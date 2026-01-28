@@ -1,15 +1,19 @@
-from fastapi import FastAPI, APIRouter
+from fastapi import FastAPI, APIRouter, HTTPException, Depends, UploadFile, File
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
 import os
 import logging
 from pathlib import Path
-from pydantic import BaseModel, Field, ConfigDict
-from typing import List
+from pydantic import BaseModel, Field, EmailStr
+from typing import List, Optional, Dict, Any
 import uuid
-from datetime import datetime, timezone
-
+from datetime import datetime, timezone, timedelta
+import jwt
+import bcrypt
+from emergentintegrations.llm.chat import LlmChat, UserMessage
+import base64
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
@@ -19,54 +23,480 @@ mongo_url = os.environ['MONGO_URL']
 client = AsyncIOMotorClient(mongo_url)
 db = client[os.environ['DB_NAME']]
 
-# Create the main app without a prefix
-app = FastAPI()
+# JWT Configuration
+JWT_SECRET = os.environ.get('JWT_SECRET', 'usa-edu-secret-key-2026')
+JWT_ALGORITHM = "HS256"
+JWT_EXPIRATION_HOURS = 24
 
-# Create a router with the /api prefix
+# Emergent LLM Key
+EMERGENT_LLM_KEY = os.environ.get('EMERGENT_LLM_KEY', '')
+
+app = FastAPI(title="USA.edu Application Portal API")
 api_router = APIRouter(prefix="/api")
+security = HTTPBearer()
 
+# ==================== MODELS ====================
 
-# Define Models
-class StatusCheck(BaseModel):
-    model_config = ConfigDict(extra="ignore")  # Ignore MongoDB's _id field
+class UserCreate(BaseModel):
+    email: EmailStr
+    password: str
+    first_name: str
+    last_name: str
+
+class UserLogin(BaseModel):
+    email: EmailStr
+    password: str
+
+class UserResponse(BaseModel):
+    id: str
+    email: str
+    first_name: str
+    last_name: str
+    created_at: str
+
+class TokenResponse(BaseModel):
+    access_token: str
+    token_type: str = "bearer"
+    user: UserResponse
+
+class PersonalInfo(BaseModel):
+    first_name: Optional[str] = None
+    last_name: Optional[str] = None
+    email: Optional[str] = None
+    phone: Optional[str] = None
+    date_of_birth: Optional[str] = None
+    address: Optional[str] = None
+    city: Optional[str] = None
+    state: Optional[str] = None
+    zip_code: Optional[str] = None
+    country: Optional[str] = "United States"
+
+class AcademicHistory(BaseModel):
+    institution_name: Optional[str] = None
+    degree_type: Optional[str] = None
+    major: Optional[str] = None
+    gpa: Optional[float] = None
+    graduation_date: Optional[str] = None
+    additional_institutions: Optional[List[Dict[str, Any]]] = []
+
+class ProgramSelection(BaseModel):
+    program_type: Optional[str] = None  # OT or Nursing
+    program_level: Optional[str] = None  # MOT, OTD, MSN, DNP
+    campus: Optional[str] = None
+    start_term: Optional[str] = None
+    full_time: Optional[bool] = True
+
+class DocumentInfo(BaseModel):
+    id: str
+    name: str
+    type: str
+    status: str  # pending, uploaded, verified
+    uploaded_at: Optional[str] = None
+    file_data: Optional[str] = None
+
+class FinancialAid(BaseModel):
+    fafsa_completed: Optional[bool] = False
+    scholarship_interest: Optional[bool] = False
+    payment_plan_interest: Optional[bool] = False
+    comments: Optional[str] = None
+
+class ApplicationCreate(BaseModel):
+    program_type: str  # OT or Nursing
+
+class ApplicationUpdate(BaseModel):
+    personal_info: Optional[PersonalInfo] = None
+    academic_history: Optional[AcademicHistory] = None
+    program_selection: Optional[ProgramSelection] = None
+    financial_aid: Optional[FinancialAid] = None
+    current_step: Optional[int] = None
+
+class ApplicationResponse(BaseModel):
+    id: str
+    user_id: str
+    status: str
+    progress: int
+    current_step: int
+    personal_info: Optional[PersonalInfo] = None
+    academic_history: Optional[AcademicHistory] = None
+    program_selection: Optional[ProgramSelection] = None
+    documents: List[DocumentInfo] = []
+    financial_aid: Optional[FinancialAid] = None
+    created_at: str
+    updated_at: str
+    submitted_at: Optional[str] = None
+
+class ChatMessage(BaseModel):
+    message: str
+    session_id: Optional[str] = None
+
+class ChatResponse(BaseModel):
+    response: str
+    session_id: str
+
+# ==================== AUTH HELPERS ====================
+
+def hash_password(password: str) -> str:
+    return bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
+
+def verify_password(password: str, hashed: str) -> bool:
+    return bcrypt.checkpw(password.encode('utf-8'), hashed.encode('utf-8'))
+
+def create_token(user_id: str) -> str:
+    payload = {
+        "sub": user_id,
+        "exp": datetime.now(timezone.utc) + timedelta(hours=JWT_EXPIRATION_HOURS)
+    }
+    return jwt.encode(payload, JWT_SECRET, algorithm=JWT_ALGORITHM)
+
+async def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(security)):
+    try:
+        payload = jwt.decode(credentials.credentials, JWT_SECRET, algorithms=[JWT_ALGORITHM])
+        user_id = payload.get("sub")
+        if not user_id:
+            raise HTTPException(status_code=401, detail="Invalid token")
+        user = await db.users.find_one({"id": user_id}, {"_id": 0})
+        if not user:
+            raise HTTPException(status_code=401, detail="User not found")
+        return user
+    except jwt.ExpiredSignatureError:
+        raise HTTPException(status_code=401, detail="Token expired")
+    except jwt.InvalidTokenError:
+        raise HTTPException(status_code=401, detail="Invalid token")
+
+# ==================== AUTH ROUTES ====================
+
+@api_router.post("/auth/register", response_model=TokenResponse)
+async def register(user_data: UserCreate):
+    existing = await db.users.find_one({"email": user_data.email})
+    if existing:
+        raise HTTPException(status_code=400, detail="Email already registered")
     
-    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
-    client_name: str
-    timestamp: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    user_id = str(uuid.uuid4())
+    user_doc = {
+        "id": user_id,
+        "email": user_data.email,
+        "password_hash": hash_password(user_data.password),
+        "first_name": user_data.first_name,
+        "last_name": user_data.last_name,
+        "created_at": datetime.now(timezone.utc).isoformat()
+    }
+    await db.users.insert_one(user_doc)
+    
+    token = create_token(user_id)
+    return TokenResponse(
+        access_token=token,
+        user=UserResponse(
+            id=user_id,
+            email=user_data.email,
+            first_name=user_data.first_name,
+            last_name=user_data.last_name,
+            created_at=user_doc["created_at"]
+        )
+    )
 
-class StatusCheckCreate(BaseModel):
-    client_name: str
+@api_router.post("/auth/login", response_model=TokenResponse)
+async def login(credentials: UserLogin):
+    user = await db.users.find_one({"email": credentials.email}, {"_id": 0})
+    if not user or not verify_password(credentials.password, user["password_hash"]):
+        raise HTTPException(status_code=401, detail="Invalid email or password")
+    
+    token = create_token(user["id"])
+    return TokenResponse(
+        access_token=token,
+        user=UserResponse(
+            id=user["id"],
+            email=user["email"],
+            first_name=user["first_name"],
+            last_name=user["last_name"],
+            created_at=user["created_at"]
+        )
+    )
 
-# Add your routes to the router instead of directly to app
+@api_router.get("/auth/me", response_model=UserResponse)
+async def get_me(current_user: dict = Depends(get_current_user)):
+    return UserResponse(
+        id=current_user["id"],
+        email=current_user["email"],
+        first_name=current_user["first_name"],
+        last_name=current_user["last_name"],
+        created_at=current_user["created_at"]
+    )
+
+# ==================== APPLICATION ROUTES ====================
+
+def calculate_progress(app_data: dict) -> int:
+    progress = 0
+    if app_data.get("personal_info"):
+        pi = app_data["personal_info"]
+        if pi.get("first_name") and pi.get("last_name") and pi.get("email"):
+            progress += 20
+    if app_data.get("academic_history"):
+        ah = app_data["academic_history"]
+        if ah.get("institution_name") and ah.get("degree_type"):
+            progress += 20
+    if app_data.get("program_selection"):
+        ps = app_data["program_selection"]
+        if ps.get("program_type") and ps.get("program_level"):
+            progress += 20
+    docs = app_data.get("documents", [])
+    required_docs = ["transcript", "resume", "statement"]
+    uploaded = sum(1 for d in docs if d.get("status") == "uploaded" and d.get("type") in required_docs)
+    if uploaded >= 3:
+        progress += 20
+    elif uploaded >= 1:
+        progress += 10
+    if app_data.get("financial_aid"):
+        progress += 10
+    if app_data.get("status") == "submitted":
+        progress = 100
+    return min(progress, 100)
+
+@api_router.post("/applications", response_model=ApplicationResponse)
+async def create_application(app_data: ApplicationCreate, current_user: dict = Depends(get_current_user)):
+    existing = await db.applications.find_one({"user_id": current_user["id"], "status": {"$ne": "submitted"}})
+    if existing:
+        raise HTTPException(status_code=400, detail="You already have an active application")
+    
+    app_id = str(uuid.uuid4())
+    now = datetime.now(timezone.utc).isoformat()
+    
+    default_docs = [
+        {"id": str(uuid.uuid4()), "name": "Official Transcript", "type": "transcript", "status": "pending"},
+        {"id": str(uuid.uuid4()), "name": "Resume/CV", "type": "resume", "status": "pending"},
+        {"id": str(uuid.uuid4()), "name": "Personal Statement", "type": "statement", "status": "pending"},
+        {"id": str(uuid.uuid4()), "name": "Letters of Recommendation", "type": "recommendation", "status": "pending"},
+        {"id": str(uuid.uuid4()), "name": "Government ID", "type": "id", "status": "pending"},
+    ]
+    
+    application = {
+        "id": app_id,
+        "user_id": current_user["id"],
+        "status": "draft",
+        "progress": 0,
+        "current_step": 1,
+        "personal_info": {
+            "first_name": current_user["first_name"],
+            "last_name": current_user["last_name"],
+            "email": current_user["email"]
+        },
+        "academic_history": {},
+        "program_selection": {"program_type": app_data.program_type},
+        "documents": default_docs,
+        "financial_aid": {},
+        "created_at": now,
+        "updated_at": now,
+        "submitted_at": None
+    }
+    
+    await db.applications.insert_one(application)
+    del application["_id"] if "_id" in application else None
+    application["progress"] = calculate_progress(application)
+    
+    return ApplicationResponse(**application)
+
+@api_router.get("/applications", response_model=List[ApplicationResponse])
+async def get_applications(current_user: dict = Depends(get_current_user)):
+    apps = await db.applications.find({"user_id": current_user["id"]}, {"_id": 0}).to_list(100)
+    for app in apps:
+        app["progress"] = calculate_progress(app)
+    return apps
+
+@api_router.get("/applications/{app_id}", response_model=ApplicationResponse)
+async def get_application(app_id: str, current_user: dict = Depends(get_current_user)):
+    app = await db.applications.find_one({"id": app_id, "user_id": current_user["id"]}, {"_id": 0})
+    if not app:
+        raise HTTPException(status_code=404, detail="Application not found")
+    app["progress"] = calculate_progress(app)
+    return ApplicationResponse(**app)
+
+@api_router.put("/applications/{app_id}", response_model=ApplicationResponse)
+async def update_application(app_id: str, update_data: ApplicationUpdate, current_user: dict = Depends(get_current_user)):
+    app = await db.applications.find_one({"id": app_id, "user_id": current_user["id"]})
+    if not app:
+        raise HTTPException(status_code=404, detail="Application not found")
+    if app["status"] == "submitted":
+        raise HTTPException(status_code=400, detail="Cannot modify submitted application")
+    
+    update_dict = {"updated_at": datetime.now(timezone.utc).isoformat()}
+    
+    if update_data.personal_info:
+        update_dict["personal_info"] = {**app.get("personal_info", {}), **update_data.personal_info.model_dump(exclude_none=True)}
+    if update_data.academic_history:
+        update_dict["academic_history"] = {**app.get("academic_history", {}), **update_data.academic_history.model_dump(exclude_none=True)}
+    if update_data.program_selection:
+        update_dict["program_selection"] = {**app.get("program_selection", {}), **update_data.program_selection.model_dump(exclude_none=True)}
+    if update_data.financial_aid:
+        update_dict["financial_aid"] = {**app.get("financial_aid", {}), **update_data.financial_aid.model_dump(exclude_none=True)}
+    if update_data.current_step is not None:
+        update_dict["current_step"] = update_data.current_step
+    
+    await db.applications.update_one({"id": app_id}, {"$set": update_dict})
+    
+    updated_app = await db.applications.find_one({"id": app_id}, {"_id": 0})
+    updated_app["progress"] = calculate_progress(updated_app)
+    return ApplicationResponse(**updated_app)
+
+@api_router.post("/applications/{app_id}/submit", response_model=ApplicationResponse)
+async def submit_application(app_id: str, current_user: dict = Depends(get_current_user)):
+    app = await db.applications.find_one({"id": app_id, "user_id": current_user["id"]})
+    if not app:
+        raise HTTPException(status_code=404, detail="Application not found")
+    if app["status"] == "submitted":
+        raise HTTPException(status_code=400, detail="Application already submitted")
+    
+    now = datetime.now(timezone.utc).isoformat()
+    await db.applications.update_one(
+        {"id": app_id},
+        {"$set": {"status": "submitted", "submitted_at": now, "updated_at": now, "progress": 100}}
+    )
+    
+    updated_app = await db.applications.find_one({"id": app_id}, {"_id": 0})
+    updated_app["progress"] = 100
+    return ApplicationResponse(**updated_app)
+
+# ==================== DOCUMENT ROUTES ====================
+
+@api_router.post("/applications/{app_id}/documents/{doc_id}/upload")
+async def upload_document(
+    app_id: str,
+    doc_id: str,
+    file: UploadFile = File(...),
+    current_user: dict = Depends(get_current_user)
+):
+    app = await db.applications.find_one({"id": app_id, "user_id": current_user["id"]})
+    if not app:
+        raise HTTPException(status_code=404, detail="Application not found")
+    
+    documents = app.get("documents", [])
+    doc_index = next((i for i, d in enumerate(documents) if d["id"] == doc_id), None)
+    
+    if doc_index is None:
+        raise HTTPException(status_code=404, detail="Document not found")
+    
+    file_content = await file.read()
+    file_data = base64.b64encode(file_content).decode('utf-8')
+    
+    documents[doc_index]["status"] = "uploaded"
+    documents[doc_index]["uploaded_at"] = datetime.now(timezone.utc).isoformat()
+    documents[doc_index]["name"] = file.filename or documents[doc_index]["name"]
+    documents[doc_index]["file_data"] = file_data[:100] + "..."  # Store preview only
+    
+    await db.applications.update_one(
+        {"id": app_id},
+        {"$set": {"documents": documents, "updated_at": datetime.now(timezone.utc).isoformat()}}
+    )
+    
+    return {"success": True, "document": documents[doc_index]}
+
+# ==================== AI CHAT ROUTES ====================
+
+@api_router.post("/chat", response_model=ChatResponse)
+async def chat_with_ai(chat_data: ChatMessage, current_user: dict = Depends(get_current_user)):
+    session_id = chat_data.session_id or str(uuid.uuid4())
+    
+    # Get user's application context
+    app = await db.applications.find_one({"user_id": current_user["id"]}, {"_id": 0})
+    
+    context = f"""You are 'Journey', an AI assistant for the University of St. Augustine for Health Sciences (USA.edu) application portal.
+    
+Current applicant: {current_user['first_name']} {current_user['last_name']}
+"""
+    if app:
+        context += f"""
+Application Status: {app.get('status', 'No application')}
+Progress: {calculate_progress(app)}%
+Program: {app.get('program_selection', {}).get('program_type', 'Not selected')}
+Current Step: {app.get('current_step', 1)}
+"""
+    
+    context += """
+You help prospective students with:
+- Application status and requirements
+- Program information (Occupational Therapy: MOT, OTD | Nursing: MSN, DNP)
+- Document requirements and deadlines
+- Campus information (Austin, Dallas, Miami, San Marcos, St. Augustine)
+- Financial aid and scholarships
+- Technical troubleshooting
+
+Be friendly, professional, and concise. Guide students through their application journey."""
+
+    try:
+        chat = LlmChat(
+            api_key=EMERGENT_LLM_KEY,
+            session_id=session_id,
+            system_message=context
+        ).with_model("anthropic", "claude-sonnet-4-5-20250929")
+        
+        user_message = UserMessage(text=chat_data.message)
+        response = await chat.send_message(user_message)
+        
+        # Store chat history
+        await db.chat_history.insert_one({
+            "id": str(uuid.uuid4()),
+            "session_id": session_id,
+            "user_id": current_user["id"],
+            "user_message": chat_data.message,
+            "ai_response": response,
+            "created_at": datetime.now(timezone.utc).isoformat()
+        })
+        
+        return ChatResponse(response=response, session_id=session_id)
+    except Exception as e:
+        logging.error(f"AI Chat error: {str(e)}")
+        return ChatResponse(
+            response="I apologize, but I'm having trouble connecting right now. Please try again in a moment, or contact our admissions team directly at admissions@usa.edu for immediate assistance.",
+            session_id=session_id
+        )
+
+@api_router.get("/chat/history")
+async def get_chat_history(session_id: Optional[str] = None, current_user: dict = Depends(get_current_user)):
+    query = {"user_id": current_user["id"]}
+    if session_id:
+        query["session_id"] = session_id
+    history = await db.chat_history.find(query, {"_id": 0}).sort("created_at", 1).to_list(100)
+    return history
+
+# ==================== PROGRAMS INFO ====================
+
+@api_router.get("/programs")
+async def get_programs():
+    return {
+        "programs": [
+            {
+                "id": "ot",
+                "name": "Occupational Therapy",
+                "description": "Transform lives through therapeutic interventions",
+                "levels": [
+                    {"code": "MOT", "name": "Master of Occupational Therapy", "duration": "2.5 years"},
+                    {"code": "OTD", "name": "Doctor of Occupational Therapy", "duration": "3 years"}
+                ],
+                "campuses": ["Austin", "Dallas", "Miami", "San Marcos", "St. Augustine"]
+            },
+            {
+                "id": "nursing",
+                "name": "Nursing",
+                "description": "Lead the future of patient care and healthcare innovation",
+                "levels": [
+                    {"code": "MSN", "name": "Master of Science in Nursing", "duration": "2 years"},
+                    {"code": "DNP", "name": "Doctor of Nursing Practice", "duration": "3 years"}
+                ],
+                "campuses": ["Austin", "Miami", "St. Augustine"]
+            }
+        ],
+        "start_terms": ["Spring 2026", "Summer 2026", "Fall 2026", "Spring 2027"]
+    }
+
+# ==================== HEALTH CHECK ====================
+
 @api_router.get("/")
 async def root():
-    return {"message": "Hello World"}
+    return {"message": "USA.edu Application Portal API", "status": "healthy"}
 
-@api_router.post("/status", response_model=StatusCheck)
-async def create_status_check(input: StatusCheckCreate):
-    status_dict = input.model_dump()
-    status_obj = StatusCheck(**status_dict)
-    
-    # Convert to dict and serialize datetime to ISO string for MongoDB
-    doc = status_obj.model_dump()
-    doc['timestamp'] = doc['timestamp'].isoformat()
-    
-    _ = await db.status_checks.insert_one(doc)
-    return status_obj
+@api_router.get("/health")
+async def health_check():
+    return {"status": "healthy", "timestamp": datetime.now(timezone.utc).isoformat()}
 
-@api_router.get("/status", response_model=List[StatusCheck])
-async def get_status_checks():
-    # Exclude MongoDB's _id field from the query results
-    status_checks = await db.status_checks.find({}, {"_id": 0}).to_list(1000)
-    
-    # Convert ISO string timestamps back to datetime objects
-    for check in status_checks:
-        if isinstance(check['timestamp'], str):
-            check['timestamp'] = datetime.fromisoformat(check['timestamp'])
-    
-    return status_checks
-
-# Include the router in the main app
+# Include router
 app.include_router(api_router)
 
 app.add_middleware(
@@ -77,7 +507,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Configure logging
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
