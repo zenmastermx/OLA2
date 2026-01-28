@@ -896,7 +896,7 @@ const ApplicationForm = () => {
       {/* AI Chat FAB */}
       <button
         onClick={() => setShowChat(true)}
-        className="fixed bottom-6 right-6 w-16 h-16 rounded-full bg-gradient-to-br from-[#00B4D8] to-[#7B68EE] flex items-center justify-center shadow-[0_0_30px_rgba(0,180,216,0.4)] hover:shadow-[0_0_40px_rgba(0,180,216,0.6)] transition-all hover:scale-110 z-40"
+        className="fixed bottom-24 right-6 w-16 h-16 rounded-full bg-gradient-to-br from-[#00B4D8] to-[#7B68EE] flex items-center justify-center shadow-[0_0_30px_rgba(0,180,216,0.4)] hover:shadow-[0_0_40px_rgba(0,180,216,0.6)] transition-all hover:scale-110 z-40"
         data-testid="ai-chat-fab"
       >
         <Sparkles className="w-7 h-7 text-white" />
