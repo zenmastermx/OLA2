@@ -101,6 +101,16 @@ const Dashboard = () => {
           </div>
           
           <div className="flex items-center gap-4">
+            {/* Ask Journey Button */}
+            <Button
+              onClick={() => setShowChat(true)}
+              className="bg-gradient-to-r from-[#00B4D8]/20 to-[#7B68EE]/20 border border-[#00B4D8]/30 text-white hover:border-[#00F5FF] hover:bg-[#00B4D8]/30 rounded-full px-4 py-2 flex items-center gap-2 transition-all"
+              data-testid="ask-journey-btn"
+            >
+              <Sparkles className="w-4 h-4 text-[#00F5FF]" />
+              <span className="hidden sm:inline">Ask Journey</span>
+            </Button>
+            
             <div className="text-right hidden sm:block">
               <p className="text-white font-medium">{user?.first_name} {user?.last_name}</p>
               <p className="text-slate-500 text-sm">{user?.email}</p>
@@ -411,15 +421,6 @@ const Dashboard = () => {
           </div>
         </div>
       )}
-
-      {/* AI Chat FAB */}
-      <button
-        onClick={() => setShowChat(true)}
-        className="fixed bottom-24 right-6 w-16 h-16 rounded-full bg-gradient-to-br from-[#00B4D8] to-[#7B68EE] flex items-center justify-center shadow-[0_0_30px_rgba(0,180,216,0.4)] hover:shadow-[0_0_40px_rgba(0,180,216,0.6)] transition-all hover:scale-110 z-40"
-        data-testid="ai-chat-fab"
-      >
-        <Sparkles className="w-7 h-7 text-white" />
-      </button>
 
       {/* AI Chat Modal */}
       {showChat && (
