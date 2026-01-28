@@ -1,0 +1,142 @@
+{
+  "design_system": {
+    "identity": {
+      "name": "USA.edu Future Portal",
+      "archetype": "Bioluminescent Deep Sea",
+      "emotion": "Precision, Trust, Future-Forward",
+      "description": "A cutting-edge application portal that blends the sterility of medical science with the immersion of a sci-fi command center. Dark, moody, but illuminated by data."
+    },
+    "typography": {
+      "headings": {
+        "family": "Outfit, sans-serif",
+        "weights": ["300", "500", "700"],
+        "usage": "Use for all H1-H6. Tracking tight (-0.02em).",
+        "import": "@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&family=Figtree:wght@300;400;500;600&display=swap');"
+      },
+      "body": {
+        "family": "Figtree, sans-serif",
+        "weights": ["300", "400", "600"],
+        "usage": "Use for all paragraphs, inputs, and labels. High legibility."
+      }
+    },
+    "colors": {
+      "palette": {
+        "background": {
+          "default": "#0A0E14",
+          "paper": "#11161F",
+          "glass": "rgba(10, 14, 20, 0.7)"
+        },
+        "primary": {
+          "main": "#00B4D8",
+          "hover": "#0096B4",
+          "glow": "0 0 20px rgba(0, 180, 216, 0.5)"
+        },
+        "secondary": {
+          "main": "#002855",
+          "surface": "#1A2E45"
+        },
+        "accent": {
+          "neon": "#00F5FF",
+          "purple": "#7B68EE",
+          "success": "#28A745",
+          "warning": "#FF6B35"
+        },
+        "text": {
+          "primary": "#F5F7F9",
+          "secondary": "#94A3B8",
+          "muted": "#475569"
+        }
+      },
+      "gradients": {
+        "hero": "linear-gradient(135deg, #0A0E14 0%, #002855 100%)",
+        "glass_border": "linear-gradient(180deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.02) 100%)",
+        "active_beam": "linear-gradient(90deg, transparent, #00F5FF, transparent)"
+      }
+    },
+    "layout": {
+      "spacing": {
+        "container_padding": "p-6 md:p-12 lg:p-24",
+        "section_gap": "gap-16 md:gap-32",
+        "component_gap": "gap-6"
+      },
+      "grid": {
+        "dashboard": "grid grid-cols-1 md:grid-cols-12 gap-6",
+        "cards": "grid grid-cols-1 md:grid-cols-3 gap-8"
+      },
+      "radius": {
+        "default": "rounded-2xl",
+        "button": "rounded-full",
+        "input": "rounded-xl"
+      }
+    },
+    "components": {
+      "buttons": {
+        "primary": "bg-[#00B4D8] text-white hover:bg-[#0096B4] shadow-[0_0_20px_rgba(0,180,216,0.3)] transition-all duration-300 hover:scale-105 rounded-full px-8 py-6 font-medium tracking-wide",
+        "secondary": "bg-transparent border border-[#00B4D8]/30 text-[#00B4D8] hover:bg-[#00B4D8]/10 hover:border-[#00B4D8] rounded-full px-8 py-6",
+        "ghost": "text-slate-400 hover:text-white hover:bg-white/5 rounded-lg px-4 py-2"
+      },
+      "cards": {
+        "glass": "bg-[#0A0E14]/60 backdrop-blur-xl border border-white/10 shadow-2xl hover:border-[#00F5FF]/30 transition-colors duration-300",
+        "solid": "bg-[#11161F] border border-slate-800"
+      },
+      "inputs": {
+        "default": "bg-black/20 border-white/10 focus:border-[#00F5FF] focus:ring-1 focus:ring-[#00F5FF] text-white placeholder:text-slate-600 h-12 rounded-xl transition-all duration-300"
+      },
+      "navigation": {
+        "sidebar": "bg-[#0A0E14]/90 backdrop-blur-2xl border-r border-white/5 w-64 h-screen fixed left-0 top-0 z-50",
+        "topbar": "bg-[#0A0E14]/80 backdrop-blur-md border-b border-white/5 sticky top-0 z-40"
+      }
+    },
+    "motion": {
+      "transitions": {
+        "default": "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+        "slow": "all 0.7s cubic-bezier(0.4, 0, 0.2, 1)"
+      },
+      "animations": {
+        "fade_in": "animate-in fade-in duration-700",
+        "slide_up": "animate-in slide-in-from-bottom-8 duration-700",
+        "pulse_glow": "animate-pulse"
+      }
+    }
+  },
+  "assets": {
+    "images": {
+      "hero_bg": "https://images.unsplash.com/photo-1529431801612-df968fb9eb9c?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxOTJ8MHwxfHNlYXJjaHwzfHxtb2Rlcm4lMjB1bml2ZXJzaXR5JTIwYXJjaGl0ZWN0dXJlJTIwbmlnaHR8ZW58MHx8fHwxNzY5NjM4Mjg4fDA&ixlib=rb-4.1.0&q=85",
+      "dashboard_student": "https://images.unsplash.com/photo-1656428964836-78d54bf76231?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMjd8MHwxfHNlYXJjaHwzfHxtZWRpY2FsJTIwc3R1ZGVudCUyMGZ1dHVyaXN0aWMlMjB0ZWNobm9sb2d5fGVufDB8fHx8MTc2OTYzODI4Nnww&ixlib=rb-4.1.0&q=85",
+      "program_nursing": "https://images.unsplash.com/photo-1659353887907-000c9a92377d?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMjd8MHwxfHNlYXJjaHw0fHxtZWRpY2FsJTIwc3R1ZGVudCUyMGZ1dHVyaXN0aWMlMjB0ZWNobm9sb2d5fGVufDB8fHx8MTc2OTYzODI4Nnww&ixlib=rb-4.1.0&q=85",
+      "program_ot": "https://images.pexels.com/photos/4506169/pexels-photo-4506169.jpeg"
+    },
+    "icons": {
+      "library": "lucide-react",
+      "style": "Stroke width 1.5px, size 20px or 24px"
+    }
+  },
+  "implementation_rules": {
+    "general": [
+      "Use 'Outfit' font for all headings and 'Figtree' for body.",
+      "Implement Dark Mode by default. Add 'dark' class to html/body.",
+      "Use Glassmorphism for all cards and panels: bg-opacity-60 + backdrop-blur-xl.",
+      "Do NOT use solid white backgrounds. Use #0A0E14 or #11161F.",
+      "Add 'data-testid' to all interactive elements.",
+      "Use 'sonner' for toast notifications.",
+      "Ensure all text has sufficient contrast against dark backgrounds (Text-slate-200 or lighter)."
+    ],
+    "dashboard": [
+      "Use a Bento Grid layout (Grid cols 12).",
+      "Widgets should have a thin border (border-white/10) and glow on hover.",
+      "Progress bars should use the Neon Cyan (#00F5FF) color."
+    ],
+    "forms": [
+      "Split long forms into steps (Progressive Disclosure).",
+      "Use the 'Tracing Beam' effect for active inputs (glow border).",
+      "Validation errors should be clear but not jarring (Soft Red text)."
+    ]
+  },
+  "universal_guidelines": [
+    "Avoid generic 'Bootstrap' layouts. Use asymmetry.",
+    "No 'Inter' font for headings.",
+    "Micro-interactions on every click and hover.",
+    "Images must be high quality and relevant.",
+    "Accessibility is paramount: Ensure keyboard navigation works."
+  ]
+}
