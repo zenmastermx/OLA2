@@ -289,7 +289,8 @@ async def create_application(app_data: ApplicationCreate, current_user: dict = D
     }
     
     await db.applications.insert_one(application)
-    del application["_id"] if "_id" in application else None
+    if "_id" in application:
+        del application["_id"]
     application["progress"] = calculate_progress(application)
     
     return ApplicationResponse(**application)
