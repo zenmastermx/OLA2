@@ -362,127 +362,96 @@ const ApplicationForm = () => {
 
       case 3:
         return (
-          <div className="space-y-8" data-testid="step-3-program">
-            {/* Program Type */}
-            <div>
-              <Label className="text-slate-300 mb-4 block">Program Type *</Label>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {[
-                  { id: "Occupational Therapy", name: "Occupational Therapy", icon: GraduationCap, color: "#00B4D8" },
-                  { id: "Nursing", name: "Nursing", icon: User, color: "#7B68EE" }
-                ].map((program) => (
-                  <button
-                    key={program.id}
-                    type="button"
-                    onClick={() => setProgramSelection({ ...programSelection, program_type: program.id })}
-                    className={`p-6 rounded-xl border text-left transition-all ${
-                      programSelection.program_type === program.id
-                        ? "border-[#00F5FF] bg-[#00F5FF]/10"
-                        : "border-white/10 bg-white/5 hover:border-white/30"
-                    }`}
-                    data-testid={`program-type-${program.id.toLowerCase().replace(' ', '-')}`}
-                  >
-                    <div className="flex items-center gap-4">
-                      <div 
-                        className="w-12 h-12 rounded-xl flex items-center justify-center"
-                        style={{ background: `${program.color}20` }}
-                      >
-                        <program.icon className="w-6 h-6" style={{ color: program.color }} />
-                      </div>
-                      <p className="text-white font-medium text-lg">{program.name}</p>
-                    </div>
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Program Level */}
-            <div>
-              <Label className="text-slate-300 mb-4 block">Program Level *</Label>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {(programSelection.program_type === "Occupational Therapy" 
-                  ? [{ code: "MOT", name: "Master's" }, { code: "OTD", name: "Doctorate" }]
-                  : [{ code: "MSN", name: "Master's" }, { code: "DNP", name: "Doctorate" }]
-                ).map((level) => (
-                  <button
-                    key={level.code}
-                    type="button"
-                    onClick={() => setProgramSelection({ ...programSelection, program_level: level.code })}
-                    className={`p-4 rounded-xl border text-center transition-all ${
-                      programSelection.program_level === level.code
-                        ? "border-[#00F5FF] bg-[#00F5FF]/10"
-                        : "border-white/10 bg-white/5 hover:border-white/30"
-                    }`}
-                    data-testid={`program-level-${level.code}`}
-                  >
-                    <p className="text-white font-bold text-xl">{level.code}</p>
-                    <p className="text-slate-400 text-sm">{level.name}</p>
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Campus */}
-            <div>
-              <Label className="text-slate-300 mb-4 block">Preferred Campus *</Label>
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
-                {["Austin", "Dallas", "Miami", "San Marcos", "St. Augustine"].map((campus) => (
-                  <button
-                    key={campus}
-                    type="button"
-                    onClick={() => setProgramSelection({ ...programSelection, campus })}
-                    className={`p-4 rounded-xl border transition-all ${
-                      programSelection.campus === campus
-                        ? "border-[#00F5FF] bg-[#00F5FF]/10"
-                        : "border-white/10 bg-white/5 hover:border-white/30"
-                    }`}
-                    data-testid={`campus-${campus.toLowerCase().replace(' ', '-')}`}
-                  >
-                    <MapPin className={`w-5 h-5 mx-auto mb-2 ${
-                      programSelection.campus === campus ? "text-[#00F5FF]" : "text-slate-400"
-                    }`} />
-                    <p className="text-white text-sm font-medium">{campus}</p>
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Start Term */}
-            <div>
-              <Label className="text-slate-300 mb-4 block">Start Term *</Label>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                {programs?.start_terms?.map((term) => (
-                  <button
-                    key={term}
-                    type="button"
-                    onClick={() => setProgramSelection({ ...programSelection, start_term: term })}
-                    className={`p-4 rounded-xl border transition-all ${
-                      programSelection.start_term === term
-                        ? "border-[#00F5FF] bg-[#00F5FF]/10"
-                        : "border-white/10 bg-white/5 hover:border-white/30"
-                    }`}
-                    data-testid={`term-${term.toLowerCase().replace(' ', '-')}`}
-                  >
-                    <Calendar className={`w-5 h-5 mx-auto mb-2 ${
-                      programSelection.start_term === term ? "text-[#00F5FF]" : "text-slate-400"
-                    }`} />
-                    <p className="text-white text-sm font-medium">{term}</p>
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Full-time toggle */}
-            <div className="flex items-center justify-between p-4 rounded-xl border border-white/10 bg-white/5">
-              <div>
-                <p className="text-white font-medium">Full-Time Enrollment</p>
-                <p className="text-slate-400 text-sm">I plan to enroll as a full-time student</p>
-              </div>
-              <Switch
-                checked={programSelection.full_time !== false}
-                onCheckedChange={(checked) => setProgramSelection({ ...programSelection, full_time: checked })}
-                data-testid="fulltime-switch"
+          <div className="space-y-6" data-testid="step-3-employment">
+            <div className="space-y-2">
+              <Label className="text-slate-300">Current/Most Recent Employer</Label>
+              <Input
+                value={programSelection.employer_name || ""}
+                onChange={(e) => setProgramSelection({ ...programSelection, employer_name: e.target.value })}
+                placeholder="e.g., Memorial Hospital"
+                className="h-12 bg-black/20 border-white/10 focus:border-[#00F5FF] text-white rounded-xl"
+                data-testid="employment-employer"
               />
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="space-y-2">
+                <Label className="text-slate-300">Job Title</Label>
+                <Input
+                  value={programSelection.job_title || ""}
+                  onChange={(e) => setProgramSelection({ ...programSelection, job_title: e.target.value })}
+                  placeholder="e.g., Registered Nurse"
+                  className="h-12 bg-black/20 border-white/10 focus:border-[#00F5FF] text-white rounded-xl"
+                  data-testid="employment-title"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label className="text-slate-300">Years of Experience</Label>
+                <Select
+                  value={programSelection.years_experience || ""}
+                  onValueChange={(value) => setProgramSelection({ ...programSelection, years_experience: value })}
+                >
+                  <SelectTrigger className="h-12 bg-black/20 border-white/10 text-white rounded-xl" data-testid="employment-years">
+                    <SelectValue placeholder="Select years" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-[#11161F] border-white/10">
+                    <SelectItem value="0-1">Less than 1 year</SelectItem>
+                    <SelectItem value="1-3">1-3 years</SelectItem>
+                    <SelectItem value="3-5">3-5 years</SelectItem>
+                    <SelectItem value="5-10">5-10 years</SelectItem>
+                    <SelectItem value="10+">10+ years</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="space-y-2">
+                <Label className="text-slate-300">Start Date</Label>
+                <Input
+                  type="month"
+                  value={programSelection.employment_start || ""}
+                  onChange={(e) => setProgramSelection({ ...programSelection, employment_start: e.target.value })}
+                  className="h-12 bg-black/20 border-white/10 focus:border-[#00F5FF] text-white rounded-xl"
+                  data-testid="employment-start"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label className="text-slate-300">End Date (or Current)</Label>
+                <Input
+                  type="month"
+                  value={programSelection.employment_end || ""}
+                  onChange={(e) => setProgramSelection({ ...programSelection, employment_end: e.target.value })}
+                  placeholder="Leave blank if current"
+                  className="h-12 bg-black/20 border-white/10 focus:border-[#00F5FF] text-white rounded-xl"
+                  data-testid="employment-end"
+                />
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <Label className="text-slate-300">Job Responsibilities</Label>
+              <Textarea
+                value={programSelection.responsibilities || ""}
+                onChange={(e) => setProgramSelection({ ...programSelection, responsibilities: e.target.value })}
+                placeholder="Describe your main responsibilities and achievements..."
+                className="min-h-[100px] bg-black/20 border-white/10 focus:border-[#00F5FF] text-white rounded-xl resize-none"
+                data-testid="employment-responsibilities"
+              />
+            </div>
+
+            <div className="p-4 rounded-xl border border-white/10 bg-white/5">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-white font-medium">Currently Employed Here</p>
+                  <p className="text-slate-400 text-sm">I am still working at this position</p>
+                </div>
+                <Switch
+                  checked={programSelection.currently_employed || false}
+                  onCheckedChange={(checked) => setProgramSelection({ ...programSelection, currently_employed: checked })}
+                  data-testid="currently-employed-switch"
+                />
+              </div>
             </div>
           </div>
         );
