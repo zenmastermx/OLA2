@@ -786,136 +786,196 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo }) => {
 
       case 4:
         return (
-          <div className="space-y-6" data-testid="subsection-military">
-            <h3 className="text-xl font-semibold text-white mb-4">US Military Background</h3>
-            
-            <div className="space-y-4">
-              <Label className="text-slate-300">Will you be using veteran benefits to fund your education? *</Label>
-              <RadioGroup
-                value={personalInfo.veteran_benefits || ""}
-                onValueChange={(value) => setPersonalInfo({ ...personalInfo, veteran_benefits: value })}
-                className="flex gap-4"
-              >
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="yes" id="vet-benefits-yes" />
-                  <Label htmlFor="vet-benefits-yes" className="text-white">Yes</Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="no" id="vet-benefits-no" />
-                  <Label htmlFor="vet-benefits-no" className="text-white">No</Label>
-                </div>
-              </RadioGroup>
+          <div className="space-y-8" data-testid="subsection-military">
+            {/* Section Header */}
+            <div className="relative">
+              <div className="absolute -left-4 top-0 w-1 h-full bg-gradient-to-b from-[#4CAF50] to-[#81C784] rounded-full" />
+              <h3 className="text-2xl font-light text-white tracking-tight">US Military Background</h3>
+              <p className="text-slate-500 text-sm mt-1">Veteran status and military service information</p>
             </div>
 
-            <div className="space-y-4">
-              <Label className="text-slate-300">Are you actively serving in the U.S. military? *</Label>
-              <RadioGroup
-                value={personalInfo.active_military || ""}
-                onValueChange={(value) => setPersonalInfo({ ...personalInfo, active_military: value })}
-                className="flex gap-4"
-              >
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="yes" id="active-mil-yes" />
-                  <Label htmlFor="active-mil-yes" className="text-white">Yes</Label>
+            {/* Veteran Benefits - Glass Card */}
+            <div className="backdrop-blur-xl bg-white/[0.02] border border-white/[0.05] rounded-2xl p-6 space-y-5 hover:border-[#4CAF50]/20 transition-colors duration-500">
+              <div className="flex items-center gap-3 mb-2">
+                <div className="w-8 h-8 rounded-full bg-[#4CAF50]/10 flex items-center justify-center">
+                  <Shield className="w-4 h-4 text-[#4CAF50]" />
                 </div>
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="no" id="active-mil-no" />
-                  <Label htmlFor="active-mil-no" className="text-white">No</Label>
-                </div>
-              </RadioGroup>
-            </div>
-
-            {personalInfo.veteran_benefits === "yes" && (
-              <div className="space-y-2">
-                <Label className="text-slate-300">Branch of Service</Label>
-                <Select
-                  value={personalInfo.military_branch || ""}
-                  onValueChange={(value) => setPersonalInfo({ ...personalInfo, military_branch: value })}
+                <h4 className="text-xs font-medium uppercase tracking-wider text-slate-500">Veteran Benefits</h4>
+              </div>
+              
+              <div className="space-y-3">
+                <Label className="text-xs font-medium uppercase tracking-wider text-slate-400">
+                  Will you be using veteran benefits to fund your education? <span className="text-[#00F5FF]">*</span>
+                </Label>
+                <RadioGroup
+                  value={personalInfo.veteran_benefits || ""}
+                  onValueChange={(value) => setPersonalInfo({ ...personalInfo, veteran_benefits: value })}
+                  className="flex gap-4"
                 >
-                  <SelectTrigger className="h-12 bg-black/20 border-white/10 text-white rounded-xl" data-testid="military-branch">
-                    <SelectValue placeholder="Select branch" />
-                  </SelectTrigger>
-                  <SelectContent className="bg-[#11161F] border-white/10">
-                    <SelectItem value="army">Army</SelectItem>
-                    <SelectItem value="navy">Navy</SelectItem>
-                    <SelectItem value="air_force">Air Force</SelectItem>
-                    <SelectItem value="marines">Marines</SelectItem>
-                    <SelectItem value="coast_guard">Coast Guard</SelectItem>
-                    <SelectItem value="space_force">Space Force</SelectItem>
-                    <SelectItem value="national_guard">National Guard</SelectItem>
-                  </SelectContent>
-                </Select>
+                  {[{ value: "yes", label: "Yes, I qualify for VA benefits" }, { value: "no", label: "No" }].map((option) => (
+                    <div key={option.value} className={`flex items-center space-x-2 px-5 py-3 rounded-full border transition-all duration-300 cursor-pointer ${
+                      personalInfo.veteran_benefits === option.value 
+                        ? "border-[#4CAF50]/50 bg-[#4CAF50]/10" 
+                        : "border-white/[0.08] bg-black/30 hover:border-white/20"
+                    }`}>
+                      <RadioGroupItem value={option.value} id={`vet-benefits-${option.value}`} />
+                      <Label htmlFor={`vet-benefits-${option.value}`} className="text-white cursor-pointer text-sm">{option.label}</Label>
+                    </div>
+                  ))}
+                </RadioGroup>
               </div>
-            )}
 
-            {personalInfo.active_military === "yes" && (
-              <div className="glass-card rounded-xl p-4 border-[#00B4D8]/30 bg-[#00B4D8]/5">
-                <p className="text-[#00B4D8] text-sm">
-                  Thank you for your service! Our admissions team will contact you about military-friendly scheduling options and benefits.
-                </p>
+              <div className="space-y-3">
+                <Label className="text-xs font-medium uppercase tracking-wider text-slate-400">
+                  Are you actively serving in the U.S. military? <span className="text-[#00F5FF]">*</span>
+                </Label>
+                <RadioGroup
+                  value={personalInfo.active_military || ""}
+                  onValueChange={(value) => setPersonalInfo({ ...personalInfo, active_military: value })}
+                  className="flex gap-4"
+                >
+                  {[{ value: "yes", label: "Yes, currently serving" }, { value: "no", label: "No" }].map((option) => (
+                    <div key={option.value} className={`flex items-center space-x-2 px-5 py-3 rounded-full border transition-all duration-300 cursor-pointer ${
+                      personalInfo.active_military === option.value 
+                        ? "border-[#4CAF50]/50 bg-[#4CAF50]/10" 
+                        : "border-white/[0.08] bg-black/30 hover:border-white/20"
+                    }`}>
+                      <RadioGroupItem value={option.value} id={`active-mil-${option.value}`} />
+                      <Label htmlFor={`active-mil-${option.value}`} className="text-white cursor-pointer text-sm">{option.label}</Label>
+                    </div>
+                  ))}
+                </RadioGroup>
               </div>
-            )}
+
+              {(personalInfo.veteran_benefits === "yes" || personalInfo.active_military === "yes") && (
+                <div className="space-y-2 pt-2 animate-in slide-in-from-top-2 duration-300">
+                  <Label className="text-xs font-medium uppercase tracking-wider text-slate-400">Branch of Service</Label>
+                  <Select
+                    value={personalInfo.military_branch || ""}
+                    onValueChange={(value) => setPersonalInfo({ ...personalInfo, military_branch: value })}
+                  >
+                    <SelectTrigger className="h-12 bg-black/30 border-white/[0.08] text-white rounded-full px-5 focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20 max-w-xs" data-testid="military-branch">
+                      <SelectValue placeholder="Select branch" />
+                    </SelectTrigger>
+                    <SelectContent className="bg-[#11161F] border-white/10 rounded-xl">
+                      <SelectItem value="army">Army</SelectItem>
+                      <SelectItem value="navy">Navy</SelectItem>
+                      <SelectItem value="air_force">Air Force</SelectItem>
+                      <SelectItem value="marines">Marines</SelectItem>
+                      <SelectItem value="coast_guard">Coast Guard</SelectItem>
+                      <SelectItem value="space_force">Space Force</SelectItem>
+                      <SelectItem value="national_guard">National Guard</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              )}
+
+              {personalInfo.active_military === "yes" && (
+                <div className="p-4 rounded-xl bg-[#4CAF50]/10 border border-[#4CAF50]/20 animate-in slide-in-from-top-2 duration-300">
+                  <div className="flex items-center gap-2">
+                    <svg className="w-5 h-5 text-[#4CAF50]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <p className="text-[#4CAF50] text-sm font-medium">
+                      Thank you for your service!
+                    </p>
+                  </div>
+                  <p className="text-slate-400 text-sm mt-2">
+                    Our admissions team will contact you about military-friendly scheduling options and benefits.
+                  </p>
+                </div>
+              )}
+            </div>
           </div>
         );
 
       case 5:
         return (
-          <div className="space-y-6" data-testid="subsection-work">
-            <h3 className="text-xl font-semibold text-white mb-4">Work Experience</h3>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-2">
-                <Label className="text-slate-300">Years of Work Experience *</Label>
-                <Select
-                  value={personalInfo.years_work_experience || ""}
-                  onValueChange={(value) => setPersonalInfo({ ...personalInfo, years_work_experience: value })}
+          <div className="space-y-8" data-testid="subsection-work">
+            {/* Section Header */}
+            <div className="relative">
+              <div className="absolute -left-4 top-0 w-1 h-full bg-gradient-to-b from-[#FF9800] to-[#FFB74D] rounded-full" />
+              <h3 className="text-2xl font-light text-white tracking-tight">Work Experience</h3>
+              <p className="text-slate-500 text-sm mt-1">Your professional background and employment history</p>
+            </div>
+
+            {/* Experience Summary - Glass Card */}
+            <div className="backdrop-blur-xl bg-white/[0.02] border border-white/[0.05] rounded-2xl p-6 space-y-5 hover:border-[#FF9800]/20 transition-colors duration-500">
+              <div className="flex items-center gap-3 mb-2">
+                <div className="w-8 h-8 rounded-full bg-[#FF9800]/10 flex items-center justify-center">
+                  <Briefcase className="w-4 h-4 text-[#FF9800]" />
+                </div>
+                <h4 className="text-xs font-medium uppercase tracking-wider text-slate-500">Experience Summary</h4>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label className="text-xs font-medium uppercase tracking-wider text-slate-400">
+                    Years of Work Experience <span className="text-[#00F5FF]">*</span>
+                  </Label>
+                  <Select
+                    value={personalInfo.years_work_experience || ""}
+                    onValueChange={(value) => setPersonalInfo({ ...personalInfo, years_work_experience: value })}
+                  >
+                    <SelectTrigger className="h-12 bg-black/30 border-white/[0.08] text-white rounded-full px-5 focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20" data-testid="work-years">
+                      <SelectValue placeholder="Select experience level" />
+                    </SelectTrigger>
+                    <SelectContent className="bg-[#11161F] border-white/10 rounded-xl">
+                      <SelectItem value="0">No experience</SelectItem>
+                      <SelectItem value="1-2">1-2 years</SelectItem>
+                      <SelectItem value="3-5">3-5 years</SelectItem>
+                      <SelectItem value="6-10">6-10 years</SelectItem>
+                      <SelectItem value="10+">10+ years</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="space-y-2">
+                  <Label className="text-xs font-medium uppercase tracking-wider text-slate-400">Current Job Title</Label>
+                  <Input
+                    value={personalInfo.current_job_title || ""}
+                    onChange={(e) => setPersonalInfo({ ...personalInfo, current_job_title: e.target.value })}
+                    placeholder="e.g., Registered Nurse, Physical Therapist"
+                    className="h-12 bg-black/30 border-white/[0.08] focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20 text-white rounded-full px-5 transition-all duration-300 placeholder:text-slate-600"
+                    data-testid="work-title"
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-3">
+                <Label className="text-xs font-medium uppercase tracking-wider text-slate-400">
+                  Do you have OTA (Occupational Therapy Assistant) experience?
+                </Label>
+                <RadioGroup
+                  value={personalInfo.ota_experience || ""}
+                  onValueChange={(value) => setPersonalInfo({ ...personalInfo, ota_experience: value })}
+                  className="flex gap-4"
                 >
-                  <SelectTrigger className="h-12 bg-black/20 border-white/10 text-white rounded-xl" data-testid="work-years">
-                    <SelectValue placeholder="Select years" />
-                  </SelectTrigger>
-                  <SelectContent className="bg-[#11161F] border-white/10">
-                    <SelectItem value="0">No experience</SelectItem>
-                    <SelectItem value="1-2">1-2 years</SelectItem>
-                    <SelectItem value="3-5">3-5 years</SelectItem>
-                    <SelectItem value="6-10">6-10 years</SelectItem>
-                    <SelectItem value="10+">10+ years</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              <div className="space-y-2">
-                <Label className="text-slate-300">Current Job Title</Label>
-                <Input
-                  value={personalInfo.current_job_title || ""}
-                  onChange={(e) => setPersonalInfo({ ...personalInfo, current_job_title: e.target.value })}
-                  placeholder="e.g., Registered Nurse"
-                  className="h-12 bg-black/20 border-white/10 focus:border-[#00F5FF] text-white rounded-xl"
-                  data-testid="work-title"
-                />
+                  {[{ value: "yes", label: "Yes" }, { value: "no", label: "No" }].map((option) => (
+                    <div key={option.value} className={`flex items-center space-x-2 px-6 py-3 rounded-full border transition-all duration-300 cursor-pointer ${
+                      personalInfo.ota_experience === option.value 
+                        ? "border-[#FF9800]/50 bg-[#FF9800]/10" 
+                        : "border-white/[0.08] bg-black/30 hover:border-white/20"
+                    }`}>
+                      <RadioGroupItem value={option.value} id={`ota-${option.value}`} />
+                      <Label htmlFor={`ota-${option.value}`} className="text-white cursor-pointer">{option.label}</Label>
+                    </div>
+                  ))}
+                </RadioGroup>
               </div>
             </div>
 
-            <div className="space-y-4">
-              <Label className="text-slate-300">Do you have OTA (Occupational Therapy Assistant) experience?</Label>
-              <RadioGroup
-                value={personalInfo.ota_experience || ""}
-                onValueChange={(value) => setPersonalInfo({ ...personalInfo, ota_experience: value })}
-                className="flex gap-4"
-              >
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="yes" id="ota-yes" />
-                  <Label htmlFor="ota-yes" className="text-white">Yes</Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="no" id="ota-no" />
-                  <Label htmlFor="ota-no" className="text-white">No</Label>
-                </div>
-              </RadioGroup>
-            </div>
-
-            {/* Employers List */}
-            <div className="space-y-4">
+            {/* Employment History - Glass Card */}
+            <div className="backdrop-blur-xl bg-white/[0.02] border border-white/[0.05] rounded-2xl p-6 space-y-5 hover:border-[#00B4D8]/20 transition-colors duration-500">
               <div className="flex items-center justify-between">
-                <Label className="text-slate-300">Employment History</Label>
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-full bg-[#00B4D8]/10 flex items-center justify-center">
+                    <Users className="w-4 h-4 text-[#00B4D8]" />
+                  </div>
+                  <div>
+                    <h4 className="text-xs font-medium uppercase tracking-wider text-slate-500">Employment History</h4>
+                    <p className="text-slate-600 text-xs mt-0.5">Add your previous employers</p>
+                  </div>
+                </div>
                 <Button
                   type="button"
                   variant="outline"
@@ -927,7 +987,7 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo }) => {
                       employers: [...employers, { id: Date.now(), name: "", title: "", start: "", end: "", current: false }]
                     });
                   }}
-                  className="border-[#00B4D8]/50 text-[#00B4D8] hover:bg-[#00B4D8]/10"
+                  className="border-[#00B4D8]/50 text-[#00B4D8] hover:bg-[#00B4D8]/10 rounded-full px-4"
                   data-testid="add-employer-btn"
                 >
                   <Plus className="w-4 h-4 mr-1" />
@@ -935,169 +995,245 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo }) => {
                 </Button>
               </div>
 
-              {(personalInfo.employers || []).map((employer, index) => (
-                <div key={employer.id} className="glass-card rounded-xl p-4 space-y-4">
-                  <div className="flex items-center justify-between">
-                    <span className="text-white font-medium">Employer {index + 1}</span>
-                    <Button
-                      type="button"
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => {
-                        const employers = personalInfo.employers.filter(e => e.id !== employer.id);
-                        setPersonalInfo({ ...personalInfo, employers });
-                      }}
-                      className="text-red-400 hover:text-red-300 hover:bg-red-400/10"
-                    >
-                      <Trash2 className="w-4 h-4" />
-                    </Button>
-                  </div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <Input
-                      placeholder="Employer Name"
-                      value={employer.name}
-                      onChange={(e) => {
-                        const employers = personalInfo.employers.map(emp =>
-                          emp.id === employer.id ? { ...emp, name: e.target.value } : emp
-                        );
-                        setPersonalInfo({ ...personalInfo, employers });
-                      }}
-                      className="h-10 bg-black/20 border-white/10 text-white rounded-lg"
-                    />
-                    <Input
-                      placeholder="Job Title"
-                      value={employer.title}
-                      onChange={(e) => {
-                        const employers = personalInfo.employers.map(emp =>
-                          emp.id === employer.id ? { ...emp, title: e.target.value } : emp
-                        );
-                        setPersonalInfo({ ...personalInfo, employers });
-                      }}
-                      className="h-10 bg-black/20 border-white/10 text-white rounded-lg"
-                    />
-                  </div>
-                  <div className="grid grid-cols-2 gap-4">
-                    <Input
-                      type="month"
-                      placeholder="Start Date"
-                      value={employer.start}
-                      onChange={(e) => {
-                        const employers = personalInfo.employers.map(emp =>
-                          emp.id === employer.id ? { ...emp, start: e.target.value } : emp
-                        );
-                        setPersonalInfo({ ...personalInfo, employers });
-                      }}
-                      className="h-10 bg-black/20 border-white/10 text-white rounded-lg"
-                    />
-                    <Input
-                      type="month"
-                      placeholder="End Date"
-                      value={employer.end}
-                      disabled={employer.current}
-                      onChange={(e) => {
-                        const employers = personalInfo.employers.map(emp =>
-                          emp.id === employer.id ? { ...emp, end: e.target.value } : emp
-                        );
-                        setPersonalInfo({ ...personalInfo, employers });
-                      }}
-                      className="h-10 bg-black/20 border-white/10 text-white rounded-lg"
-                    />
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <Checkbox
-                      id={`current-${employer.id}`}
-                      checked={employer.current}
-                      onCheckedChange={(checked) => {
-                        const employers = personalInfo.employers.map(emp =>
-                          emp.id === employer.id ? { ...emp, current: checked, end: checked ? "" : emp.end } : emp
-                        );
-                        setPersonalInfo({ ...personalInfo, employers });
-                      }}
-                    />
-                    <Label htmlFor={`current-${employer.id}`} className="text-slate-300 text-sm">Currently employed here</Label>
-                  </div>
+              {(personalInfo.employers || []).length === 0 ? (
+                <div className="text-center py-8 border border-dashed border-white/10 rounded-xl">
+                  <Briefcase className="w-10 h-10 text-slate-600 mx-auto mb-3" />
+                  <p className="text-slate-500 text-sm">No employers added yet</p>
+                  <p className="text-slate-600 text-xs mt-1">Click "Add Employer" to start building your work history</p>
                 </div>
-              ))}
+              ) : (
+                <div className="space-y-4">
+                  {(personalInfo.employers || []).map((employer, index) => (
+                    <div key={employer.id} className="p-5 rounded-xl bg-black/20 border border-white/[0.05] space-y-4">
+                      <div className="flex items-center justify-between">
+                        <span className="text-white font-medium flex items-center gap-2">
+                          <span className="w-6 h-6 rounded-full bg-[#00B4D8]/20 flex items-center justify-center text-xs text-[#00B4D8]">{index + 1}</span>
+                          Employer {index + 1}
+                        </span>
+                        <Button
+                          type="button"
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => {
+                            const employers = personalInfo.employers.filter(e => e.id !== employer.id);
+                            setPersonalInfo({ ...personalInfo, employers });
+                          }}
+                          className="text-red-400 hover:text-red-300 hover:bg-red-400/10 rounded-full h-8 w-8 p-0"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </Button>
+                      </div>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <Input
+                          placeholder="Company / Employer Name"
+                          value={employer.name}
+                          onChange={(e) => {
+                            const employers = personalInfo.employers.map(emp =>
+                              emp.id === employer.id ? { ...emp, name: e.target.value } : emp
+                            );
+                            setPersonalInfo({ ...personalInfo, employers });
+                          }}
+                          className="h-11 bg-black/30 border-white/[0.08] text-white rounded-full px-5 focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20 placeholder:text-slate-600"
+                        />
+                        <Input
+                          placeholder="Your Job Title"
+                          value={employer.title}
+                          onChange={(e) => {
+                            const employers = personalInfo.employers.map(emp =>
+                              emp.id === employer.id ? { ...emp, title: e.target.value } : emp
+                            );
+                            setPersonalInfo({ ...personalInfo, employers });
+                          }}
+                          className="h-11 bg-black/30 border-white/[0.08] text-white rounded-full px-5 focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20 placeholder:text-slate-600"
+                        />
+                      </div>
+                      <div className="grid grid-cols-2 gap-4">
+                        <div className="space-y-1">
+                          <Label className="text-xs text-slate-500">Start Date</Label>
+                          <Input
+                            type="month"
+                            value={employer.start}
+                            onChange={(e) => {
+                              const employers = personalInfo.employers.map(emp =>
+                                emp.id === employer.id ? { ...emp, start: e.target.value } : emp
+                              );
+                              setPersonalInfo({ ...personalInfo, employers });
+                            }}
+                            className="h-11 bg-black/30 border-white/[0.08] text-white rounded-full px-5 focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20"
+                          />
+                        </div>
+                        <div className="space-y-1">
+                          <Label className="text-xs text-slate-500">End Date</Label>
+                          <Input
+                            type="month"
+                            value={employer.end}
+                            disabled={employer.current}
+                            onChange={(e) => {
+                              const employers = personalInfo.employers.map(emp =>
+                                emp.id === employer.id ? { ...emp, end: e.target.value } : emp
+                              );
+                              setPersonalInfo({ ...personalInfo, employers });
+                            }}
+                            className="h-11 bg-black/30 border-white/[0.08] text-white rounded-full px-5 focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20 disabled:opacity-50"
+                          />
+                        </div>
+                      </div>
+                      <div className="flex items-center space-x-2 pt-1">
+                        <Checkbox
+                          id={`current-${employer.id}`}
+                          checked={employer.current}
+                          onCheckedChange={(checked) => {
+                            const employers = personalInfo.employers.map(emp =>
+                              emp.id === employer.id ? { ...emp, current: checked, end: checked ? "" : emp.end } : emp
+                            );
+                            setPersonalInfo({ ...personalInfo, employers });
+                          }}
+                          className="border-[#00B4D8]"
+                        />
+                        <Label htmlFor={`current-${employer.id}`} className="text-slate-400 text-sm cursor-pointer">I currently work here</Label>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         );
 
       case 6:
         return (
-          <div className="space-y-6" data-testid="subsection-demographic">
-            <h3 className="text-xl font-semibold text-white mb-4">Demographic Information</h3>
-            <p className="text-slate-400 text-sm mb-6">
-              This information is collected for statistical purposes only and will not affect your application.
-            </p>
-            
-            <div className="space-y-2">
-              <Label className="text-slate-300">Ethnicity</Label>
-              <Select
-                value={personalInfo.ethnicity || ""}
-                onValueChange={(value) => setPersonalInfo({ ...personalInfo, ethnicity: value })}
-              >
-                <SelectTrigger className="h-12 bg-black/20 border-white/10 text-white rounded-xl" data-testid="demographic-ethnicity">
-                  <SelectValue placeholder="Select ethnicity" />
-                </SelectTrigger>
-                <SelectContent className="bg-[#11161F] border-white/10">
-                  <SelectItem value="hispanic">Hispanic or Latino</SelectItem>
-                  <SelectItem value="not_hispanic">Not Hispanic or Latino</SelectItem>
-                  <SelectItem value="prefer_not">Prefer not to say</SelectItem>
-                </SelectContent>
-              </Select>
+          <div className="space-y-8" data-testid="subsection-demographic">
+            {/* Section Header */}
+            <div className="relative">
+              <div className="absolute -left-4 top-0 w-1 h-full bg-gradient-to-b from-[#9C27B0] to-[#CE93D8] rounded-full" />
+              <h3 className="text-2xl font-light text-white tracking-tight">Demographic Information</h3>
+              <p className="text-slate-500 text-sm mt-1">Optional information for statistical purposes</p>
             </div>
 
-            <div className="space-y-2">
-              <Label className="text-slate-300">Race (Select all that apply)</Label>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-2">
-                {[
-                  { id: "american_indian", label: "American Indian or Alaska Native" },
-                  { id: "asian", label: "Asian" },
-                  { id: "black", label: "Black or African American" },
-                  { id: "pacific_islander", label: "Native Hawaiian or Pacific Islander" },
-                  { id: "white", label: "White" },
-                  { id: "two_or_more", label: "Two or More Races" },
-                  { id: "prefer_not_race", label: "Prefer not to say" },
-                ].map((option) => (
-                  <div key={option.id} className="flex items-center space-x-2 p-3 rounded-xl border border-white/10 bg-white/5">
-                    <Checkbox
-                      id={option.id}
-                      checked={(personalInfo.race || []).includes(option.id)}
-                      onCheckedChange={(checked) => {
+            {/* Notice */}
+            <div className="p-4 rounded-xl bg-[#9C27B0]/5 border border-[#9C27B0]/10">
+              <p className="text-slate-400 text-sm">
+                This information is collected for statistical purposes only and will not affect your application decision.
+              </p>
+            </div>
+
+            {/* Ethnicity & Race - Glass Card */}
+            <div className="backdrop-blur-xl bg-white/[0.02] border border-white/[0.05] rounded-2xl p-6 space-y-5 hover:border-[#9C27B0]/20 transition-colors duration-500">
+              <div className="flex items-center gap-3 mb-2">
+                <div className="w-8 h-8 rounded-full bg-[#9C27B0]/10 flex items-center justify-center">
+                  <Users className="w-4 h-4 text-[#9C27B0]" />
+                </div>
+                <h4 className="text-xs font-medium uppercase tracking-wider text-slate-500">Ethnicity & Race</h4>
+              </div>
+              
+              <div className="space-y-2">
+                <Label className="text-xs font-medium uppercase tracking-wider text-slate-400">Ethnicity</Label>
+                <Select
+                  value={personalInfo.ethnicity || ""}
+                  onValueChange={(value) => setPersonalInfo({ ...personalInfo, ethnicity: value })}
+                >
+                  <SelectTrigger className="h-12 bg-black/30 border-white/[0.08] text-white rounded-full px-5 focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20 max-w-md" data-testid="demographic-ethnicity">
+                    <SelectValue placeholder="Select ethnicity" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-[#11161F] border-white/10 rounded-xl">
+                    <SelectItem value="hispanic">Hispanic or Latino</SelectItem>
+                    <SelectItem value="not_hispanic">Not Hispanic or Latino</SelectItem>
+                    <SelectItem value="prefer_not">Prefer not to say</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div className="space-y-3">
+                <Label className="text-xs font-medium uppercase tracking-wider text-slate-400">Race (Select all that apply)</Label>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  {[
+                    { id: "american_indian", label: "American Indian or Alaska Native" },
+                    { id: "asian", label: "Asian" },
+                    { id: "black", label: "Black or African American" },
+                    { id: "pacific_islander", label: "Native Hawaiian or Pacific Islander" },
+                    { id: "white", label: "White" },
+                    { id: "two_or_more", label: "Two or More Races" },
+                    { id: "prefer_not_race", label: "Prefer not to say" },
+                  ].map((option) => (
+                    <div 
+                      key={option.id} 
+                      className={`flex items-center space-x-3 p-4 rounded-xl border transition-all duration-300 cursor-pointer ${
+                        (personalInfo.race || []).includes(option.id)
+                          ? "border-[#9C27B0]/50 bg-[#9C27B0]/10"
+                          : "border-white/[0.08] bg-black/30 hover:border-white/20"
+                      }`}
+                      onClick={() => {
                         const current = personalInfo.race || [];
-                        if (checked) {
-                          setPersonalInfo({ ...personalInfo, race: [...current, option.id] });
-                        } else {
+                        if (current.includes(option.id)) {
                           setPersonalInfo({ ...personalInfo, race: current.filter(r => r !== option.id) });
+                        } else {
+                          setPersonalInfo({ ...personalInfo, race: [...current, option.id] });
                         }
                       }}
-                      className="border-[#00B4D8]"
-                    />
-                    <Label htmlFor={option.id} className="text-white text-sm cursor-pointer">{option.label}</Label>
-                  </div>
-                ))}
+                    >
+                      <Checkbox
+                        id={option.id}
+                        checked={(personalInfo.race || []).includes(option.id)}
+                        onCheckedChange={(checked) => {
+                          const current = personalInfo.race || [];
+                          if (checked) {
+                            setPersonalInfo({ ...personalInfo, race: [...current, option.id] });
+                          } else {
+                            setPersonalInfo({ ...personalInfo, race: current.filter(r => r !== option.id) });
+                          }
+                        }}
+                        className="border-[#9C27B0]"
+                      />
+                      <Label htmlFor={option.id} className="text-white text-sm cursor-pointer">{option.label}</Label>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
 
-            <div className="space-y-2">
-              <Label className="text-slate-300">How did you hear about us?</Label>
-              <Select
-                value={personalInfo.referral_source || ""}
-                onValueChange={(value) => setPersonalInfo({ ...personalInfo, referral_source: value })}
-              >
-                <SelectTrigger className="h-12 bg-black/20 border-white/10 text-white rounded-xl" data-testid="demographic-referral">
-                  <SelectValue placeholder="Select source" />
-                </SelectTrigger>
-                <SelectContent className="bg-[#11161F] border-white/10">
-                  <SelectItem value="search_engine">Search Engine (Google, Bing)</SelectItem>
-                  <SelectItem value="social_media">Social Media</SelectItem>
-                  <SelectItem value="friend_family">Friend or Family</SelectItem>
-                  <SelectItem value="employer">Employer</SelectItem>
-                  <SelectItem value="college_fair">College Fair</SelectItem>
-                  <SelectItem value="advertisement">Advertisement</SelectItem>
-                  <SelectItem value="other">Other</SelectItem>
-                </SelectContent>
-              </Select>
+            {/* How did you hear about us - Glass Card */}
+            <div className="backdrop-blur-xl bg-white/[0.02] border border-white/[0.05] rounded-2xl p-6 space-y-5 hover:border-[#00B4D8]/20 transition-colors duration-500">
+              <div className="flex items-center gap-3 mb-2">
+                <div className="w-8 h-8 rounded-full bg-[#00B4D8]/10 flex items-center justify-center">
+                  <svg className="w-4 h-4 text-[#00B4D8]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <h4 className="text-xs font-medium uppercase tracking-wider text-slate-500">Referral Source</h4>
+              </div>
+              
+              <div className="space-y-2">
+                <Label className="text-xs font-medium uppercase tracking-wider text-slate-400">How did you hear about us?</Label>
+                <p className="text-slate-600 text-xs">Help us understand how you found our program</p>
+                <Select
+                  value={personalInfo.referral_source || ""}
+                  onValueChange={(value) => setPersonalInfo({ ...personalInfo, referral_source: value })}
+                >
+                  <SelectTrigger className="h-12 bg-black/30 border-white/[0.08] text-white rounded-full px-5 focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20 max-w-md" data-testid="demographic-referral">
+                    <SelectValue placeholder="Select source" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-[#11161F] border-white/10 rounded-xl">
+                    <SelectItem value="search_engine">Search Engine (Google, Bing)</SelectItem>
+                    <SelectItem value="social_media">Social Media</SelectItem>
+                    <SelectItem value="friend_family">Friend or Family</SelectItem>
+                    <SelectItem value="employer">Employer</SelectItem>
+                    <SelectItem value="college_fair">College Fair</SelectItem>
+                    <SelectItem value="advertisement">Advertisement</SelectItem>
+                    <SelectItem value="other">Other</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+
+            {/* Section Complete Indicator */}
+            <div className="flex items-center justify-center p-6 rounded-xl bg-gradient-to-r from-[#9C27B0]/10 to-[#00B4D8]/10 border border-white/[0.05]">
+              <div className="text-center">
+                <div className="w-12 h-12 rounded-full bg-[#28A745]/20 flex items-center justify-center mx-auto mb-3">
+                  <Check className="w-6 h-6 text-[#28A745]" />
+                </div>
+                <p className="text-white font-medium">You're almost done!</p>
+                <p className="text-slate-500 text-sm mt-1">Click "Section Complete" to finish Personal Information</p>
+              </div>
             </div>
           </div>
         );
