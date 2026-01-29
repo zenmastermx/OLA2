@@ -59,25 +59,133 @@ class TokenResponse(BaseModel):
     token_type: str = "bearer"
     user: UserResponse
 
+class Employer(BaseModel):
+    id: Optional[int] = None
+    name: Optional[str] = None
+    title: Optional[str] = None
+    start: Optional[str] = None
+    end: Optional[str] = None
+    current: Optional[bool] = False
+
 class PersonalInfo(BaseModel):
+    # Contact Information
     first_name: Optional[str] = None
     last_name: Optional[str] = None
+    middle_name: Optional[str] = None
+    preferred_name: Optional[str] = None
     email: Optional[str] = None
     phone: Optional[str] = None
-    date_of_birth: Optional[str] = None
+    alternate_phone: Optional[str] = None
     address: Optional[str] = None
     city: Optional[str] = None
     state: Optional[str] = None
     zip_code: Optional[str] = None
     country: Optional[str] = "United States"
+    
+    # Judicial Background
+    judicial_agreement: Optional[str] = None
+    felony_conviction: Optional[str] = None
+    felony_explanation: Optional[str] = None
+    
+    # Emergency Contact
+    emergency_first_name: Optional[str] = None
+    emergency_last_name: Optional[str] = None
+    emergency_relationship: Optional[str] = None
+    emergency_phone: Optional[str] = None
+    emergency_email: Optional[str] = None
+    emergency_address: Optional[str] = None
+    
+    # Citizenship & Identification
+    date_of_birth: Optional[str] = None
+    gender: Optional[str] = None
+    marital_status: Optional[str] = None
+    us_citizen: Optional[str] = None
+    residency_status: Optional[str] = None
+    country_of_citizenship: Optional[str] = None
+    us_visa: Optional[str] = None
+    ssn: Optional[str] = None
+    itin: Optional[str] = None
+    funding_options: Optional[List[str]] = []
+    
+    # US Military Background
+    veteran_benefits: Optional[str] = None
+    active_military: Optional[str] = None
+    military_branch: Optional[str] = None
+    
+    # Work Experience
+    years_work_experience: Optional[str] = None
+    current_job_title: Optional[str] = None
+    ota_experience: Optional[str] = None
+    employers: Optional[List[Dict[str, Any]]] = []
+    
+    # Demographic Information
+    ethnicity: Optional[str] = None
+    race: Optional[List[str]] = []
+    referral_source: Optional[str] = None
+
+class Institution(BaseModel):
+    id: Optional[int] = None
+    name: Optional[str] = None
+    date: Optional[str] = None
+    degree: Optional[str] = None
+
+class PrerequisiteCourse(BaseModel):
+    name: Optional[str] = None
+    completed: Optional[bool] = False
+    grade: Optional[str] = None
+    institution: Optional[str] = None
+    credits: Optional[float] = None
 
 class AcademicHistory(BaseModel):
+    # Education
+    advanced_degree: Optional[str] = None
+    highest_degree: Optional[str] = None
     institution_name: Optional[str] = None
     degree_type: Optional[str] = None
     major: Optional[str] = None
     gpa: Optional[float] = None
     graduation_date: Optional[str] = None
-    additional_institutions: Optional[List[Dict[str, Any]]] = []
+    institutions: Optional[List[Dict[str, Any]]] = []
+    
+    # Prerequisites
+    prerequisites: Optional[Dict[str, Any]] = {}
+    
+    # Test Information (TOEFL)
+    toefl_required: Optional[bool] = None
+    toefl_date: Optional[str] = None
+    toefl_total: Optional[str] = None
+    toefl_reading: Optional[str] = None
+    toefl_writing: Optional[str] = None
+    toefl_speaking: Optional[str] = None
+    toefl_listening: Optional[str] = None
+    
+    # Prior Application
+    prior_application: Optional[str] = None
+    prior_application_date: Optional[str] = None
+    prior_ot_enrollment: Optional[str] = None
+    
+    # Academic Background
+    academic_probation: Optional[str] = None
+    probation_explanation: Optional[str] = None
+
+class EmploymentVerification(BaseModel):
+    id: Optional[int] = None
+    verifier_first_name: Optional[str] = None
+    verifier_last_name: Optional[str] = None
+    verifier_email: Optional[str] = None
+    verifier_phone: Optional[str] = None
+    employer_name: Optional[str] = None
+    employer_address: Optional[str] = None
+    job_title: Optional[str] = None
+    start_date: Optional[str] = None
+    end_date: Optional[str] = None
+    hours_worked: Optional[str] = None
+    request_stage: Optional[str] = "Pending"
+    date_requested: Optional[str] = None
+    date_confirmed: Optional[str] = None
+
+class EmploymentHistory(BaseModel):
+    verifications: Optional[List[Dict[str, Any]]] = []
 
 class ProgramSelection(BaseModel):
     program_type: Optional[str] = None  # OT or Nursing
