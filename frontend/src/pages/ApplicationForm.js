@@ -365,133 +365,296 @@ const ApplicationForm = () => {
       case 5:
         return (
           <div className="space-y-8" data-testid="step-5-review">
-            {/* Summary Cards */}
+            {/* Section Header */}
+            <div className="relative">
+              <div className="absolute -left-4 top-0 w-1 h-full bg-gradient-to-b from-[#28A745] to-[#00B4D8] rounded-full" />
+              <h3 className="text-2xl font-light text-white tracking-tight">Review & Submit</h3>
+              <p className="text-slate-500 text-sm mt-1">Review your application before final submission</p>
+            </div>
+
+            {/* Completion Status - Glass Card */}
+            <div className="backdrop-blur-xl bg-white/[0.02] border border-white/[0.05] rounded-2xl p-6 hover:border-[#00B4D8]/20 transition-colors duration-500">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-full bg-[#00B4D8]/10 flex items-center justify-center">
+                    <CheckCircle2 className="w-6 h-6 text-[#00B4D8]" />
+                  </div>
+                  <div>
+                    <p className="text-slate-500 text-xs uppercase tracking-wider">Application Progress</p>
+                    <p className="text-2xl font-light text-white">{application?.progress || 0}% <span className="text-sm text-slate-500">Complete</span></p>
+                  </div>
+                </div>
+                <div className="text-right">
+                  <p className="text-slate-500 text-xs uppercase tracking-wider">Status</p>
+                  <span className={`inline-block mt-1 px-3 py-1 rounded-full text-sm font-medium ${
+                    application?.status === "submitted" 
+                      ? "bg-[#28A745]/20 text-[#28A745]" 
+                      : "bg-[#FF9800]/20 text-[#FF9800]"
+                  }`}>
+                    {application?.status === "submitted" ? "Submitted" : "In Progress"}
+                  </span>
+                </div>
+              </div>
+              
+              {/* Progress Bar */}
+              <div className="mt-4 pt-4 border-t border-white/[0.05]">
+                <div className="h-2 bg-black/30 rounded-full overflow-hidden">
+                  <div 
+                    className="h-full bg-gradient-to-r from-[#00B4D8] to-[#28A745] rounded-full transition-all duration-500"
+                    style={{ width: `${application?.progress || 0}%` }}
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Summary Cards Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Personal Info */}
-              <div className="glass-card rounded-xl p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-white font-semibold flex items-center gap-2">
-                    <User className="w-5 h-5 text-[#00B4D8]" />
-                    Personal Information
-                  </h3>
+              {/* Personal Info Card */}
+              <div className="backdrop-blur-xl bg-white/[0.02] border border-white/[0.05] rounded-2xl p-6 hover:border-[#00B4D8]/20 transition-colors duration-500 group">
+                <div className="flex items-center justify-between mb-5">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-[#00B4D8]/10 flex items-center justify-center">
+                      <User className="w-5 h-5 text-[#00B4D8]" />
+                    </div>
+                    <h4 className="text-white font-medium">Personal Information</h4>
+                  </div>
                   <button 
                     onClick={() => { setCurrentStep(1); navigate(`/application/${appId}/1`); }}
-                    className="text-[#00B4D8] text-sm hover:text-[#00F5FF]"
+                    className="px-3 py-1.5 rounded-full text-xs font-medium bg-white/5 text-[#00B4D8] hover:bg-[#00B4D8]/10 transition-colors opacity-0 group-hover:opacity-100"
                   >
                     Edit
                   </button>
                 </div>
-                <div className="space-y-2 text-sm">
-                  <p className="text-slate-300">{personalInfo.first_name} {personalInfo.last_name}</p>
-                  <p className="text-slate-400">{personalInfo.email}</p>
-                  <p className="text-slate-400">{personalInfo.phone}</p>
-                  <p className="text-slate-400">{personalInfo.city}, {personalInfo.state}</p>
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between py-2 border-b border-white/[0.03]">
+                    <span className="text-slate-500 text-sm">Name</span>
+                    <span className="text-white text-sm">{personalInfo.first_name} {personalInfo.last_name}</span>
+                  </div>
+                  <div className="flex items-center justify-between py-2 border-b border-white/[0.03]">
+                    <span className="text-slate-500 text-sm">Email</span>
+                    <span className="text-slate-300 text-sm">{personalInfo.email || "Not provided"}</span>
+                  </div>
+                  <div className="flex items-center justify-between py-2 border-b border-white/[0.03]">
+                    <span className="text-slate-500 text-sm">Phone</span>
+                    <span className="text-slate-300 text-sm">{personalInfo.phone || "Not provided"}</span>
+                  </div>
+                  <div className="flex items-center justify-between py-2">
+                    <span className="text-slate-500 text-sm">Location</span>
+                    <span className="text-slate-300 text-sm">
+                      {personalInfo.city && personalInfo.state ? `${personalInfo.city}, ${personalInfo.state}` : "Not provided"}
+                    </span>
+                  </div>
                 </div>
               </div>
 
-              {/* Academic */}
-              <div className="glass-card rounded-xl p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-white font-semibold flex items-center gap-2">
-                    <GraduationCap className="w-5 h-5 text-[#00B4D8]" />
-                    Academic History
-                  </h3>
+              {/* Academic History Card */}
+              <div className="backdrop-blur-xl bg-white/[0.02] border border-white/[0.05] rounded-2xl p-6 hover:border-[#7B68EE]/20 transition-colors duration-500 group">
+                <div className="flex items-center justify-between mb-5">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-[#7B68EE]/10 flex items-center justify-center">
+                      <GraduationCap className="w-5 h-5 text-[#7B68EE]" />
+                    </div>
+                    <h4 className="text-white font-medium">Academic History</h4>
+                  </div>
                   <button 
                     onClick={() => { setCurrentStep(2); navigate(`/application/${appId}/2`); }}
-                    className="text-[#00B4D8] text-sm hover:text-[#00F5FF]"
+                    className="px-3 py-1.5 rounded-full text-xs font-medium bg-white/5 text-[#7B68EE] hover:bg-[#7B68EE]/10 transition-colors opacity-0 group-hover:opacity-100"
                   >
                     Edit
                   </button>
                 </div>
-                <div className="space-y-2 text-sm">
-                  <p className="text-slate-300">{academicHistory.institution_name}</p>
-                  <p className="text-slate-400">{academicHistory.degree_type} in {academicHistory.major}</p>
-                  <p className="text-slate-400">GPA: {academicHistory.gpa}</p>
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between py-2 border-b border-white/[0.03]">
+                    <span className="text-slate-500 text-sm">Highest Degree</span>
+                    <span className="text-white text-sm capitalize">{academicHistory.highest_degree?.replace('_', ' ') || "Not provided"}</span>
+                  </div>
+                  <div className="flex items-center justify-between py-2 border-b border-white/[0.03]">
+                    <span className="text-slate-500 text-sm">Institutions</span>
+                    <span className="text-slate-300 text-sm">{(academicHistory.institutions || []).length} listed</span>
+                  </div>
+                  <div className="flex items-center justify-between py-2 border-b border-white/[0.03]">
+                    <span className="text-slate-500 text-sm">Prior Application</span>
+                    <span className="text-slate-300 text-sm capitalize">{academicHistory.prior_application || "Not specified"}</span>
+                  </div>
+                  <div className="flex items-center justify-between py-2">
+                    <span className="text-slate-500 text-sm">TOEFL</span>
+                    <span className="text-slate-300 text-sm">{academicHistory.toefl_total ? `Score: ${academicHistory.toefl_total}` : "Not required"}</span>
+                  </div>
                 </div>
               </div>
 
-              {/* Employment */}
-              <div className="glass-card rounded-xl p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-white font-semibold flex items-center gap-2">
-                    <LayoutDashboard className="w-5 h-5 text-[#00B4D8]" />
-                    Employment History
-                  </h3>
+              {/* Employment History Card */}
+              <div className="backdrop-blur-xl bg-white/[0.02] border border-white/[0.05] rounded-2xl p-6 hover:border-[#FF9800]/20 transition-colors duration-500 group">
+                <div className="flex items-center justify-between mb-5">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-[#FF9800]/10 flex items-center justify-center">
+                      <LayoutDashboard className="w-5 h-5 text-[#FF9800]" />
+                    </div>
+                    <h4 className="text-white font-medium">Employment History</h4>
+                  </div>
                   <button 
                     onClick={() => { setCurrentStep(3); navigate(`/application/${appId}/3`); }}
-                    className="text-[#00B4D8] text-sm hover:text-[#00F5FF]"
+                    className="px-3 py-1.5 rounded-full text-xs font-medium bg-white/5 text-[#FF9800] hover:bg-[#FF9800]/10 transition-colors opacity-0 group-hover:opacity-100"
                   >
                     Edit
                   </button>
                 </div>
-                <div className="space-y-2 text-sm">
-                  <p className="text-slate-300">{programSelection.employer_name || "Not provided"}</p>
-                  <p className="text-slate-400">{programSelection.job_title || "N/A"}</p>
-                  <p className="text-slate-400">Experience: {programSelection.years_experience || "N/A"}</p>
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between py-2 border-b border-white/[0.03]">
+                    <span className="text-slate-500 text-sm">Verifications</span>
+                    <span className="text-white text-sm">{(employmentHistory.verifications || []).length} submitted</span>
+                  </div>
+                  <div className="flex items-center justify-between py-2 border-b border-white/[0.03]">
+                    <span className="text-slate-500 text-sm">Confirmed</span>
+                    <span className="text-slate-300 text-sm">
+                      {(employmentHistory.verifications || []).filter(v => v.date_confirmed).length} of {(employmentHistory.verifications || []).length}
+                    </span>
+                  </div>
+                  <div className="flex items-center justify-between py-2">
+                    <span className="text-slate-500 text-sm">Total Hours</span>
+                    <span className={`text-sm font-medium ${
+                      (employmentHistory.verifications || []).reduce((sum, v) => sum + (parseInt(v.hours_worked) || 0), 0) >= 2080
+                        ? "text-[#28A745]"
+                        : "text-[#FF6B35]"
+                    }`}>
+                      {(employmentHistory.verifications || []).reduce((sum, v) => sum + (parseInt(v.hours_worked) || 0), 0).toLocaleString()} / 2,080
+                    </span>
+                  </div>
                 </div>
               </div>
 
-              {/* Documents */}
-              <div className="glass-card rounded-xl p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-white font-semibold flex items-center gap-2">
-                    <FileText className="w-5 h-5 text-[#00B4D8]" />
-                    Documents Required
-                  </h3>
+              {/* Documents Card */}
+              <div className="backdrop-blur-xl bg-white/[0.02] border border-white/[0.05] rounded-2xl p-6 hover:border-[#E91E63]/20 transition-colors duration-500 group">
+                <div className="flex items-center justify-between mb-5">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-[#E91E63]/10 flex items-center justify-center">
+                      <FileText className="w-5 h-5 text-[#E91E63]" />
+                    </div>
+                    <h4 className="text-white font-medium">Documents Required</h4>
+                  </div>
                   <button 
                     onClick={() => { setCurrentStep(4); navigate(`/application/${appId}/4`); }}
-                    className="text-[#00B4D8] text-sm hover:text-[#00F5FF]"
+                    className="px-3 py-1.5 rounded-full text-xs font-medium bg-white/5 text-[#E91E63] hover:bg-[#E91E63]/10 transition-colors opacity-0 group-hover:opacity-100"
                   >
                     Edit
                   </button>
                 </div>
-                <div className="space-y-2 text-sm">
-                  <p className="text-slate-300">
-                    {application?.documents?.filter(d => d.status === "uploaded").length} of {application?.documents?.length} uploaded
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between py-2 border-b border-white/[0.03]">
+                    <span className="text-slate-500 text-sm">Uploaded</span>
+                    <span className="text-white text-sm">
+                      {application?.documents?.filter(d => d.status === "uploaded").length || 0} of {application?.documents?.length || 5}
+                    </span>
+                  </div>
+                  <div className="space-y-2 pt-2">
+                    {application?.documents?.map((doc) => (
+                      <div key={doc.id} className="flex items-center gap-3">
+                        <div className={`w-5 h-5 rounded-full flex items-center justify-center ${
+                          doc.status === "uploaded" ? "bg-[#28A745]/20" : "bg-white/5"
+                        }`}>
+                          {doc.status === "uploaded" ? (
+                            <Check className="w-3 h-3 text-[#28A745]" />
+                          ) : (
+                            <X className="w-3 h-3 text-slate-500" />
+                          )}
+                        </div>
+                        <span className={`text-sm ${doc.status === "uploaded" ? "text-slate-300" : "text-slate-500"}`}>
+                          {doc.name}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Program Selection Summary */}
+            <div className="backdrop-blur-xl bg-white/[0.02] border border-white/[0.05] rounded-2xl p-6 hover:border-[#00B4D8]/20 transition-colors duration-500">
+              <div className="flex items-center gap-3 mb-5">
+                <div className="w-10 h-10 rounded-xl bg-[#00B4D8]/10 flex items-center justify-center">
+                  <GraduationCap className="w-5 h-5 text-[#00B4D8]" />
+                </div>
+                <div>
+                  <h4 className="text-white font-medium">Selected Program</h4>
+                  <p className="text-slate-500 text-xs">Your chosen degree program</p>
+                </div>
+              </div>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div className="p-4 rounded-xl bg-black/20 border border-white/[0.03]">
+                  <p className="text-slate-600 text-xs uppercase tracking-wider mb-1">Program</p>
+                  <p className="text-white font-medium">{programSelection.program_type || "OT"}</p>
+                </div>
+                <div className="p-4 rounded-xl bg-black/20 border border-white/[0.03]">
+                  <p className="text-slate-600 text-xs uppercase tracking-wider mb-1">Degree</p>
+                  <p className="text-white font-medium">{programSelection.degree_type || "Not selected"}</p>
+                </div>
+                <div className="p-4 rounded-xl bg-black/20 border border-white/[0.03]">
+                  <p className="text-slate-600 text-xs uppercase tracking-wider mb-1">Campus</p>
+                  <p className="text-white font-medium capitalize">{programSelection.campus?.replace('_', ' ') || "Not selected"}</p>
+                </div>
+                <div className="p-4 rounded-xl bg-black/20 border border-white/[0.03]">
+                  <p className="text-slate-600 text-xs uppercase tracking-wider mb-1">Start Term</p>
+                  <p className="text-white font-medium">{programSelection.start_term || "Not selected"}</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Certification & Agreement */}
+            <div className="backdrop-blur-xl bg-white/[0.02] border border-white/[0.05] rounded-2xl p-6 hover:border-[#7B68EE]/20 transition-colors duration-500">
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 rounded-xl bg-[#7B68EE]/10 flex items-center justify-center flex-shrink-0 mt-1">
+                  <AlertCircle className="w-5 h-5 text-[#7B68EE]" />
+                </div>
+                <div className="space-y-3">
+                  <h4 className="text-white font-medium">Certification & Agreement</h4>
+                  <p className="text-slate-400 text-sm leading-relaxed">
+                    By clicking "Submit Application," I certify that all information provided in this application is true, 
+                    accurate, and complete to the best of my knowledge. I understand that any falsification, misrepresentation, 
+                    or omission of information may result in denial of admission or dismissal from the program.
                   </p>
-                  {application?.documents?.map((doc) => (
-                    <div key={doc.id} className="flex items-center gap-2">
-                      {doc.status === "uploaded" ? (
-                        <Check className="w-4 h-4 text-[#28A745]" />
-                      ) : (
-                        <X className="w-4 h-4 text-slate-500" />
-                      )}
-                      <span className={doc.status === "uploaded" ? "text-slate-300" : "text-slate-500"}>
-                        {doc.name}
-                      </span>
-                    </div>
-                  ))}
+                  <p className="text-slate-500 text-xs">
+                    I authorize the University of St. Augustine for Health Sciences to verify all information provided 
+                    and to contact references as needed.
+                  </p>
                 </div>
               </div>
             </div>
 
             {/* Submit Section */}
-            <div className="glass-card rounded-xl p-8 text-center border-[#00B4D8]/30">
-              <CheckCircle2 className="w-16 h-16 text-[#00B4D8] mx-auto mb-4" />
-              <h3 className="font-['Outfit'] text-2xl font-bold text-white mb-2">
+            <div className="backdrop-blur-xl bg-gradient-to-br from-[#00B4D8]/10 to-[#7B68EE]/10 border border-[#00B4D8]/20 rounded-2xl p-10 text-center">
+              <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[#00B4D8]/20 to-[#7B68EE]/20 flex items-center justify-center mx-auto mb-6">
+                <CheckCircle2 className="w-10 h-10 text-[#00B4D8]" />
+              </div>
+              <h3 className="font-['Outfit'] text-3xl font-light text-white mb-3">
                 Ready to Submit?
               </h3>
-              <p className="text-slate-400 mb-6 max-w-md mx-auto">
-                Please review all information carefully. Once submitted, you cannot make changes to your application.
+              <p className="text-slate-400 mb-8 max-w-lg mx-auto">
+                Please review all information carefully. Once submitted, you will not be able to make changes to your application. 
+                Our admissions team will review your application and contact you within 2-3 business days.
               </p>
+              
               <Button
                 onClick={handleSubmit}
                 disabled={saving}
-                className="bg-gradient-to-r from-[#00B4D8] to-[#7B68EE] hover:opacity-90 text-white rounded-full px-12 py-6 text-lg shadow-[0_0_30px_rgba(0,180,216,0.4)] transition-all"
+                className="bg-gradient-to-r from-[#00B4D8] to-[#7B68EE] hover:opacity-90 text-white rounded-full px-14 py-7 text-lg shadow-[0_0_40px_rgba(0,180,216,0.4)] hover:shadow-[0_0_60px_rgba(0,180,216,0.5)] transition-all duration-300"
                 data-testid="submit-application-btn"
               >
                 {saving ? (
                   <>
-                    <Loader2 className="w-5 h-5 mr-2 animate-spin" />
-                    Submitting...
+                    <Loader2 className="w-6 h-6 mr-3 animate-spin" />
+                    Submitting Application...
                   </>
                 ) : (
                   <>
-                    <Check className="w-5 h-5 mr-2" />
+                    <Check className="w-6 h-6 mr-3" />
                     Submit Application
                   </>
                 )}
               </Button>
+              
+              <p className="text-slate-600 text-xs mt-6">
+                By submitting, you agree to our Terms of Service and Privacy Policy
+              </p>
             </div>
           </div>
         );
