@@ -505,7 +505,7 @@ const ApplicationForm = () => {
       </div>
 
       {/* Main Content */}
-      <div className="max-w-3xl mx-auto px-6 py-8">
+      <div className="max-w-5xl mx-auto px-6 py-8">
         <div className="mb-8">
           <h1 className="font-['Outfit'] text-2xl lg:text-3xl font-bold text-white mb-2">
             {steps[currentStep - 1]?.label}
