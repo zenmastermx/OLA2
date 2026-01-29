@@ -579,12 +579,12 @@ const ApplicationForm = () => {
                 </div>
               </div>
 
-              {/* Program */}
+              {/* Employment */}
               <div className="glass-card rounded-xl p-6">
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="text-white font-semibold flex items-center gap-2">
                     <LayoutDashboard className="w-5 h-5 text-[#00B4D8]" />
-                    Program Selection
+                    Employment History
                   </h3>
                   <button 
                     onClick={() => { setCurrentStep(3); navigate(`/application/${appId}/3`); }}
@@ -594,9 +594,9 @@ const ApplicationForm = () => {
                   </button>
                 </div>
                 <div className="space-y-2 text-sm">
-                  <p className="text-slate-300">{programSelection.program_type} - {programSelection.program_level}</p>
-                  <p className="text-slate-400">Campus: {programSelection.campus}</p>
-                  <p className="text-slate-400">Start: {programSelection.start_term}</p>
+                  <p className="text-slate-300">{programSelection.employer_name || "Not provided"}</p>
+                  <p className="text-slate-400">{programSelection.job_title || "N/A"}</p>
+                  <p className="text-slate-400">Experience: {programSelection.years_experience || "N/A"}</p>
                 </div>
               </div>
 
@@ -605,7 +605,7 @@ const ApplicationForm = () => {
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="text-white font-semibold flex items-center gap-2">
                     <FileText className="w-5 h-5 text-[#00B4D8]" />
-                    Documents
+                    Documents Required
                   </h3>
                   <button 
                     onClick={() => { setCurrentStep(4); navigate(`/application/${appId}/4`); }}
