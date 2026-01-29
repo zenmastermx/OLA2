@@ -718,10 +718,10 @@ const ApplicationForm = () => {
       <div className="bg-[#11161F] border-b border-white/5">
         <div className="max-w-5xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between mb-3">
-            <span className="text-slate-400 text-sm">Step {currentStep} of 6</span>
+            <span className="text-slate-400 text-sm">Step {currentStep} of 5</span>
             <span className="text-[#00F5FF] text-sm font-medium">{application?.progress || 0}% Complete</span>
           </div>
-          <Progress value={(currentStep / 6) * 100} className="h-2 bg-slate-800" />
+          <Progress value={(currentStep / 5) * 100} className="h-2 bg-slate-800" />
         </div>
       </div>
 
