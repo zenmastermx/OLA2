@@ -264,14 +264,13 @@ const Dashboard = () => {
             </div>
 
             {/* Application Steps */}
-            <div className="mt-8 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            <div className="mt-8 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
               {[
                 { step: 1, label: "Personal", icon: User },
-                { step: 2, label: "Academic", icon: GraduationCap },
-                { step: 3, label: "Program", icon: LayoutDashboard },
-                { step: 4, label: "Documents", icon: Upload },
-                { step: 5, label: "Financial", icon: DollarSign },
-                { step: 6, label: "Review", icon: CheckCircle2 }
+                { step: 2, label: "Academic History", icon: GraduationCap },
+                { step: 3, label: "Employment History", icon: LayoutDashboard },
+                { step: 4, label: "Documents Required", icon: Upload },
+                { step: 5, label: "Review", icon: CheckCircle2 }
               ].map(({ step, label, icon: Icon }) => (
                 <div
                   key={step}
