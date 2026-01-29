@@ -51,13 +51,12 @@ const LandingPage = () => {
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-[#0A0E14]/80 backdrop-blur-xl border-b border-white/5">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
+          <div className="flex items-center">
             <img 
-              src="https://customer-assets.emergentagent.com/job_be4bb2aa-ca20-4b1a-9d54-431ad1ac86d0/artifacts/7kvxdoxy_primary.filled.whouter.pms315.png" 
-              alt="USA.edu Logo" 
+              src="https://customer-assets.emergentagent.com/job_be4bb2aa-ca20-4b1a-9d54-431ad1ac86d0/artifacts/ie0vbsv3_primary.Horiz.2line.knockedout.whouter.pms315%2Bwhite.png" 
+              alt="University of St. Augustine for Health Sciences" 
               className="h-10 w-auto"
             />
-            <span className="font-['Outfit'] font-bold text-xl tracking-tight">USA.edu</span>
           </div>
           <div className="flex items-center gap-4">
             <Link to="/login">
