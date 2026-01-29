@@ -49,134 +49,207 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo }) => {
     switch (activeSubSection) {
       case 0:
         return (
-          <div className="space-y-6" data-testid="subsection-contact">
-            <h3 className="text-xl font-semibold text-white mb-4">Contact Information</h3>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-2">
-                <Label className="text-slate-300">First Name *</Label>
-                <Input
-                  value={personalInfo.first_name || ""}
-                  onChange={(e) => setPersonalInfo({ ...personalInfo, first_name: e.target.value })}
-                  className="h-12 bg-black/20 border-white/10 focus:border-[#00F5FF] text-white rounded-xl"
-                  data-testid="contact-firstname"
-                />
-              </div>
-              <div className="space-y-2">
-                <Label className="text-slate-300">Last Name *</Label>
-                <Input
-                  value={personalInfo.last_name || ""}
-                  onChange={(e) => setPersonalInfo({ ...personalInfo, last_name: e.target.value })}
-                  className="h-12 bg-black/20 border-white/10 focus:border-[#00F5FF] text-white rounded-xl"
-                  data-testid="contact-lastname"
-                />
-              </div>
+          <div className="space-y-8" data-testid="subsection-contact">
+            {/* Section Header */}
+            <div className="relative">
+              <div className="absolute -left-4 top-0 w-1 h-full bg-gradient-to-b from-[#00B4D8] to-[#7B68EE] rounded-full" />
+              <h3 className="text-2xl font-light text-white tracking-tight">Contact Information</h3>
+              <p className="text-slate-500 text-sm mt-1">Let us know how to reach you</p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-2">
-                <Label className="text-slate-300">Middle Name</Label>
-                <Input
-                  value={personalInfo.middle_name || ""}
-                  onChange={(e) => setPersonalInfo({ ...personalInfo, middle_name: e.target.value })}
-                  className="h-12 bg-black/20 border-white/10 focus:border-[#00F5FF] text-white rounded-xl"
-                  data-testid="contact-middlename"
-                />
+            {/* WHO YOU ARE - Glass Card */}
+            <div className="backdrop-blur-xl bg-white/[0.02] border border-white/[0.05] rounded-2xl p-6 space-y-5 hover:border-[#00B4D8]/20 transition-colors duration-500">
+              <div className="flex items-center gap-3 mb-2">
+                <div className="w-8 h-8 rounded-full bg-[#00B4D8]/10 flex items-center justify-center">
+                  <User className="w-4 h-4 text-[#00B4D8]" />
+                </div>
+                <h4 className="text-xs font-medium uppercase tracking-wider text-slate-500">Who You Are</h4>
               </div>
-              <div className="space-y-2">
-                <Label className="text-slate-300">Preferred Name</Label>
+              
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="space-y-2">
+                  <Label className="text-xs font-medium uppercase tracking-wider text-slate-400">
+                    First Name <span className="text-[#00F5FF]">*</span>
+                  </Label>
+                  <Input
+                    value={personalInfo.first_name || ""}
+                    onChange={(e) => setPersonalInfo({ ...personalInfo, first_name: e.target.value })}
+                    className="h-12 bg-black/30 border-white/[0.08] focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20 text-white rounded-full px-5 transition-all duration-300 placeholder:text-slate-600"
+                    placeholder="Enter first name"
+                    data-testid="contact-firstname"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label className="text-xs font-medium uppercase tracking-wider text-slate-400">Middle Name</Label>
+                  <Input
+                    value={personalInfo.middle_name || ""}
+                    onChange={(e) => setPersonalInfo({ ...personalInfo, middle_name: e.target.value })}
+                    className="h-12 bg-black/30 border-white/[0.08] focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20 text-white rounded-full px-5 transition-all duration-300 placeholder:text-slate-600"
+                    placeholder="Optional"
+                    data-testid="contact-middlename"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label className="text-xs font-medium uppercase tracking-wider text-slate-400">
+                    Last Name <span className="text-[#00F5FF]">*</span>
+                  </Label>
+                  <Input
+                    value={personalInfo.last_name || ""}
+                    onChange={(e) => setPersonalInfo({ ...personalInfo, last_name: e.target.value })}
+                    className="h-12 bg-black/30 border-white/[0.08] focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20 text-white rounded-full px-5 transition-all duration-300 placeholder:text-slate-600"
+                    placeholder="Enter last name"
+                    data-testid="contact-lastname"
+                  />
+                </div>
+              </div>
+              
+              <div className="max-w-xs">
+                <Label className="text-xs font-medium uppercase tracking-wider text-slate-400">Preferred Name</Label>
+                <p className="text-slate-600 text-xs mb-2">What should we call you?</p>
                 <Input
                   value={personalInfo.preferred_name || ""}
                   onChange={(e) => setPersonalInfo({ ...personalInfo, preferred_name: e.target.value })}
-                  className="h-12 bg-black/20 border-white/10 focus:border-[#00F5FF] text-white rounded-xl"
+                  className="h-12 bg-black/30 border-white/[0.08] focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20 text-white rounded-full px-5 transition-all duration-300 placeholder:text-slate-600"
+                  placeholder="Nickname or preferred name"
                   data-testid="contact-preferredname"
                 />
               </div>
             </div>
-            
-            <div className="space-y-2">
-              <Label className="text-slate-300">Email Address *</Label>
-              <Input
-                type="email"
-                value={personalInfo.email || ""}
-                onChange={(e) => setPersonalInfo({ ...personalInfo, email: e.target.value })}
-                className="h-12 bg-black/20 border-white/10 focus:border-[#00F5FF] text-white rounded-xl"
-                data-testid="contact-email"
-              />
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+            {/* HOW TO REACH YOU - Glass Card */}
+            <div className="backdrop-blur-xl bg-white/[0.02] border border-white/[0.05] rounded-2xl p-6 space-y-5 hover:border-[#7B68EE]/20 transition-colors duration-500">
+              <div className="flex items-center gap-3 mb-2">
+                <div className="w-8 h-8 rounded-full bg-[#7B68EE]/10 flex items-center justify-center">
+                  <Phone className="w-4 h-4 text-[#7B68EE]" />
+                </div>
+                <h4 className="text-xs font-medium uppercase tracking-wider text-slate-500">How to Reach You</h4>
+              </div>
+              
               <div className="space-y-2">
-                <Label className="text-slate-300">Phone Number *</Label>
+                <Label className="text-xs font-medium uppercase tracking-wider text-slate-400">
+                  Email Address <span className="text-[#00F5FF]">*</span>
+                </Label>
+                <p className="text-slate-600 text-xs">We'll send application updates here</p>
                 <Input
-                  type="tel"
-                  value={personalInfo.phone || ""}
-                  onChange={(e) => setPersonalInfo({ ...personalInfo, phone: e.target.value })}
-                  placeholder="(000) 000-0000"
-                  className="h-12 bg-black/20 border-white/10 focus:border-[#00F5FF] text-white rounded-xl"
-                  data-testid="contact-phone"
+                  type="email"
+                  value={personalInfo.email || ""}
+                  onChange={(e) => setPersonalInfo({ ...personalInfo, email: e.target.value })}
+                  className="h-12 bg-black/30 border-white/[0.08] focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20 text-white rounded-full px-5 transition-all duration-300 placeholder:text-slate-600 max-w-md"
+                  placeholder="you@example.com"
+                  data-testid="contact-email"
                 />
               </div>
-              <div className="space-y-2">
-                <Label className="text-slate-300">Alternate Phone</Label>
-                <Input
-                  type="tel"
-                  value={personalInfo.alternate_phone || ""}
-                  onChange={(e) => setPersonalInfo({ ...personalInfo, alternate_phone: e.target.value })}
-                  placeholder="(000) 000-0000"
-                  className="h-12 bg-black/20 border-white/10 focus:border-[#00F5FF] text-white rounded-xl"
-                  data-testid="contact-altphone"
-                />
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl">
+                <div className="space-y-2">
+                  <Label className="text-xs font-medium uppercase tracking-wider text-slate-400">
+                    Phone Number <span className="text-[#00F5FF]">*</span>
+                  </Label>
+                  <Input
+                    type="tel"
+                    inputMode="numeric"
+                    value={personalInfo.phone || ""}
+                    onChange={(e) => setPersonalInfo({ ...personalInfo, phone: e.target.value })}
+                    placeholder="(000) 000-0000"
+                    className="h-12 bg-black/30 border-white/[0.08] focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20 text-white rounded-full px-5 transition-all duration-300 placeholder:text-slate-600"
+                    data-testid="contact-phone"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label className="text-xs font-medium uppercase tracking-wider text-slate-400">Alternate Phone</Label>
+                  <Input
+                    type="tel"
+                    inputMode="numeric"
+                    value={personalInfo.alternate_phone || ""}
+                    onChange={(e) => setPersonalInfo({ ...personalInfo, alternate_phone: e.target.value })}
+                    placeholder="(000) 000-0000"
+                    className="h-12 bg-black/30 border-white/[0.08] focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20 text-white rounded-full px-5 transition-all duration-300 placeholder:text-slate-600"
+                    data-testid="contact-altphone"
+                  />
+                </div>
               </div>
             </div>
 
-            <div className="space-y-2">
-              <Label className="text-slate-300">Street Address</Label>
-              <Input
-                value={personalInfo.address || ""}
-                onChange={(e) => setPersonalInfo({ ...personalInfo, address: e.target.value })}
-                className="h-12 bg-black/20 border-white/10 focus:border-[#00F5FF] text-white rounded-xl"
-                data-testid="contact-address"
-              />
+            {/* WHERE YOU LIVE - Glass Card */}
+            <div className="backdrop-blur-xl bg-white/[0.02] border border-white/[0.05] rounded-2xl p-6 space-y-5 hover:border-[#28A745]/20 transition-colors duration-500">
+              <div className="flex items-center gap-3 mb-2">
+                <div className="w-8 h-8 rounded-full bg-[#28A745]/10 flex items-center justify-center">
+                  <svg className="w-4 h-4 text-[#28A745]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                </div>
+                <h4 className="text-xs font-medium uppercase tracking-wider text-slate-500">Where You Live</h4>
+              </div>
+
+              <div className="space-y-2">
+                <Label className="text-xs font-medium uppercase tracking-wider text-slate-400">Street Address</Label>
+                <Input
+                  value={personalInfo.address || ""}
+                  onChange={(e) => setPersonalInfo({ ...personalInfo, address: e.target.value })}
+                  className="h-12 bg-black/30 border-white/[0.08] focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20 text-white rounded-full px-5 transition-all duration-300 placeholder:text-slate-600"
+                  placeholder="123 Main Street, Apt 4B"
+                  data-testid="contact-address"
+                />
+              </div>
+
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div className="space-y-2 col-span-2 md:col-span-1">
+                  <Label className="text-xs font-medium uppercase tracking-wider text-slate-400">City</Label>
+                  <Input
+                    value={personalInfo.city || ""}
+                    onChange={(e) => setPersonalInfo({ ...personalInfo, city: e.target.value })}
+                    className="h-12 bg-black/30 border-white/[0.08] focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20 text-white rounded-full px-5 transition-all duration-300 placeholder:text-slate-600"
+                    placeholder="City"
+                    data-testid="contact-city"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label className="text-xs font-medium uppercase tracking-wider text-slate-400">State</Label>
+                  <Input
+                    value={personalInfo.state || ""}
+                    onChange={(e) => setPersonalInfo({ ...personalInfo, state: e.target.value })}
+                    className="h-12 bg-black/30 border-white/[0.08] focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20 text-white rounded-full px-5 transition-all duration-300 placeholder:text-slate-600"
+                    placeholder="FL"
+                    data-testid="contact-state"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label className="text-xs font-medium uppercase tracking-wider text-slate-400">ZIP Code</Label>
+                  <Input
+                    inputMode="numeric"
+                    value={personalInfo.zip_code || ""}
+                    onChange={(e) => setPersonalInfo({ ...personalInfo, zip_code: e.target.value })}
+                    className="h-12 bg-black/30 border-white/[0.08] focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20 text-white rounded-full px-5 transition-all duration-300 placeholder:text-slate-600"
+                    placeholder="32084"
+                    data-testid="contact-zip"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label className="text-xs font-medium uppercase tracking-wider text-slate-400">Country</Label>
+                  <Input
+                    value={personalInfo.country || "United States"}
+                    onChange={(e) => setPersonalInfo({ ...personalInfo, country: e.target.value })}
+                    className="h-12 bg-black/30 border-white/[0.08] focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20 text-white rounded-full px-5 transition-all duration-300 placeholder:text-slate-600"
+                    data-testid="contact-country"
+                  />
+                </div>
+              </div>
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <div className="space-y-2">
-                <Label className="text-slate-300">City</Label>
-                <Input
-                  value={personalInfo.city || ""}
-                  onChange={(e) => setPersonalInfo({ ...personalInfo, city: e.target.value })}
-                  className="h-12 bg-black/20 border-white/10 focus:border-[#00F5FF] text-white rounded-xl"
-                  data-testid="contact-city"
-                />
+            {/* Completion Indicator */}
+            <div className="flex items-center justify-between p-4 rounded-xl bg-[#00B4D8]/5 border border-[#00B4D8]/10">
+              <div className="flex items-center gap-3">
+                <div className="w-2 h-2 rounded-full bg-[#00F5FF] animate-pulse" />
+                <span className="text-sm text-slate-400">
+                  {personalInfo.first_name && personalInfo.last_name && personalInfo.email && personalInfo.phone
+                    ? "All required fields completed"
+                    : "Complete required fields to continue"}
+                </span>
               </div>
-              <div className="space-y-2">
-                <Label className="text-slate-300">State</Label>
-                <Input
-                  value={personalInfo.state || ""}
-                  onChange={(e) => setPersonalInfo({ ...personalInfo, state: e.target.value })}
-                  className="h-12 bg-black/20 border-white/10 focus:border-[#00F5FF] text-white rounded-xl"
-                  data-testid="contact-state"
-                />
-              </div>
-              <div className="space-y-2">
-                <Label className="text-slate-300">ZIP Code</Label>
-                <Input
-                  value={personalInfo.zip_code || ""}
-                  onChange={(e) => setPersonalInfo({ ...personalInfo, zip_code: e.target.value })}
-                  className="h-12 bg-black/20 border-white/10 focus:border-[#00F5FF] text-white rounded-xl"
-                  data-testid="contact-zip"
-                />
-              </div>
-              <div className="space-y-2">
-                <Label className="text-slate-300">Country</Label>
-                <Input
-                  value={personalInfo.country || "United States"}
-                  onChange={(e) => setPersonalInfo({ ...personalInfo, country: e.target.value })}
-                  className="h-12 bg-black/20 border-white/10 focus:border-[#00F5FF] text-white rounded-xl"
-                  data-testid="contact-country"
-                />
-              </div>
+              <span className="text-xs font-medium text-[#00F5FF]">
+                {[personalInfo.first_name, personalInfo.last_name, personalInfo.email, personalInfo.phone].filter(Boolean).length}/4 required
+              </span>
             </div>
           </div>
         );
