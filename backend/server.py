@@ -216,6 +216,7 @@ class ApplicationUpdate(BaseModel):
     academic_history: Optional[AcademicHistory] = None
     program_selection: Optional[ProgramSelection] = None
     financial_aid: Optional[FinancialAid] = None
+    employment_history: Optional[EmploymentHistory] = None
     current_step: Optional[int] = None
 
 class ApplicationResponse(BaseModel):
@@ -227,6 +228,7 @@ class ApplicationResponse(BaseModel):
     personal_info: Optional[PersonalInfo] = None
     academic_history: Optional[AcademicHistory] = None
     program_selection: Optional[ProgramSelection] = None
+    employment_history: Optional[EmploymentHistory] = None
     documents: List[DocumentInfo] = []
     financial_aid: Optional[FinancialAid] = None
     created_at: str
