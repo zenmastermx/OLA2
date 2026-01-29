@@ -180,7 +180,7 @@ const Dashboard = () => {
               </div>
               <div>
                 <p className="text-white font-semibold text-lg">
-                  {activeApp ? `Step ${activeApp.current_step} of 6` : "Not Started"}
+                  {activeApp ? `Step ${activeApp.current_step} of 5` : "Not Started"}
                 </p>
                 <p className="text-slate-500 text-sm">
                   {activeApp?.status === "submitted" ? "Submitted" : "In Progress"}
