@@ -210,47 +210,93 @@ const ApplicationForm = () => {
 
       case 4:
         return (
-          <div className="space-y-6" data-testid="step-4-documents">
-            <div className="glass-card rounded-xl p-4 border-[#FF6B35]/30 bg-[#FF6B35]/5">
-              <div className="flex items-start gap-3">
-                <AlertCircle className="w-5 h-5 text-[#FF6B35] mt-0.5" />
-                <div>
+          <div className="space-y-8" data-testid="step-4-documents">
+            {/* Section Header */}
+            <div className="relative">
+              <div className="absolute -left-4 top-0 w-1 h-full bg-gradient-to-b from-[#9C27B0] to-[#E91E63] rounded-full" />
+              <h3 className="text-2xl font-light text-white tracking-tight">Documents Required</h3>
+              <p className="text-slate-500 text-sm mt-1">Upload all required documents for your application</p>
+            </div>
+
+            {/* Requirements Notice - Glass Card */}
+            <div className="backdrop-blur-xl bg-white/[0.02] border border-white/[0.05] rounded-2xl p-6 hover:border-[#FF6B35]/20 transition-colors duration-500">
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 rounded-full bg-[#FF6B35]/10 flex items-center justify-center flex-shrink-0">
+                  <AlertCircle className="w-5 h-5 text-[#FF6B35]" />
+                </div>
+                <div className="space-y-2">
                   <p className="text-white font-medium">Document Requirements</p>
                   <p className="text-slate-400 text-sm">
                     Upload clear, legible copies of all required documents. Accepted formats: PDF, DOC, DOCX, JPG, PNG
                   </p>
+                  <div className="flex flex-wrap gap-2 mt-3">
+                    {["PDF", "DOC", "DOCX", "JPG", "PNG"].map(format => (
+                      <span key={format} className="px-2 py-1 rounded-full bg-white/5 text-slate-500 text-xs">
+                        {format}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
 
+            {/* Upload Progress Summary */}
+            <div className="backdrop-blur-xl bg-white/[0.02] border border-white/[0.05] rounded-2xl p-6 hover:border-[#00B4D8]/20 transition-colors duration-500">
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-full bg-[#00B4D8]/10 flex items-center justify-center">
+                    <Upload className="w-4 h-4 text-[#00B4D8]" />
+                  </div>
+                  <span className="text-xs font-medium uppercase tracking-wider text-slate-500">Upload Progress</span>
+                </div>
+                <span className="text-white font-medium">
+                  {application?.documents?.filter(d => d.status === "uploaded").length || 0} / {application?.documents?.length || 5} uploaded
+                </span>
+              </div>
+              <div className="h-2 bg-black/30 rounded-full overflow-hidden">
+                <div 
+                  className="h-full bg-gradient-to-r from-[#00B4D8] to-[#00F5FF] rounded-full transition-all duration-500"
+                  style={{ width: `${((application?.documents?.filter(d => d.status === "uploaded").length || 0) / (application?.documents?.length || 5)) * 100}%` }}
+                />
+              </div>
+            </div>
+
+            {/* Documents List */}
             <div className="space-y-4">
-              {application?.documents?.map((doc) => (
+              {application?.documents?.map((doc, index) => (
                 <div
                   key={doc.id}
-                  className={`p-4 rounded-xl border transition-all ${
+                  className={`backdrop-blur-xl bg-white/[0.02] border rounded-2xl p-5 transition-all duration-500 hover:scale-[1.01] ${
                     doc.status === "uploaded"
-                      ? "border-[#28A745]/30 bg-[#28A745]/5"
-                      : "border-white/10 bg-white/5"
+                      ? "border-[#28A745]/30 hover:border-[#28A745]/50"
+                      : "border-white/[0.05] hover:border-[#00B4D8]/30"
                   }`}
                   data-testid={`document-${doc.type}`}
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-4">
-                      <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${
-                        doc.status === "uploaded" ? "bg-[#28A745]/20" : "bg-white/10"
+                      <div className={`w-14 h-14 rounded-xl flex items-center justify-center transition-all ${
+                        doc.status === "uploaded" 
+                          ? "bg-[#28A745]/20" 
+                          : "bg-white/5"
                       }`}>
                         {doc.status === "uploaded" ? (
-                          <Check className="w-6 h-6 text-[#28A745]" />
+                          <Check className="w-7 h-7 text-[#28A745]" />
                         ) : (
-                          <FileText className="w-6 h-6 text-slate-400" />
+                          <FileText className="w-7 h-7 text-slate-500" />
                         )}
                       </div>
                       <div>
-                        <p className="text-white font-medium">{doc.name}</p>
-                        <p className="text-slate-500 text-sm">
+                        <div className="flex items-center gap-2">
+                          <p className="text-white font-medium">{doc.name}</p>
+                          {doc.status !== "uploaded" && (
+                            <span className="px-2 py-0.5 rounded-full bg-[#FF6B35]/10 text-[#FF6B35] text-xs">Required</span>
+                          )}
+                        </div>
+                        <p className="text-slate-500 text-sm mt-1">
                           {doc.status === "uploaded"
-                            ? `Uploaded ${new Date(doc.uploaded_at).toLocaleDateString()}`
-                            : "Required"
+                            ? `Uploaded ${new Date(doc.uploaded_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}`
+                            : "No file uploaded yet"
                           }
                         </p>
                       </div>
@@ -268,11 +314,12 @@ const ApplicationForm = () => {
                         }}
                         data-testid={`upload-${doc.type}`}
                       />
-                      <span className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                      <span className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium transition-all ${
                         doc.status === "uploaded"
-                          ? "bg-white/10 text-slate-300 hover:bg-white/20"
-                          : "bg-[#00B4D8] text-white hover:bg-[#0096B4]"
+                          ? "bg-white/5 hover:bg-white/10 text-slate-300 border border-white/10"
+                          : "bg-[#00B4D8] hover:bg-[#0096B4] text-white shadow-[0_0_15px_rgba(0,180,216,0.3)]"
                       }`}>
+                        <Upload className="w-4 h-4" />
                         {doc.status === "uploaded" ? "Replace" : "Upload"}
                       </span>
                     </label>
@@ -280,6 +327,38 @@ const ApplicationForm = () => {
                 </div>
               ))}
             </div>
+
+            {/* Disclosure Notice - Glass Card */}
+            <div className="backdrop-blur-xl bg-white/[0.02] border border-white/[0.05] rounded-2xl p-6 hover:border-[#7B68EE]/20 transition-colors duration-500">
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 rounded-full bg-[#7B68EE]/10 flex items-center justify-center flex-shrink-0">
+                  <FileText className="w-5 h-5 text-[#7B68EE]" />
+                </div>
+                <div className="space-y-3">
+                  <p className="text-white font-medium">Important Disclosure</p>
+                  <p className="text-slate-400 text-sm leading-relaxed">
+                    By submitting these documents, you certify that all information provided is true and accurate to the best of your knowledge. 
+                    Falsification of any document may result in rejection of your application or dismissal from the program.
+                  </p>
+                  <p className="text-slate-500 text-xs">
+                    All documents are encrypted and stored securely in compliance with FERPA regulations.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Completion Status */}
+            {application?.documents?.every(d => d.status === "uploaded") && (
+              <div className="flex items-center justify-center p-6 rounded-xl bg-gradient-to-r from-[#28A745]/10 to-[#00B4D8]/10 border border-[#28A745]/20 animate-in fade-in duration-500">
+                <div className="text-center">
+                  <div className="w-12 h-12 rounded-full bg-[#28A745]/20 flex items-center justify-center mx-auto mb-3">
+                    <Check className="w-6 h-6 text-[#28A745]" />
+                  </div>
+                  <p className="text-white font-medium">All Documents Uploaded!</p>
+                  <p className="text-slate-500 text-sm mt-1">You're ready to proceed to the final review step</p>
+                </div>
+              </div>
+            )}
           </div>
         );
 
