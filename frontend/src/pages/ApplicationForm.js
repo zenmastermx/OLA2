@@ -785,7 +785,7 @@ const ApplicationForm = () => {
             Previous
           </Button>
           
-          {currentStep < 6 ? (
+          {currentStep < 5 ? (
             <Button
               onClick={handleNext}
               disabled={saving}
