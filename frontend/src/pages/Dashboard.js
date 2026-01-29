@@ -8,7 +8,7 @@ import { toast } from "sonner";
 import {
   LayoutDashboard, User, GraduationCap, FileText, DollarSign, CheckCircle2,
   LogOut, Plus, Clock, AlertCircle, ChevronRight, Calendar, Upload,
-  MessageCircle, Sparkles, X
+  MessageCircle, Sparkles, X, Phone, Mail, Video, CalendarDays
 } from "lucide-react";
 import AIChat from "@/components/AIChat";
 
@@ -22,9 +22,11 @@ const Dashboard = () => {
   const [selectedProgram, setSelectedProgram] = useState(null);
   const [creatingApp, setCreatingApp] = useState(false);
   const [showChat, setShowChat] = useState(false);
+  const [advisor, setAdvisor] = useState(null);
 
   useEffect(() => {
     fetchApplications();
+    fetchAdvisor();
     if (location.state?.newUser) {
       toast.success(`Welcome, ${user?.first_name}! Let's start your application.`);
       setShowNewAppModal(true);
@@ -33,6 +35,17 @@ const Dashboard = () => {
       }
     }
   }, []);
+
+  const fetchAdvisor = async () => {
+    try {
+      const response = await axios.get(`${API}/auth/advisor`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      setAdvisor(response.data);
+    } catch (error) {
+      console.error("Error fetching advisor:", error);
+    }
+  };
 
   const fetchApplications = async () => {
     try {
