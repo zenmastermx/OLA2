@@ -190,75 +190,10 @@ const ApplicationForm = () => {
 
       case 2:
         return (
-          <div className="space-y-6" data-testid="step-2-academic">
-            <div className="space-y-2">
-              <Label className="text-slate-300">Institution Name *</Label>
-              <Input
-                value={academicHistory.institution_name || ""}
-                onChange={(e) => setAcademicHistory({ ...academicHistory, institution_name: e.target.value })}
-                placeholder="e.g., University of Florida"
-                className="h-12 bg-black/20 border-white/10 focus:border-[#00F5FF] text-white rounded-xl"
-                data-testid="academic-institution"
-              />
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-2">
-                <Label className="text-slate-300">Degree Type *</Label>
-                <Select
-                  value={academicHistory.degree_type || ""}
-                  onValueChange={(value) => setAcademicHistory({ ...academicHistory, degree_type: value })}
-                >
-                  <SelectTrigger className="h-12 bg-black/20 border-white/10 text-white rounded-xl" data-testid="academic-degree-type">
-                    <SelectValue placeholder="Select degree type" />
-                  </SelectTrigger>
-                  <SelectContent className="bg-[#11161F] border-white/10">
-                    <SelectItem value="bachelors">Bachelor's Degree</SelectItem>
-                    <SelectItem value="masters">Master's Degree</SelectItem>
-                    <SelectItem value="associates">Associate's Degree</SelectItem>
-                    <SelectItem value="other">Other</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              <div className="space-y-2">
-                <Label className="text-slate-300">Major/Field of Study</Label>
-                <Input
-                  value={academicHistory.major || ""}
-                  onChange={(e) => setAcademicHistory({ ...academicHistory, major: e.target.value })}
-                  placeholder="e.g., Biology, Health Sciences"
-                  className="h-12 bg-black/20 border-white/10 focus:border-[#00F5FF] text-white rounded-xl"
-                  data-testid="academic-major"
-                />
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-2">
-                <Label className="text-slate-300">GPA (4.0 Scale)</Label>
-                <Input
-                  type="number"
-                  step="0.01"
-                  min="0"
-                  max="4"
-                  value={academicHistory.gpa || ""}
-                  onChange={(e) => setAcademicHistory({ ...academicHistory, gpa: parseFloat(e.target.value) })}
-                  placeholder="e.g., 3.5"
-                  className="h-12 bg-black/20 border-white/10 focus:border-[#00F5FF] text-white rounded-xl"
-                  data-testid="academic-gpa"
-                />
-              </div>
-              <div className="space-y-2">
-                <Label className="text-slate-300">Graduation Date</Label>
-                <Input
-                  type="month"
-                  value={academicHistory.graduation_date || ""}
-                  onChange={(e) => setAcademicHistory({ ...academicHistory, graduation_date: e.target.value })}
-                  className="h-12 bg-black/20 border-white/10 focus:border-[#00F5FF] text-white rounded-xl"
-                  data-testid="academic-graduation"
-                />
-              </div>
-            </div>
-          </div>
+          <AcademicHistorySections 
+            academicHistory={academicHistory} 
+            setAcademicHistory={setAcademicHistory} 
+          />
         );
 
       case 3:
