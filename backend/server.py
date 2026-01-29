@@ -384,6 +384,19 @@ async def get_me(current_user: dict = Depends(get_current_user)):
         created_at=current_user["created_at"]
     )
 
+@api_router.get("/auth/advisor")
+async def get_my_advisor(current_user: dict = Depends(get_current_user)):
+    """Get the assigned enrollment advisor for current user"""
+    advisor = current_user.get("enrollment_advisor")
+    if not advisor:
+        # Assign one if not exists (for existing users)
+        advisor = assign_advisor()
+        await db.users.update_one(
+            {"id": current_user["id"]},
+            {"$set": {"enrollment_advisor": advisor}}
+        )
+    return advisor
+
 # ==================== APPLICATION ROUTES ====================
 
 def calculate_progress(app_data: dict) -> int:
