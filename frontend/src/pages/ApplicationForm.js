@@ -763,10 +763,9 @@ const ApplicationForm = () => {
           <p className="text-slate-400">
             {currentStep === 1 && "Tell us about yourself"}
             {currentStep === 2 && "Share your educational background"}
-            {currentStep === 3 && "Select your desired program and campus"}
+            {currentStep === 3 && "Tell us about your work experience"}
             {currentStep === 4 && "Upload required documents"}
-            {currentStep === 5 && "Financial aid and scholarship information"}
-            {currentStep === 6 && "Review and submit your application"}
+            {currentStep === 5 && "Review and submit your application"}
           </p>
         </div>
 
