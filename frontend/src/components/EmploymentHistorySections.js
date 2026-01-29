@@ -82,42 +82,158 @@ const EmploymentHistorySections = ({ employmentHistory, setEmploymentHistory }) 
           <div className="space-y-6" data-testid="subsection-docs-required">
             <h3 className="text-xl font-semibold text-white mb-4">Documents Required</h3>
             
-            <div className="glass-card rounded-xl p-6 border-[#00B4D8]/30 bg-[#00B4D8]/5">
-              <h4 className="text-white font-medium mb-4">Required Documents for Your Application</h4>
-              <p className="text-slate-400 text-sm mb-4">
-                The following documents are required to complete your application. Please ensure all documents 
-                are submitted before your application deadline.
+            {/* Main Disclosure Box */}
+            <div className="glass-card rounded-xl p-6 border-[#FF6B35]/50 bg-[#FF6B35]/5">
+              <h4 className="text-white font-semibold mb-4">Required documents for Master of Occupational Therapy (OTA Entry)</h4>
+              
+              <p className="text-slate-300 text-sm mb-4">
+                To have your application evaluated by admissions send the following items:
               </p>
               
-              <ul className="space-y-3 text-slate-300 text-sm">
-                <li className="flex items-start gap-2">
-                  <Check className="w-4 h-4 text-[#28A745] mt-0.5 flex-shrink-0" />
-                  <span><strong>Official Transcripts</strong> - From all post-secondary institutions attended</span>
+              <ul className="list-disc list-inside text-slate-300 text-sm mb-4 ml-2">
+                <li>Official Transcripts</li>
+              </ul>
+              
+              <p className="text-slate-300 text-sm mb-2">
+                Electronic transcripts should be sent to: <a href="mailto:USA_Admissions@usa.edu" className="text-[#00B4D8] hover:underline">USA_Admissions@usa.edu</a>
+              </p>
+              
+              <p className="text-slate-400 text-sm mb-2">Or by mail:</p>
+              <div className="text-slate-300 text-sm mb-4 ml-4">
+                <p>Admissions Office</p>
+                <p>University of St. Augustine for Health Sciences</p>
+                <p>1 News Place</p>
+                <p>St. Augustine, FL 32086</p>
+              </div>
+              
+              <p className="text-[#FF6B35] text-sm font-medium">
+                All post-secondary official transcripts must be submitted, regardless of whether you believe they contain applicable courses.
+              </p>
+            </div>
+
+            {/* Documents List */}
+            <div className="space-y-4">
+              <p className="text-slate-300 text-sm">
+                Please upload the following documents in order to complete your application.
+              </p>
+              
+              <ul className="space-y-2 text-slate-300 text-sm ml-4">
+                <li className="flex items-center gap-2">
+                  <span>•</span>
+                  <span>Resume</span>
+                  <Info className="w-4 h-4 text-slate-500" />
                 </li>
-                <li className="flex items-start gap-2">
-                  <Check className="w-4 h-4 text-[#28A745] mt-0.5 flex-shrink-0" />
-                  <span><strong>Employment Verification</strong> - Proof of 2,080 hours as an OTA in a clinical setting</span>
+                <li className="flex items-center gap-2">
+                  <span>•</span>
+                  <span>Statement of Purpose</span>
+                  <Info className="w-4 h-4 text-slate-500" />
                 </li>
-                <li className="flex items-start gap-2">
-                  <Check className="w-4 h-4 text-[#28A745] mt-0.5 flex-shrink-0" />
-                  <span><strong>Resume/CV</strong> - Current resume highlighting relevant experience</span>
+                <li className="flex items-center gap-2">
+                  <span>•</span>
+                  <span>Supplemental Questions</span>
+                  <Info className="w-4 h-4 text-slate-500" />
                 </li>
-                <li className="flex items-start gap-2">
-                  <Check className="w-4 h-4 text-[#28A745] mt-0.5 flex-shrink-0" />
-                  <span><strong>Personal Statement</strong> - Essay describing your goals and qualifications</span>
+                <li className="flex items-center gap-2">
+                  <span>•</span>
+                  <span>OTA license</span>
+                  <Info className="w-4 h-4 text-slate-500" />
                 </li>
-                <li className="flex items-start gap-2">
-                  <Check className="w-4 h-4 text-[#28A745] mt-0.5 flex-shrink-0" />
-                  <span><strong>Letters of Recommendation</strong> - Professional references</span>
+                <li className="flex items-center gap-2">
+                  <span>•</span>
+                  <span>NBCOT certification</span>
+                  <Info className="w-4 h-4 text-slate-500" />
                 </li>
               </ul>
             </div>
 
+            {/* Document Type Selector */}
+            <div className="space-y-2">
+              <Label className="text-slate-300">* Document Type</Label>
+              <Select
+                value={employmentHistory.document_type || ""}
+                onValueChange={(value) => setEmploymentHistory({ ...employmentHistory, document_type: value })}
+              >
+                <SelectTrigger className="h-12 bg-black/20 border-white/10 text-white rounded-xl max-w-md" data-testid="document-type-select">
+                  <SelectValue placeholder="Select" />
+                </SelectTrigger>
+                <SelectContent className="bg-[#11161F] border-white/10">
+                  <SelectItem value="resume">Resume</SelectItem>
+                  <SelectItem value="statement">Statement of Purpose</SelectItem>
+                  <SelectItem value="supplemental">Supplemental Questions</SelectItem>
+                  <SelectItem value="ota_license">OTA License</SelectItem>
+                  <SelectItem value="nbcot">NBCOT Certification</SelectItem>
+                  <SelectItem value="transcript">Official Transcript</SelectItem>
+                  <SelectItem value="other">Other</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            {/* Transcript Reminder */}
             <div className="glass-card rounded-xl p-4 border-[#FF6B35]/30 bg-[#FF6B35]/5">
-              <p className="text-[#FF6B35] text-sm">
-                <strong>Important:</strong> All documents must be submitted by the application deadline. 
-                Incomplete applications may not be reviewed.
+              <p className="text-slate-300 text-sm">
+                <strong className="text-[#FF6B35]">All post-secondary official transcripts must be submitted,</strong> regardless of whether you believe they contain applicable courses.
               </p>
+            </div>
+
+            {/* Upload Area */}
+            <div className="space-y-2">
+              <p className="text-slate-400 text-sm">Document Upload (.pdf is the only acceptable file format).</p>
+              <div className="border-2 border-dashed border-white/20 rounded-xl p-8 text-center hover:border-[#00B4D8]/50 transition-colors cursor-pointer">
+                <input
+                  type="file"
+                  accept=".pdf"
+                  className="hidden"
+                  id="doc-upload"
+                  onChange={(e) => {
+                    // Handle file upload
+                    console.log("File selected:", e.target.files?.[0]);
+                  }}
+                />
+                <label htmlFor="doc-upload" className="cursor-pointer">
+                  <div className="flex flex-col items-center gap-2">
+                    <FileText className="w-8 h-8 text-slate-500" />
+                    <span className="text-[#00B4D8]">Upload Files</span>
+                    <span className="text-slate-500 text-sm">Or drop files</span>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            {/* Uploaded Documents Table */}
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b border-white/10">
+                    <th className="text-left py-3 px-2 text-slate-400 font-normal">Document Type</th>
+                    <th className="text-left py-3 px-2 text-slate-400 font-normal">File Name</th>
+                    <th className="text-left py-3 px-2 text-slate-400 font-normal">Required</th>
+                    <th className="text-left py-3 px-2 text-slate-400 font-normal">Upload Date</th>
+                    <th className="text-left py-3 px-2 text-slate-400 font-normal">Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {(employmentHistory.uploaded_documents || []).map((doc) => (
+                    <tr key={doc.id} className="border-b border-white/5">
+                      <td className="py-3 px-2 text-white">{doc.type}</td>
+                      <td className="py-3 px-2 text-white">{doc.name}</td>
+                      <td className="py-3 px-2 text-white">{doc.required ? "Yes" : "No"}</td>
+                      <td className="py-3 px-2 text-white">{doc.upload_date}</td>
+                      <td className="py-3 px-2">
+                        <button className="text-red-400 hover:text-red-300">
+                          <Trash2 className="w-4 h-4" />
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                  {(!employmentHistory.uploaded_documents || employmentHistory.uploaded_documents.length === 0) && (
+                    <tr>
+                      <td colSpan={5} className="py-8 text-center text-slate-500 italic">
+                        No documents uploaded yet
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
             </div>
           </div>
         );
