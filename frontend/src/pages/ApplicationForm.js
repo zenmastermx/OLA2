@@ -18,6 +18,7 @@ import {
 import AIChat from "@/components/AIChat";
 import PersonalInfoSections from "@/components/PersonalInfoSections";
 import AcademicHistorySections from "@/components/AcademicHistorySections";
+import EmploymentHistorySections from "@/components/EmploymentHistorySections";
 
 const ApplicationForm = () => {
   const navigate = useNavigate();
