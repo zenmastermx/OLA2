@@ -237,9 +237,11 @@ class EmploymentHistory(BaseModel):
     verifications: Optional[List[Dict[str, Any]]] = []
 
 class ProgramSelection(BaseModel):
-    program_type: Optional[str] = None  # OT or Nursing
+    program_type: Optional[str] = None  # Occupational Therapy, Nursing, Education, Certificates
+    program_pathway: Optional[str] = None  # Full pathway name
     program_level: Optional[str] = None  # MOT, OTD, MSN, DNP
-    campus: Optional[str] = None
+    campus: Optional[str] = None  # Primary campus
+    secondary_campus: Optional[str] = None  # Backup campus
     start_term: Optional[str] = None
     full_time: Optional[bool] = True
 
@@ -258,7 +260,11 @@ class FinancialAid(BaseModel):
     comments: Optional[str] = None
 
 class ApplicationCreate(BaseModel):
-    program_type: str  # OT or Nursing
+    program_type: str  # Occupational Therapy, Nursing, Education, Certificates
+    program_pathway: Optional[str] = None
+    start_term: Optional[str] = None
+    primary_campus: Optional[str] = None
+    secondary_campus: Optional[str] = None
 
 class ApplicationUpdate(BaseModel):
     personal_info: Optional[PersonalInfo] = None
