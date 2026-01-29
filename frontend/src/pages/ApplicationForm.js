@@ -36,6 +36,7 @@ const ApplicationForm = () => {
   const [academicHistory, setAcademicHistory] = useState({});
   const [programSelection, setProgramSelection] = useState({});
   const [financialAid, setFinancialAid] = useState({});
+  const [employmentHistory, setEmploymentHistory] = useState({});
 
   const steps = [
     { step: 1, label: "Personal Information", icon: User },
