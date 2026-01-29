@@ -15,6 +15,7 @@ A cutting-edge, futuristic student online application portal for the University 
 - Multi-step application forms
 - Document upload capability
 - Progress tracking
+- **Enrollment Advisor Assignment** (NEW)
 
 ## Tech Stack
 - **Frontend**: React 19, Tailwind CSS, shadcn/ui
@@ -29,7 +30,7 @@ A cutting-edge, futuristic student online application portal for the University 
 
 ---
 
-## What's Been Implemented (Jan 28, 2026)
+## What's Been Implemented (Jan 29, 2026)
 
 ### Pages
 1. **Landing Page** (`/`)
@@ -48,26 +49,46 @@ A cutting-edge, futuristic student online application portal for the University 
    - First/last name, email, password fields
    - Password strength indicators
    - Confirm password validation
+   - **Auto-assigns enrollment advisor on registration**
 
 4. **Dashboard** (`/dashboard`)
    - Welcome greeting with user name
    - Progress ring (percentage complete)
    - Deadline countdown
    - Documents status
+   - **Enrollment Advisor Card** (NEW)
+     - Advisor name, avatar, title, specialization
+     - Schedule Appointment button (Calendly link)
+     - Send Email button (mailto:)
+     - Send Text button (sms:)
+     - Call button (tel:)
    - Active application card with step navigation
    - Create new application modal
-   - AI Chat FAB
+   - AI Chat "Ask Journey" button
 
 5. **Application Form** (`/application/:appId/:step`)
-   - Step 1: Personal Information
-   - Step 2: Academic History
-   - Step 3: Program Selection
-   - Step 4: Document Upload
-   - Step 5: Financial Aid
-   - Step 6: Review & Submit
+   - Step 1: Personal Information (7 sub-sections)
+     - Contact Information
+     - Judicial Background
+     - Emergency Contact
+     - Citizenship & Identification
+     - US Military Background
+     - Work Experience
+     - Demographic Information
+   - Step 2: Academic History (5 sub-sections)
+     - Prerequisite Requirements
+     - Education
+     - Test Information (TOEFL)
+     - Prior Application
+     - Academic Background
+   - Step 3: Employment History
+     - Employment Verification form
+   - Step 4: Documents Required
+   - Step 5: Review & Submit
 
 ### Features
 - ✅ JWT Authentication (register/login/logout)
+- ✅ **Enrollment Advisor Auto-Assignment** (NEW)
 - ✅ Application CRUD operations
 - ✅ Progress calculation (auto-updates)
 - ✅ AI Chat "Ask Journey" with Claude Sonnet 4.5
@@ -77,19 +98,26 @@ A cutting-edge, futuristic student online application portal for the University 
 - ✅ Start term selection
 - ✅ Financial aid preferences
 - ✅ Application submission
+- ✅ **Complex nested data persistence** (personal_info, academic_history, employment_history)
 
 ### API Endpoints
-- `POST /api/auth/register` - User registration
+- `POST /api/auth/register` - User registration (with advisor assignment)
 - `POST /api/auth/login` - User login
 - `GET /api/auth/me` - Get current user
+- `GET /api/auth/advisor` - **Get assigned enrollment advisor** (NEW)
 - `GET /api/applications` - List user applications
 - `POST /api/applications` - Create application
 - `GET /api/applications/:id` - Get application
-- `PUT /api/applications/:id` - Update application
+- `PUT /api/applications/:id` - Update application (supports nested data)
 - `POST /api/applications/:id/submit` - Submit application
 - `POST /api/applications/:id/documents/:docId/upload` - Upload document
 - `POST /api/chat` - AI Chat
 - `GET /api/programs` - List programs
+
+### Data Models
+- **PersonalInfo**: Contact info, judicial background, emergency contact, citizenship, military, work experience, demographics
+- **AcademicHistory**: Prerequisites, education, TOEFL scores, prior application, academic background
+- **EmploymentHistory**: Employment verifications with verifier info, dates, hours worked
 
 ---
 
@@ -139,3 +167,9 @@ A cutting-edge, futuristic student online application portal for the University 
 - Time to complete < 30 minutes
 - User satisfaction > 4.5/5
 - Support ticket reduction 50%
+
+---
+
+## Test Credentials
+- **Email**: testuser@test.com
+- **Password**: password123
