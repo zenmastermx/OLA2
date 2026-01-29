@@ -37,10 +37,9 @@ const ApplicationForm = () => {
   const steps = [
     { step: 1, label: "Personal Information", icon: User },
     { step: 2, label: "Academic History", icon: GraduationCap },
-    { step: 3, label: "Program Selection", icon: LayoutDashboard },
-    { step: 4, label: "Documents", icon: Upload },
-    { step: 5, label: "Financial Aid", icon: DollarSign },
-    { step: 6, label: "Review & Submit", icon: CheckCircle2 }
+    { step: 3, label: "Employment History", icon: LayoutDashboard },
+    { step: 4, label: "Documents Required", icon: Upload },
+    { step: 5, label: "Review & Submit", icon: CheckCircle2 }
   ];
 
   useEffect(() => {
