@@ -4,13 +4,86 @@ import { useAuth, API } from "@/App";
 import axios from "axios";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import {
   LayoutDashboard, User, GraduationCap, FileText, DollarSign, CheckCircle2,
   LogOut, Plus, Clock, AlertCircle, ChevronRight, Calendar, Upload,
-  MessageCircle, Sparkles, X, Phone, Mail, Video, CalendarDays
+  MessageCircle, Sparkles, X, Phone, Mail, Video, CalendarDays, MapPin, BookOpen
 } from "lucide-react";
 import AIChat from "@/components/AIChat";
+
+// Program pathways data
+const PROGRAM_PATHWAYS = {
+  ot: {
+    name: "Occupational Therapy",
+    color: "#00B4D8",
+    programs: [
+      { id: "mot", name: "Master of Occupational Therapy" },
+      { id: "mot_ota", name: "Master of Occupational Therapy (OTA Entry)" },
+      { id: "flex_mot", name: "Flex Master of Occupational Therapy" },
+      { id: "flex_mot_ota", name: "Flex Master of Occupational Therapy (OTA Entry)" },
+      { id: "hybrid_mot", name: "Hybrid Immersion Master of Occupational Therapy" },
+      { id: "hybrid_mot_ota", name: "Hybrid Immersion Master of Occupational Therapy (OTA Entry)" },
+      { id: "otd", name: "Doctor of Occupational Therapy" },
+      { id: "flex_otd", name: "Flex Doctor of Occupational Therapy" },
+      { id: "hybrid_otd", name: "Hybrid Immersion Doctor of Occupational Therapy" },
+      { id: "ppotd", name: "Post Professional Doctor of Occupational Therapy" },
+    ]
+  },
+  nursing: {
+    name: "Nursing",
+    color: "#7B68EE",
+    programs: [
+      { id: "msn_fnp", name: "MSN - Family Nurse Practitioner" },
+      { id: "msn_ne", name: "MSN - Nurse Executive" },
+      { id: "msn_pmhnp", name: "MSN - Psychiatric Mental Health Nurse Practitioner" },
+      { id: "rn_msn_fnp", name: "RN to MSN - Family Nurse Practitioner" },
+      { id: "rn_msn_pmhnp", name: "RN to MSN - Psychiatric Mental Health Nurse Practitioner" },
+      { id: "bsn_dnp_ne", name: "BSN to DNP - Nurse Executive" },
+      { id: "bsn_dnp_fnp", name: "BSN to DNP - Family Nurse Practitioner" },
+      { id: "bsn_dnp_pmhnp", name: "BSN to DNP - Psychiatric Mental Health Nurse Practitioner" },
+      { id: "msn_dnp", name: "MSN to DNP" },
+    ]
+  },
+  education: {
+    name: "Education",
+    color: "#FF9800",
+    programs: [
+      { id: "edd", name: "Doctor of Education" },
+      { id: "edd_el", name: "EdD - Executive Leadership" },
+      { id: "edd_tl", name: "EdD - Teaching and Learning" },
+      { id: "edd_ne", name: "EdD - Nursing Education" },
+      { id: "edd_at", name: "EdD - Athletic Training" },
+    ]
+  },
+  certificates: {
+    name: "Certificates",
+    color: "#28A745",
+    programs: [
+      { id: "cert_fnp", name: "Certificate - Family Nurse Practitioner" },
+      { id: "cert_ne", name: "Certificate - Nursing Executive" },
+      { id: "cert_bi", name: "Graduate Certificate in Business Intelligence" },
+      { id: "cert_el", name: "Graduate Certificate in Executive Leadership" },
+      { id: "cert_ipe", name: "Graduate Certificate in Interprofessional Education (IPE)" },
+    ]
+  }
+};
+
+const START_TERMS = [
+  { id: "summer_2026", name: "Summer 2026 (May 11)" },
+  { id: "fall_2026", name: "Fall 2026 (September 8)" },
+  { id: "spring_2027", name: "Spring 2027 (January 11)" },
+];
+
+const CAMPUSES = [
+  { id: "miami", name: "Miami, FL" },
+  { id: "st_augustine", name: "St. Augustine, FL" },
+  { id: "austin", name: "Austin, TX" },
+  { id: "dallas", name: "Dallas, TX" },
+  { id: "san_marcos", name: "San Marcos, CA" },
+];
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -19,10 +92,15 @@ const Dashboard = () => {
   const [applications, setApplications] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showNewAppModal, setShowNewAppModal] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedProgram, setSelectedProgram] = useState(null);
+  const [selectedStartTerm, setSelectedStartTerm] = useState(null);
+  const [selectedCampus, setSelectedCampus] = useState(null);
+  const [selectedCampus2, setSelectedCampus2] = useState(null);
   const [creatingApp, setCreatingApp] = useState(false);
   const [showChat, setShowChat] = useState(false);
   const [advisor, setAdvisor] = useState(null);
+  const [modalStep, setModalStep] = useState(1);
 
   useEffect(() => {
     fetchApplications();
@@ -31,7 +109,7 @@ const Dashboard = () => {
       toast.success(`Welcome, ${user?.first_name}! Let's start your application.`);
       setShowNewAppModal(true);
       if (location.state?.program) {
-        setSelectedProgram(location.state.program);
+        setSelectedCategory(location.state.program);
       }
     }
   }, []);
