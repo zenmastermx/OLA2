@@ -11,9 +11,9 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Switch } from "@/components/ui/switch";
 import { toast } from "sonner";
 import {
-  User, GraduationCap, LayoutDashboard, Upload, DollarSign, CheckCircle2,
+  User, GraduationCap, LayoutDashboard, Upload, CheckCircle2,
   ArrowLeft, ArrowRight, Save, Loader2, FileText, X, Check, Sparkles,
-  MapPin, Calendar, AlertCircle
+  AlertCircle
 } from "lucide-react";
 import AIChat from "@/components/AIChat";
 
