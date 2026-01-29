@@ -256,108 +256,177 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo }) => {
 
       case 1:
         return (
-          <div className="space-y-6" data-testid="subsection-judicial">
-            <h3 className="text-xl font-semibold text-white mb-4">Judicial Background</h3>
-            
-            <div className="glass-card rounded-xl p-6 border-[#FF6B35]/30 bg-[#FF6B35]/5">
-              <p className="text-white font-medium mb-4">Criminal Background Check Agreement</p>
-              <p className="text-slate-400 text-sm mb-6">
-                All applicants are required to complete a criminal background check as part of the admission process. 
-                Clinical affiliates may require additional background checks prior to clinical placement. 
-                Certain criminal convictions may affect eligibility for licensure in your chosen field.
-              </p>
+          <div className="space-y-8" data-testid="subsection-judicial">
+            {/* Section Header */}
+            <div className="relative">
+              <div className="absolute -left-4 top-0 w-1 h-full bg-gradient-to-b from-[#FF6B35] to-[#FF8C5A] rounded-full" />
+              <h3 className="text-2xl font-light text-white tracking-tight">Judicial Background</h3>
+              <p className="text-slate-500 text-sm mt-1">Required background check disclosure</p>
+            </div>
+
+            {/* Background Check Agreement - Glass Card */}
+            <div className="backdrop-blur-xl bg-white/[0.02] border border-white/[0.05] rounded-2xl p-6 space-y-5 hover:border-[#FF6B35]/20 transition-colors duration-500">
+              <div className="flex items-center gap-3 mb-2">
+                <div className="w-8 h-8 rounded-full bg-[#FF6B35]/10 flex items-center justify-center">
+                  <Shield className="w-4 h-4 text-[#FF6B35]" />
+                </div>
+                <h4 className="text-xs font-medium uppercase tracking-wider text-slate-500">Background Check Agreement</h4>
+              </div>
+              
+              <div className="p-4 rounded-xl bg-[#FF6B35]/5 border border-[#FF6B35]/10">
+                <p className="text-slate-300 text-sm leading-relaxed">
+                  All applicants are required to complete a criminal background check as part of the admission process. 
+                  Clinical affiliates may require additional background checks prior to clinical placement. 
+                  Certain criminal convictions may affect eligibility for licensure in your chosen field.
+                </p>
+              </div>
               
               <RadioGroup
                 value={personalInfo.judicial_agreement}
                 onValueChange={(value) => setPersonalInfo({ ...personalInfo, judicial_agreement: value })}
                 className="space-y-3"
               >
-                <div className="flex items-center space-x-3 p-4 rounded-xl border border-white/10 bg-white/5 hover:border-[#00B4D8]/50 transition-colors">
+                <div className={`flex items-center space-x-3 p-4 rounded-full border transition-all duration-300 cursor-pointer ${
+                  personalInfo.judicial_agreement === "agree" 
+                    ? "border-[#28A745]/50 bg-[#28A745]/10" 
+                    : "border-white/[0.08] bg-black/30 hover:border-[#00B4D8]/30"
+                }`}>
                   <RadioGroupItem value="agree" id="agree" className="border-[#00B4D8]" />
-                  <Label htmlFor="agree" className="text-white cursor-pointer flex-1">
+                  <Label htmlFor="agree" className="text-white cursor-pointer flex-1 text-sm">
                     I Agree - I understand and consent to the background check requirements
                   </Label>
+                  {personalInfo.judicial_agreement === "agree" && <Check className="w-4 h-4 text-[#28A745]" />}
                 </div>
-                <div className="flex items-center space-x-3 p-4 rounded-xl border border-white/10 bg-white/5 hover:border-[#00B4D8]/50 transition-colors">
+                <div className={`flex items-center space-x-3 p-4 rounded-full border transition-all duration-300 cursor-pointer ${
+                  personalInfo.judicial_agreement === "disagree" 
+                    ? "border-[#FF6B35]/50 bg-[#FF6B35]/10" 
+                    : "border-white/[0.08] bg-black/30 hover:border-[#00B4D8]/30"
+                }`}>
                   <RadioGroupItem value="disagree" id="disagree" className="border-[#00B4D8]" />
-                  <Label htmlFor="disagree" className="text-white cursor-pointer flex-1">
+                  <Label htmlFor="disagree" className="text-white cursor-pointer flex-1 text-sm">
                     I Do Not Agree
                   </Label>
                 </div>
               </RadioGroup>
             </div>
 
-            <div className="space-y-4">
-              <Label className="text-slate-300">Have you ever been convicted of a felony? *</Label>
-              <RadioGroup
-                value={personalInfo.felony_conviction}
-                onValueChange={(value) => setPersonalInfo({ ...personalInfo, felony_conviction: value })}
-                className="flex gap-4"
-              >
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="yes" id="felony-yes" />
-                  <Label htmlFor="felony-yes" className="text-white">Yes</Label>
+            {/* Criminal History - Glass Card */}
+            <div className="backdrop-blur-xl bg-white/[0.02] border border-white/[0.05] rounded-2xl p-6 space-y-5 hover:border-[#7B68EE]/20 transition-colors duration-500">
+              <div className="flex items-center gap-3 mb-2">
+                <div className="w-8 h-8 rounded-full bg-[#7B68EE]/10 flex items-center justify-center">
+                  <svg className="w-4 h-4 text-[#7B68EE]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
                 </div>
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="no" id="felony-no" />
-                  <Label htmlFor="felony-no" className="text-white">No</Label>
-                </div>
-              </RadioGroup>
-            </div>
-
-            {personalInfo.felony_conviction === "yes" && (
-              <div className="space-y-2">
-                <Label className="text-slate-300">Please explain the circumstances</Label>
-                <Textarea
-                  value={personalInfo.felony_explanation || ""}
-                  onChange={(e) => setPersonalInfo({ ...personalInfo, felony_explanation: e.target.value })}
-                  placeholder="Provide details about the conviction..."
-                  className="min-h-[100px] bg-black/20 border-white/10 focus:border-[#00F5FF] text-white rounded-xl resize-none"
-                  data-testid="felony-explanation"
-                />
+                <h4 className="text-xs font-medium uppercase tracking-wider text-slate-500">Criminal History Disclosure</h4>
               </div>
-            )}
+
+              <div className="space-y-3">
+                <Label className="text-xs font-medium uppercase tracking-wider text-slate-400">
+                  Have you ever been convicted of a felony? <span className="text-[#00F5FF]">*</span>
+                </Label>
+                <RadioGroup
+                  value={personalInfo.felony_conviction}
+                  onValueChange={(value) => setPersonalInfo({ ...personalInfo, felony_conviction: value })}
+                  className="flex gap-4"
+                >
+                  <div className={`flex items-center space-x-2 px-6 py-3 rounded-full border transition-all duration-300 cursor-pointer ${
+                    personalInfo.felony_conviction === "yes" 
+                      ? "border-[#00F5FF]/50 bg-[#00F5FF]/10" 
+                      : "border-white/[0.08] bg-black/30 hover:border-white/20"
+                  }`}>
+                    <RadioGroupItem value="yes" id="felony-yes" />
+                    <Label htmlFor="felony-yes" className="text-white cursor-pointer">Yes</Label>
+                  </div>
+                  <div className={`flex items-center space-x-2 px-6 py-3 rounded-full border transition-all duration-300 cursor-pointer ${
+                    personalInfo.felony_conviction === "no" 
+                      ? "border-[#00F5FF]/50 bg-[#00F5FF]/10" 
+                      : "border-white/[0.08] bg-black/30 hover:border-white/20"
+                  }`}>
+                    <RadioGroupItem value="no" id="felony-no" />
+                    <Label htmlFor="felony-no" className="text-white cursor-pointer">No</Label>
+                  </div>
+                </RadioGroup>
+              </div>
+
+              {personalInfo.felony_conviction === "yes" && (
+                <div className="space-y-2 pt-2 animate-in slide-in-from-top-2 duration-300">
+                  <Label className="text-xs font-medium uppercase tracking-wider text-slate-400">
+                    Please explain the circumstances
+                  </Label>
+                  <p className="text-slate-600 text-xs">This information will be reviewed confidentially</p>
+                  <Textarea
+                    value={personalInfo.felony_explanation || ""}
+                    onChange={(e) => setPersonalInfo({ ...personalInfo, felony_explanation: e.target.value })}
+                    placeholder="Provide details about the conviction..."
+                    className="min-h-[120px] bg-black/30 border-white/[0.08] focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20 text-white rounded-2xl resize-none transition-all duration-300 placeholder:text-slate-600"
+                    data-testid="felony-explanation"
+                  />
+                </div>
+              )}
+            </div>
           </div>
         );
 
       case 2:
         return (
-          <div className="space-y-6" data-testid="subsection-emergency">
-            <h3 className="text-xl font-semibold text-white mb-4">Emergency Contact</h3>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-2">
-                <Label className="text-slate-300">First Name *</Label>
-                <Input
-                  value={personalInfo.emergency_first_name || ""}
-                  onChange={(e) => setPersonalInfo({ ...personalInfo, emergency_first_name: e.target.value })}
-                  className="h-12 bg-black/20 border-white/10 focus:border-[#00F5FF] text-white rounded-xl"
-                  data-testid="emergency-firstname"
-                />
-              </div>
-              <div className="space-y-2">
-                <Label className="text-slate-300">Last Name *</Label>
-                <Input
-                  value={personalInfo.emergency_last_name || ""}
-                  onChange={(e) => setPersonalInfo({ ...personalInfo, emergency_last_name: e.target.value })}
-                  className="h-12 bg-black/20 border-white/10 focus:border-[#00F5FF] text-white rounded-xl"
-                  data-testid="emergency-lastname"
-                />
-              </div>
+          <div className="space-y-8" data-testid="subsection-emergency">
+            {/* Section Header */}
+            <div className="relative">
+              <div className="absolute -left-4 top-0 w-1 h-full bg-gradient-to-b from-[#E91E63] to-[#F48FB1] rounded-full" />
+              <h3 className="text-2xl font-light text-white tracking-tight">Emergency Contact</h3>
+              <p className="text-slate-500 text-sm mt-1">Someone we can reach in case of emergency</p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-2">
-                <Label className="text-slate-300">Relationship *</Label>
+            {/* Contact Person - Glass Card */}
+            <div className="backdrop-blur-xl bg-white/[0.02] border border-white/[0.05] rounded-2xl p-6 space-y-5 hover:border-[#E91E63]/20 transition-colors duration-500">
+              <div className="flex items-center gap-3 mb-2">
+                <div className="w-8 h-8 rounded-full bg-[#E91E63]/10 flex items-center justify-center">
+                  <Heart className="w-4 h-4 text-[#E91E63]" />
+                </div>
+                <h4 className="text-xs font-medium uppercase tracking-wider text-slate-500">Contact Person</h4>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label className="text-xs font-medium uppercase tracking-wider text-slate-400">
+                    First Name <span className="text-[#00F5FF]">*</span>
+                  </Label>
+                  <Input
+                    value={personalInfo.emergency_first_name || ""}
+                    onChange={(e) => setPersonalInfo({ ...personalInfo, emergency_first_name: e.target.value })}
+                    className="h-12 bg-black/30 border-white/[0.08] focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20 text-white rounded-full px-5 transition-all duration-300 placeholder:text-slate-600"
+                    placeholder="Contact's first name"
+                    data-testid="emergency-firstname"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label className="text-xs font-medium uppercase tracking-wider text-slate-400">
+                    Last Name <span className="text-[#00F5FF]">*</span>
+                  </Label>
+                  <Input
+                    value={personalInfo.emergency_last_name || ""}
+                    onChange={(e) => setPersonalInfo({ ...personalInfo, emergency_last_name: e.target.value })}
+                    className="h-12 bg-black/30 border-white/[0.08] focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20 text-white rounded-full px-5 transition-all duration-300 placeholder:text-slate-600"
+                    placeholder="Contact's last name"
+                    data-testid="emergency-lastname"
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-2 max-w-xs">
+                <Label className="text-xs font-medium uppercase tracking-wider text-slate-400">
+                  Relationship <span className="text-[#00F5FF]">*</span>
+                </Label>
                 <Select
                   value={personalInfo.emergency_relationship || ""}
                   onValueChange={(value) => setPersonalInfo({ ...personalInfo, emergency_relationship: value })}
                 >
-                  <SelectTrigger className="h-12 bg-black/20 border-white/10 text-white rounded-xl" data-testid="emergency-relationship">
+                  <SelectTrigger className="h-12 bg-black/30 border-white/[0.08] text-white rounded-full px-5 focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20" data-testid="emergency-relationship">
                     <SelectValue placeholder="Select relationship" />
                   </SelectTrigger>
-                  <SelectContent className="bg-[#11161F] border-white/10">
-                    <SelectItem value="spouse">Spouse</SelectItem>
+                  <SelectContent className="bg-[#11161F] border-white/10 rounded-xl">
+                    <SelectItem value="spouse">Spouse / Partner</SelectItem>
                     <SelectItem value="parent">Parent</SelectItem>
                     <SelectItem value="sibling">Sibling</SelectItem>
                     <SelectItem value="child">Child</SelectItem>
@@ -366,216 +435,331 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo }) => {
                   </SelectContent>
                 </Select>
               </div>
+            </div>
+
+            {/* Contact Details - Glass Card */}
+            <div className="backdrop-blur-xl bg-white/[0.02] border border-white/[0.05] rounded-2xl p-6 space-y-5 hover:border-[#00B4D8]/20 transition-colors duration-500">
+              <div className="flex items-center gap-3 mb-2">
+                <div className="w-8 h-8 rounded-full bg-[#00B4D8]/10 flex items-center justify-center">
+                  <Phone className="w-4 h-4 text-[#00B4D8]" />
+                </div>
+                <h4 className="text-xs font-medium uppercase tracking-wider text-slate-500">Contact Details</h4>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label className="text-xs font-medium uppercase tracking-wider text-slate-400">
+                    Phone Number <span className="text-[#00F5FF]">*</span>
+                  </Label>
+                  <Input
+                    type="tel"
+                    inputMode="numeric"
+                    value={personalInfo.emergency_phone || ""}
+                    onChange={(e) => setPersonalInfo({ ...personalInfo, emergency_phone: e.target.value })}
+                    placeholder="(000) 000-0000"
+                    className="h-12 bg-black/30 border-white/[0.08] focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20 text-white rounded-full px-5 transition-all duration-300 placeholder:text-slate-600"
+                    data-testid="emergency-phone"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label className="text-xs font-medium uppercase tracking-wider text-slate-400">Email Address</Label>
+                  <Input
+                    type="email"
+                    value={personalInfo.emergency_email || ""}
+                    onChange={(e) => setPersonalInfo({ ...personalInfo, emergency_email: e.target.value })}
+                    placeholder="contact@email.com"
+                    className="h-12 bg-black/30 border-white/[0.08] focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20 text-white rounded-full px-5 transition-all duration-300 placeholder:text-slate-600"
+                    data-testid="emergency-email"
+                  />
+                </div>
+              </div>
+
               <div className="space-y-2">
-                <Label className="text-slate-300">Phone Number *</Label>
+                <Label className="text-xs font-medium uppercase tracking-wider text-slate-400">Address</Label>
+                <p className="text-slate-600 text-xs">Optional - helpful if they live nearby</p>
                 <Input
-                  type="tel"
-                  value={personalInfo.emergency_phone || ""}
-                  onChange={(e) => setPersonalInfo({ ...personalInfo, emergency_phone: e.target.value })}
-                  placeholder="(000) 000-0000"
-                  className="h-12 bg-black/20 border-white/10 focus:border-[#00F5FF] text-white rounded-xl"
-                  data-testid="emergency-phone"
+                  value={personalInfo.emergency_address || ""}
+                  onChange={(e) => setPersonalInfo({ ...personalInfo, emergency_address: e.target.value })}
+                  placeholder="Street Address, City, State ZIP"
+                  className="h-12 bg-black/30 border-white/[0.08] focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20 text-white rounded-full px-5 transition-all duration-300 placeholder:text-slate-600"
+                  data-testid="emergency-address"
                 />
               </div>
             </div>
 
-            <div className="space-y-2">
-              <Label className="text-slate-300">Email Address</Label>
-              <Input
-                type="email"
-                value={personalInfo.emergency_email || ""}
-                onChange={(e) => setPersonalInfo({ ...personalInfo, emergency_email: e.target.value })}
-                className="h-12 bg-black/20 border-white/10 focus:border-[#00F5FF] text-white rounded-xl"
-                data-testid="emergency-email"
-              />
-            </div>
-
-            <div className="space-y-2">
-              <Label className="text-slate-300">Address</Label>
-              <Input
-                value={personalInfo.emergency_address || ""}
-                onChange={(e) => setPersonalInfo({ ...personalInfo, emergency_address: e.target.value })}
-                placeholder="Street Address, City, State ZIP"
-                className="h-12 bg-black/20 border-white/10 focus:border-[#00F5FF] text-white rounded-xl"
-                data-testid="emergency-address"
-              />
+            {/* Completion Indicator */}
+            <div className="flex items-center justify-between p-4 rounded-xl bg-[#E91E63]/5 border border-[#E91E63]/10">
+              <div className="flex items-center gap-3">
+                <div className="w-2 h-2 rounded-full bg-[#E91E63] animate-pulse" />
+                <span className="text-sm text-slate-400">
+                  {personalInfo.emergency_first_name && personalInfo.emergency_phone
+                    ? "Emergency contact information complete"
+                    : "Please provide emergency contact details"}
+                </span>
+              </div>
+              <span className="text-xs font-medium text-[#E91E63]">
+                {[personalInfo.emergency_first_name, personalInfo.emergency_last_name, personalInfo.emergency_phone, personalInfo.emergency_relationship].filter(Boolean).length}/4 required
+              </span>
             </div>
           </div>
         );
 
       case 3:
         return (
-          <div className="space-y-6" data-testid="subsection-citizenship">
-            <h3 className="text-xl font-semibold text-white mb-4">Citizenship & Identification Information</h3>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-2">
-                <Label className="text-slate-300">Date of Birth *</Label>
-                <Input
-                  type="date"
-                  value={personalInfo.date_of_birth || ""}
-                  onChange={(e) => setPersonalInfo({ ...personalInfo, date_of_birth: e.target.value })}
-                  className="h-12 bg-black/20 border-white/10 focus:border-[#00F5FF] text-white rounded-xl"
-                  data-testid="citizenship-dob"
-                />
-              </div>
-              <div className="space-y-2">
-                <Label className="text-slate-300">Gender *</Label>
-                <RadioGroup
-                  value={personalInfo.gender || ""}
-                  onValueChange={(value) => setPersonalInfo({ ...personalInfo, gender: value })}
-                  className="flex gap-4 h-12 items-center"
-                >
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="female" id="female" />
-                    <Label htmlFor="female" className="text-white">Female</Label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="male" id="male" />
-                    <Label htmlFor="male" className="text-white">Male</Label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="other" id="other-gender" />
-                    <Label htmlFor="other-gender" className="text-white">Other</Label>
-                  </div>
-                </RadioGroup>
-              </div>
+          <div className="space-y-8" data-testid="subsection-citizenship">
+            {/* Section Header */}
+            <div className="relative">
+              <div className="absolute -left-4 top-0 w-1 h-full bg-gradient-to-b from-[#3F51B5] to-[#7986CB] rounded-full" />
+              <h3 className="text-2xl font-light text-white tracking-tight">Citizenship & Identification</h3>
+              <p className="text-slate-500 text-sm mt-1">Identity verification and residency information</p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Personal Details - Glass Card */}
+            <div className="backdrop-blur-xl bg-white/[0.02] border border-white/[0.05] rounded-2xl p-6 space-y-5 hover:border-[#3F51B5]/20 transition-colors duration-500">
+              <div className="flex items-center gap-3 mb-2">
+                <div className="w-8 h-8 rounded-full bg-[#3F51B5]/10 flex items-center justify-center">
+                  <User className="w-4 h-4 text-[#3F51B5]" />
+                </div>
+                <h4 className="text-xs font-medium uppercase tracking-wider text-slate-500">Personal Details</h4>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <Label className="text-xs font-medium uppercase tracking-wider text-slate-400">
+                    Date of Birth <span className="text-[#00F5FF]">*</span>
+                  </Label>
+                  <Input
+                    type="date"
+                    value={personalInfo.date_of_birth || ""}
+                    onChange={(e) => setPersonalInfo({ ...personalInfo, date_of_birth: e.target.value })}
+                    className="h-12 bg-black/30 border-white/[0.08] focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20 text-white rounded-full px-5 transition-all duration-300"
+                    data-testid="citizenship-dob"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label className="text-xs font-medium uppercase tracking-wider text-slate-400">
+                    Gender <span className="text-[#00F5FF]">*</span>
+                  </Label>
+                  <RadioGroup
+                    value={personalInfo.gender || ""}
+                    onValueChange={(value) => setPersonalInfo({ ...personalInfo, gender: value })}
+                    className="flex gap-3 h-12 items-center"
+                  >
+                    {[
+                      { value: "female", label: "Female" },
+                      { value: "male", label: "Male" },
+                      { value: "other", label: "Other" }
+                    ].map((option) => (
+                      <div key={option.value} className={`flex items-center space-x-2 px-4 py-2 rounded-full border transition-all duration-300 cursor-pointer ${
+                        personalInfo.gender === option.value 
+                          ? "border-[#00F5FF]/50 bg-[#00F5FF]/10" 
+                          : "border-white/[0.08] bg-black/30 hover:border-white/20"
+                      }`}>
+                        <RadioGroupItem value={option.value} id={option.value} />
+                        <Label htmlFor={option.value} className="text-white cursor-pointer text-sm">{option.label}</Label>
+                      </div>
+                    ))}
+                  </RadioGroup>
+                </div>
+              </div>
+
               <div className="space-y-2">
-                <Label className="text-slate-300">Marital Status</Label>
+                <Label className="text-xs font-medium uppercase tracking-wider text-slate-400">Marital Status</Label>
                 <RadioGroup
                   value={personalInfo.marital_status || ""}
                   onValueChange={(value) => setPersonalInfo({ ...personalInfo, marital_status: value })}
-                  className="flex gap-4"
+                  className="flex gap-3"
                 >
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="single" id="single" />
-                    <Label htmlFor="single" className="text-white">Single</Label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="married" id="married" />
-                    <Label htmlFor="married" className="text-white">Married</Label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="widowed" id="widowed" />
-                    <Label htmlFor="widowed" className="text-white">Widowed</Label>
-                  </div>
+                  {[
+                    { value: "single", label: "Single" },
+                    { value: "married", label: "Married" },
+                    { value: "widowed", label: "Widowed" },
+                    { value: "divorced", label: "Divorced" }
+                  ].map((option) => (
+                    <div key={option.value} className={`flex items-center space-x-2 px-4 py-2 rounded-full border transition-all duration-300 cursor-pointer ${
+                      personalInfo.marital_status === option.value 
+                        ? "border-[#00F5FF]/50 bg-[#00F5FF]/10" 
+                        : "border-white/[0.08] bg-black/30 hover:border-white/20"
+                    }`}>
+                      <RadioGroupItem value={option.value} id={option.value} />
+                      <Label htmlFor={option.value} className="text-white cursor-pointer text-sm">{option.label}</Label>
+                    </div>
+                  ))}
                 </RadioGroup>
               </div>
-              <div className="space-y-2">
-                <Label className="text-slate-300">Are you a U.S. Citizen? *</Label>
+            </div>
+
+            {/* Citizenship Status - Glass Card */}
+            <div className="backdrop-blur-xl bg-white/[0.02] border border-white/[0.05] rounded-2xl p-6 space-y-5 hover:border-[#00B4D8]/20 transition-colors duration-500">
+              <div className="flex items-center gap-3 mb-2">
+                <div className="w-8 h-8 rounded-full bg-[#00B4D8]/10 flex items-center justify-center">
+                  <Flag className="w-4 h-4 text-[#00B4D8]" />
+                </div>
+                <h4 className="text-xs font-medium uppercase tracking-wider text-slate-500">Citizenship Status</h4>
+              </div>
+              
+              <div className="space-y-3">
+                <Label className="text-xs font-medium uppercase tracking-wider text-slate-400">
+                  Are you a U.S. Citizen? <span className="text-[#00F5FF]">*</span>
+                </Label>
                 <RadioGroup
                   value={personalInfo.us_citizen || ""}
                   onValueChange={(value) => setPersonalInfo({ ...personalInfo, us_citizen: value })}
-                  className="flex gap-4 h-12 items-center"
-                >
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="yes" id="citizen-yes" />
-                    <Label htmlFor="citizen-yes" className="text-white">Yes</Label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="no" id="citizen-no" />
-                    <Label htmlFor="citizen-no" className="text-white">No</Label>
-                  </div>
-                </RadioGroup>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-2">
-                <Label className="text-slate-300">Residency Status</Label>
-                <Select
-                  value={personalInfo.residency_status || ""}
-                  onValueChange={(value) => setPersonalInfo({ ...personalInfo, residency_status: value })}
-                >
-                  <SelectTrigger className="h-12 bg-black/20 border-white/10 text-white rounded-xl" data-testid="residency-status">
-                    <SelectValue placeholder="Select status" />
-                  </SelectTrigger>
-                  <SelectContent className="bg-[#11161F] border-white/10">
-                    <SelectItem value="us_citizen">U.S. Citizen</SelectItem>
-                    <SelectItem value="permanent_resident">Permanent Resident</SelectItem>
-                    <SelectItem value="non_resident_alien">Non-Resident Alien</SelectItem>
-                    <SelectItem value="refugee">Refugee/Asylee</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              <div className="space-y-2">
-                <Label className="text-slate-300">Country of Citizenship</Label>
-                <Select
-                  value={personalInfo.country_of_citizenship || ""}
-                  onValueChange={(value) => setPersonalInfo({ ...personalInfo, country_of_citizenship: value })}
-                >
-                  <SelectTrigger className="h-12 bg-black/20 border-white/10 text-white rounded-xl" data-testid="country-citizenship">
-                    <SelectValue placeholder="Select country" />
-                  </SelectTrigger>
-                  <SelectContent className="bg-[#11161F] border-white/10">
-                    <SelectItem value="united_states">United States</SelectItem>
-                    <SelectItem value="canada">Canada</SelectItem>
-                    <SelectItem value="mexico">Mexico</SelectItem>
-                    <SelectItem value="united_kingdom">United Kingdom</SelectItem>
-                    <SelectItem value="other">Other</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
-
-            {personalInfo.us_citizen === "no" && (
-              <div className="space-y-4">
-                <Label className="text-slate-300">Do you have a U.S. Visa?</Label>
-                <RadioGroup
-                  value={personalInfo.us_visa || ""}
-                  onValueChange={(value) => setPersonalInfo({ ...personalInfo, us_visa: value })}
                   className="flex gap-4"
                 >
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="yes" id="visa-yes" />
-                    <Label htmlFor="visa-yes" className="text-white">Yes</Label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="no" id="visa-no" />
-                    <Label htmlFor="visa-no" className="text-white">No</Label>
-                  </div>
+                  {[{ value: "yes", label: "Yes" }, { value: "no", label: "No" }].map((option) => (
+                    <div key={option.value} className={`flex items-center space-x-2 px-6 py-3 rounded-full border transition-all duration-300 cursor-pointer ${
+                      personalInfo.us_citizen === option.value 
+                        ? "border-[#00F5FF]/50 bg-[#00F5FF]/10" 
+                        : "border-white/[0.08] bg-black/30 hover:border-white/20"
+                    }`}>
+                      <RadioGroupItem value={option.value} id={`citizen-${option.value}`} />
+                      <Label htmlFor={`citizen-${option.value}`} className="text-white cursor-pointer">{option.label}</Label>
+                    </div>
+                  ))}
                 </RadioGroup>
               </div>
-            )}
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-2">
-                <Label className="text-slate-300">SSN # (Social Security Number)</Label>
-                <Input
-                  type="password"
-                  value={personalInfo.ssn || ""}
-                  onChange={(e) => setPersonalInfo({ ...personalInfo, ssn: e.target.value })}
-                  placeholder="000-00-0000"
-                  className="h-12 bg-black/20 border-white/10 focus:border-[#00F5FF] text-white rounded-xl"
-                  data-testid="citizenship-ssn"
-                />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label className="text-xs font-medium uppercase tracking-wider text-slate-400">Residency Status</Label>
+                  <Select
+                    value={personalInfo.residency_status || ""}
+                    onValueChange={(value) => setPersonalInfo({ ...personalInfo, residency_status: value })}
+                  >
+                    <SelectTrigger className="h-12 bg-black/30 border-white/[0.08] text-white rounded-full px-5 focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20" data-testid="residency-status">
+                      <SelectValue placeholder="Select status" />
+                    </SelectTrigger>
+                    <SelectContent className="bg-[#11161F] border-white/10 rounded-xl">
+                      <SelectItem value="us_citizen">U.S. Citizen</SelectItem>
+                      <SelectItem value="permanent_resident">Permanent Resident</SelectItem>
+                      <SelectItem value="non_resident_alien">Non-Resident Alien</SelectItem>
+                      <SelectItem value="refugee">Refugee/Asylee</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="space-y-2">
+                  <Label className="text-xs font-medium uppercase tracking-wider text-slate-400">Country of Citizenship</Label>
+                  <Select
+                    value={personalInfo.country_of_citizenship || ""}
+                    onValueChange={(value) => setPersonalInfo({ ...personalInfo, country_of_citizenship: value })}
+                  >
+                    <SelectTrigger className="h-12 bg-black/30 border-white/[0.08] text-white rounded-full px-5 focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20" data-testid="country-citizenship">
+                      <SelectValue placeholder="Select country" />
+                    </SelectTrigger>
+                    <SelectContent className="bg-[#11161F] border-white/10 rounded-xl">
+                      <SelectItem value="united_states">United States</SelectItem>
+                      <SelectItem value="canada">Canada</SelectItem>
+                      <SelectItem value="mexico">Mexico</SelectItem>
+                      <SelectItem value="united_kingdom">United Kingdom</SelectItem>
+                      <SelectItem value="other">Other</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
               </div>
-              <div className="space-y-2">
-                <Label className="text-slate-300">ITIN # (if applicable)</Label>
-                <Input
-                  value={personalInfo.itin || ""}
-                  onChange={(e) => setPersonalInfo({ ...personalInfo, itin: e.target.value })}
-                  placeholder="000-00-0000"
-                  className="h-12 bg-black/20 border-white/10 focus:border-[#00F5FF] text-white rounded-xl"
-                  data-testid="citizenship-itin"
-                />
+
+              {personalInfo.us_citizen === "no" && (
+                <div className="space-y-3 pt-2 animate-in slide-in-from-top-2 duration-300">
+                  <Label className="text-xs font-medium uppercase tracking-wider text-slate-400">Do you have a U.S. Visa?</Label>
+                  <RadioGroup
+                    value={personalInfo.us_visa || ""}
+                    onValueChange={(value) => setPersonalInfo({ ...personalInfo, us_visa: value })}
+                    className="flex gap-4"
+                  >
+                    {[{ value: "yes", label: "Yes" }, { value: "no", label: "No" }].map((option) => (
+                      <div key={option.value} className={`flex items-center space-x-2 px-6 py-3 rounded-full border transition-all duration-300 cursor-pointer ${
+                        personalInfo.us_visa === option.value 
+                          ? "border-[#00F5FF]/50 bg-[#00F5FF]/10" 
+                          : "border-white/[0.08] bg-black/30 hover:border-white/20"
+                      }`}>
+                        <RadioGroupItem value={option.value} id={`visa-${option.value}`} />
+                        <Label htmlFor={`visa-${option.value}`} className="text-white cursor-pointer">{option.label}</Label>
+                      </div>
+                    ))}
+                  </RadioGroup>
+                </div>
+              )}
+            </div>
+
+            {/* Identification Numbers - Glass Card */}
+            <div className="backdrop-blur-xl bg-white/[0.02] border border-white/[0.05] rounded-2xl p-6 space-y-5 hover:border-[#7B68EE]/20 transition-colors duration-500">
+              <div className="flex items-center gap-3 mb-2">
+                <div className="w-8 h-8 rounded-full bg-[#7B68EE]/10 flex items-center justify-center">
+                  <svg className="w-4 h-4 text-[#7B68EE]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
+                  </svg>
+                </div>
+                <h4 className="text-xs font-medium uppercase tracking-wider text-slate-500">Identification Numbers</h4>
+              </div>
+              
+              <div className="p-4 rounded-xl bg-[#7B68EE]/5 border border-[#7B68EE]/10">
+                <p className="text-slate-400 text-xs">
+                  Your SSN/ITIN is encrypted and stored securely. This information is required for financial aid processing.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label className="text-xs font-medium uppercase tracking-wider text-slate-400">Social Security Number (SSN)</Label>
+                  <Input
+                    type="password"
+                    value={personalInfo.ssn || ""}
+                    onChange={(e) => setPersonalInfo({ ...personalInfo, ssn: e.target.value })}
+                    placeholder="•••-••-••••"
+                    className="h-12 bg-black/30 border-white/[0.08] focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20 text-white rounded-full px-5 transition-all duration-300 placeholder:text-slate-600"
+                    data-testid="citizenship-ssn"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label className="text-xs font-medium uppercase tracking-wider text-slate-400">ITIN (if applicable)</Label>
+                  <Input
+                    value={personalInfo.itin || ""}
+                    onChange={(e) => setPersonalInfo({ ...personalInfo, itin: e.target.value })}
+                    placeholder="000-00-0000"
+                    className="h-12 bg-black/30 border-white/[0.08] focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20 text-white rounded-full px-5 transition-all duration-300 placeholder:text-slate-600"
+                    data-testid="citizenship-itin"
+                  />
+                </div>
               </div>
             </div>
 
-            <div className="space-y-2">
-              <Label className="text-slate-300">Which funding options interest you? (Select all that apply)</Label>
-              <div className="grid grid-cols-2 gap-3 mt-2">
+            {/* Funding Options - Glass Card */}
+            <div className="backdrop-blur-xl bg-white/[0.02] border border-white/[0.05] rounded-2xl p-6 space-y-5 hover:border-[#28A745]/20 transition-colors duration-500">
+              <div className="flex items-center gap-3 mb-2">
+                <div className="w-8 h-8 rounded-full bg-[#28A745]/10 flex items-center justify-center">
+                  <svg className="w-4 h-4 text-[#28A745]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <h4 className="text-xs font-medium uppercase tracking-wider text-slate-500">Funding Options</h4>
+              </div>
+              
+              <p className="text-slate-500 text-sm">Select all options you're interested in exploring</p>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {[
-                  { id: "federal_loans", label: "Federal Loans" },
-                  { id: "private_loans", label: "Private Loans" },
-                  { id: "self_pay", label: "Self-pay or installments" },
-                  { id: "veteran_benefits", label: "Veteran Benefits" },
-                  { id: "outside_scholarships", label: "Outside Scholarships" },
+                  { id: "federal_loans", label: "Federal Loans", desc: "Government-backed student loans" },
+                  { id: "private_loans", label: "Private Loans", desc: "Bank or credit union loans" },
+                  { id: "self_pay", label: "Self-Pay", desc: "Pay out of pocket or installments" },
+                  { id: "veteran_benefits", label: "Veteran Benefits", desc: "VA education benefits" },
+                  { id: "outside_scholarships", label: "Outside Scholarships", desc: "External scholarship programs" },
                 ].map((option) => (
-                  <div key={option.id} className="flex items-center space-x-2 p-3 rounded-xl border border-white/10 bg-white/5">
+                  <div 
+                    key={option.id} 
+                    className={`flex items-start space-x-3 p-4 rounded-xl border transition-all duration-300 cursor-pointer ${
+                      (personalInfo.funding_options || []).includes(option.id)
+                        ? "border-[#28A745]/50 bg-[#28A745]/10"
+                        : "border-white/[0.08] bg-black/30 hover:border-white/20"
+                    }`}
+                    onClick={() => {
+                      const current = personalInfo.funding_options || [];
+                      if (current.includes(option.id)) {
+                        setPersonalInfo({ ...personalInfo, funding_options: current.filter(f => f !== option.id) });
+                      } else {
+                        setPersonalInfo({ ...personalInfo, funding_options: [...current, option.id] });
+                      }
+                    }}
+                  >
                     <Checkbox
                       id={option.id}
                       checked={(personalInfo.funding_options || []).includes(option.id)}
@@ -587,9 +771,12 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo }) => {
                           setPersonalInfo({ ...personalInfo, funding_options: current.filter(f => f !== option.id) });
                         }
                       }}
-                      className="border-[#00B4D8]"
+                      className="border-[#28A745] mt-0.5"
                     />
-                    <Label htmlFor={option.id} className="text-white text-sm cursor-pointer">{option.label}</Label>
+                    <div>
+                      <Label htmlFor={option.id} className="text-white text-sm cursor-pointer font-medium">{option.label}</Label>
+                      <p className="text-slate-500 text-xs mt-0.5">{option.desc}</p>
+                    </div>
                   </div>
                 ))}
               </div>
