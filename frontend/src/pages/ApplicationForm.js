@@ -97,6 +97,7 @@ const ApplicationForm = () => {
         academic_history: academicHistory,
         program_selection: programSelection,
         financial_aid: financialAid,
+        employment_history: employmentHistory,
         current_step: nextStep || currentStep
       };
 
