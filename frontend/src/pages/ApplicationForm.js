@@ -16,6 +16,7 @@ import {
   AlertCircle
 } from "lucide-react";
 import AIChat from "@/components/AIChat";
+import PersonalInfoSections from "@/components/PersonalInfoSections";
 
 const ApplicationForm = () => {
   const navigate = useNavigate();
