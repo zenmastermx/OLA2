@@ -187,12 +187,6 @@ const Dashboard = () => {
     setShowNewAppModal(false);
     resetModalState();
   };
-      console.error("Error creating application:", error);
-      toast.error(error.response?.data?.detail || "Failed to create application");
-    } finally {
-      setCreatingApp(false);
-    }
-  };
 
   const activeApp = applications.find(a => a.status !== "submitted");
   const submittedApps = applications.filter(a => a.status === "submitted");
