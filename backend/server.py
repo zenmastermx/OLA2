@@ -391,6 +391,7 @@ async def create_application(app_data: ApplicationCreate, current_user: dict = D
         },
         "academic_history": {},
         "program_selection": {"program_type": app_data.program_type},
+        "employment_history": {"verifications": []},
         "documents": default_docs,
         "financial_aid": {},
         "created_at": now,
