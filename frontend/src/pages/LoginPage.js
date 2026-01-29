@@ -52,9 +52,11 @@ const LoginPage = () => {
 
           {/* Logo */}
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#00B4D8] to-[#002855] flex items-center justify-center">
-              <span className="text-white font-bold text-2xl font-['Outfit']">U</span>
-            </div>
+            <img 
+              src="https://customer-assets.emergentagent.com/job_be4bb2aa-ca20-4b1a-9d54-431ad1ac86d0/artifacts/7kvxdoxy_primary.filled.whouter.pms315.png" 
+              alt="USA.edu Logo" 
+              className="h-12 w-auto"
+            />
             <div>
               <h1 className="font-['Outfit'] text-2xl font-bold">USA.edu</h1>
               <p className="text-slate-500 text-sm">Application Portal</p>
@@ -147,9 +149,11 @@ const LoginPage = () => {
         <div className="absolute bottom-1/4 left-1/4 w-96 h-96 bg-[#7B68EE]/10 rounded-full blur-[100px]" />
         
         <div className="relative z-10 text-center max-w-lg">
-          <div className="w-24 h-24 rounded-3xl bg-gradient-to-br from-[#00B4D8] to-[#002855] flex items-center justify-center mx-auto mb-8 shadow-[0_0_60px_rgba(0,180,216,0.4)]">
-            <span className="text-white font-bold text-5xl font-['Outfit']">U</span>
-          </div>
+          <img 
+            src="https://customer-assets.emergentagent.com/job_be4bb2aa-ca20-4b1a-9d54-431ad1ac86d0/artifacts/7kvxdoxy_primary.filled.whouter.pms315.png" 
+            alt="USA.edu Logo" 
+            className="h-24 w-auto mx-auto mb-8"
+          />
           <h2 className="font-['Outfit'] text-4xl font-bold mb-4">
             University of St. Augustine
           </h2>

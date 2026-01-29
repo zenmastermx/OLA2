@@ -52,9 +52,11 @@ const LandingPage = () => {
       <nav className="fixed top-0 left-0 right-0 z-50 bg-[#0A0E14]/80 backdrop-blur-xl border-b border-white/5">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#00B4D8] to-[#002855] flex items-center justify-center">
-              <span className="text-white font-bold text-lg font-['Outfit']">U</span>
-            </div>
+            <img 
+              src="https://customer-assets.emergentagent.com/job_be4bb2aa-ca20-4b1a-9d54-431ad1ac86d0/artifacts/7kvxdoxy_primary.filled.whouter.pms315.png" 
+              alt="USA.edu Logo" 
+              className="h-10 w-auto"
+            />
             <span className="font-['Outfit'] font-bold text-xl tracking-tight">USA.edu</span>
           </div>
           <div className="flex items-center gap-4">
@@ -288,9 +290,11 @@ const LandingPage = () => {
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#00B4D8] to-[#002855] flex items-center justify-center">
-                <span className="text-white font-bold text-sm font-['Outfit']">U</span>
-              </div>
+              <img 
+                src="https://customer-assets.emergentagent.com/job_be4bb2aa-ca20-4b1a-9d54-431ad1ac86d0/artifacts/7kvxdoxy_primary.filled.whouter.pms315.png" 
+                alt="USA.edu Logo" 
+                className="h-8 w-auto"
+              />
               <span className="font-['Outfit'] font-semibold">University of St. Augustine</span>
             </div>
             <p className="text-slate-500 text-sm">
