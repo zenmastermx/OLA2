@@ -200,98 +200,10 @@ const ApplicationForm = () => {
 
       case 3:
         return (
-          <div className="space-y-6" data-testid="step-3-employment">
-            <div className="space-y-2">
-              <Label className="text-slate-300">Current/Most Recent Employer</Label>
-              <Input
-                value={programSelection.employer_name || ""}
-                onChange={(e) => setProgramSelection({ ...programSelection, employer_name: e.target.value })}
-                placeholder="e.g., Memorial Hospital"
-                className="h-12 bg-black/20 border-white/10 focus:border-[#00F5FF] text-white rounded-xl"
-                data-testid="employment-employer"
-              />
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-2">
-                <Label className="text-slate-300">Job Title</Label>
-                <Input
-                  value={programSelection.job_title || ""}
-                  onChange={(e) => setProgramSelection({ ...programSelection, job_title: e.target.value })}
-                  placeholder="e.g., Registered Nurse"
-                  className="h-12 bg-black/20 border-white/10 focus:border-[#00F5FF] text-white rounded-xl"
-                  data-testid="employment-title"
-                />
-              </div>
-              <div className="space-y-2">
-                <Label className="text-slate-300">Years of Experience</Label>
-                <Select
-                  value={programSelection.years_experience || ""}
-                  onValueChange={(value) => setProgramSelection({ ...programSelection, years_experience: value })}
-                >
-                  <SelectTrigger className="h-12 bg-black/20 border-white/10 text-white rounded-xl" data-testid="employment-years">
-                    <SelectValue placeholder="Select years" />
-                  </SelectTrigger>
-                  <SelectContent className="bg-[#11161F] border-white/10">
-                    <SelectItem value="0-1">Less than 1 year</SelectItem>
-                    <SelectItem value="1-3">1-3 years</SelectItem>
-                    <SelectItem value="3-5">3-5 years</SelectItem>
-                    <SelectItem value="5-10">5-10 years</SelectItem>
-                    <SelectItem value="10+">10+ years</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-2">
-                <Label className="text-slate-300">Start Date</Label>
-                <Input
-                  type="month"
-                  value={programSelection.employment_start || ""}
-                  onChange={(e) => setProgramSelection({ ...programSelection, employment_start: e.target.value })}
-                  className="h-12 bg-black/20 border-white/10 focus:border-[#00F5FF] text-white rounded-xl"
-                  data-testid="employment-start"
-                />
-              </div>
-              <div className="space-y-2">
-                <Label className="text-slate-300">End Date (or Current)</Label>
-                <Input
-                  type="month"
-                  value={programSelection.employment_end || ""}
-                  onChange={(e) => setProgramSelection({ ...programSelection, employment_end: e.target.value })}
-                  placeholder="Leave blank if current"
-                  className="h-12 bg-black/20 border-white/10 focus:border-[#00F5FF] text-white rounded-xl"
-                  data-testid="employment-end"
-                />
-              </div>
-            </div>
-
-            <div className="space-y-2">
-              <Label className="text-slate-300">Job Responsibilities</Label>
-              <Textarea
-                value={programSelection.responsibilities || ""}
-                onChange={(e) => setProgramSelection({ ...programSelection, responsibilities: e.target.value })}
-                placeholder="Describe your main responsibilities and achievements..."
-                className="min-h-[100px] bg-black/20 border-white/10 focus:border-[#00F5FF] text-white rounded-xl resize-none"
-                data-testid="employment-responsibilities"
-              />
-            </div>
-
-            <div className="p-4 rounded-xl border border-white/10 bg-white/5">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-white font-medium">Currently Employed Here</p>
-                  <p className="text-slate-400 text-sm">I am still working at this position</p>
-                </div>
-                <Switch
-                  checked={programSelection.currently_employed || false}
-                  onCheckedChange={(checked) => setProgramSelection({ ...programSelection, currently_employed: checked })}
-                  data-testid="currently-employed-switch"
-                />
-              </div>
-            </div>
-          </div>
+          <EmploymentHistorySections 
+            employmentHistory={employmentHistory} 
+            setEmploymentHistory={setEmploymentHistory} 
+          />
         );
 
       case 4:
