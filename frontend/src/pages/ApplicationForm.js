@@ -533,75 +533,7 @@ const ApplicationForm = () => {
 
       case 5:
         return (
-          <div className="space-y-6" data-testid="step-5-financial">
-            <div className="p-6 rounded-xl border border-white/10 bg-white/5">
-              <div className="flex items-center justify-between mb-4">
-                <div>
-                  <p className="text-white font-medium">FAFSA Application</p>
-                  <p className="text-slate-400 text-sm">Have you completed your FAFSA application?</p>
-                </div>
-                <Switch
-                  checked={financialAid.fafsa_completed || false}
-                  onCheckedChange={(checked) => setFinancialAid({ ...financialAid, fafsa_completed: checked })}
-                  data-testid="fafsa-switch"
-                />
-              </div>
-              {!financialAid.fafsa_completed && (
-                <a 
-                  href="https://studentaid.gov/h/apply-for-aid/fafsa" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-[#00B4D8] hover:text-[#00F5FF] text-sm"
-                >
-                  Apply for FAFSA →
-                </a>
-              )}
-            </div>
-
-            <div className="p-6 rounded-xl border border-white/10 bg-white/5">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-white font-medium">Scholarship Interest</p>
-                  <p className="text-slate-400 text-sm">Would you like information about scholarships?</p>
-                </div>
-                <Switch
-                  checked={financialAid.scholarship_interest || false}
-                  onCheckedChange={(checked) => setFinancialAid({ ...financialAid, scholarship_interest: checked })}
-                  data-testid="scholarship-switch"
-                />
-              </div>
-            </div>
-
-            <div className="p-6 rounded-xl border border-white/10 bg-white/5">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-white font-medium">Payment Plan Interest</p>
-                  <p className="text-slate-400 text-sm">Interested in monthly payment plans?</p>
-                </div>
-                <Switch
-                  checked={financialAid.payment_plan_interest || false}
-                  onCheckedChange={(checked) => setFinancialAid({ ...financialAid, payment_plan_interest: checked })}
-                  data-testid="payment-plan-switch"
-                />
-              </div>
-            </div>
-
-            <div className="space-y-2">
-              <Label className="text-slate-300">Additional Comments</Label>
-              <Textarea
-                value={financialAid.comments || ""}
-                onChange={(e) => setFinancialAid({ ...financialAid, comments: e.target.value })}
-                placeholder="Any questions or additional information about financial aid..."
-                className="min-h-[100px] bg-black/20 border-white/10 focus:border-[#00F5FF] text-white rounded-xl resize-none"
-                data-testid="financial-comments"
-              />
-            </div>
-          </div>
-        );
-
-      case 6:
-        return (
-          <div className="space-y-8" data-testid="step-6-review">
+          <div className="space-y-8" data-testid="step-5-review">
             {/* Summary Cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Personal Info */}
