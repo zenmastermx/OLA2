@@ -31,6 +31,55 @@ JWT_EXPIRATION_HOURS = 24
 # Emergent LLM Key
 EMERGENT_LLM_KEY = os.environ.get('EMERGENT_LLM_KEY', '')
 
+# Enrollment Advisors Data
+ENROLLMENT_ADVISORS = [
+    {
+        "id": "adv001",
+        "name": "Sarah Mitchell",
+        "title": "Senior Enrollment Advisor",
+        "email": "smitchell@usa.edu",
+        "phone": "(904) 826-1234",
+        "avatar_url": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=face",
+        "specialization": "Occupational Therapy Programs",
+        "calendly_link": "https://calendly.com/usa-admissions/sarah-mitchell"
+    },
+    {
+        "id": "adv002",
+        "name": "Michael Chen",
+        "title": "Enrollment Advisor",
+        "email": "mchen@usa.edu",
+        "phone": "(904) 826-1235",
+        "avatar_url": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
+        "specialization": "Nursing Programs",
+        "calendly_link": "https://calendly.com/usa-admissions/michael-chen"
+    },
+    {
+        "id": "adv003",
+        "name": "Jessica Rodriguez",
+        "title": "Enrollment Advisor",
+        "email": "jrodriguez@usa.edu",
+        "phone": "(904) 826-1236",
+        "avatar_url": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
+        "specialization": "All Programs",
+        "calendly_link": "https://calendly.com/usa-admissions/jessica-rodriguez"
+    },
+    {
+        "id": "adv004",
+        "name": "David Thompson",
+        "title": "Senior Enrollment Advisor",
+        "email": "dthompson@usa.edu",
+        "phone": "(904) 826-1237",
+        "avatar_url": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
+        "specialization": "Graduate Programs",
+        "calendly_link": "https://calendly.com/usa-admissions/david-thompson"
+    }
+]
+
+def assign_advisor():
+    """Randomly assign an enrollment advisor to new user"""
+    import random
+    return random.choice(ENROLLMENT_ADVISORS)
+
 app = FastAPI(title="USA.edu Application Portal API")
 api_router = APIRouter(prefix="/api")
 security = HTTPBearer()
