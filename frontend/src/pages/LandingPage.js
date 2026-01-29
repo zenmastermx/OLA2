@@ -138,7 +138,7 @@ const LandingPage = () => {
             <div className="absolute inset-0 bg-gradient-to-t from-[#0A0E14] via-transparent to-transparent z-10" />
             <div className="glass-card rounded-3xl overflow-hidden animate-float">
               <img 
-                src="https://images.unsplash.com/photo-1529431801612-df968fb9eb9c?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxOTJ8MHwxfHNlYXJjaHwzfHxtb2Rlcm4lMjB1bml2ZXJzaXR5JTIwYXJjaGl0ZWN0dXJlJTIwbmlnaHR8ZW58MHx8fHwxNzY5NjM4Mjg4fDA&ixlib=rb-4.1.0&q=85"
+                src="https://customer-assets.emergentagent.com/job_be4bb2aa-ca20-4b1a-9d54-431ad1ac86d0/artifacts/1nfqifog_usahs-innovation-advantage-main-page.webp"
                 alt="USA.edu Campus"
                 className="w-full h-[500px] object-cover"
               />
