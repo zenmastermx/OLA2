@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import AIChat from "@/components/AIChat";
 import PersonalInfoSections from "@/components/PersonalInfoSections";
+import AcademicHistorySections from "@/components/AcademicHistorySections";
 
 const ApplicationForm = () => {
   const navigate = useNavigate();
