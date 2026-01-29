@@ -373,6 +373,78 @@ const Dashboard = () => {
             </div>
           </div>
         )}
+
+        {/* Enrollment Advisor Card - At Bottom */}
+        {advisor && (
+          <div className="glass-card rounded-2xl p-6 mt-8" data-testid="enrollment-advisor-card">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-slate-400 text-sm font-medium">Your Enrollment Advisor</h3>
+              <span className="px-2 py-1 rounded-full text-xs font-medium bg-[#28A745]/20 text-[#28A745]">
+                Assigned
+              </span>
+            </div>
+            
+            <div className="flex flex-col lg:flex-row lg:items-center gap-6">
+              {/* Advisor Info */}
+              <div className="flex items-center gap-4 flex-1">
+                <img 
+                  src={advisor.avatar_url} 
+                  alt={advisor.name}
+                  className="w-16 h-16 rounded-full object-cover border-2 border-[#00B4D8]/30"
+                  data-testid="advisor-avatar"
+                />
+                <div>
+                  <h4 className="text-white font-semibold text-lg" data-testid="advisor-name">
+                    {advisor.name}
+                  </h4>
+                  <p className="text-[#00B4D8] text-sm">{advisor.title}</p>
+                  <p className="text-slate-500 text-sm">{advisor.specialization}</p>
+                </div>
+              </div>
+              
+              {/* Contact Actions */}
+              <div className="flex flex-wrap gap-3">
+                <a
+                  href={advisor.calendly_link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#00B4D8] hover:bg-[#0096B4] text-white text-sm font-medium transition-all shadow-[0_0_15px_rgba(0,180,216,0.3)] hover:shadow-[0_0_20px_rgba(0,180,216,0.5)]"
+                  data-testid="schedule-appointment-btn"
+                >
+                  <CalendarDays className="w-4 h-4" />
+                  Schedule Appointment
+                </a>
+                
+                <a
+                  href={`mailto:${advisor.email}?subject=Application Inquiry - ${user?.first_name} ${user?.last_name}`}
+                  className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-[#7B68EE]/50 text-white text-sm font-medium transition-all"
+                  data-testid="email-advisor-btn"
+                >
+                  <Mail className="w-4 h-4 text-[#7B68EE]" />
+                  Send Email
+                </a>
+                
+                <a
+                  href={`sms:${advisor.phone}?body=Hi ${advisor.name.split(' ')[0]}, I'm ${user?.first_name} ${user?.last_name} and I have a question about my application.`}
+                  className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-[#28A745]/50 text-white text-sm font-medium transition-all"
+                  data-testid="text-advisor-btn"
+                >
+                  <MessageCircle className="w-4 h-4 text-[#28A745]" />
+                  Send Text
+                </a>
+                
+                <a
+                  href={`tel:${advisor.phone}`}
+                  className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-[#FF6B35]/50 text-white text-sm font-medium transition-all"
+                  data-testid="call-advisor-btn"
+                >
+                  <Phone className="w-4 h-4 text-[#FF6B35]" />
+                  Call
+                </a>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* New Application Modal */}
