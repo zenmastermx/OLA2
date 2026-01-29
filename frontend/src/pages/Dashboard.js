@@ -357,9 +357,9 @@ const Dashboard = () => {
         {/* Active Application */}
         {activeApp ? (
           <div className="glass-card rounded-2xl p-8 mb-8" data-testid="active-application-card">
-            <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
-              <div>
-                <div className="flex items-center gap-2 mb-2">
+            <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6">
+              <div className="flex-1">
+                <div className="flex items-center gap-2 mb-3 flex-wrap">
                   <span className="px-3 py-1 rounded-full text-xs font-medium bg-[#00B4D8]/20 text-[#00B4D8]">
                     Active Application
                   </span>
@@ -367,12 +367,47 @@ const Dashboard = () => {
                     {activeApp.program_selection?.program_type || "Program"}
                   </span>
                 </div>
-                <h2 className="font-['Outfit'] text-2xl font-bold text-white mb-1">
-                  {activeApp.program_selection?.program_type || "Healthcare"} Program Application
+                <h2 className="font-['Outfit'] text-2xl font-bold text-white mb-2">
+                  {activeApp.program_selection?.program_pathway || activeApp.program_selection?.program_type || "Healthcare"} 
                 </h2>
-                <p className="text-slate-400">
-                  Started {new Date(activeApp.created_at).toLocaleDateString()}
-                </p>
+                
+                {/* Program Details Grid */}
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-4">
+                  {activeApp.program_selection?.start_term && (
+                    <div className="p-3 rounded-xl bg-white/5 border border-white/[0.05]">
+                      <div className="flex items-center gap-2 mb-1">
+                        <Calendar className="w-3.5 h-3.5 text-[#FF9800]" />
+                        <span className="text-slate-500 text-xs uppercase tracking-wider">Start Term</span>
+                      </div>
+                      <p className="text-white text-sm font-medium">{activeApp.program_selection.start_term}</p>
+                    </div>
+                  )}
+                  {activeApp.program_selection?.campus && (
+                    <div className="p-3 rounded-xl bg-white/5 border border-white/[0.05]">
+                      <div className="flex items-center gap-2 mb-1">
+                        <MapPin className="w-3.5 h-3.5 text-[#00B4D8]" />
+                        <span className="text-slate-500 text-xs uppercase tracking-wider">Campus</span>
+                      </div>
+                      <p className="text-white text-sm font-medium">{activeApp.program_selection.campus}</p>
+                    </div>
+                  )}
+                  {activeApp.program_selection?.secondary_campus && (
+                    <div className="p-3 rounded-xl bg-white/5 border border-white/[0.05]">
+                      <div className="flex items-center gap-2 mb-1">
+                        <MapPin className="w-3.5 h-3.5 text-[#7B68EE]" />
+                        <span className="text-slate-500 text-xs uppercase tracking-wider">Backup</span>
+                      </div>
+                      <p className="text-white text-sm font-medium">{activeApp.program_selection.secondary_campus}</p>
+                    </div>
+                  )}
+                  <div className="p-3 rounded-xl bg-white/5 border border-white/[0.05]">
+                    <div className="flex items-center gap-2 mb-1">
+                      <Clock className="w-3.5 h-3.5 text-slate-400" />
+                      <span className="text-slate-500 text-xs uppercase tracking-wider">Started</span>
+                    </div>
+                    <p className="text-white text-sm font-medium">{new Date(activeApp.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</p>
+                  </div>
+                </div>
               </div>
               
               <Button
