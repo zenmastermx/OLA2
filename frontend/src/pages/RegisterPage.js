@@ -105,9 +105,11 @@ const RegisterPage = () => {
 
           {/* Logo */}
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#00B4D8] to-[#002855] flex items-center justify-center">
-              <span className="text-white font-bold text-2xl font-['Outfit']">U</span>
-            </div>
+            <img 
+              src="https://customer-assets.emergentagent.com/job_be4bb2aa-ca20-4b1a-9d54-431ad1ac86d0/artifacts/7kvxdoxy_primary.filled.whouter.pms315.png" 
+              alt="USA.edu Logo" 
+              className="h-12 w-auto"
+            />
             <div>
               <h1 className="font-['Outfit'] text-2xl font-bold">USA.edu</h1>
               <p className="text-slate-500 text-sm">Application Portal</p>

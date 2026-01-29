@@ -94,9 +94,11 @@ const Dashboard = () => {
       <nav className="sticky top-0 z-40 bg-[#0A0E14]/80 backdrop-blur-xl border-b border-white/5">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#00B4D8] to-[#002855] flex items-center justify-center">
-              <span className="text-white font-bold text-lg font-['Outfit']">U</span>
-            </div>
+            <img 
+              src="https://customer-assets.emergentagent.com/job_be4bb2aa-ca20-4b1a-9d54-431ad1ac86d0/artifacts/7kvxdoxy_primary.filled.whouter.pms315.png" 
+              alt="USA.edu Logo" 
+              className="h-10 w-auto"
+            />
             <span className="font-['Outfit'] font-bold text-xl text-white">USA.edu Portal</span>
           </div>
           
