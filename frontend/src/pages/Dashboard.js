@@ -558,60 +558,209 @@ const Dashboard = () => {
 
       {/* New Application Modal */}
       {showNewAppModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
-          <div className="glass-card rounded-3xl p-8 max-w-lg w-full animate-slide-up" data-testid="new-app-modal">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 overflow-y-auto">
+          <div className="glass-card rounded-3xl p-8 max-w-2xl w-full animate-slide-up my-8" data-testid="new-app-modal">
             <div className="flex items-center justify-between mb-6">
-              <h2 className="font-['Outfit'] text-2xl font-bold text-white">
-                Select Your Program
-              </h2>
+              <div>
+                <h2 className="font-['Outfit'] text-2xl font-bold text-white">
+                  {modalStep === 1 && "Select Your Program"}
+                  {modalStep === 2 && "Select Your Pathway"}
+                  {modalStep === 3 && "Select Term & Campus"}
+                </h2>
+                <p className="text-slate-500 text-sm mt-1">Step {modalStep} of 3</p>
+              </div>
               <button
-                onClick={() => setShowNewAppModal(false)}
+                onClick={closeModal}
                 className="text-slate-400 hover:text-white transition-colors"
                 data-testid="close-modal-btn"
               >
                 <X className="w-6 h-6" />
               </button>
             </div>
-            
-            <div className="space-y-4 mb-6">
-              {[
-                { id: "ot", name: "Occupational Therapy", icon: GraduationCap, color: "#00B4D8" },
-                { id: "nursing", name: "Nursing", icon: User, color: "#7B68EE" }
-              ].map((program) => (
-                <button
-                  key={program.id}
-                  onClick={() => setSelectedProgram(program.id)}
-                  className={`w-full p-4 rounded-xl border text-left transition-all ${
-                    selectedProgram === program.id
-                      ? "border-[#00F5FF] bg-[#00F5FF]/10"
-                      : "border-white/10 bg-white/5 hover:border-white/30"
+
+            {/* Progress Indicator */}
+            <div className="flex gap-2 mb-8">
+              {[1, 2, 3].map((step) => (
+                <div 
+                  key={step}
+                  className={`h-1 flex-1 rounded-full transition-all ${
+                    step <= modalStep ? "bg-[#00B4D8]" : "bg-white/10"
                   }`}
-                  data-testid={`select-program-${program.id}`}
-                >
-                  <div className="flex items-center gap-4">
-                    <div 
-                      className="w-12 h-12 rounded-xl flex items-center justify-center"
-                      style={{ background: `${program.color}20` }}
-                    >
-                      <program.icon className="w-6 h-6" style={{ color: program.color }} />
-                    </div>
-                    <div>
-                      <p className="text-white font-medium">{program.name}</p>
-                      <p className="text-slate-500 text-sm">Masters & Doctorate Programs</p>
-                    </div>
-                  </div>
-                </button>
+                />
               ))}
             </div>
             
-            <Button
-              onClick={createApplication}
-              disabled={!selectedProgram || creatingApp}
-              className="w-full bg-[#00B4D8] hover:bg-[#0096B4] text-white rounded-xl h-12 shadow-[0_0_20px_rgba(0,180,216,0.3)] disabled:opacity-50"
-              data-testid="create-application-btn"
-            >
-              {creatingApp ? "Creating..." : "Create Application"}
-            </Button>
+            {/* Step 1: Program Category */}
+            {modalStep === 1 && (
+              <div className="space-y-4 mb-6">
+                {Object.entries(PROGRAM_PATHWAYS).map(([key, category]) => (
+                  <button
+                    key={key}
+                    onClick={() => {
+                      setSelectedCategory(key);
+                      setSelectedProgram(null);
+                    }}
+                    className={`w-full p-4 rounded-xl border text-left transition-all ${
+                      selectedCategory === key
+                        ? "border-[#00F5FF] bg-[#00F5FF]/10"
+                        : "border-white/10 bg-white/5 hover:border-white/30"
+                    }`}
+                    data-testid={`select-category-${key}`}
+                  >
+                    <div className="flex items-center gap-4">
+                      <div 
+                        className="w-12 h-12 rounded-xl flex items-center justify-center"
+                        style={{ background: `${category.color}20` }}
+                      >
+                        {key === "ot" && <GraduationCap className="w-6 h-6" style={{ color: category.color }} />}
+                        {key === "nursing" && <User className="w-6 h-6" style={{ color: category.color }} />}
+                        {key === "education" && <BookOpen className="w-6 h-6" style={{ color: category.color }} />}
+                        {key === "certificates" && <FileText className="w-6 h-6" style={{ color: category.color }} />}
+                      </div>
+                      <div>
+                        <p className="text-white font-medium">{category.name}</p>
+                        <p className="text-slate-500 text-sm">{category.programs.length} programs available</p>
+                      </div>
+                      {selectedCategory === key && (
+                        <CheckCircle2 className="w-5 h-5 text-[#00F5FF] ml-auto" />
+                      )}
+                    </div>
+                  </button>
+                ))}
+              </div>
+            )}
+
+            {/* Step 2: Specific Program Pathway */}
+            {modalStep === 2 && selectedCategory && (
+              <div className="space-y-3 mb-6 max-h-[400px] overflow-y-auto pr-2">
+                <p className="text-slate-400 text-sm mb-4">
+                  Select your specific pathway within {PROGRAM_PATHWAYS[selectedCategory].name}:
+                </p>
+                {PROGRAM_PATHWAYS[selectedCategory].programs.map((program) => (
+                  <button
+                    key={program.id}
+                    onClick={() => setSelectedProgram(program.id)}
+                    className={`w-full p-4 rounded-xl border text-left transition-all ${
+                      selectedProgram === program.id
+                        ? "border-[#00F5FF] bg-[#00F5FF]/10"
+                        : "border-white/10 bg-white/5 hover:border-white/30"
+                    }`}
+                    data-testid={`select-program-${program.id}`}
+                  >
+                    <div className="flex items-center justify-between">
+                      <p className="text-white text-sm font-medium">{program.name}</p>
+                      {selectedProgram === program.id && (
+                        <CheckCircle2 className="w-5 h-5 text-[#00F5FF]" />
+                      )}
+                    </div>
+                  </button>
+                ))}
+              </div>
+            )}
+
+            {/* Step 3: Start Term & Campus */}
+            {modalStep === 3 && (
+              <div className="space-y-6 mb-6">
+                {/* Selected Program Summary */}
+                <div className="p-4 rounded-xl bg-[#00B4D8]/10 border border-[#00B4D8]/20">
+                  <p className="text-slate-400 text-xs uppercase tracking-wider mb-1">Selected Program</p>
+                  <p className="text-white font-medium">
+                    {PROGRAM_PATHWAYS[selectedCategory]?.programs.find(p => p.id === selectedProgram)?.name}
+                  </p>
+                </div>
+
+                {/* Start Term Selection */}
+                <div className="space-y-3">
+                  <Label className="text-xs font-medium uppercase tracking-wider text-slate-400 flex items-center gap-2">
+                    <Calendar className="w-4 h-4 text-[#FF9800]" />
+                    Intended Start Term <span className="text-[#00F5FF]">*</span>
+                  </Label>
+                  <Select value={selectedStartTerm || ""} onValueChange={setSelectedStartTerm}>
+                    <SelectTrigger className="h-12 bg-black/30 border-white/[0.08] text-white rounded-xl px-4 focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20" data-testid="select-start-term">
+                      <SelectValue placeholder="Select your start term" />
+                    </SelectTrigger>
+                    <SelectContent className="bg-[#11161F] border-white/10 rounded-xl">
+                      {START_TERMS.map((term) => (
+                        <SelectItem key={term.id} value={term.id}>{term.name}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                {/* Primary Campus Selection */}
+                <div className="space-y-3">
+                  <Label className="text-xs font-medium uppercase tracking-wider text-slate-400 flex items-center gap-2">
+                    <MapPin className="w-4 h-4 text-[#00B4D8]" />
+                    Primary Campus <span className="text-[#00F5FF]">*</span>
+                  </Label>
+                  <Select value={selectedCampus || ""} onValueChange={setSelectedCampus}>
+                    <SelectTrigger className="h-12 bg-black/30 border-white/[0.08] text-white rounded-xl px-4 focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20" data-testid="select-campus">
+                      <SelectValue placeholder="Select your preferred campus" />
+                    </SelectTrigger>
+                    <SelectContent className="bg-[#11161F] border-white/10 rounded-xl">
+                      {CAMPUSES.map((campus) => (
+                        <SelectItem key={campus.id} value={campus.id}>{campus.name}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                {/* Secondary Campus Selection */}
+                <div className="space-y-3">
+                  <Label className="text-xs font-medium uppercase tracking-wider text-slate-400 flex items-center gap-2">
+                    <MapPin className="w-4 h-4 text-[#7B68EE]" />
+                    Secondary Campus (Backup Option)
+                  </Label>
+                  <p className="text-slate-600 text-xs -mt-1">In case your first choice reaches capacity</p>
+                  <Select value={selectedCampus2 || ""} onValueChange={setSelectedCampus2}>
+                    <SelectTrigger className="h-12 bg-black/30 border-white/[0.08] text-white rounded-xl px-4 focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20" data-testid="select-campus-2">
+                      <SelectValue placeholder="Select a backup campus (optional)" />
+                    </SelectTrigger>
+                    <SelectContent className="bg-[#11161F] border-white/10 rounded-xl">
+                      {CAMPUSES.filter(c => c.id !== selectedCampus).map((campus) => (
+                        <SelectItem key={campus.id} value={campus.id}>{campus.name}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+            )}
+            
+            {/* Navigation Buttons */}
+            <div className="flex gap-3">
+              {modalStep > 1 && (
+                <Button
+                  onClick={() => setModalStep(modalStep - 1)}
+                  variant="outline"
+                  className="flex-1 border-white/20 text-white hover:bg-white/5 rounded-xl h-12"
+                >
+                  Back
+                </Button>
+              )}
+              
+              {modalStep < 3 ? (
+                <Button
+                  onClick={() => setModalStep(modalStep + 1)}
+                  disabled={
+                    (modalStep === 1 && !selectedCategory) ||
+                    (modalStep === 2 && !selectedProgram)
+                  }
+                  className="flex-1 bg-[#00B4D8] hover:bg-[#0096B4] text-white rounded-xl h-12 shadow-[0_0_20px_rgba(0,180,216,0.3)] disabled:opacity-50"
+                >
+                  Continue
+                  <ChevronRight className="w-4 h-4 ml-2" />
+                </Button>
+              ) : (
+                <Button
+                  onClick={createApplication}
+                  disabled={!selectedStartTerm || !selectedCampus || creatingApp}
+                  className="flex-1 bg-[#28A745] hover:bg-[#218838] text-white rounded-xl h-12 shadow-[0_0_20px_rgba(40,167,69,0.3)] disabled:opacity-50"
+                  data-testid="create-application-btn"
+                >
+                  {creatingApp ? "Creating..." : "Create Application"}
+                </Button>
+              )}
+            </div>
           </div>
         </div>
       )}
