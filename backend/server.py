@@ -331,12 +331,15 @@ async def register(user_data: UserCreate):
         raise HTTPException(status_code=400, detail="Email already registered")
     
     user_id = str(uuid.uuid4())
+    assigned_advisor = assign_advisor()
+    
     user_doc = {
         "id": user_id,
         "email": user_data.email,
         "password_hash": hash_password(user_data.password),
         "first_name": user_data.first_name,
         "last_name": user_data.last_name,
+        "enrollment_advisor": assigned_advisor,
         "created_at": datetime.now(timezone.utc).isoformat()
     }
     await db.users.insert_one(user_doc)
