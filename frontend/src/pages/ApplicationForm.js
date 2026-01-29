@@ -67,6 +67,7 @@ const ApplicationForm = () => {
       setAcademicHistory(response.data.academic_history || {});
       setProgramSelection(response.data.program_selection || {});
       setFinancialAid(response.data.financial_aid || {});
+      setEmploymentHistory(response.data.employment_history || {});
       if (!urlStep) {
         setCurrentStep(response.data.current_step || 1);
       }
