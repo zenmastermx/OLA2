@@ -439,6 +439,8 @@ async def update_application(app_id: str, update_data: ApplicationUpdate, curren
         update_dict["program_selection"] = {**app.get("program_selection", {}), **update_data.program_selection.model_dump(exclude_none=True)}
     if update_data.financial_aid:
         update_dict["financial_aid"] = {**app.get("financial_aid", {}), **update_data.financial_aid.model_dump(exclude_none=True)}
+    if update_data.employment_history:
+        update_dict["employment_history"] = {**app.get("employment_history", {}), **update_data.employment_history.model_dump(exclude_none=True)}
     if update_data.current_step is not None:
         update_dict["current_step"] = update_data.current_step
     
