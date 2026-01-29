@@ -140,22 +140,53 @@ const Dashboard = () => {
   };
 
   const createApplication = async () => {
-    if (!selectedProgram) {
-      toast.error("Please select a program");
+    if (!selectedProgram || !selectedStartTerm || !selectedCampus) {
+      toast.error("Please complete all required selections");
       return;
     }
 
     setCreatingApp(true);
     try {
+      // Find the program details
+      const categoryData = PROGRAM_PATHWAYS[selectedCategory];
+      const programData = categoryData?.programs.find(p => p.id === selectedProgram);
+      
       const response = await axios.post(
         `${API}/applications`,
-        { program_type: selectedProgram === "ot" ? "Occupational Therapy" : "Nursing" },
+        { 
+          program_type: categoryData?.name || "Occupational Therapy",
+          program_pathway: programData?.name || selectedProgram,
+          start_term: START_TERMS.find(t => t.id === selectedStartTerm)?.name || selectedStartTerm,
+          primary_campus: CAMPUSES.find(c => c.id === selectedCampus)?.name || selectedCampus,
+          secondary_campus: selectedCampus2 ? CAMPUSES.find(c => c.id === selectedCampus2)?.name : null
+        },
         { headers: { Authorization: `Bearer ${token}` } }
       );
       toast.success("Application created successfully!");
       setShowNewAppModal(false);
+      resetModalState();
       navigate(`/application/${response.data.id}`);
     } catch (error) {
+      console.error("Error creating application:", error);
+      toast.error("Failed to create application");
+    } finally {
+      setCreatingApp(false);
+    }
+  };
+
+  const resetModalState = () => {
+    setSelectedCategory(null);
+    setSelectedProgram(null);
+    setSelectedStartTerm(null);
+    setSelectedCampus(null);
+    setSelectedCampus2(null);
+    setModalStep(1);
+  };
+
+  const closeModal = () => {
+    setShowNewAppModal(false);
+    resetModalState();
+  };
       console.error("Error creating application:", error);
       toast.error(error.response?.data?.detail || "Failed to create application");
     } finally {
