@@ -1324,6 +1324,7 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo, onSectionComplete
             </Button>
           ) : (
             <Button
+              onClick={() => onSectionComplete && onSectionComplete()}
               className="bg-[#28A745] hover:bg-[#218838] text-white rounded-full px-6"
               data-testid="complete-personal-btn"
             >
