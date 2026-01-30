@@ -537,16 +537,14 @@ const Dashboard = () => {
               
               {/* Contact Actions */}
               <div className="flex flex-wrap gap-3">
-                <a
-                  href={advisor.acuity_link}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <button
+                  onClick={() => setShowScheduleModal(true)}
                   className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-[#00B4D8]/50 text-white text-sm font-medium transition-all"
                   data-testid="schedule-appointment-btn"
                 >
                   <CalendarDays className="w-4 h-4 text-[#00B4D8]" />
                   Schedule Appointment
-                </a>
+                </button>
                 
                 <button
                   onClick={() => setShowEmailModal(true)}
