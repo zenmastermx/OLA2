@@ -232,6 +232,100 @@ const RegisterPage = () => {
               )}
             </div>
 
+            {/* Communication Consent */}
+            <div className="space-y-4 pt-2">
+              <div className="flex items-center gap-3 pb-2 border-b border-white/[0.05]">
+                <span className="text-xs font-medium uppercase tracking-wider text-slate-400">Communication Preferences</span>
+              </div>
+              <p className="text-slate-500 text-xs">
+                Select how you'd like to receive updates about your application and program information.
+              </p>
+              
+              <div className="space-y-3">
+                <div 
+                  className={`flex items-center justify-between p-4 rounded-xl border transition-all duration-300 cursor-pointer ${
+                    consentCall 
+                      ? "border-[#28A745]/50 bg-[#28A745]/10" 
+                      : "border-white/[0.08] bg-black/20 hover:border-white/20"
+                  }`}
+                  onClick={() => setConsentCall(!consentCall)}
+                >
+                  <div className="flex items-center gap-3">
+                    <div className={`w-8 h-8 rounded-full flex items-center justify-center ${consentCall ? "bg-[#28A745]/20" : "bg-white/5"}`}>
+                      <Phone className={`w-4 h-4 ${consentCall ? "text-[#28A745]" : "text-slate-500"}`} />
+                    </div>
+                    <div>
+                      <p className="text-white text-sm font-medium">Phone Calls</p>
+                      <p className="text-slate-500 text-xs">Receive calls from enrollment advisors</p>
+                    </div>
+                  </div>
+                  <Checkbox
+                    id="consent-call"
+                    checked={consentCall}
+                    onCheckedChange={setConsentCall}
+                    className="border-[#28A745] data-[state=checked]:bg-[#28A745]"
+                    data-testid="consent-call-checkbox"
+                  />
+                </div>
+
+                <div 
+                  className={`flex items-center justify-between p-4 rounded-xl border transition-all duration-300 cursor-pointer ${
+                    consentText 
+                      ? "border-[#00B4D8]/50 bg-[#00B4D8]/10" 
+                      : "border-white/[0.08] bg-black/20 hover:border-white/20"
+                  }`}
+                  onClick={() => setConsentText(!consentText)}
+                >
+                  <div className="flex items-center gap-3">
+                    <div className={`w-8 h-8 rounded-full flex items-center justify-center ${consentText ? "bg-[#00B4D8]/20" : "bg-white/5"}`}>
+                      <MessageCircle className={`w-4 h-4 ${consentText ? "text-[#00B4D8]" : "text-slate-500"}`} />
+                    </div>
+                    <div>
+                      <p className="text-white text-sm font-medium">Text Messages (SMS)</p>
+                      <p className="text-slate-500 text-xs">Receive text updates and reminders</p>
+                    </div>
+                  </div>
+                  <Checkbox
+                    id="consent-text"
+                    checked={consentText}
+                    onCheckedChange={setConsentText}
+                    className="border-[#00B4D8] data-[state=checked]:bg-[#00B4D8]"
+                    data-testid="consent-text-checkbox"
+                  />
+                </div>
+
+                <div 
+                  className={`flex items-center justify-between p-4 rounded-xl border transition-all duration-300 cursor-pointer ${
+                    consentEmail 
+                      ? "border-[#7B68EE]/50 bg-[#7B68EE]/10" 
+                      : "border-white/[0.08] bg-black/20 hover:border-white/20"
+                  }`}
+                  onClick={() => setConsentEmail(!consentEmail)}
+                >
+                  <div className="flex items-center gap-3">
+                    <div className={`w-8 h-8 rounded-full flex items-center justify-center ${consentEmail ? "bg-[#7B68EE]/20" : "bg-white/5"}`}>
+                      <Mail className={`w-4 h-4 ${consentEmail ? "text-[#7B68EE]" : "text-slate-500"}`} />
+                    </div>
+                    <div>
+                      <p className="text-white text-sm font-medium">Email Communications</p>
+                      <p className="text-slate-500 text-xs">Receive emails about your application</p>
+                    </div>
+                  </div>
+                  <Checkbox
+                    id="consent-email"
+                    checked={consentEmail}
+                    onCheckedChange={setConsentEmail}
+                    className="border-[#7B68EE] data-[state=checked]:bg-[#7B68EE]"
+                    data-testid="consent-email-checkbox"
+                  />
+                </div>
+              </div>
+              
+              <p className="text-slate-600 text-xs">
+                You can update these preferences at any time in your account settings.
+              </p>
+            </div>
+
             <Button
               type="submit"
               disabled={loading}
