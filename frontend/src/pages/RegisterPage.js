@@ -242,13 +242,13 @@ const RegisterPage = () => {
               </p>
               
               <div className="space-y-3">
-                <div 
+                <label 
+                  htmlFor="consent-call"
                   className={`flex items-center justify-between p-4 rounded-xl border transition-all duration-300 cursor-pointer ${
                     consentCall 
                       ? "border-[#28A745]/50 bg-[#28A745]/10" 
                       : "border-white/[0.08] bg-black/20 hover:border-white/20"
                   }`}
-                  onClick={() => setConsentCall(!consentCall)}
                 >
                   <div className="flex items-center gap-3">
                     <div className={`w-8 h-8 rounded-full flex items-center justify-center ${consentCall ? "bg-[#28A745]/20" : "bg-white/5"}`}>
@@ -262,19 +262,19 @@ const RegisterPage = () => {
                   <Checkbox
                     id="consent-call"
                     checked={consentCall}
-                    onCheckedChange={setConsentCall}
+                    onCheckedChange={(checked) => setConsentCall(checked)}
                     className="border-[#28A745] data-[state=checked]:bg-[#28A745]"
                     data-testid="consent-call-checkbox"
                   />
-                </div>
+                </label>
 
-                <div 
+                <label 
+                  htmlFor="consent-text"
                   className={`flex items-center justify-between p-4 rounded-xl border transition-all duration-300 cursor-pointer ${
                     consentText 
                       ? "border-[#00B4D8]/50 bg-[#00B4D8]/10" 
                       : "border-white/[0.08] bg-black/20 hover:border-white/20"
                   }`}
-                  onClick={() => setConsentText(!consentText)}
                 >
                   <div className="flex items-center gap-3">
                     <div className={`w-8 h-8 rounded-full flex items-center justify-center ${consentText ? "bg-[#00B4D8]/20" : "bg-white/5"}`}>
@@ -288,19 +288,19 @@ const RegisterPage = () => {
                   <Checkbox
                     id="consent-text"
                     checked={consentText}
-                    onCheckedChange={setConsentText}
+                    onCheckedChange={(checked) => setConsentText(checked)}
                     className="border-[#00B4D8] data-[state=checked]:bg-[#00B4D8]"
                     data-testid="consent-text-checkbox"
                   />
-                </div>
+                </label>
 
-                <div 
+                <label 
+                  htmlFor="consent-email"
                   className={`flex items-center justify-between p-4 rounded-xl border transition-all duration-300 cursor-pointer ${
                     consentEmail 
                       ? "border-[#7B68EE]/50 bg-[#7B68EE]/10" 
                       : "border-white/[0.08] bg-black/20 hover:border-white/20"
                   }`}
-                  onClick={() => setConsentEmail(!consentEmail)}
                 >
                   <div className="flex items-center gap-3">
                     <div className={`w-8 h-8 rounded-full flex items-center justify-center ${consentEmail ? "bg-[#7B68EE]/20" : "bg-white/5"}`}>
@@ -314,11 +314,11 @@ const RegisterPage = () => {
                   <Checkbox
                     id="consent-email"
                     checked={consentEmail}
-                    onCheckedChange={setConsentEmail}
+                    onCheckedChange={(checked) => setConsentEmail(checked)}
                     className="border-[#7B68EE] data-[state=checked]:bg-[#7B68EE]"
                     data-testid="consent-email-checkbox"
                   />
-                </div>
+                </label>
               </div>
               
               <p className="text-slate-600 text-xs">
