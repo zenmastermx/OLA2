@@ -533,7 +533,7 @@ const Dashboard = () => {
               {/* Contact Actions */}
               <div className="flex flex-wrap gap-3">
                 <a
-                  href={advisor.calendly_link}
+                  href={advisor.acuity_link}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-[#00B4D8]/50 text-white text-sm font-medium transition-all"
