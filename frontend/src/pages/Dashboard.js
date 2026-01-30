@@ -190,6 +190,9 @@ const Dashboard = () => {
 
   const activeApp = applications.find(a => a.status !== "submitted");
   const submittedApps = applications.filter(a => a.status === "submitted");
+  
+  // For stats display: use active app if exists, otherwise most recent submitted app
+  const displayApp = activeApp || (submittedApps.length > 0 ? submittedApps[0] : null);
 
   const getDeadline = () => {
     const now = new Date();
