@@ -337,7 +337,7 @@ const AcademicHistorySections = ({ academicHistory, setAcademicHistory }) => {
                     </table>
                   </div>
                 </div>
-              ))}
+              )})}
             </div>
           </div>
         );
