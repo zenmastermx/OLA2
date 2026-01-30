@@ -378,7 +378,7 @@ const Dashboard = () => {
                 </h2>
                 
                 {/* Program Details Grid */}
-                <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mt-4">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-4">
                   {activeApp.program_selection?.program_pathway && (
                     <div className="p-3 rounded-xl bg-white/5 border border-white/[0.05]">
                       <div className="flex items-center gap-2 mb-1">
@@ -415,13 +415,6 @@ const Dashboard = () => {
                       <p className="text-white text-sm font-medium">{activeApp.program_selection.secondary_campus}</p>
                     </div>
                   )}
-                  <div className="p-3 rounded-xl bg-white/5 border border-white/[0.05]">
-                    <div className="flex items-center gap-2 mb-1">
-                      <Clock className="w-3.5 h-3.5 text-slate-400" />
-                      <span className="text-slate-500 text-xs uppercase tracking-wider">Started</span>
-                    </div>
-                    <p className="text-white text-sm font-medium">{new Date(activeApp.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</p>
-                  </div>
                 </div>
               </div>
               
