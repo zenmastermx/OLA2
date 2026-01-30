@@ -4,8 +4,9 @@ import { useAuth } from "@/App";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "sonner";
-import { Eye, EyeOff, Mail, Lock, User, ArrowLeft, Loader2, Check } from "lucide-react";
+import { Eye, EyeOff, Mail, Lock, User, ArrowLeft, Loader2, Check, Phone, MessageCircle } from "lucide-react";
 
 const RegisterPage = () => {
   const navigate = useNavigate();
@@ -18,6 +19,11 @@ const RegisterPage = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  
+  // Consent preferences
+  const [consentCall, setConsentCall] = useState(true);
+  const [consentText, setConsentText] = useState(true);
+  const [consentEmail, setConsentEmail] = useState(true);
 
   const passwordChecks = [
     { label: "At least 8 characters", valid: password.length >= 8 },
@@ -45,7 +51,11 @@ const RegisterPage = () => {
 
     setLoading(true);
     try {
-      await register(email, password, firstName, lastName);
+      await register(email, password, firstName, lastName, {
+        consent_call: consentCall,
+        consent_text: consentText,
+        consent_email: consentEmail
+      });
       toast.success("Account created successfully!");
       navigate("/dashboard", { state: { newUser: true, program: location.state?.program } });
     } catch (error) {
