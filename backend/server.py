@@ -568,7 +568,7 @@ async def create_application(app_data: ApplicationCreate, current_user: dict = D
     now = datetime.now(timezone.utc).isoformat()
     
     default_docs = [
-        {"id": str(uuid.uuid4()), "name": "Official Transcript", "type": "transcript", "status": "pending"},
+        {"id": str(uuid.uuid4()), "name": "Unofficial Transcript", "type": "transcript", "status": "pending"},
         {"id": str(uuid.uuid4()), "name": "Resume/CV", "type": "resume", "status": "pending"},
         {"id": str(uuid.uuid4()), "name": "Personal Statement", "type": "statement", "status": "pending"},
         {"id": str(uuid.uuid4()), "name": "Letters of Recommendation", "type": "recommendation", "status": "pending"},
