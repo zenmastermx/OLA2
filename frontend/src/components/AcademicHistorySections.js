@@ -12,6 +12,14 @@ import {
 
 const AcademicHistorySections = ({ academicHistory, setAcademicHistory }) => {
   const [activeSubSection, setActiveSubSection] = useState(0);
+  const [addingPrereqFor, setAddingPrereqFor] = useState(null);
+  const [newCourse, setNewCourse] = useState({
+    name: "",
+    completed: false,
+    grade: "",
+    institution: "",
+    credits: ""
+  });
 
   const subSections = [
     { id: 0, label: "Prerequisite Requirements", icon: BookOpen },
