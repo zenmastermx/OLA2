@@ -566,80 +566,104 @@ const Dashboard = () => {
               Submitted Applications
             </h3>
             <div className="space-y-4">
-              {submittedApps.map((app) => (
-                <div 
-                  key={app.id}
-                  className="glass-card rounded-2xl p-6"
-                  data-testid={`submitted-app-${app.id}`}
-                >
-                  <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 mb-4">
-                    <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 rounded-xl bg-[#28A745]/20 flex items-center justify-center">
-                        <CheckCircle2 className="w-6 h-6 text-[#28A745]" />
-                      </div>
-                      <div>
-                        <div className="flex items-center gap-2 mb-1 flex-wrap">
-                          <span className="px-3 py-1 rounded-full text-xs font-medium bg-[#28A745]/20 text-[#28A745]">
-                            Submitted
-                          </span>
-                          <span className="px-3 py-1 rounded-full text-xs font-medium bg-[#7B68EE]/20 text-[#7B68EE]">
-                            {app.program_selection?.program_type || "Program"}
-                          </span>
+              {submittedApps.map((app) => {
+                // Get status label and color based on review_status
+                const getStatusDisplay = (reviewStatus) => {
+                  switch (reviewStatus) {
+                    case "application_received":
+                      return { label: "Application Received", color: "#00B4D8", bgColor: "rgba(0,180,216,0.2)" };
+                    case "under_review":
+                      return { label: "Under Review", color: "#FF9800", bgColor: "rgba(255,152,0,0.2)" };
+                    case "admitted":
+                      return { label: "Admitted", color: "#28A745", bgColor: "rgba(40,167,69,0.2)" };
+                    case "denied":
+                      return { label: "Denied", color: "#EF4444", bgColor: "rgba(239,68,68,0.2)" };
+                    default:
+                      return { label: "Application Received", color: "#00B4D8", bgColor: "rgba(0,180,216,0.2)" };
+                  }
+                };
+                
+                const statusDisplay = getStatusDisplay(app.review_status);
+                
+                return (
+                  <div 
+                    key={app.id}
+                    className="glass-card rounded-2xl p-6"
+                    data-testid={`submitted-app-${app.id}`}
+                  >
+                    <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 mb-4">
+                      <div className="flex items-center gap-4">
+                        <div className="w-12 h-12 rounded-xl bg-[#28A745]/20 flex items-center justify-center">
+                          <CheckCircle2 className="w-6 h-6 text-[#28A745]" />
                         </div>
-                        <p className="text-white font-semibold text-lg">
-                          {app.program_selection?.program_pathway || app.program_selection?.program_type || "Healthcare"}
-                        </p>
-                        <p className="text-slate-500 text-sm">
-                          Submitted {new Date(app.submitted_at).toLocaleDateString()}
-                        </p>
+                        <div>
+                          <div className="flex items-center gap-2 mb-1 flex-wrap">
+                            <span className="px-3 py-1 rounded-full text-xs font-medium bg-[#28A745]/20 text-[#28A745]">
+                              Submitted
+                            </span>
+                            <span className="px-3 py-1 rounded-full text-xs font-medium bg-[#7B68EE]/20 text-[#7B68EE]">
+                              {app.program_selection?.program_type || "Program"}
+                            </span>
+                          </div>
+                          <p className="text-white font-semibold text-lg">
+                            {app.program_selection?.program_pathway || app.program_selection?.program_type || "Healthcare"}
+                          </p>
+                          <p className="text-slate-500 text-sm">
+                            Submitted {new Date(app.submitted_at).toLocaleDateString()}
+                          </p>
+                        </div>
                       </div>
+                      <span 
+                        className="px-4 py-2 rounded-full text-sm font-medium self-start"
+                        style={{ backgroundColor: statusDisplay.bgColor, color: statusDisplay.color }}
+                        data-testid={`app-status-${app.id}`}
+                      >
+                        {statusDisplay.label}
+                      </span>
                     </div>
-                    <span className="px-4 py-2 rounded-full text-sm font-medium bg-[#FF9800]/20 text-[#FF9800] self-start">
-                      Under Review
-                    </span>
-                  </div>
 
-                  {/* Program Details Grid - Same as Active Application */}
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                    {app.program_selection?.program_pathway && (
-                      <div className="p-3 rounded-xl bg-white/5 border border-white/[0.05]">
-                        <div className="flex items-center gap-2 mb-1">
-                          <GraduationCap className="w-3.5 h-3.5 text-[#7B68EE]" />
-                          <span className="text-slate-500 text-xs uppercase tracking-wider">Pathway</span>
+                    {/* Program Details Grid - Same as Active Application */}
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                      {app.program_selection?.program_pathway && (
+                        <div className="p-3 rounded-xl bg-white/5 border border-white/[0.05]">
+                          <div className="flex items-center gap-2 mb-1">
+                            <GraduationCap className="w-3.5 h-3.5 text-[#7B68EE]" />
+                            <span className="text-slate-500 text-xs uppercase tracking-wider">Pathway</span>
+                          </div>
+                          <p className="text-white text-sm font-medium">{app.program_selection.program_pathway}</p>
                         </div>
-                        <p className="text-white text-sm font-medium">{app.program_selection.program_pathway}</p>
-                      </div>
-                    )}
-                    {(app.program_selection?.campus || app.program_selection?.primary_campus) && (
-                      <div className="p-3 rounded-xl bg-white/5 border border-white/[0.05]">
-                        <div className="flex items-center gap-2 mb-1">
-                          <MapPin className="w-3.5 h-3.5 text-[#00B4D8]" />
-                          <span className="text-slate-500 text-xs uppercase tracking-wider">Primary Campus</span>
+                      )}
+                      {(app.program_selection?.campus || app.program_selection?.primary_campus) && (
+                        <div className="p-3 rounded-xl bg-white/5 border border-white/[0.05]">
+                          <div className="flex items-center gap-2 mb-1">
+                            <MapPin className="w-3.5 h-3.5 text-[#00B4D8]" />
+                            <span className="text-slate-500 text-xs uppercase tracking-wider">Primary Campus</span>
+                          </div>
+                          <p className="text-white text-sm font-medium">{app.program_selection.campus || app.program_selection.primary_campus}</p>
                         </div>
-                        <p className="text-white text-sm font-medium">{app.program_selection.campus || app.program_selection.primary_campus}</p>
-                      </div>
-                    )}
-                    {app.program_selection?.start_term && (
-                      <div className="p-3 rounded-xl bg-white/5 border border-white/[0.05]">
-                        <div className="flex items-center gap-2 mb-1">
-                          <Calendar className="w-3.5 h-3.5 text-[#FF9800]" />
-                          <span className="text-slate-500 text-xs uppercase tracking-wider">Start Term</span>
+                      )}
+                      {app.program_selection?.start_term && (
+                        <div className="p-3 rounded-xl bg-white/5 border border-white/[0.05]">
+                          <div className="flex items-center gap-2 mb-1">
+                            <Calendar className="w-3.5 h-3.5 text-[#FF9800]" />
+                            <span className="text-slate-500 text-xs uppercase tracking-wider">Start Term</span>
+                          </div>
+                          <p className="text-white text-sm font-medium">{app.program_selection.start_term}</p>
                         </div>
-                        <p className="text-white text-sm font-medium">{app.program_selection.start_term}</p>
-                      </div>
-                    )}
-                    {app.program_selection?.secondary_campus && (
-                      <div className="p-3 rounded-xl bg-white/5 border border-white/[0.05]">
-                        <div className="flex items-center gap-2 mb-1">
-                          <MapPin className="w-3.5 h-3.5 text-[#28A745]" />
-                          <span className="text-slate-500 text-xs uppercase tracking-wider">Backup Campus</span>
+                      )}
+                      {app.program_selection?.secondary_campus && (
+                        <div className="p-3 rounded-xl bg-white/5 border border-white/[0.05]">
+                          <div className="flex items-center gap-2 mb-1">
+                            <MapPin className="w-3.5 h-3.5 text-[#28A745]" />
+                            <span className="text-slate-500 text-xs uppercase tracking-wider">Backup Campus</span>
+                          </div>
+                          <p className="text-white text-sm font-medium">{app.program_selection.secondary_campus}</p>
                         </div>
-                        <p className="text-white text-sm font-medium">{app.program_selection.secondary_campus}</p>
-                      </div>
-                    )}
+                      )}
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         )}
