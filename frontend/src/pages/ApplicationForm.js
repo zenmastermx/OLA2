@@ -206,7 +206,8 @@ const ApplicationForm = () => {
         return (
           <EmploymentHistorySections 
             employmentHistory={employmentHistory} 
-            setEmploymentHistory={setEmploymentHistory} 
+            setEmploymentHistory={setEmploymentHistory}
+            onSectionComplete={() => handleStepChange(4)}
           />
         );
 
