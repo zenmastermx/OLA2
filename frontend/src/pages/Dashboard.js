@@ -378,7 +378,25 @@ const Dashboard = () => {
                 </h2>
                 
                 {/* Program Details Grid */}
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-4">
+                <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mt-4">
+                  {activeApp.program_selection?.program_pathway && (
+                    <div className="p-3 rounded-xl bg-white/5 border border-white/[0.05]">
+                      <div className="flex items-center gap-2 mb-1">
+                        <GraduationCap className="w-3.5 h-3.5 text-[#7B68EE]" />
+                        <span className="text-slate-500 text-xs uppercase tracking-wider">Pathway</span>
+                      </div>
+                      <p className="text-white text-sm font-medium">{activeApp.program_selection.program_pathway}</p>
+                    </div>
+                  )}
+                  {(activeApp.program_selection?.campus || activeApp.program_selection?.primary_campus) && (
+                    <div className="p-3 rounded-xl bg-white/5 border border-white/[0.05]">
+                      <div className="flex items-center gap-2 mb-1">
+                        <MapPin className="w-3.5 h-3.5 text-[#00B4D8]" />
+                        <span className="text-slate-500 text-xs uppercase tracking-wider">Primary Campus</span>
+                      </div>
+                      <p className="text-white text-sm font-medium">{activeApp.program_selection.campus || activeApp.program_selection.primary_campus}</p>
+                    </div>
+                  )}
                   {activeApp.program_selection?.start_term && (
                     <div className="p-3 rounded-xl bg-white/5 border border-white/[0.05]">
                       <div className="flex items-center gap-2 mb-1">
@@ -388,20 +406,11 @@ const Dashboard = () => {
                       <p className="text-white text-sm font-medium">{activeApp.program_selection.start_term}</p>
                     </div>
                   )}
-                  {activeApp.program_selection?.campus && (
-                    <div className="p-3 rounded-xl bg-white/5 border border-white/[0.05]">
-                      <div className="flex items-center gap-2 mb-1">
-                        <MapPin className="w-3.5 h-3.5 text-[#00B4D8]" />
-                        <span className="text-slate-500 text-xs uppercase tracking-wider">Campus</span>
-                      </div>
-                      <p className="text-white text-sm font-medium">{activeApp.program_selection.campus}</p>
-                    </div>
-                  )}
                   {activeApp.program_selection?.secondary_campus && (
                     <div className="p-3 rounded-xl bg-white/5 border border-white/[0.05]">
                       <div className="flex items-center gap-2 mb-1">
-                        <MapPin className="w-3.5 h-3.5 text-[#7B68EE]" />
-                        <span className="text-slate-500 text-xs uppercase tracking-wider">Backup</span>
+                        <MapPin className="w-3.5 h-3.5 text-[#28A745]" />
+                        <span className="text-slate-500 text-xs uppercase tracking-wider">Backup Campus</span>
                       </div>
                       <p className="text-white text-sm font-medium">{activeApp.program_selection.secondary_campus}</p>
                     </div>
