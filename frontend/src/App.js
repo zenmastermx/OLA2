@@ -135,10 +135,11 @@ const AuthProvider = ({ children }) => {
 // Protected Route
 const ProtectedRoute = ({ children }) => {
   const { isAuthenticated, loading } = useAuth();
+  const { theme } = useTheme();
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#0A0E14]">
+      <div className={`min-h-screen flex items-center justify-center ${theme === 'dark' ? 'bg-[#0A0E14]' : 'bg-gray-50'}`}>
         <div className="w-12 h-12 border-4 border-[#00B4D8] border-t-transparent rounded-full animate-spin" />
       </div>
     );
@@ -153,42 +154,52 @@ const ProtectedRoute = ({ children }) => {
 
 function App() {
   return (
-    <AuthProvider>
-      <div className="App min-h-screen bg-[#0A0E14]">
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<LandingPage />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterPage />} />
-            <Route
-              path="/dashboard"
-              element={
-                <ProtectedRoute>
-                  <Dashboard />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/application/:appId"
-              element={
-                <ProtectedRoute>
-                  <ApplicationForm />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/application/:appId/:step"
-              element={
-                <ProtectedRoute>
-                  <ApplicationForm />
-                </ProtectedRoute>
-              }
-            />
-          </Routes>
-        </BrowserRouter>
-        <Toaster position="top-right" richColors />
-      </div>
-    </AuthProvider>
+    <ThemeProvider>
+      <AuthProvider>
+        <AppContent />
+      </AuthProvider>
+    </ThemeProvider>
+  );
+}
+
+function AppContent() {
+  const { theme } = useTheme();
+  
+  return (
+    <div className={`App min-h-screen ${theme === 'dark' ? 'bg-[#0A0E14]' : 'bg-gray-50'}`}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/application/:appId"
+            element={
+              <ProtectedRoute>
+                <ApplicationForm />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/application/:appId/:step"
+            element={
+              <ProtectedRoute>
+                <ApplicationForm />
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
+      </BrowserRouter>
+      <Toaster position="top-right" richColors />
+    </div>
   );
 }
 
