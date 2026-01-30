@@ -11,7 +11,7 @@ const AIChat = ({ onClose }) => {
   const [messages, setMessages] = useState([
     {
       role: "assistant",
-      content: "Hi! I'm Journey, your AI assistant for the USA.edu application process. I can help you with:\n\n• Application status and requirements\n• Program information (OT & Nursing)\n• Document guidance\n• Campus information\n• Financial aid questions\n\nHow can I help you today?"
+      content: "Hi! I'm Journey, your AI assistant for the USA.edu application process. I can help you with:\n\n• Application status and requirements\n• Program information (Occupational Therapy, Nursing, Education & Certificates)\n• Document guidance\n• Campus information\n• Financial aid questions\n\nHow can I help you today?"
     }
   ]);
   const [input, setInput] = useState("");
@@ -22,7 +22,7 @@ const AIChat = ({ onClose }) => {
 
   const quickQuestions = [
     "What documents do I need?",
-    "Tell me about the OT program",
+    "Tell me about the programs",
     "What are the deadlines?",
     "Campus locations?"
   ];
