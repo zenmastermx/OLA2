@@ -848,7 +848,7 @@ const AcademicHistorySections = ({ academicHistory, setAcademicHistory, onSectio
         {/* Sub-section Navigation Buttons */}
         <div className="flex justify-between mt-8 pt-6 border-t border-white/[0.05]">
           <Button
-            onClick={() => setActiveSubSection(Math.max(0, activeSubSection - 1))}
+            onClick={() => { setActiveSubSection(Math.max(0, activeSubSection - 1)); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
             disabled={activeSubSection === 0}
             variant="outline"
             className="border-white/20 text-white hover:bg-white/5 rounded-full px-6 disabled:opacity-30"
@@ -859,7 +859,7 @@ const AcademicHistorySections = ({ academicHistory, setAcademicHistory, onSectio
           
           {activeSubSection < 4 ? (
             <Button
-              onClick={() => setActiveSubSection(activeSubSection + 1)}
+              onClick={() => { setActiveSubSection(activeSubSection + 1); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
               className="bg-[#00B4D8] hover:bg-[#0096B4] text-white rounded-full px-6 shadow-[0_0_20px_rgba(0,180,216,0.3)]"
               data-testid="academic-next-subsection-btn"
             >
