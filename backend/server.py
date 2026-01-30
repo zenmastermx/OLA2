@@ -424,31 +424,127 @@ async def get_my_advisor(current_user: dict = Depends(get_current_user)):
 # ==================== APPLICATION ROUTES ====================
 
 def calculate_progress(app_data: dict) -> int:
-    progress = 0
-    if app_data.get("personal_info"):
-        pi = app_data["personal_info"]
-        if pi.get("first_name") and pi.get("last_name") and pi.get("email"):
-            progress += 20
-    if app_data.get("academic_history"):
-        ah = app_data["academic_history"]
-        if ah.get("institution_name") and ah.get("degree_type"):
-            progress += 20
-    if app_data.get("program_selection"):
-        ps = app_data["program_selection"]
-        if ps.get("program_type") and ps.get("program_level"):
-            progress += 20
-    docs = app_data.get("documents", [])
-    required_docs = ["transcript", "resume", "statement"]
-    uploaded = sum(1 for d in docs if d.get("status") == "uploaded" and d.get("type") in required_docs)
-    if uploaded >= 3:
-        progress += 20
-    elif uploaded >= 1:
-        progress += 10
-    if app_data.get("financial_aid"):
-        progress += 10
+    """
+    Calculate application progress based on all completed fields across all sections.
+    Total: 100% distributed across 5 main sections (20% each)
+    - Personal Information: 20% (7 sub-sections)
+    - Academic History: 20% (5 sub-sections)
+    - Employment History: 20%
+    - Documents: 20% (5 required documents)
+    - Review/Submit: 20%
+    """
+    
+    # If submitted, always 100%
     if app_data.get("status") == "submitted":
-        progress = 100
-    return min(progress, 100)
+        return 100
+    
+    total_progress = 0
+    
+    # === PERSONAL INFORMATION (20% total) ===
+    pi = app_data.get("personal_info", {})
+    pi_score = 0
+    
+    # Contact Info (required: first_name, last_name, email)
+    if pi.get("first_name") and pi.get("last_name") and pi.get("email"):
+        pi_score += 3
+    
+    # Judicial Background (judicial_agreement must be set to true/false, not null)
+    if pi.get("judicial_agreement") is not None and pi.get("judicial_agreement") != "":
+        pi_score += 3
+    
+    # Emergency Contact (required: emergency_first_name, emergency_phone)
+    if pi.get("emergency_first_name") and pi.get("emergency_phone"):
+        pi_score += 3
+    
+    # Citizenship & Identification (required: date_of_birth, gender)
+    if pi.get("date_of_birth") and pi.get("gender"):
+        pi_score += 3
+    
+    # US Military Background (veteran_benefits must be set)
+    if pi.get("veteran_benefits") is not None and pi.get("veteran_benefits") != "":
+        pi_score += 3
+    
+    # Work Experience (years_work_experience must be set)
+    if pi.get("years_work_experience") is not None and pi.get("years_work_experience") != "":
+        pi_score += 3
+    
+    # Demographic Information (ethnicity must be set)
+    if pi.get("ethnicity") is not None and pi.get("ethnicity") != "":
+        pi_score += 2
+    
+    total_progress += min(pi_score, 20)
+    
+    # === ACADEMIC HISTORY (20% total) ===
+    ah = app_data.get("academic_history", {})
+    ah_score = 0
+    
+    # Prerequisites (at least one course added)
+    prereqs = ah.get("prerequisites", {})
+    has_prereqs = any(len(p.get("courses", [])) > 0 for p in prereqs.values()) if prereqs else False
+    if has_prereqs:
+        ah_score += 4
+    
+    # Education (highest_degree set)
+    if ah.get("highest_degree") and ah.get("highest_degree") != "":
+        ah_score += 4
+    
+    # Test Information (toefl_required set or toefl_date provided)
+    if ah.get("toefl_required") is not None or ah.get("toefl_date"):
+        ah_score += 4
+    
+    # Prior Application (prior_application set)
+    if ah.get("prior_application") is not None and ah.get("prior_application") != "":
+        ah_score += 4
+    
+    # Academic Background (academic_probation set)
+    if ah.get("academic_probation") is not None and ah.get("academic_probation") != "":
+        ah_score += 4
+    
+    total_progress += min(ah_score, 20)
+    
+    # === EMPLOYMENT HISTORY (20% total) ===
+    eh = app_data.get("employment_history", {})
+    eh_score = 0
+    
+    # Currently employed status set
+    if eh.get("currently_employed") is not None:
+        eh_score += 10
+    
+    # If employed, employer details provided
+    if eh.get("currently_employed") == True:
+        if eh.get("employer_name"):
+            eh_score += 5
+        if eh.get("job_title"):
+            eh_score += 5
+    elif eh.get("currently_employed") == False:
+        # Not employed, section complete
+        eh_score += 10
+    
+    total_progress += min(eh_score, 20)
+    
+    # === DOCUMENTS (20% total) ===
+    docs = app_data.get("documents", [])
+    uploaded_count = sum(1 for d in docs if d.get("status") == "uploaded")
+    total_docs = max(len(docs), 5)  # Assume 5 required documents
+    doc_score = int((uploaded_count / total_docs) * 20)
+    total_progress += min(doc_score, 20)
+    
+    # === PROGRAM SELECTION / REVIEW (20% total) ===
+    ps = app_data.get("program_selection", {})
+    ps_score = 0
+    
+    if ps.get("program_type"):
+        ps_score += 5
+    if ps.get("program_pathway"):
+        ps_score += 5
+    if ps.get("start_term"):
+        ps_score += 5
+    if ps.get("campus") or ps.get("primary_campus"):
+        ps_score += 5
+    
+    total_progress += min(ps_score, 20)
+    
+    return min(total_progress, 100)
 
 @api_router.post("/applications", response_model=ApplicationResponse)
 async def create_application(app_data: ApplicationCreate, current_user: dict = Depends(get_current_user)):
