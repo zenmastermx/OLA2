@@ -56,12 +56,15 @@ const AuthProvider = ({ children }) => {
     return userData;
   };
 
-  const register = async (email, password, firstName, lastName) => {
+  const register = async (email, password, firstName, lastName, consentPreferences = {}) => {
     const response = await axios.post(`${API}/auth/register`, {
       email,
       password,
       first_name: firstName,
-      last_name: lastName
+      last_name: lastName,
+      consent_call: consentPreferences.consent_call ?? true,
+      consent_text: consentPreferences.consent_text ?? true,
+      consent_email: consentPreferences.consent_email ?? true
     });
     const { access_token, user: userData } = response.data;
     localStorage.setItem("token", access_token);
