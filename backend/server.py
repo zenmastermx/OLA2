@@ -665,7 +665,13 @@ async def submit_application(app_id: str, current_user: dict = Depends(get_curre
     now = datetime.now(timezone.utc).isoformat()
     await db.applications.update_one(
         {"id": app_id},
-        {"$set": {"status": "submitted", "submitted_at": now, "updated_at": now, "progress": 100}}
+        {"$set": {
+            "status": "submitted", 
+            "review_status": "application_received",  # Initial review status
+            "submitted_at": now, 
+            "updated_at": now, 
+            "progress": 100
+        }}
     )
     
     updated_app = await db.applications.find_one({"id": app_id}, {"_id": 0})
