@@ -23,6 +23,22 @@ const LandingPage = () => {
       description: "Lead the future of patient care",
       degrees: ["MSN - Master's", "DNP - Doctorate"],
       color: "#7B68EE"
+    },
+    {
+      id: "education",
+      name: "Education",
+      icon: BookOpen,
+      description: "Shape tomorrow's healthcare educators",
+      degrees: ["EdD - Doctorate", "MS - Master's"],
+      color: "#F59E0B"
+    },
+    {
+      id: "certificates",
+      name: "Certificates",
+      icon: Award,
+      description: "Advance your skills with specialized training",
+      degrees: ["Professional", "Advanced"],
+      color: "#10B981"
     }
   ];
 
