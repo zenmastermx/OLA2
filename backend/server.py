@@ -388,7 +388,10 @@ async def login(credentials: UserLogin):
             email=user["email"],
             first_name=user["first_name"],
             last_name=user["last_name"],
-            created_at=user["created_at"]
+            created_at=user["created_at"],
+            consent_call=user.get("consent_call", True),
+            consent_text=user.get("consent_text", True),
+            consent_email=user.get("consent_email", True)
         )
     )
 
@@ -399,7 +402,10 @@ async def get_me(current_user: dict = Depends(get_current_user)):
         email=current_user["email"],
         first_name=current_user["first_name"],
         last_name=current_user["last_name"],
-        created_at=current_user["created_at"]
+        created_at=current_user["created_at"],
+        consent_call=current_user.get("consent_call", True),
+        consent_text=current_user.get("consent_text", True),
+        consent_email=current_user.get("consent_email", True)
     )
 
 @api_router.get("/auth/advisor")
