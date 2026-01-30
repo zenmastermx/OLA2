@@ -13,7 +13,7 @@ import { toast } from "sonner";
 import {
   User, GraduationCap, LayoutDashboard, Upload, CheckCircle2,
   ArrowLeft, ArrowRight, Save, Loader2, FileText, X, Check, Sparkles,
-  AlertCircle
+  AlertCircle, ChevronDown
 } from "lucide-react";
 import AIChat from "@/components/AIChat";
 import PersonalInfoSections from "@/components/PersonalInfoSections";
