@@ -197,7 +197,8 @@ const ApplicationForm = () => {
         return (
           <AcademicHistorySections 
             academicHistory={academicHistory} 
-            setAcademicHistory={setAcademicHistory} 
+            setAcademicHistory={setAcademicHistory}
+            onSectionComplete={() => handleStepChange(3)}
           />
         );
 
