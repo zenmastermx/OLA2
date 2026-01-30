@@ -349,7 +349,7 @@ const Dashboard = () => {
         </div>
 
         {/* Active Application */}
-        {activeApp ? (
+        {activeApp && (
           <div className="glass-card rounded-2xl p-8 mb-8" data-testid="active-application-card">
             <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6">
               <div className="flex-1">
@@ -453,27 +453,6 @@ const Dashboard = () => {
                 </div>
               ))}
             </div>
-          </div>
-        ) : (
-          /* No Application - Create New */
-          <div className="glass-card rounded-2xl p-8 text-center" data-testid="no-application-card">
-            <div className="w-20 h-20 rounded-2xl bg-[#00B4D8]/10 flex items-center justify-center mx-auto mb-6">
-              <Plus className="w-10 h-10 text-[#00B4D8]" />
-            </div>
-            <h2 className="font-['Outfit'] text-2xl font-bold text-white mb-2">
-              Start Your Application
-            </h2>
-            <p className="text-slate-400 mb-6 max-w-md mx-auto">
-              Begin your journey to becoming a healthcare professional at USA.edu
-            </p>
-            <Button
-              onClick={() => setShowNewAppModal(true)}
-              className="bg-[#00B4D8] hover:bg-[#0096B4] text-white rounded-full px-8 py-6 shadow-[0_0_20px_rgba(0,180,216,0.3)] hover:shadow-[0_0_30px_rgba(0,180,216,0.5)] transition-all"
-              data-testid="start-new-application-btn"
-            >
-              <Plus className="w-5 h-5 mr-2" />
-              Start New Application
-            </Button>
           </div>
         )}
 
