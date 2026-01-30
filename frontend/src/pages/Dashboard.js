@@ -223,10 +223,10 @@ const Dashboard = () => {
             <img 
               src={theme === 'dark' 
                 ? "https://customer-assets.emergentagent.com/job_be4bb2aa-ca20-4b1a-9d54-431ad1ac86d0/artifacts/ie0vbsv3_primary.Horiz.2line.knockedout.whouter.pms315%2Bwhite.png"
-                : "https://customer-assets.emergentagent.com/job_be4bb2aa-ca20-4b1a-9d54-431ad1ac86d0/artifacts/ie0vbsv3_primary.Horiz.2line.knockedout.whouter.pms315%2Bwhite.png"
+                : "https://customer-assets.emergentagent.com/job_student-journey-17/artifacts/lcfdritp_primary.Horiz.2line.knockedout.pms315.png"
               }
               alt="University of St. Augustine for Health Sciences" 
-              className={`h-14 w-auto ${theme === 'light' ? 'brightness-0' : ''}`}
+              className="h-14 w-auto"
             />
           </div>
           
