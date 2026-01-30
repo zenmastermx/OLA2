@@ -123,13 +123,6 @@ const LandingPage = () => {
                 Start Your Application
                 <ChevronRight className="ml-2 w-5 h-5" />
               </Button>
-              <Button 
-                variant="outline"
-                className="border-white/20 text-white hover:bg-white/5 rounded-full px-8 py-6 text-lg"
-                data-testid="hero-explore-btn"
-              >
-                Explore Programs
-              </Button>
             </div>
             
             {/* Stats */}
