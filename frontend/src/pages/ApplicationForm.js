@@ -185,6 +185,47 @@ const ApplicationForm = () => {
     }
   };
 
+  const handleMultipleFileUpload = async (docId, files) => {
+    try {
+      for (const file of files) {
+        const formData = new FormData();
+        formData.append("file", file);
+        
+        await axios.post(
+          `${API}/applications/${appId}/documents/${docId}/upload-transcript`,
+          formData,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "multipart/form-data"
+            }
+          }
+        );
+      }
+      toast.success(`${files.length} transcript${files.length > 1 ? 's' : ''} uploaded successfully`);
+      fetchApplication();
+    } catch (error) {
+      console.error("Upload error:", error);
+      toast.error("Failed to upload transcripts");
+    }
+  };
+
+  const handleRemoveTranscriptFile = async (docId, fileIndex) => {
+    try {
+      await axios.delete(
+        `${API}/applications/${appId}/documents/${docId}/transcript/${fileIndex}`,
+        {
+          headers: { Authorization: `Bearer ${token}` }
+        }
+      );
+      toast.success("Transcript removed");
+      fetchApplication();
+    } catch (error) {
+      console.error("Remove error:", error);
+      toast.error("Failed to remove transcript");
+    }
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen bg-[#0A0E14] flex items-center justify-center">
