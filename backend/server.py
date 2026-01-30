@@ -693,6 +693,87 @@ async def upload_document(
     
     return {"success": True, "document": documents[doc_index]}
 
+@api_router.post("/applications/{app_id}/documents/{doc_id}/upload-transcript")
+async def upload_transcript(
+    app_id: str,
+    doc_id: str,
+    file: UploadFile = File(...),
+    current_user: dict = Depends(get_current_user)
+):
+    """Upload a transcript file (supports multiple files for the same document)"""
+    app = await db.applications.find_one({"id": app_id, "user_id": current_user["id"]})
+    if not app:
+        raise HTTPException(status_code=404, detail="Application not found")
+    
+    documents = app.get("documents", [])
+    doc_index = next((i for i, d in enumerate(documents) if d["id"] == doc_id), None)
+    
+    if doc_index is None:
+        raise HTTPException(status_code=404, detail="Document not found")
+    
+    file_content = await file.read()
+    file_data = base64.b64encode(file_content).decode('utf-8')
+    
+    # Initialize files array if not exists
+    if "files" not in documents[doc_index]:
+        documents[doc_index]["files"] = []
+    
+    # Add new transcript file
+    documents[doc_index]["files"].append({
+        "name": file.filename,
+        "uploaded_at": datetime.now(timezone.utc).isoformat(),
+        "file_data": file_data[:100] + "..."  # Store preview only
+    })
+    
+    # Update status to uploaded if at least one file exists
+    documents[doc_index]["status"] = "uploaded"
+    documents[doc_index]["uploaded_at"] = datetime.now(timezone.utc).isoformat()
+    
+    await db.applications.update_one(
+        {"id": app_id},
+        {"$set": {"documents": documents, "updated_at": datetime.now(timezone.utc).isoformat()}}
+    )
+    
+    return {"success": True, "document": documents[doc_index]}
+
+@api_router.delete("/applications/{app_id}/documents/{doc_id}/transcript/{file_index}")
+async def remove_transcript(
+    app_id: str,
+    doc_id: str,
+    file_index: int,
+    current_user: dict = Depends(get_current_user)
+):
+    """Remove a specific transcript file from the document"""
+    app = await db.applications.find_one({"id": app_id, "user_id": current_user["id"]})
+    if not app:
+        raise HTTPException(status_code=404, detail="Application not found")
+    
+    documents = app.get("documents", [])
+    doc_index = next((i for i, d in enumerate(documents) if d["id"] == doc_id), None)
+    
+    if doc_index is None:
+        raise HTTPException(status_code=404, detail="Document not found")
+    
+    files = documents[doc_index].get("files", [])
+    if file_index < 0 or file_index >= len(files):
+        raise HTTPException(status_code=404, detail="File not found")
+    
+    # Remove the file
+    files.pop(file_index)
+    documents[doc_index]["files"] = files
+    
+    # Update status based on remaining files
+    if len(files) == 0:
+        documents[doc_index]["status"] = "pending"
+        documents[doc_index]["uploaded_at"] = None
+    
+    await db.applications.update_one(
+        {"id": app_id},
+        {"$set": {"documents": documents, "updated_at": datetime.now(timezone.utc).isoformat()}}
+    )
+    
+    return {"success": True, "remaining_files": len(files)}
+
 # ==================== AI CHAT ROUTES ====================
 
 @api_router.post("/chat", response_model=ChatResponse)
