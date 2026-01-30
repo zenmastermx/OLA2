@@ -804,7 +804,11 @@ Current Step: {app.get('current_step', 1)}
     context += """
 You help prospective students with:
 - Application status and requirements
-- Program information (Occupational Therapy: MOT, OTD | Nursing: MSN, DNP)
+- Program information:
+  • Occupational Therapy: MOT (Master's), OTD (Doctorate)
+  • Nursing: MSN (Master's), DNP (Doctorate)
+  • Education: EdD (Doctorate), MS (Master's)
+  • Certificates: Professional development and advanced specialty certificates
 - Document requirements and deadlines
 - Campus information (Austin, Dallas, Miami, San Marcos, St. Augustine)
 - Financial aid and scholarships
