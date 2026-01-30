@@ -168,8 +168,8 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo }) => {
                   <Input
                     type="tel"
                     inputMode="numeric"
-                    value={personalInfo.phone || ""}
-                    onChange={(e) => setPersonalInfo({ ...personalInfo, phone: e.target.value })}
+                    value={formatPhoneNumber(personalInfo.phone) || ""}
+                    onChange={(e) => setPersonalInfo({ ...personalInfo, phone: formatPhoneNumber(e.target.value) })}
                     placeholder="(000) 000-0000"
                     className="h-12 bg-black/30 border-white/[0.08] focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20 text-white rounded-full px-5 transition-all duration-300 placeholder:text-slate-600"
                     data-testid="contact-phone"
@@ -180,8 +180,8 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo }) => {
                   <Input
                     type="tel"
                     inputMode="numeric"
-                    value={personalInfo.alternate_phone || ""}
-                    onChange={(e) => setPersonalInfo({ ...personalInfo, alternate_phone: e.target.value })}
+                    value={formatPhoneNumber(personalInfo.alternate_phone) || ""}
+                    onChange={(e) => setPersonalInfo({ ...personalInfo, alternate_phone: formatPhoneNumber(e.target.value) })}
                     placeholder="(000) 000-0000"
                     className="h-12 bg-black/30 border-white/[0.08] focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20 text-white rounded-full px-5 transition-all duration-300 placeholder:text-slate-600"
                     data-testid="contact-altphone"
