@@ -215,23 +215,37 @@ const Dashboard = () => {
   const daysUntilDeadline = Math.ceil((deadline.date - new Date()) / (1000 * 60 * 60 * 24));
 
   return (
-    <div className="min-h-screen bg-[#0A0E14]">
+    <div className={`min-h-screen ${theme === 'dark' ? 'bg-[#0A0E14]' : 'bg-gray-50'}`}>
       {/* Top Navigation */}
-      <nav className="sticky top-0 z-40 bg-[#0A0E14]/80 backdrop-blur-xl border-b border-white/5">
+      <nav className={`sticky top-0 z-40 backdrop-blur-xl border-b ${theme === 'dark' ? 'bg-[#0A0E14]/80 border-white/5' : 'bg-white/80 border-gray-200'}`}>
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center">
             <img 
-              src="https://customer-assets.emergentagent.com/job_be4bb2aa-ca20-4b1a-9d54-431ad1ac86d0/artifacts/ie0vbsv3_primary.Horiz.2line.knockedout.whouter.pms315%2Bwhite.png" 
+              src={theme === 'dark' 
+                ? "https://customer-assets.emergentagent.com/job_be4bb2aa-ca20-4b1a-9d54-431ad1ac86d0/artifacts/ie0vbsv3_primary.Horiz.2line.knockedout.whouter.pms315%2Bwhite.png"
+                : "https://customer-assets.emergentagent.com/job_be4bb2aa-ca20-4b1a-9d54-431ad1ac86d0/artifacts/ie0vbsv3_primary.Horiz.2line.knockedout.whouter.pms315%2Bwhite.png"
+              }
               alt="University of St. Augustine for Health Sciences" 
-              className="h-14 w-auto"
+              className={`h-14 w-auto ${theme === 'light' ? 'brightness-0' : ''}`}
             />
           </div>
           
           <div className="flex items-center gap-4">
+            {/* Theme Toggle Button */}
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={toggleTheme}
+              className={`rounded-full ${theme === 'dark' ? 'text-slate-400 hover:text-white hover:bg-white/5' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'}`}
+              data-testid="theme-toggle-btn"
+            >
+              {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+            </Button>
+            
             {/* Ask Journey Button */}
             <Button
               onClick={() => setShowChat(true)}
-              className="bg-gradient-to-r from-[#00B4D8]/20 to-[#7B68EE]/20 border border-[#00B4D8]/30 text-white hover:border-[#00F5FF] hover:bg-[#00B4D8]/30 rounded-full px-4 py-2 flex items-center gap-2 transition-all"
+              className={`bg-gradient-to-r from-[#00B4D8]/20 to-[#7B68EE]/20 border border-[#00B4D8]/30 hover:border-[#00F5FF] hover:bg-[#00B4D8]/30 rounded-full px-4 py-2 flex items-center gap-2 transition-all ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}
               data-testid="ask-journey-btn"
             >
               <Sparkles className="w-4 h-4 text-[#00F5FF]" />
@@ -239,8 +253,8 @@ const Dashboard = () => {
             </Button>
             
             <div className="text-right hidden sm:block">
-              <p className="text-white font-medium">{user?.first_name} {user?.last_name}</p>
-              <p className="text-slate-500 text-sm">{user?.email}</p>
+              <p className={`font-medium ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>{user?.first_name} {user?.last_name}</p>
+              <p className={`text-sm ${theme === 'dark' ? 'text-slate-500' : 'text-gray-500'}`}>{user?.email}</p>
             </div>
             <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#00B4D8] to-[#7B68EE] flex items-center justify-center">
               <span className="text-white font-bold">{user?.first_name?.[0]}</span>
@@ -249,7 +263,7 @@ const Dashboard = () => {
               variant="ghost"
               size="icon"
               onClick={logout}
-              className="text-slate-400 hover:text-white hover:bg-white/5"
+              className={`${theme === 'dark' ? 'text-slate-400 hover:text-white hover:bg-white/5' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'}`}
               data-testid="logout-btn"
             >
               <LogOut className="w-5 h-5" />
