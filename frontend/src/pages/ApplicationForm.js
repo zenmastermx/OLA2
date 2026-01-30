@@ -123,6 +123,7 @@ const ApplicationForm = () => {
     if (saved && currentStep < 6) {
       setCurrentStep(currentStep + 1);
       navigate(`/application/${appId}/${currentStep + 1}`);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
@@ -131,6 +132,7 @@ const ApplicationForm = () => {
     if (saved) {
       setCurrentStep(targetStep);
       navigate(`/application/${appId}/${targetStep}`);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
@@ -138,6 +140,7 @@ const ApplicationForm = () => {
     if (currentStep > 1) {
       setCurrentStep(currentStep - 1);
       navigate(`/application/${appId}/${currentStep - 1}`);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
