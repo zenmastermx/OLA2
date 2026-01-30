@@ -6,6 +6,18 @@ import {
   Briefcase, Check, Plus, Trash2, Info, Mail, Phone, Building, Calendar, Clock, User, X, Send
 } from "lucide-react";
 
+// Phone number formatting function
+const formatPhoneNumber = (value) => {
+  if (!value) return value;
+  const phoneNumber = value.replace(/[^\d]/g, '');
+  const phoneNumberLength = phoneNumber.length;
+  if (phoneNumberLength < 4) return phoneNumber;
+  if (phoneNumberLength < 7) {
+    return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3)}`;
+  }
+  return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3, 6)}-${phoneNumber.slice(6, 10)}`;
+};
+
 const EmploymentHistorySections = ({ employmentHistory, setEmploymentHistory, onSectionComplete }) => {
   const [showAddForm, setShowAddForm] = useState(false);
   const [newVerification, setNewVerification] = useState({
