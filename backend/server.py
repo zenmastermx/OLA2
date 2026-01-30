@@ -91,6 +91,9 @@ class UserCreate(BaseModel):
     password: str
     first_name: str
     last_name: str
+    consent_call: Optional[bool] = True
+    consent_text: Optional[bool] = True
+    consent_email: Optional[bool] = True
 
 class UserLogin(BaseModel):
     email: EmailStr
@@ -102,6 +105,9 @@ class UserResponse(BaseModel):
     first_name: str
     last_name: str
     created_at: str
+    consent_call: Optional[bool] = True
+    consent_text: Optional[bool] = True
+    consent_email: Optional[bool] = True
 
 class TokenResponse(BaseModel):
     access_token: str
