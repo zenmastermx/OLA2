@@ -58,6 +58,10 @@ A cutting-edge, futuristic student online application portal for the University 
 
 4. **Dashboard** (`/dashboard`)
    - Welcome greeting with user name
+   - **Application Review Status Progress Bar** (NEW - for submitted apps)
+     - Visual progress tracker showing: Application Received → Under Review → Admitted/Denied
+     - Dynamic status updates based on review_status field
+     - Pulsing indicator for current status
    - Progress ring (percentage complete)
    - Deadline countdown
    - Documents status
@@ -65,11 +69,11 @@ A cutting-edge, futuristic student online application portal for the University 
      - Program badges (Active Application, Program Type)
      - Detail cards: Pathway, Primary Campus, Start Term, Backup Campus
      - Application step navigation (5 steps)
-   - **Submitted Applications Section** (Updated Jan 30)
+   - **Submitted Applications Section**
      - Consistent card layout matching active application view
      - Detail cards: Pathway, Primary Campus, Start Term, Backup Campus
      - "Submitted" and Program Type badges
-     - "Under Review" status badge
+     - **Dynamic status badge** (Application Received, Under Review, Admitted, Denied)
      - Submission date display
    - **Enrollment Advisor Card**
      - Advisor name, avatar, title, specialization (dynamically shows user's program)
