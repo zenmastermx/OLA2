@@ -30,6 +30,7 @@ const ApplicationForm = () => {
   const [currentStep, setCurrentStep] = useState(parseInt(urlStep) || 1);
   const [showChat, setShowChat] = useState(false);
   const [programs, setPrograms] = useState(null);
+  const [expandedTranscript, setExpandedTranscript] = useState(false);
 
   // Form state
   const [personalInfo, setPersonalInfo] = useState({});
