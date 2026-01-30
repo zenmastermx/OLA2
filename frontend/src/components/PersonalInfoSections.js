@@ -1304,7 +1304,7 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo, onSectionComplete
         {/* Sub-section Navigation Buttons */}
         <div className="flex justify-between mt-8 pt-6 border-t border-white/10">
           <Button
-            onClick={() => setActiveSubSection(Math.max(0, activeSubSection - 1))}
+            onClick={() => { setActiveSubSection(Math.max(0, activeSubSection - 1)); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
             disabled={activeSubSection === 0}
             variant="outline"
             className="border-white/20 text-white hover:bg-white/5 rounded-full px-6"
