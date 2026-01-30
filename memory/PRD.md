@@ -35,7 +35,7 @@ A cutting-edge, futuristic student online application portal for the University 
 ### Pages
 1. **Landing Page** (`/`)
    - Hero section with animated background
-   - Program selection cards (OT & Nursing)
+   - Program selection cards (4-column grid: OT, Nursing, Education, Certificates)
    - Feature highlights (AI Assistant, Progress Tracking, 24/7 Support)
    - Campus locations
    - Stats (15K+ Alumni, 95% Employment, 5 Campuses)
@@ -50,7 +50,7 @@ A cutting-edge, futuristic student online application portal for the University 
    - Password strength indicators
    - Confirm password validation
    - **Auto-assigns enrollment advisor on registration**
-   - **Communication Consent Preferences** (NEW - Jan 30)
+   - **Communication Consent Preferences**
      - Phone Calls consent toggle
      - Text Messages (SMS) consent toggle
      - Email Communications consent toggle
@@ -61,14 +61,20 @@ A cutting-edge, futuristic student online application portal for the University 
    - Progress ring (percentage complete)
    - Deadline countdown
    - Documents status
-   - **Enrollment Advisor Card** (NEW)
-     - Advisor name, avatar, title, specialization
-     - Schedule Appointment button (Calendly link)
-     - Send Email button (mailto:)
-     - Send Text button (sms:)
-     - Call button (tel:)
-   - Active application card with step navigation
-   - Create new application modal
+   - **Active Application Card**
+     - Program badges (Active Application, Program Type)
+     - Detail cards: Pathway, Primary Campus, Start Term, Backup Campus
+     - Application step navigation (5 steps)
+   - **Submitted Applications Section** (Updated Jan 30)
+     - Consistent card layout matching active application view
+     - Detail cards: Pathway, Primary Campus, Start Term, Backup Campus
+     - "Submitted" and Program Type badges
+     - "Under Review" status badge
+     - Submission date display
+   - **Enrollment Advisor Card**
+     - Advisor name, avatar, title, specialization (dynamically shows user's program)
+     - In-app modals for: Schedule Appointment, Send Email, Send Text, Call (UI-only, backend MOCKED)
+   - Create new application modal (3-step: Program Category → Pathway → Term/Campus)
    - AI Chat "Ask Journey" button
 
 5. **Application Form** (`/application/:appId/:step`)
