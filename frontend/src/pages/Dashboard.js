@@ -101,6 +101,9 @@ const Dashboard = () => {
   const [showChat, setShowChat] = useState(false);
   const [advisor, setAdvisor] = useState(null);
   const [modalStep, setModalStep] = useState(1);
+  const [showEmailModal, setShowEmailModal] = useState(false);
+  const [showTextModal, setShowTextModal] = useState(false);
+  const [showCallModal, setShowCallModal] = useState(false);
 
   useEffect(() => {
     fetchApplications();
