@@ -425,6 +425,12 @@ async def get_my_advisor(current_user: dict = Depends(get_current_user)):
             {"id": current_user["id"]},
             {"$set": {"enrollment_advisor": advisor}}
         )
+    
+    # Convert calendly_link to acuity_link for backwards compatibility
+    if advisor and "calendly_link" in advisor and "acuity_link" not in advisor:
+        advisor_name = advisor.get("name", "").lower().replace(" ", "-")
+        advisor["acuity_link"] = f"https://usa-admissions.acuityscheduling.com/schedule.php?appointmentType={advisor_name}"
+    
     return advisor
 
 # ==================== APPLICATION ROUTES ====================
