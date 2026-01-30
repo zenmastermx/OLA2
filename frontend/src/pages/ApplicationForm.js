@@ -322,7 +322,7 @@ const ApplicationForm = () => {
               {application?.documents?.map((doc, index) => (
                 <div
                   key={doc.id}
-                  className={`backdrop-blur-xl bg-white/[0.02] border rounded-2xl p-5 transition-all duration-500 hover:scale-[1.01] ${
+                  className={`backdrop-blur-xl bg-white/[0.02] border rounded-2xl p-5 transition-all duration-500 ${
                     doc.status === "uploaded"
                       ? "border-[#28A745]/30 hover:border-[#28A745]/50"
                       : "border-white/[0.05] hover:border-[#00B4D8]/30"
@@ -344,20 +344,29 @@ const ApplicationForm = () => {
                       </div>
                       <div>
                         <div className="flex items-center gap-2">
-                          <p className="text-white font-medium">{doc.name}</p>
+                          {doc.type === "transcript" && doc.files && doc.files.length > 0 ? (
+                            <button
+                              onClick={() => setExpandedTranscript(!expandedTranscript)}
+                              className="flex items-center gap-2 hover:opacity-80 transition-opacity cursor-pointer"
+                            >
+                              <p className="text-white font-medium">{doc.name}</p>
+                              <span className="text-slate-400">•</span>
+                              <span className="text-[#00B4D8] font-medium">
+                                Total: {doc.files.length}
+                              </span>
+                              <ChevronDown className={`w-4 h-4 text-[#00B4D8] transition-transform duration-300 ${expandedTranscript ? 'rotate-180' : ''}`} />
+                            </button>
+                          ) : (
+                            <p className="text-white font-medium">{doc.name}</p>
+                          )}
                           {doc.status !== "uploaded" && (
                             <span className="px-2 py-0.5 rounded-full bg-[#FF6B35]/10 text-[#FF6B35] text-xs">Required</span>
-                          )}
-                          {doc.type === "transcript" && doc.files && doc.files.length > 0 && (
-                            <span className="px-2 py-0.5 rounded-full bg-[#00B4D8]/10 text-[#00B4D8] text-xs">
-                              {doc.files.length} file{doc.files.length > 1 ? 's' : ''}
-                            </span>
                           )}
                         </div>
                         <p className="text-slate-500 text-sm mt-1">
                           {doc.type === "transcript" ? (
                             doc.files && doc.files.length > 0 
-                              ? `${doc.files.length} transcript${doc.files.length > 1 ? 's' : ''} uploaded`
+                              ? "Click to view and manage transcripts"
                               : "Upload transcripts from all schools attended"
                           ) : (
                             doc.status === "uploaded"
@@ -419,28 +428,31 @@ const ApplicationForm = () => {
                     </div>
                   </div>
                   
-                  {/* Show uploaded transcript files list */}
-                  {doc.type === "transcript" && doc.files && doc.files.length > 0 && (
-                    <div className="mt-4 pt-4 border-t border-white/[0.05] space-y-2">
-                      <p className="text-xs font-medium uppercase tracking-wider text-slate-500 mb-3">Uploaded Transcripts</p>
+                  {/* Expandable transcript files list */}
+                  {doc.type === "transcript" && doc.files && doc.files.length > 0 && expandedTranscript && (
+                    <div className="mt-4 pt-4 border-t border-white/[0.05] space-y-2 animate-in slide-in-from-top-2 duration-300">
+                      <p className="text-xs font-medium uppercase tracking-wider text-slate-500 mb-3">Uploaded Transcripts ({doc.files.length})</p>
                       {doc.files.map((file, fileIndex) => (
-                        <div key={fileIndex} className="flex items-center justify-between py-2 px-3 rounded-lg bg-white/[0.02] border border-white/[0.03]">
+                        <div key={fileIndex} className="flex items-center justify-between py-3 px-4 rounded-xl bg-white/[0.02] border border-white/[0.03] hover:border-white/[0.08] transition-colors">
                           <div className="flex items-center gap-3">
-                            <FileText className="w-4 h-4 text-[#28A745]" />
-                            <span className="text-white text-sm">{file.name}</span>
+                            <div className="w-8 h-8 rounded-lg bg-[#28A745]/10 flex items-center justify-center">
+                              <FileText className="w-4 h-4 text-[#28A745]" />
+                            </div>
+                            <div>
+                              <span className="text-white text-sm font-medium">{file.name}</span>
+                              <p className="text-slate-500 text-xs">
+                                Uploaded {new Date(file.uploaded_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                              </p>
+                            </div>
                           </div>
-                          <div className="flex items-center gap-2">
-                            <span className="text-slate-500 text-xs">
-                              {new Date(file.uploaded_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
-                            </span>
-                            <button
-                              onClick={() => handleRemoveTranscriptFile(doc.id, fileIndex)}
-                              className="p-1 rounded-full hover:bg-red-500/10 text-slate-500 hover:text-red-400 transition-colors"
-                              data-testid={`remove-transcript-${fileIndex}`}
-                            >
-                              <X className="w-4 h-4" />
-                            </button>
-                          </div>
+                          <button
+                            onClick={() => handleRemoveTranscriptFile(doc.id, fileIndex)}
+                            className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-red-500/10 hover:bg-red-500/20 text-red-400 hover:text-red-300 transition-colors text-sm"
+                            data-testid={`remove-transcript-${fileIndex}`}
+                          >
+                            <X className="w-3.5 h-3.5" />
+                            Remove
+                          </button>
                         </div>
                       ))}
                     </div>
