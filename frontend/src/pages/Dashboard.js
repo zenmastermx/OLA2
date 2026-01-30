@@ -105,6 +105,7 @@ const Dashboard = () => {
   const [showEmailModal, setShowEmailModal] = useState(false);
   const [showTextModal, setShowTextModal] = useState(false);
   const [showCallModal, setShowCallModal] = useState(false);
+  const [showScheduleModal, setShowScheduleModal] = useState(false);
 
   useEffect(() => {
     fetchApplications();
