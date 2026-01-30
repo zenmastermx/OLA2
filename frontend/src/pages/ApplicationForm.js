@@ -547,7 +547,7 @@ const ApplicationForm = () => {
                     <h4 className="text-white font-medium">Documents Required</h4>
                   </div>
                   <button 
-                    onClick={() => { setCurrentStep(4); navigate(`/application/${appId}/4`); }}
+                    onClick={() => { setCurrentStep(4); navigate(`/application/${appId}/4`); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
                     className="px-3 py-1.5 rounded-full text-xs font-medium bg-white/5 text-[#E91E63] hover:bg-[#E91E63]/10 transition-colors opacity-0 group-hover:opacity-100"
                   >
                     Edit
