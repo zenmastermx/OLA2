@@ -522,7 +522,11 @@ const Dashboard = () => {
                     {advisor.name}
                   </h4>
                   <p className="text-[#00B4D8] text-sm">{advisor.title}</p>
-                  <p className="text-slate-500 text-sm">{advisor.specialization}</p>
+                  <p className="text-slate-500 text-sm">
+                    {displayApp?.program_selection?.program_type 
+                      ? `${displayApp.program_selection.program_type} Programs` 
+                      : advisor.specialization}
+                  </p>
                 </div>
               </div>
               
