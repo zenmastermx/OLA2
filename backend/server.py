@@ -251,6 +251,11 @@ class ProgramSelection(BaseModel):
     start_term: Optional[str] = None
     full_time: Optional[bool] = True
 
+class TranscriptFile(BaseModel):
+    name: str
+    uploaded_at: str
+    file_data: Optional[str] = None
+
 class DocumentInfo(BaseModel):
     id: str
     name: str
@@ -258,6 +263,7 @@ class DocumentInfo(BaseModel):
     status: str  # pending, uploaded, verified
     uploaded_at: Optional[str] = None
     file_data: Optional[str] = None
+    files: Optional[List[TranscriptFile]] = None  # For multiple transcript files
 
 class FinancialAid(BaseModel):
     fafsa_completed: Optional[bool] = False
