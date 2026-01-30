@@ -1,11 +1,339 @@
 import { useState, useRef, useEffect } from "react";
-import { X, Mail, MessageSquare, Phone, Send, Loader2, User } from "lucide-react";
+import { X, Mail, MessageSquare, Phone, Send, Loader2, User, CalendarDays, Clock, Video, ChevronLeft, ChevronRight, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { toast } from "sonner";
+
+// Schedule Appointment Modal Component
+export const ScheduleModal = ({ onClose, advisor, user }) => {
+  const [step, setStep] = useState(1); // 1: meeting type, 2: date, 3: time, 4: confirm
+  const [meetingType, setMeetingType] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedTime, setSelectedTime] = useState(null);
+  const [currentMonth, setCurrentMonth] = useState(new Date());
+  const [scheduling, setScheduling] = useState(false);
+  const [notes, setNotes] = useState("");
+
+  const meetingTypes = [
+    { id: "phone", name: "Phone Call", icon: Phone, duration: "30 min", color: "#FF6B35" },
+    { id: "video", name: "Video Call", icon: Video, duration: "30 min", color: "#00B4D8" },
+    { id: "inperson", name: "In-Person", icon: User, duration: "45 min", color: "#7B68EE" }
+  ];
+
+  const timeSlots = [
+    "9:00 AM", "9:30 AM", "10:00 AM", "10:30 AM", "11:00 AM", "11:30 AM",
+    "1:00 PM", "1:30 PM", "2:00 PM", "2:30 PM", "3:00 PM", "3:30 PM", "4:00 PM"
+  ];
+
+  const getDaysInMonth = (date) => {
+    const year = date.getFullYear();
+    const month = date.getMonth();
+    const firstDay = new Date(year, month, 1);
+    const lastDay = new Date(year, month + 1, 0);
+    const days = [];
+    
+    // Add empty slots for days before the first day of the month
+    for (let i = 0; i < firstDay.getDay(); i++) {
+      days.push(null);
+    }
+    
+    // Add all days of the month
+    for (let i = 1; i <= lastDay.getDate(); i++) {
+      days.push(new Date(year, month, i));
+    }
+    
+    return days;
+  };
+
+  const isDateAvailable = (date) => {
+    if (!date) return false;
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const day = date.getDay();
+    // Available: future dates, not weekends
+    return date >= today && day !== 0 && day !== 6;
+  };
+
+  const formatDate = (date) => {
+    if (!date) return "";
+    return date.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+  };
+
+  const handleSchedule = async () => {
+    setScheduling(true);
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    setScheduling(false);
+    toast.success("Appointment scheduled successfully!");
+    onClose();
+  };
+
+  const prevMonth = () => {
+    setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1, 1));
+  };
+
+  const nextMonth = () => {
+    setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 1));
+  };
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6" data-testid="schedule-modal">
+      <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={onClose} />
+      
+      <div className="relative w-full max-w-lg glass-card rounded-3xl flex flex-col overflow-hidden animate-slide-up">
+        {/* Header */}
+        <div className="flex items-center justify-between p-4 border-b border-white/10">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#00B4D8] to-[#0096B4] flex items-center justify-center">
+              <CalendarDays className="w-5 h-5 text-white" />
+            </div>
+            <div>
+              <h3 className="text-white font-semibold">Schedule Appointment</h3>
+              <p className="text-slate-500 text-xs">with {advisor?.name}</p>
+            </div>
+          </div>
+          <button
+            onClick={onClose}
+            className="text-slate-400 hover:text-white transition-colors p-2 hover:bg-white/5 rounded-lg"
+          >
+            <X className="w-5 h-5" />
+          </button>
+        </div>
+
+        {/* Progress Steps */}
+        <div className="px-6 pt-4">
+          <div className="flex items-center justify-between">
+            {["Type", "Date", "Time", "Confirm"].map((label, index) => (
+              <div key={label} className="flex items-center">
+                <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium transition-all ${
+                  step > index + 1 
+                    ? "bg-[#28A745] text-white" 
+                    : step === index + 1 
+                      ? "bg-[#00B4D8] text-white" 
+                      : "bg-white/10 text-slate-500"
+                }`}>
+                  {step > index + 1 ? <Check className="w-4 h-4" /> : index + 1}
+                </div>
+                {index < 3 && (
+                  <div className={`w-12 sm:w-16 h-0.5 mx-1 transition-colors ${
+                    step > index + 1 ? "bg-[#28A745]" : "bg-white/10"
+                  }`} />
+                )}
+              </div>
+            ))}
+          </div>
+          <div className="flex justify-between mt-2 px-1">
+            {["Type", "Date", "Time", "Confirm"].map((label, index) => (
+              <span key={label} className={`text-xs ${step === index + 1 ? "text-white" : "text-slate-500"}`}>
+                {label}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* Content */}
+        <div className="p-6 flex-1 min-h-[300px]">
+          {/* Step 1: Meeting Type */}
+          {step === 1 && (
+            <div className="space-y-3">
+              <p className="text-slate-400 text-sm mb-4">Select your preferred meeting type:</p>
+              {meetingTypes.map((type) => (
+                <button
+                  key={type.id}
+                  onClick={() => { setMeetingType(type); setStep(2); }}
+                  className={`w-full flex items-center gap-4 p-4 rounded-xl border transition-all ${
+                    meetingType?.id === type.id
+                      ? "border-[#00B4D8] bg-[#00B4D8]/10"
+                      : "border-white/10 bg-white/5 hover:border-white/20 hover:bg-white/10"
+                  }`}
+                >
+                  <div 
+                    className="w-12 h-12 rounded-xl flex items-center justify-center"
+                    style={{ backgroundColor: `${type.color}20` }}
+                  >
+                    <type.icon className="w-6 h-6" style={{ color: type.color }} />
+                  </div>
+                  <div className="text-left flex-1">
+                    <p className="text-white font-medium">{type.name}</p>
+                    <p className="text-slate-500 text-sm">{type.duration}</p>
+                  </div>
+                  <ChevronRight className="w-5 h-5 text-slate-500" />
+                </button>
+              ))}
+            </div>
+          )}
+
+          {/* Step 2: Date Selection */}
+          {step === 2 && (
+            <div>
+              <div className="flex items-center justify-between mb-4">
+                <button onClick={prevMonth} className="p-2 hover:bg-white/10 rounded-lg transition-colors">
+                  <ChevronLeft className="w-5 h-5 text-slate-400" />
+                </button>
+                <h4 className="text-white font-medium">
+                  {currentMonth.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
+                </h4>
+                <button onClick={nextMonth} className="p-2 hover:bg-white/10 rounded-lg transition-colors">
+                  <ChevronRight className="w-5 h-5 text-slate-400" />
+                </button>
+              </div>
+              
+              <div className="grid grid-cols-7 gap-1 mb-2">
+                {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map(day => (
+                  <div key={day} className="text-center text-slate-500 text-xs py-2">{day}</div>
+                ))}
+              </div>
+              
+              <div className="grid grid-cols-7 gap-1">
+                {getDaysInMonth(currentMonth).map((date, index) => (
+                  <button
+                    key={index}
+                    onClick={() => date && isDateAvailable(date) && setSelectedDate(date)}
+                    disabled={!date || !isDateAvailable(date)}
+                    className={`aspect-square rounded-lg text-sm transition-all ${
+                      !date 
+                        ? "invisible" 
+                        : selectedDate?.toDateString() === date.toDateString()
+                          ? "bg-[#00B4D8] text-white"
+                          : isDateAvailable(date)
+                            ? "text-white hover:bg-white/10"
+                            : "text-slate-600 cursor-not-allowed"
+                    }`}
+                  >
+                    {date?.getDate()}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Step 3: Time Selection */}
+          {step === 3 && (
+            <div>
+              <p className="text-slate-400 text-sm mb-4">
+                Available times for {selectedDate?.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' })}:
+              </p>
+              <div className="grid grid-cols-3 gap-2">
+                {timeSlots.map((time) => (
+                  <button
+                    key={time}
+                    onClick={() => setSelectedTime(time)}
+                    className={`p-3 rounded-xl text-sm font-medium transition-all ${
+                      selectedTime === time
+                        ? "bg-[#00B4D8] text-white"
+                        : "bg-white/5 border border-white/10 text-white hover:bg-white/10"
+                    }`}
+                  >
+                    {time}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Step 4: Confirmation */}
+          {step === 4 && (
+            <div className="space-y-4">
+              <div className="p-4 rounded-xl bg-white/5 border border-white/10 space-y-3">
+                <div className="flex items-center gap-3">
+                  <img 
+                    src={advisor?.avatar_url} 
+                    alt={advisor?.name}
+                    className="w-12 h-12 rounded-full object-cover"
+                  />
+                  <div>
+                    <p className="text-white font-medium">{advisor?.name}</p>
+                    <p className="text-slate-500 text-sm">{advisor?.title}</p>
+                  </div>
+                </div>
+                
+                <div className="pt-3 border-t border-white/10 space-y-2">
+                  <div className="flex items-center gap-3">
+                    <meetingType.icon className="w-4 h-4" style={{ color: meetingType?.color }} />
+                    <span className="text-white text-sm">{meetingType?.name} ({meetingType?.duration})</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <CalendarDays className="w-4 h-4 text-[#00B4D8]" />
+                    <span className="text-white text-sm">{formatDate(selectedDate)}</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <Clock className="w-4 h-4 text-[#FF9800]" />
+                    <span className="text-white text-sm">{selectedTime}</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="space-y-2">
+                <Label className="text-xs font-medium uppercase tracking-wider text-slate-400">Notes (optional)</Label>
+                <Textarea
+                  value={notes}
+                  onChange={(e) => setNotes(e.target.value)}
+                  placeholder="Any specific questions or topics you'd like to discuss..."
+                  className="min-h-[80px] bg-black/30 border-white/[0.08] text-white rounded-xl px-4 py-3 resize-none"
+                />
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Footer */}
+        <div className="p-4 border-t border-white/10 flex gap-3">
+          {step > 1 && (
+            <Button
+              onClick={() => setStep(step - 1)}
+              variant="outline"
+              className="flex-1 border-white/20 text-white hover:bg-white/5 rounded-full py-6"
+            >
+              Back
+            </Button>
+          )}
+          
+          {step === 2 && (
+            <Button
+              onClick={() => setStep(3)}
+              disabled={!selectedDate}
+              className="flex-1 bg-[#00B4D8] hover:bg-[#0096B4] text-white rounded-full py-6"
+            >
+              Continue
+            </Button>
+          )}
+          
+          {step === 3 && (
+            <Button
+              onClick={() => setStep(4)}
+              disabled={!selectedTime}
+              className="flex-1 bg-[#00B4D8] hover:bg-[#0096B4] text-white rounded-full py-6"
+            >
+              Continue
+            </Button>
+          )}
+          
+          {step === 4 && (
+            <Button
+              onClick={handleSchedule}
+              disabled={scheduling}
+              className="flex-1 bg-[#28A745] hover:bg-[#218838] text-white rounded-full py-6"
+            >
+              {scheduling ? (
+                <>
+                  <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                  Scheduling...
+                </>
+              ) : (
+                <>
+                  <Check className="w-4 h-4 mr-2" />
+                  Confirm Appointment
+                </>
+              )}
+            </Button>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
 
 // Email Modal Component
 export const EmailModal = ({ onClose, advisor, user }) => {
