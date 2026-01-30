@@ -1315,7 +1315,7 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo, onSectionComplete
           
           {activeSubSection < 6 ? (
             <Button
-              onClick={() => setActiveSubSection(activeSubSection + 1)}
+              onClick={() => { setActiveSubSection(activeSubSection + 1); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
               className="bg-[#00B4D8] hover:bg-[#0096B4] text-white rounded-full px-6"
               data-testid="next-subsection-btn"
             >
