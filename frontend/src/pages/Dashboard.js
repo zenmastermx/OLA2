@@ -264,21 +264,21 @@ const Dashboard = () => {
 
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          {/* Progress Card */}
+          {/* Application Progress Card */}
           <div className="glass-card rounded-2xl p-6" data-testid="progress-card">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-slate-400 text-sm font-medium">Application Progress</h3>
-              <LayoutDashboard className="w-5 h-5 text-[#00B4D8]" />
+              <Clock className="w-5 h-5 text-[#00F5FF]" />
             </div>
             <div className="flex items-center gap-4">
               <div className="relative w-20 h-20">
-                <svg className="w-20 h-20 progress-ring">
+                <svg className="transform -rotate-90 w-20 h-20">
                   <circle
                     cx="40"
                     cy="40"
                     r="36"
                     fill="none"
-                    stroke="#1A2E45"
+                    stroke="#1E293B"
                     strokeWidth="6"
                   />
                   <circle
@@ -286,23 +286,27 @@ const Dashboard = () => {
                     cy="40"
                     r="36"
                     fill="none"
-                    stroke="#00F5FF"
+                    stroke={displayApp?.status === "submitted" ? "#28A745" : "#00F5FF"}
                     strokeWidth="6"
-                    strokeDasharray={`${(activeApp?.progress || 0) * 2.26} 226`}
+                    strokeDasharray={`${(displayApp?.progress || 0) * 2.26} 226`}
                     strokeLinecap="round"
                     className="progress-ring__circle"
                   />
                 </svg>
                 <span className="absolute inset-0 flex items-center justify-center text-2xl font-['Outfit'] font-bold text-white">
-                  {activeApp?.progress || 0}%
+                  {displayApp?.progress || 0}%
                 </span>
               </div>
               <div>
                 <p className="text-white font-semibold text-lg">
-                  {activeApp ? `Step ${activeApp.current_step} of 5` : "Not Started"}
+                  {displayApp?.status === "submitted" 
+                    ? "Complete" 
+                    : displayApp 
+                      ? `Step ${displayApp.current_step} of 5` 
+                      : "No Application"}
                 </p>
                 <p className="text-slate-500 text-sm">
-                  {activeApp?.status === "submitted" ? "Submitted" : "In Progress"}
+                  {displayApp?.status === "submitted" ? "Submitted" : displayApp ? "In Progress" : "Start one above"}
                 </p>
               </div>
             </div>
