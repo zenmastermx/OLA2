@@ -65,20 +65,31 @@ const LandingPage = () => {
   const campuses = ["Austin", "Dallas", "Miami", "San Marcos", "St. Augustine"];
 
   return (
-    <div className="min-h-screen bg-[#0A0E14] text-white overflow-x-hidden">
+    <div className={`min-h-screen overflow-x-hidden ${theme === 'dark' ? 'bg-[#0A0E14] text-white' : 'bg-gray-50 text-gray-900'}`}>
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#0A0E14]/80 backdrop-blur-xl border-b border-white/5">
+      <nav className={`fixed top-0 left-0 right-0 z-50 backdrop-blur-xl border-b ${theme === 'dark' ? 'bg-[#0A0E14]/80 border-white/5' : 'bg-white/80 border-gray-200'}`}>
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center">
             <img 
-              src="https://customer-assets.emergentagent.com/job_be4bb2aa-ca20-4b1a-9d54-431ad1ac86d0/artifacts/ie0vbsv3_primary.Horiz.2line.knockedout.whouter.pms315%2Bwhite.png" 
+              src={theme === 'dark' 
+                ? "https://customer-assets.emergentagent.com/job_be4bb2aa-ca20-4b1a-9d54-431ad1ac86d0/artifacts/ie0vbsv3_primary.Horiz.2line.knockedout.whouter.pms315%2Bwhite.png"
+                : "https://customer-assets.emergentagent.com/job_student-journey-17/artifacts/lcfdritp_primary.Horiz.2line.knockedout.pms315.png"
+              }
               alt="University of St. Augustine for Health Sciences" 
               className="h-10 w-auto"
             />
           </div>
           <div className="flex items-center gap-4">
+            {/* Theme Toggle */}
+            <button
+              onClick={toggleTheme}
+              className={`p-2 rounded-full transition-colors ${theme === 'dark' ? 'text-slate-400 hover:text-white hover:bg-white/5' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'}`}
+              data-testid="theme-toggle-btn"
+            >
+              {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+            </button>
             <Link to="/login">
-              <Button variant="ghost" className="text-slate-300 hover:text-white hover:bg-white/5" data-testid="nav-login-btn">
+              <Button variant="ghost" className={`${theme === 'dark' ? 'text-slate-300 hover:text-white hover:bg-white/5' : 'text-gray-700 hover:text-gray-900 hover:bg-gray-100'}`} data-testid="nav-login-btn">
                 Sign In
               </Button>
             </Link>
@@ -94,25 +105,25 @@ const LandingPage = () => {
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center pt-20">
         {/* Background effects */}
-        <div className="absolute inset-0 gradient-radial opacity-50" />
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#00B4D8]/10 rounded-full blur-[100px]" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#7B68EE]/10 rounded-full blur-[100px]" />
+        <div className={`absolute inset-0 ${theme === 'dark' ? 'gradient-radial opacity-50' : 'bg-gradient-to-br from-[#E0F7FA]/30 to-transparent'}`} />
+        <div className={`absolute top-1/4 left-1/4 w-96 h-96 rounded-full blur-[100px] ${theme === 'dark' ? 'bg-[#00B4D8]/10' : 'bg-[#00B4D8]/15'}`} />
+        <div className={`absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full blur-[100px] ${theme === 'dark' ? 'bg-[#7B68EE]/10' : 'bg-[#7B68EE]/10'}`} />
         
         <div className="relative z-10 max-w-7xl mx-auto px-6 py-20 grid lg:grid-cols-2 gap-16 items-center">
           <div className="space-y-8 animate-slide-up">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#00B4D8]/10 border border-[#00B4D8]/30 text-[#00B4D8] text-sm">
+            <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm ${theme === 'dark' ? 'bg-[#00B4D8]/10 border border-[#00B4D8]/30 text-[#00B4D8]' : 'bg-[#00B4D8]/10 border border-[#00B4D8]/30 text-[#0096B4]'}`}>
               <Sparkles className="w-4 h-4" />
               <span>Applications Open for 2026</span>
             </div>
             
-            <h1 className="font-['Outfit'] text-5xl lg:text-7xl font-bold leading-tight">
+            <h1 className={`font-['Outfit'] text-5xl lg:text-7xl font-bold leading-tight ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
               Your Journey to{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00B4D8] to-[#00F5FF]">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00B4D8] to-[#0096B4]">
                 Healthcare Excellence
               </span>
             </h1>
             
-            <p className="text-xl text-slate-400 max-w-xl leading-relaxed">
+            <p className={`text-xl max-w-xl leading-relaxed ${theme === 'dark' ? 'text-slate-400' : 'text-gray-600'}`}>
               Join the University of St. Augustine for Health Sciences and transform your passion into a rewarding healthcare career.
             </p>
             
@@ -130,23 +141,23 @@ const LandingPage = () => {
             {/* Stats */}
             <div className="flex gap-12 pt-8">
               <div>
-                <p className="text-3xl font-['Outfit'] font-bold text-[#00F5FF]">15K+</p>
-                <p className="text-slate-500 text-sm">Alumni Worldwide</p>
+                <p className="text-3xl font-['Outfit'] font-bold text-[#00B4D8]">15K+</p>
+                <p className={`text-sm ${theme === 'dark' ? 'text-slate-500' : 'text-gray-500'}`}>Alumni Worldwide</p>
               </div>
               <div>
-                <p className="text-3xl font-['Outfit'] font-bold text-[#00F5FF]">95%</p>
-                <p className="text-slate-500 text-sm">Employment Rate</p>
+                <p className="text-3xl font-['Outfit'] font-bold text-[#00B4D8]">95%</p>
+                <p className={`text-sm ${theme === 'dark' ? 'text-slate-500' : 'text-gray-500'}`}>Employment Rate</p>
               </div>
               <div>
-                <p className="text-3xl font-['Outfit'] font-bold text-[#00F5FF]">5</p>
-                <p className="text-slate-500 text-sm">Campus Locations</p>
+                <p className="text-3xl font-['Outfit'] font-bold text-[#00B4D8]">5</p>
+                <p className={`text-sm ${theme === 'dark' ? 'text-slate-500' : 'text-gray-500'}`}>Campus Locations</p>
               </div>
             </div>
           </div>
           
           {/* Hero Image/Visual */}
           <div className="relative hidden lg:block">
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0A0E14] via-transparent to-transparent z-10" />
+            <div className={`absolute inset-0 z-10 ${theme === 'dark' ? 'bg-gradient-to-t from-[#0A0E14] via-transparent to-transparent' : 'bg-gradient-to-t from-gray-50 via-transparent to-transparent'}`} />
             <div className="glass-card rounded-3xl overflow-hidden animate-float">
               <img 
                 src="https://customer-assets.emergentagent.com/job_be4bb2aa-ca20-4b1a-9d54-431ad1ac86d0/artifacts/1nfqifog_usahs-innovation-advantage-main-page.webp"
