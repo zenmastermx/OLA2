@@ -216,7 +216,7 @@ const Dashboard = () => {
             <img 
               src="https://customer-assets.emergentagent.com/job_be4bb2aa-ca20-4b1a-9d54-431ad1ac86d0/artifacts/ie0vbsv3_primary.Horiz.2line.knockedout.whouter.pms315%2Bwhite.png" 
               alt="University of St. Augustine for Health Sciences" 
-              className="h-10 w-auto"
+              className="h-14 w-auto"
             />
           </div>
           
