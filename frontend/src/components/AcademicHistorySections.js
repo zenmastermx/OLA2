@@ -38,6 +38,53 @@ const AcademicHistorySections = ({ academicHistory, setAcademicHistory }) => {
     { id: "psychology", name: "Abnormal Psychology", maxCredits: 3.0, required: true },
   ];
 
+  const handleAddPrerequisite = (courseId) => {
+    if (!newCourse.name || !newCourse.credits) return;
+    
+    const currentPrereqs = academicHistory.prerequisites || {};
+    const currentCourses = currentPrereqs[courseId]?.courses || [];
+    
+    setAcademicHistory({
+      ...academicHistory,
+      prerequisites: {
+        ...currentPrereqs,
+        [courseId]: {
+          courses: [...currentCourses, { ...newCourse, id: Date.now() }]
+        }
+      }
+    });
+    
+    // Reset form and close
+    setNewCourse({ name: "", completed: false, grade: "", institution: "", credits: "" });
+    setAddingPrereqFor(null);
+  };
+
+  const handleRemovePrerequisite = (courseId, prereqId) => {
+    const currentPrereqs = academicHistory.prerequisites || {};
+    const currentCourses = currentPrereqs[courseId]?.courses || [];
+    
+    setAcademicHistory({
+      ...academicHistory,
+      prerequisites: {
+        ...currentPrereqs,
+        [courseId]: {
+          courses: currentCourses.filter(c => c.id !== prereqId)
+        }
+      }
+    });
+  };
+
+  const calculateTotalCredits = () => {
+    const prereqs = academicHistory.prerequisites || {};
+    let total = 0;
+    Object.values(prereqs).forEach(p => {
+      (p.courses || []).forEach(c => {
+        total += parseFloat(c.credits) || 0;
+      });
+    });
+    return total.toFixed(1);
+  };
+
   const isSubSectionComplete = (sectionId) => {
     switch (sectionId) {
       case 0:
