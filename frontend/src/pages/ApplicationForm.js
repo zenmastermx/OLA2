@@ -188,7 +188,8 @@ const ApplicationForm = () => {
         return (
           <PersonalInfoSections 
             personalInfo={personalInfo} 
-            setPersonalInfo={setPersonalInfo} 
+            setPersonalInfo={setPersonalInfo}
+            onSectionComplete={() => handleStepChange(2)}
           />
         );
 
