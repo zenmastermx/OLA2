@@ -188,5 +188,8 @@ A cutting-edge, futuristic student online application portal for the University 
 ---
 
 ## Test Credentials
-- **Email**: testuser@test.com
-- **Password**: password123
+- **User with submitted app**: submitted_test@test.com / password123
+- **Alternative test**: testuser@test.com / password123
+
+## MOCKED Features (UI-only, no backend)
+- In-app modals for advisor communication (Email, Text, Call, Schedule Appointment)
