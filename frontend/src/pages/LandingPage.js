@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ChevronRight, Sparkles, FileCheck, Headphones, GraduationCap, Stethoscope, MapPin, ArrowRight } from "lucide-react";
+import { ChevronRight, Sparkles, FileCheck, Headphones, GraduationCap, Stethoscope, MapPin, ArrowRight, BookOpen, Award } from "lucide-react";
 
 const LandingPage = () => {
   const navigate = useNavigate();
