@@ -36,13 +36,13 @@ const AcademicHistorySections = ({ academicHistory, setAcademicHistory }) => {
         const courses = academicHistory.prerequisites || {};
         return Object.keys(courses).length > 0;
       case 1:
-        return academicHistory.highest_degree !== undefined;
+        return academicHistory.highest_degree != null && academicHistory.highest_degree !== "";
       case 2:
-        return academicHistory.toefl_required !== undefined || academicHistory.toefl_date;
+        return (academicHistory.toefl_required != null) || !!(academicHistory.toefl_date);
       case 3:
-        return academicHistory.prior_application !== undefined;
+        return academicHistory.prior_application != null && academicHistory.prior_application !== "";
       case 4:
-        return academicHistory.academic_probation !== undefined;
+        return academicHistory.academic_probation != null && academicHistory.academic_probation !== "";
       default:
         return false;
     }
