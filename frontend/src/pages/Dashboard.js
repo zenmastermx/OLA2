@@ -286,7 +286,7 @@ const Dashboard = () => {
         {/* Application Review Status Progress Bar - Shows for submitted applications */}
         {submittedApps.length > 0 && (
           <div className="glass-card rounded-2xl p-6 mb-8" data-testid="review-status-progress">
-            <h3 className="font-['Outfit'] text-lg font-semibold text-white mb-4">
+            <h3 className={`font-['Outfit'] text-lg font-semibold mb-4 ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
               Admission Status
             </h3>
             {(() => {
@@ -307,8 +307,12 @@ const Dashboard = () => {
               
               return (
                 <div className="relative">
-                  {/* Progress Line */}
-                  <div className="absolute top-5 left-0 right-0 h-1 bg-white/10 rounded-full mx-8" />
+                  {/* Progress Line Background */}
+                  <div 
+                    className="absolute top-5 left-0 right-0 h-1 rounded-full mx-8"
+                    style={{ backgroundColor: theme === 'dark' ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)' }}
+                  />
+                  {/* Progress Line Active */}
                   <div 
                     className="absolute top-5 left-0 h-1 rounded-full mx-8 transition-all duration-500"
                     style={{ 
@@ -328,8 +332,8 @@ const Dashboard = () => {
                           <div 
                             className="w-10 h-10 rounded-full flex items-center justify-center border-2 transition-all"
                             style={{
-                              borderColor: isActive ? status.color : isPast ? "#28A745" : "rgba(255,255,255,0.2)",
-                              backgroundColor: isActive ? `${status.color}20` : isPast ? "rgba(40,167,69,0.2)" : "rgba(255,255,255,0.05)"
+                              borderColor: isActive ? status.color : isPast ? "#28A745" : (theme === 'dark' ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.15)"),
+                              backgroundColor: isActive ? `${status.color}20` : isPast ? "rgba(40,167,69,0.2)" : (theme === 'dark' ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.05)")
                             }}
                           >
                             {isPast ? (
@@ -340,11 +344,18 @@ const Dashboard = () => {
                                 style={{ backgroundColor: status.color }}
                               />
                             ) : (
-                              <div className="w-3 h-3 rounded-full bg-white/20" />
+                              <div 
+                                className="w-3 h-3 rounded-full"
+                                style={{ backgroundColor: theme === 'dark' ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.15)' }}
+                              />
                             )}
                           </div>
                           <span className={`mt-2 text-xs font-medium text-center max-w-[80px] ${
-                            isActive ? "text-white" : isPast ? "text-[#28A745]" : "text-slate-500"
+                            isActive 
+                              ? (theme === 'dark' ? "text-white" : "text-gray-900")
+                              : isPast 
+                                ? "text-[#28A745]" 
+                                : (theme === 'dark' ? "text-slate-500" : "text-gray-500")
                           }`}>
                             {status.label}
                           </span>
