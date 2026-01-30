@@ -558,25 +558,26 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo }) => {
                 </div>
                 <div className="space-y-2">
                   <Label className="text-xs font-medium uppercase tracking-wider text-slate-400">
-                    Gender <span className="text-[#00F5FF]">*</span>
+                    What pronouns do you use? <span className="text-[#00F5FF]">*</span>
                   </Label>
                   <RadioGroup
                     value={personalInfo.gender || ""}
                     onValueChange={(value) => setPersonalInfo({ ...personalInfo, gender: value })}
-                    className="flex gap-3 h-12 items-center"
+                    className="flex flex-wrap gap-3 items-center"
                   >
                     {[
-                      { value: "female", label: "Female" },
-                      { value: "male", label: "Male" },
-                      { value: "other", label: "Other" }
+                      { value: "he_him", label: "He / Him" },
+                      { value: "she_her", label: "She / Her" },
+                      { value: "they_them", label: "They / Them" },
+                      { value: "prefer_not_to_say", label: "Prefer not to say" }
                     ].map((option) => (
                       <div key={option.value} className={`flex items-center space-x-2 px-4 py-2 rounded-full border transition-all duration-300 cursor-pointer ${
                         personalInfo.gender === option.value 
                           ? "border-[#00F5FF]/50 bg-[#00F5FF]/10" 
                           : "border-white/[0.08] bg-black/30 hover:border-white/20"
                       }`}>
-                        <RadioGroupItem value={option.value} id={option.value} />
-                        <Label htmlFor={option.value} className="text-white cursor-pointer text-sm">{option.label}</Label>
+                        <RadioGroupItem value={option.value} id={`pronoun-${option.value}`} />
+                        <Label htmlFor={`pronoun-${option.value}`} className="text-white cursor-pointer text-sm">{option.label}</Label>
                       </div>
                     ))}
                   </RadioGroup>
