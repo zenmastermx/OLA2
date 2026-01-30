@@ -333,15 +333,15 @@ const Dashboard = () => {
               <h3 className="text-slate-400 text-sm font-medium">Documents</h3>
               <FileText className="w-5 h-5 text-[#28A745]" />
             </div>
-            {activeApp ? (
+            {displayApp ? (
               <>
                 <p className="text-3xl font-['Outfit'] font-bold text-white mb-1">
-                  {activeApp.documents?.filter(d => d.status === "uploaded").length || 0}/5
+                  {displayApp.documents?.filter(d => d.status === "uploaded").length || 0}/5
                 </p>
                 <p className="text-slate-400">Documents Uploaded</p>
                 <div className="mt-3">
                   <Progress 
-                    value={(activeApp.documents?.filter(d => d.status === "uploaded").length || 0) * 20} 
+                    value={(displayApp.documents?.filter(d => d.status === "uploaded").length || 0) * 20} 
                     className="h-2 bg-slate-800"
                   />
                 </div>
