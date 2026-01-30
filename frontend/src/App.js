@@ -31,13 +31,24 @@ const ThemeProvider = ({ children }) => {
 
   useEffect(() => {
     localStorage.setItem("theme", theme);
-    // Apply theme class to document root
+    // Apply theme class to document root and body
+    const root = document.documentElement;
+    const body = document.body;
+    
     if (theme === "light") {
-      document.documentElement.classList.add("light-mode");
-      document.documentElement.classList.remove("dark-mode");
+      root.classList.add("light-mode");
+      root.classList.remove("dark-mode");
+      body.classList.add("light-mode");
+      body.classList.remove("dark-mode");
+      body.style.backgroundColor = "#F8FAFC";
+      body.style.color = "#1E293B";
     } else {
-      document.documentElement.classList.add("dark-mode");
-      document.documentElement.classList.remove("light-mode");
+      root.classList.add("dark-mode");
+      root.classList.remove("light-mode");
+      body.classList.add("dark-mode");
+      body.classList.remove("light-mode");
+      body.style.backgroundColor = "#0A0E14";
+      body.style.color = "#F5F7F9";
     }
   }, [theme]);
 
