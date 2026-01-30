@@ -173,10 +173,10 @@ const LandingPage = () => {
       <section className="py-24 relative">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="font-['Outfit'] text-4xl lg:text-5xl font-bold mb-4">
+            <h2 className={`font-['Outfit'] text-4xl lg:text-5xl font-bold mb-4 ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
               Choose Your Path
             </h2>
-            <p className="text-slate-400 text-lg max-w-2xl mx-auto">
+            <p className={`text-lg max-w-2xl mx-auto ${theme === 'dark' ? 'text-slate-400' : 'text-gray-600'}`}>
               Select your program of interest to begin your application journey
             </p>
           </div>
@@ -187,7 +187,7 @@ const LandingPage = () => {
                 key={program.id}
                 onClick={() => setSelectedProgram(program.id)}
                 className={`glass-card rounded-3xl p-6 cursor-pointer card-lift ${
-                  selectedProgram === program.id ? 'border-[#00F5FF] shadow-[0_0_30px_rgba(0,245,255,0.2)]' : ''
+                  selectedProgram === program.id ? 'border-[#00B4D8] shadow-[0_0_30px_rgba(0,180,216,0.2)]' : ''
                 }`}
                 data-testid={`program-card-${program.id}`}
               >
@@ -197,13 +197,13 @@ const LandingPage = () => {
                 >
                   <program.icon className="w-7 h-7" style={{ color: program.color }} />
                 </div>
-                <h3 className="font-['Outfit'] text-xl font-bold mb-2">{program.name}</h3>
-                <p className="text-slate-400 text-sm mb-4">{program.description}</p>
+                <h3 className={`font-['Outfit'] text-xl font-bold mb-2 ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>{program.name}</h3>
+                <p className={`text-sm mb-4 ${theme === 'dark' ? 'text-slate-400' : 'text-gray-600'}`}>{program.description}</p>
                 <div className="flex flex-wrap gap-2">
                   {program.degrees.map((degree) => (
                     <span 
                       key={degree}
-                      className="px-2 py-1 rounded-full text-xs bg-white/5 border border-white/10"
+                      className={`px-2 py-1 rounded-full text-xs ${theme === 'dark' ? 'bg-white/5 border border-white/10 text-white' : 'bg-gray-100 border border-gray-200 text-gray-700'}`}
                     >
                       {degree}
                     </span>
@@ -232,13 +232,13 @@ const LandingPage = () => {
 
       {/* Features */}
       <section className="py-24 relative">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#002855]/20 to-transparent" />
+        <div className={`absolute inset-0 ${theme === 'dark' ? 'bg-gradient-to-b from-transparent via-[#002855]/20 to-transparent' : 'bg-gradient-to-b from-transparent via-[#E0F7FA]/30 to-transparent'}`} />
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="text-center mb-16">
-            <h2 className="font-['Outfit'] text-4xl lg:text-5xl font-bold mb-4">
+            <h2 className={`font-['Outfit'] text-4xl lg:text-5xl font-bold mb-4 ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
               A Smarter Application Experience
             </h2>
-            <p className="text-slate-400 text-lg max-w-2xl mx-auto">
+            <p className={`text-lg max-w-2xl mx-auto ${theme === 'dark' ? 'text-slate-400' : 'text-gray-600'}`}>
               Our cutting-edge portal makes applying simple, transparent, and stress-free
             </p>
           </div>
@@ -254,8 +254,8 @@ const LandingPage = () => {
                 <div className="w-14 h-14 rounded-2xl bg-[#00B4D8]/10 flex items-center justify-center mb-6">
                   <feature.icon className="w-7 h-7 text-[#00B4D8]" />
                 </div>
-                <h3 className="font-['Outfit'] text-xl font-bold mb-3">{feature.title}</h3>
-                <p className="text-slate-400">{feature.description}</p>
+                <h3 className={`font-['Outfit'] text-xl font-bold mb-3 ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>{feature.title}</h3>
+                <p className={theme === 'dark' ? 'text-slate-400' : 'text-gray-600'}>{feature.description}</p>
               </div>
             ))}
           </div>
@@ -266,15 +266,15 @@ const LandingPage = () => {
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-12">
-            <h2 className="font-['Outfit'] text-4xl font-bold mb-4">Our Campuses</h2>
-            <p className="text-slate-400">World-class facilities across the United States</p>
+            <h2 className={`font-['Outfit'] text-4xl font-bold mb-4 ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>Our Campuses</h2>
+            <p className={theme === 'dark' ? 'text-slate-400' : 'text-gray-600'}>World-class facilities across the United States</p>
           </div>
           
           <div className="flex flex-wrap justify-center gap-4">
             {campuses.map((campus) => (
               <div 
                 key={campus}
-                className="glass-card rounded-full px-6 py-3 flex items-center gap-2 hover:border-[#00F5FF]/50 transition-colors cursor-pointer"
+                className={`glass-card rounded-full px-6 py-3 flex items-center gap-2 hover:border-[#00B4D8]/50 transition-colors cursor-pointer ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}
                 data-testid={`campus-${campus.toLowerCase().replace(' ', '-')}`}
               >
                 <MapPin className="w-4 h-4 text-[#00B4D8]" />
@@ -287,12 +287,12 @@ const LandingPage = () => {
 
       {/* CTA Section */}
       <section className="py-24 relative">
-        <div className="absolute inset-0 bg-gradient-to-r from-[#002855]/50 via-[#0A0E14] to-[#002855]/50" />
+        <div className={`absolute inset-0 ${theme === 'dark' ? 'bg-gradient-to-r from-[#002855]/50 via-[#0A0E14] to-[#002855]/50' : 'bg-gradient-to-r from-[#E0F7FA]/50 via-white to-[#E0F7FA]/50'}`} />
         <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
-          <h2 className="font-['Outfit'] text-4xl lg:text-5xl font-bold mb-6">
+          <h2 className={`font-['Outfit'] text-4xl lg:text-5xl font-bold mb-6 ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
             Ready to Begin Your Journey?
           </h2>
-          <p className="text-slate-400 text-lg mb-8 max-w-2xl mx-auto">
+          <p className={`text-lg mb-8 max-w-2xl mx-auto ${theme === 'dark' ? 'text-slate-400' : 'text-gray-600'}`}>
             Join thousands of students who have launched their healthcare careers at USA.edu
           </p>
           <Button 
@@ -307,7 +307,7 @@ const LandingPage = () => {
       </section>
 
       {/* Footer */}
-      <footer className="py-12 border-t border-white/5">
+      <footer className={`py-12 border-t ${theme === 'dark' ? 'border-white/5' : 'border-gray-200'}`}>
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="flex items-center gap-3">
@@ -316,9 +316,9 @@ const LandingPage = () => {
                 alt="USA.edu Logo" 
                 className="h-8 w-auto"
               />
-              <span className="font-['Outfit'] font-semibold">University of St. Augustine</span>
+              <span className={`font-['Outfit'] font-semibold ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>University of St. Augustine</span>
             </div>
-            <p className="text-slate-500 text-sm">
+            <p className={`text-sm ${theme === 'dark' ? 'text-slate-500' : 'text-gray-500'}`}>
               © 2026 University of St. Augustine for Health Sciences. All rights reserved.
             </p>
           </div>
