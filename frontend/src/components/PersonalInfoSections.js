@@ -156,7 +156,7 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo }) => {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label className="text-xs font-medium uppercase tracking-wider text-slate-400">Alternate Phone</Label>
+                  <Label className="text-xs font-medium uppercase tracking-wider text-slate-400">Mobile Phone</Label>
                   <Input
                     type="tel"
                     inputMode="numeric"
