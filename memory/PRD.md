@@ -135,16 +135,22 @@ A cutting-edge, futuristic student online application portal for the University 
 ## Backlog / Future Enhancements
 
 ### P0 (Critical)
-- Email verification on registration
-- Password reset functionality
+- End-to-End Data Persistence Verification - Audit all form fields including prerequisites
+- Wire up "Review & Submit" page to display complete application summary
 
 ### P1 (High Priority)
+- Connect In-App Modals (Email, Text, Call, Schedule) to backend (currently UI-only/MOCKED)
+- Add pathways for "Education" and "Certificates" programs in selection modal
+- User Account Settings Page (update communication preferences post-registration)
+- Email verification on registration
+- Password reset functionality
 - Real document preview (PDF viewer)
 - Application history/timeline
 - Email notifications on status changes
 - Admin dashboard for reviewing applications
 
 ### P2 (Medium Priority)
+- Refactor Dashboard.js - Extract modal logic into separate components
 - Virtual campus tours integration
 - Video interview scheduling
 - Scholarship matcher
