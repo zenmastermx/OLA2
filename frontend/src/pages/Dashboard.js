@@ -271,7 +271,7 @@ const Dashboard = () => {
         {submittedApps.length > 0 && (
           <div className="glass-card rounded-2xl p-6 mb-8" data-testid="review-status-progress">
             <h3 className="font-['Outfit'] text-lg font-semibold text-white mb-4">
-              Application Status
+              Admission Status
             </h3>
             {(() => {
               const latestSubmitted = submittedApps[0];
