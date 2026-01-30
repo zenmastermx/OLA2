@@ -126,6 +126,14 @@ const ApplicationForm = () => {
     }
   };
 
+  const handleStepChange = async (targetStep) => {
+    const saved = await saveProgress(targetStep);
+    if (saved) {
+      setCurrentStep(targetStep);
+      navigate(`/application/${appId}/${targetStep}`);
+    }
+  };
+
   const handleBack = () => {
     if (currentStep > 1) {
       setCurrentStep(currentStep - 1);
