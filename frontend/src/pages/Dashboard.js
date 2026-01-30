@@ -91,6 +91,7 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { user, token, logout } = useAuth();
+  const { theme, toggleTheme } = useTheme();
   const [applications, setApplications] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showNewAppModal, setShowNewAppModal] = useState(false);
