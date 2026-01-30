@@ -868,6 +868,7 @@ const AcademicHistorySections = ({ academicHistory, setAcademicHistory, onSectio
             </Button>
           ) : (
             <Button
+              onClick={() => onSectionComplete && onSectionComplete()}
               className="bg-[#28A745] hover:bg-[#218838] text-white rounded-full px-6 shadow-[0_0_20px_rgba(40,167,69,0.3)]"
               data-testid="academic-complete-btn"
             >
