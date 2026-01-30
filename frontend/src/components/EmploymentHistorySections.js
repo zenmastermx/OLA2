@@ -6,7 +6,7 @@ import {
   Briefcase, Check, Plus, Trash2, Info, Mail, Phone, Building, Calendar, Clock, User, X, Send
 } from "lucide-react";
 
-const EmploymentHistorySections = ({ employmentHistory, setEmploymentHistory }) => {
+const EmploymentHistorySections = ({ employmentHistory, setEmploymentHistory, onSectionComplete }) => {
   const [showAddForm, setShowAddForm] = useState(false);
   const [newVerification, setNewVerification] = useState({
     verifier_first_name: "",
