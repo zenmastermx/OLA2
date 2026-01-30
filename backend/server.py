@@ -831,7 +831,7 @@ KEY DEADLINES:
 • Fall 2026: Application deadline July 1, 2026
 
 REQUIRED DOCUMENTS:
-• Official transcripts from all colleges/universities attended
+• Unofficial transcripts from all colleges/universities attended
 • Resume/CV
 • Personal statement
 • Letters of recommendation (2-3)
