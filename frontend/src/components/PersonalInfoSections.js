@@ -27,19 +27,19 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo }) => {
   const isSubSectionComplete = (sectionId) => {
     switch (sectionId) {
       case 0:
-        return personalInfo.first_name && personalInfo.last_name && personalInfo.email;
+        return !!(personalInfo.first_name && personalInfo.last_name && personalInfo.email);
       case 1:
-        return personalInfo.judicial_agreement !== undefined;
+        return personalInfo.judicial_agreement != null && personalInfo.judicial_agreement !== "";
       case 2:
-        return personalInfo.emergency_first_name && personalInfo.emergency_phone;
+        return !!(personalInfo.emergency_first_name && personalInfo.emergency_phone);
       case 3:
-        return personalInfo.date_of_birth && personalInfo.gender;
+        return !!(personalInfo.date_of_birth && personalInfo.gender);
       case 4:
-        return personalInfo.veteran_benefits !== undefined;
+        return personalInfo.veteran_benefits != null && personalInfo.veteran_benefits !== "";
       case 5:
-        return personalInfo.years_work_experience !== undefined;
+        return personalInfo.years_work_experience != null && personalInfo.years_work_experience !== "";
       case 6:
-        return personalInfo.ethnicity !== undefined;
+        return personalInfo.ethnicity != null && personalInfo.ethnicity !== "";
       default:
         return false;
     }
