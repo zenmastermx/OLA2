@@ -290,6 +290,7 @@ class ApplicationResponse(BaseModel):
     id: str
     user_id: str
     status: str
+    review_status: Optional[str] = None  # application_received, under_review, admitted, denied
     progress: int
     current_step: int
     personal_info: Optional[PersonalInfo] = None
