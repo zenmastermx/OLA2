@@ -743,6 +743,7 @@ const ApplicationForm = () => {
                 onClick={() => {
                   setCurrentStep(step);
                   navigate(`/application/${appId}/${step}`);
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
                 }}
                 className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all ${
                   step === currentStep
