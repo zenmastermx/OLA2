@@ -13,6 +13,7 @@ import {
   MessageCircle, Sparkles, X, Phone, Mail, Video, CalendarDays, MapPin, BookOpen
 } from "lucide-react";
 import AIChat from "@/components/AIChat";
+import { EmailModal, TextModal, CallModal } from "@/components/AdvisorContactModals";
 
 // Program pathways data
 const PROGRAM_PATHWAYS = {
