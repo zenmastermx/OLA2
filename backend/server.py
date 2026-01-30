@@ -352,6 +352,9 @@ async def register(user_data: UserCreate):
         "first_name": user_data.first_name,
         "last_name": user_data.last_name,
         "enrollment_advisor": assigned_advisor,
+        "consent_call": user_data.consent_call,
+        "consent_text": user_data.consent_text,
+        "consent_email": user_data.consent_email,
         "created_at": datetime.now(timezone.utc).isoformat()
     }
     await db.users.insert_one(user_doc)
@@ -364,7 +367,10 @@ async def register(user_data: UserCreate):
             email=user_data.email,
             first_name=user_data.first_name,
             last_name=user_data.last_name,
-            created_at=user_doc["created_at"]
+            created_at=user_doc["created_at"],
+            consent_call=user_data.consent_call,
+            consent_text=user_data.consent_text,
+            consent_email=user_data.consent_email
         )
     )
 
