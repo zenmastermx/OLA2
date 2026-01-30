@@ -157,27 +157,31 @@ const AcademicHistorySections = ({ academicHistory, setAcademicHistory }) => {
               
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="p-4 rounded-xl bg-black/20 border border-white/[0.05]">
-                  <p className="text-slate-500 text-xs uppercase tracking-wider mb-1">Total Credits Needed</p>
-                  <p className="text-2xl font-light text-white">0.0 <span className="text-sm text-[#00B4D8]">/ 21.0</span></p>
+                  <p className="text-slate-500 text-xs uppercase tracking-wider mb-1">Total Credits Added</p>
+                  <p className="text-2xl font-light text-white">{calculateTotalCredits()} <span className="text-sm text-[#00B4D8]">/ 21.0</span></p>
                 </div>
                 <div className="p-4 rounded-xl bg-black/20 border border-white/[0.05]">
                   <p className="text-slate-500 text-xs uppercase tracking-wider mb-1">Min to Apply</p>
-                  <p className="text-2xl font-light text-white">0.0 <span className="text-sm text-[#00B4D8]">/ 10.0</span></p>
+                  <p className="text-2xl font-light text-white">{Math.min(parseFloat(calculateTotalCredits()), 10).toFixed(1)} <span className="text-sm text-[#00B4D8]">/ 10.0</span></p>
                 </div>
                 <div className="p-4 rounded-xl bg-black/20 border border-white/[0.05]">
                   <p className="text-slate-500 text-xs uppercase tracking-wider mb-1">Status</p>
-                  <p className="text-lg font-light text-slate-400">Not Started</p>
+                  <p className={`text-lg font-light ${parseFloat(calculateTotalCredits()) >= 10 ? 'text-[#28A745]' : parseFloat(calculateTotalCredits()) > 0 ? 'text-[#FF9800]' : 'text-slate-400'}`}>
+                    {parseFloat(calculateTotalCredits()) >= 21 ? 'Complete' : parseFloat(calculateTotalCredits()) >= 10 ? 'Ready to Apply' : parseFloat(calculateTotalCredits()) > 0 ? 'In Progress' : 'Not Started'}
+                  </p>
                 </div>
               </div>
             </div>
 
             {/* Prerequisite Courses */}
             <div className="space-y-4">
-              {prerequisiteCourses.map((course) => (
+              {prerequisiteCourses.map((course) => {
+                const courseCreds = (academicHistory.prerequisites?.[course.id]?.courses || []).reduce((sum, c) => sum + (parseFloat(c.credits) || 0), 0);
+                return (
                 <div key={course.id} className="backdrop-blur-xl bg-white/[0.02] border border-white/[0.05] rounded-2xl p-6 hover:border-[#00B4D8]/20 transition-colors duration-500">
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-3">
-                      <div className="w-2 h-2 rounded-full bg-[#00F5FF]" />
+                      <div className={`w-2 h-2 rounded-full ${courseCreds >= course.maxCredits ? 'bg-[#28A745]' : 'bg-[#00F5FF]'}`} />
                       <h4 className="text-white font-medium">{course.name}</h4>
                       <Info className="w-4 h-4 text-slate-500 cursor-help" />
                     </div>
@@ -185,6 +189,7 @@ const AcademicHistorySections = ({ academicHistory, setAcademicHistory }) => {
                       type="button"
                       variant="outline"
                       size="sm"
+                      onClick={() => setAddingPrereqFor(course.id)}
                       className="border-[#00B4D8]/50 text-[#00B4D8] hover:bg-[#00B4D8]/10 rounded-full px-4"
                       data-testid={`add-prereq-${course.id}`}
                     >
@@ -194,8 +199,102 @@ const AcademicHistorySections = ({ academicHistory, setAcademicHistory }) => {
                   </div>
                   
                   <p className="text-slate-500 text-sm mb-4">
-                    Max Credits Applied to Total: <span className="text-[#00B4D8]">0.0 / {course.maxCredits}</span>
+                    Max Credits Applied to Total: <span className={courseCreds >= course.maxCredits ? 'text-[#28A745]' : 'text-[#00B4D8]'}>{courseCreds.toFixed(1)} / {course.maxCredits}</span>
                   </p>
+
+                  {/* Add Prerequisite Form */}
+                  {addingPrereqFor === course.id && (
+                    <div className="mb-4 p-4 rounded-xl bg-[#00B4D8]/5 border border-[#00B4D8]/20 space-y-4 animate-in slide-in-from-top-2 duration-300">
+                      <h5 className="text-white font-medium text-sm">Add New Course</h5>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        <div className="space-y-1">
+                          <Label className="text-xs text-slate-400">Course Name *</Label>
+                          <Input
+                            value={newCourse.name}
+                            onChange={(e) => setNewCourse({ ...newCourse, name: e.target.value })}
+                            placeholder="e.g., Anatomy & Physiology I"
+                            className="h-10 bg-black/30 border-white/[0.08] text-white rounded-lg px-3 text-sm"
+                            data-testid="prereq-course-name"
+                          />
+                        </div>
+                        <div className="space-y-1">
+                          <Label className="text-xs text-slate-400">Institution *</Label>
+                          <Input
+                            value={newCourse.institution}
+                            onChange={(e) => setNewCourse({ ...newCourse, institution: e.target.value })}
+                            placeholder="e.g., University of Florida"
+                            className="h-10 bg-black/30 border-white/[0.08] text-white rounded-lg px-3 text-sm"
+                            data-testid="prereq-institution"
+                          />
+                        </div>
+                        <div className="space-y-1">
+                          <Label className="text-xs text-slate-400">Credits *</Label>
+                          <Input
+                            type="number"
+                            step="0.5"
+                            value={newCourse.credits}
+                            onChange={(e) => setNewCourse({ ...newCourse, credits: e.target.value })}
+                            placeholder="e.g., 3.0"
+                            className="h-10 bg-black/30 border-white/[0.08] text-white rounded-lg px-3 text-sm"
+                            data-testid="prereq-credits"
+                          />
+                        </div>
+                        <div className="space-y-1">
+                          <Label className="text-xs text-slate-400">Grade</Label>
+                          <Select
+                            value={newCourse.grade}
+                            onValueChange={(value) => setNewCourse({ ...newCourse, grade: value })}
+                          >
+                            <SelectTrigger className="h-10 bg-black/30 border-white/[0.08] text-white rounded-lg" data-testid="prereq-grade">
+                              <SelectValue placeholder="Select grade" />
+                            </SelectTrigger>
+                            <SelectContent className="bg-[#11161F] border-white/10 rounded-xl">
+                              <SelectItem value="A">A</SelectItem>
+                              <SelectItem value="A-">A-</SelectItem>
+                              <SelectItem value="B+">B+</SelectItem>
+                              <SelectItem value="B">B</SelectItem>
+                              <SelectItem value="B-">B-</SelectItem>
+                              <SelectItem value="C+">C+</SelectItem>
+                              <SelectItem value="C">C</SelectItem>
+                              <SelectItem value="In Progress">In Progress</SelectItem>
+                              <SelectItem value="Planned">Planned</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <Checkbox
+                          id="course-completed"
+                          checked={newCourse.completed}
+                          onCheckedChange={(checked) => setNewCourse({ ...newCourse, completed: checked })}
+                          className="border-[#00B4D8]"
+                        />
+                        <Label htmlFor="course-completed" className="text-sm text-slate-300 cursor-pointer">Course completed</Label>
+                      </div>
+                      <div className="flex gap-2 pt-2">
+                        <Button
+                          type="button"
+                          onClick={() => handleAddPrerequisite(course.id)}
+                          disabled={!newCourse.name || !newCourse.credits}
+                          className="bg-[#00B4D8] hover:bg-[#0096B4] text-white rounded-full px-4 text-sm"
+                          data-testid="save-prereq-btn"
+                        >
+                          Save Course
+                        </Button>
+                        <Button
+                          type="button"
+                          variant="ghost"
+                          onClick={() => {
+                            setAddingPrereqFor(null);
+                            setNewCourse({ name: "", completed: false, grade: "", institution: "", credits: "" });
+                          }}
+                          className="text-slate-400 hover:text-white rounded-full px-4 text-sm"
+                        >
+                          Cancel
+                        </Button>
+                      </div>
+                    </div>
+                  )}
                   
                   <div className="overflow-x-auto rounded-xl border border-white/[0.05]">
                     <table className="w-full text-sm">
@@ -210,15 +309,18 @@ const AcademicHistorySections = ({ academicHistory, setAcademicHistory }) => {
                         </tr>
                       </thead>
                       <tbody>
-                        {(academicHistory.prerequisites?.[course.id]?.courses || []).map((c, idx) => (
-                          <tr key={idx} className="border-b border-white/[0.03]">
+                        {(academicHistory.prerequisites?.[course.id]?.courses || []).map((c) => (
+                          <tr key={c.id} className="border-b border-white/[0.03]">
                             <td className="py-3 px-4 text-white">{c.name}</td>
                             <td className="py-3 px-4 text-white">{c.completed ? "Yes" : "No"}</td>
-                            <td className="py-3 px-4 text-white">{c.grade}</td>
-                            <td className="py-3 px-4 text-white">{c.institution}</td>
+                            <td className="py-3 px-4 text-white">{c.grade || "-"}</td>
+                            <td className="py-3 px-4 text-white">{c.institution || "-"}</td>
                             <td className="py-3 px-4 text-white">{c.credits}</td>
                             <td className="py-3 px-4">
-                              <button className="text-red-400 hover:text-red-300 p-1 rounded-full hover:bg-red-400/10 transition-colors">
+                              <button 
+                                onClick={() => handleRemovePrerequisite(course.id, c.id)}
+                                className="text-red-400 hover:text-red-300 p-1 rounded-full hover:bg-red-400/10 transition-colors"
+                              >
                                 <Trash2 className="w-4 h-4" />
                               </button>
                             </td>
