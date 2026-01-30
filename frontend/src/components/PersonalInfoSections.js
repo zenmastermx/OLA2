@@ -11,6 +11,26 @@ import {
   Phone, User, Shield, Heart, Flag, Briefcase, Users, Check, ChevronRight, Plus, Trash2
 } from "lucide-react";
 
+// Phone number formatting function
+const formatPhoneNumber = (value) => {
+  if (!value) return value;
+  
+  // Remove all non-digit characters
+  const phoneNumber = value.replace(/\D/g, '');
+  
+  // Get the length of the phone number
+  const phoneNumberLength = phoneNumber.length;
+  
+  // Format based on length
+  if (phoneNumberLength < 4) {
+    return phoneNumber;
+  }
+  if (phoneNumberLength < 7) {
+    return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3)}`;
+  }
+  return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3, 6)}-${phoneNumber.slice(6, 10)}`;
+};
+
 const PersonalInfoSections = ({ personalInfo, setPersonalInfo }) => {
   const [activeSubSection, setActiveSubSection] = useState(0);
 
