@@ -267,6 +267,95 @@ const Dashboard = () => {
           </p>
         </div>
 
+        {/* Application Review Status Progress Bar - Shows for submitted applications */}
+        {submittedApps.length > 0 && (
+          <div className="glass-card rounded-2xl p-6 mb-8" data-testid="review-status-progress">
+            <h3 className="font-['Outfit'] text-lg font-semibold text-white mb-4">
+              Application Status
+            </h3>
+            {(() => {
+              const latestSubmitted = submittedApps[0];
+              const reviewStatus = latestSubmitted?.review_status || "application_received";
+              const statuses = [
+                { id: "application_received", label: "Application Received", color: "#00B4D8" },
+                { id: "under_review", label: "Under Review", color: "#FF9800" },
+                { id: "admitted", label: "Admitted", color: "#28A745" },
+                { id: "denied", label: "Denied", color: "#EF4444" }
+              ];
+              
+              // Determine current step index (denied is a separate path)
+              let currentIndex = statuses.findIndex(s => s.id === reviewStatus);
+              if (currentIndex === -1) currentIndex = 0;
+              const isDenied = reviewStatus === "denied";
+              const isAdmitted = reviewStatus === "admitted";
+              
+              return (
+                <div className="relative">
+                  {/* Progress Line */}
+                  <div className="absolute top-5 left-0 right-0 h-1 bg-white/10 rounded-full mx-8" />
+                  <div 
+                    className="absolute top-5 left-0 h-1 rounded-full mx-8 transition-all duration-500"
+                    style={{ 
+                      width: isDenied || isAdmitted 
+                        ? `calc(${((currentIndex) / (statuses.length - 1)) * 100}% - 64px)` 
+                        : `calc(${(currentIndex / (statuses.length - 1)) * 100}% - 64px)`,
+                      backgroundColor: isDenied ? "#EF4444" : isAdmitted ? "#28A745" : statuses[currentIndex]?.color || "#00B4D8"
+                    }}
+                  />
+                  
+                  {/* Status Steps */}
+                  <div className="relative flex justify-between">
+                    {statuses.map((status, index) => {
+                      const isActive = status.id === reviewStatus;
+                      const isPast = index < currentIndex;
+                      const isSkipped = isDenied && status.id === "admitted";
+                      const showDenied = isDenied && status.id === "denied";
+                      
+                      // Skip showing "Admitted" if denied, and skip "Denied" if not denied
+                      if (isSkipped) return null;
+                      if (status.id === "denied" && !isDenied) return null;
+                      
+                      return (
+                        <div key={status.id} className="flex flex-col items-center" data-testid={`status-step-${status.id}`}>
+                          <div 
+                            className={`w-10 h-10 rounded-full flex items-center justify-center border-2 transition-all ${
+                              isActive 
+                                ? `border-[${status.color}] bg-[${status.color}]/20` 
+                                : isPast 
+                                  ? "border-[#28A745] bg-[#28A745]/20" 
+                                  : "border-white/20 bg-white/5"
+                            }`}
+                            style={{
+                              borderColor: isActive ? status.color : isPast ? "#28A745" : "rgba(255,255,255,0.2)",
+                              backgroundColor: isActive ? `${status.color}20` : isPast ? "rgba(40,167,69,0.2)" : "rgba(255,255,255,0.05)"
+                            }}
+                          >
+                            {isPast ? (
+                              <CheckCircle2 className="w-5 h-5 text-[#28A745]" />
+                            ) : isActive ? (
+                              <div 
+                                className="w-3 h-3 rounded-full animate-pulse"
+                                style={{ backgroundColor: status.color }}
+                              />
+                            ) : (
+                              <div className="w-3 h-3 rounded-full bg-white/20" />
+                            )}
+                          </div>
+                          <span className={`mt-2 text-xs font-medium text-center max-w-[100px] ${
+                            isActive ? "text-white" : isPast ? "text-[#28A745]" : "text-slate-500"
+                          }`}>
+                            {status.label}
+                          </span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              );
+            })()}
+          </div>
+        )}
+
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           {/* Application Progress Card */}
