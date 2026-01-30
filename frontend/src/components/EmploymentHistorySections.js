@@ -432,6 +432,18 @@ const EmploymentHistorySections = ({ employmentHistory, setEmploymentHistory, on
           ))}
         </div>
       )}
+
+      {/* Section Complete Button */}
+      <div className="mt-8 flex justify-end">
+        <Button
+          onClick={() => onSectionComplete && onSectionComplete()}
+          className="bg-[#28A745] hover:bg-[#218838] text-white rounded-full px-6 shadow-[0_0_20px_rgba(40,167,69,0.3)]"
+          data-testid="employment-complete-btn"
+        >
+          <Check className="w-4 h-4 mr-2" />
+          Section Complete
+        </Button>
+      </div>
     </div>
   );
 };
