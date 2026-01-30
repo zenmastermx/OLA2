@@ -547,37 +547,64 @@ const Dashboard = () => {
                   Schedule Appointment
                 </a>
                 
-                <a
-                  href={`mailto:${advisor.email}?subject=Application Inquiry - ${user?.first_name} ${user?.last_name}`}
+                <button
+                  onClick={() => setShowEmailModal(true)}
                   className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-[#7B68EE]/50 text-white text-sm font-medium transition-all"
                   data-testid="email-advisor-btn"
                 >
                   <Mail className="w-4 h-4 text-[#7B68EE]" />
                   Send Email
-                </a>
+                </button>
                 
-                <a
-                  href={`sms:${advisor.phone}?body=Hi ${advisor.name.split(' ')[0]}, I'm ${user?.first_name} ${user?.last_name} and I have a question about my application.`}
+                <button
+                  onClick={() => setShowTextModal(true)}
                   className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-[#28A745]/50 text-white text-sm font-medium transition-all"
                   data-testid="text-advisor-btn"
                 >
                   <MessageCircle className="w-4 h-4 text-[#28A745]" />
                   Send Text
-                </a>
+                </button>
                 
-                <a
-                  href={`tel:${advisor.phone}`}
+                <button
+                  onClick={() => setShowCallModal(true)}
                   className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-[#FF6B35]/50 text-white text-sm font-medium transition-all"
                   data-testid="call-advisor-btn"
                 >
                   <Phone className="w-4 h-4 text-[#FF6B35]" />
                   Call
-                </a>
+                </button>
               </div>
             </div>
           </div>
         )}
       </div>
+
+      {/* Email Modal */}
+      {showEmailModal && advisor && (
+        <EmailModal 
+          onClose={() => setShowEmailModal(false)} 
+          advisor={advisor} 
+          user={user} 
+        />
+      )}
+
+      {/* Text Modal */}
+      {showTextModal && advisor && (
+        <TextModal 
+          onClose={() => setShowTextModal(false)} 
+          advisor={advisor} 
+          user={user} 
+        />
+      )}
+
+      {/* Call Modal */}
+      {showCallModal && advisor && (
+        <CallModal 
+          onClose={() => setShowCallModal(false)} 
+          advisor={advisor} 
+          user={user} 
+        />
+      )}
 
       {/* New Application Modal */}
       {showNewAppModal && (
