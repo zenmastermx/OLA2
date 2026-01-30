@@ -877,6 +877,26 @@ async def get_programs():
                     {"code": "DNP", "name": "Doctor of Nursing Practice", "duration": "3 years"}
                 ],
                 "campuses": ["Austin", "Miami", "St. Augustine"]
+            },
+            {
+                "id": "education",
+                "name": "Education",
+                "description": "Shape tomorrow's healthcare educators and leaders",
+                "levels": [
+                    {"code": "EdD", "name": "Doctor of Education", "duration": "3 years"},
+                    {"code": "MS-Ed", "name": "Master of Science in Education", "duration": "2 years"}
+                ],
+                "campuses": ["Austin", "St. Augustine", "Online"]
+            },
+            {
+                "id": "certificates",
+                "name": "Certificates",
+                "description": "Advance your skills with specialized training programs",
+                "levels": [
+                    {"code": "Prof", "name": "Professional Certificate", "duration": "6-12 months"},
+                    {"code": "Adv", "name": "Advanced Specialty Certificate", "duration": "3-6 months"}
+                ],
+                "campuses": ["Austin", "Dallas", "Miami", "San Marcos", "St. Augustine", "Online"]
             }
         ],
         "start_terms": ["Spring 2026", "Summer 2026", "Fall 2026", "Spring 2027"]
