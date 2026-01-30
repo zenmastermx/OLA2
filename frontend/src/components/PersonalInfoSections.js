@@ -31,7 +31,7 @@ const formatPhoneNumber = (value) => {
   return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3, 6)}-${phoneNumber.slice(6, 10)}`;
 };
 
-const PersonalInfoSections = ({ personalInfo, setPersonalInfo }) => {
+const PersonalInfoSections = ({ personalInfo, setPersonalInfo, onSectionComplete }) => {
   const [activeSubSection, setActiveSubSection] = useState(0);
 
   const subSections = [
