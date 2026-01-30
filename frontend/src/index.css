@@ -48,84 +48,109 @@
     --usa-input-bg: rgba(241, 245, 249, 1);
 }
 
-/* Light mode specific overrides */
-.light-mode body {
-    background-color: var(--usa-bg-default);
-    color: var(--usa-text-primary);
+/* Light mode global overrides */
+.light-mode,
+.light-mode * {
+    --tw-text-opacity: 1;
 }
 
 .light-mode .glass-card {
-    background: var(--usa-card-bg);
-    border: 1px solid var(--usa-border);
+    background: rgba(255, 255, 255, 0.9) !important;
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 .light-mode .glass-card:hover {
-    border-color: rgba(0, 180, 216, 0.5);
+    border-color: rgba(0, 180, 216, 0.5) !important;
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 
-.light-mode .bg-\[\\#0A0E14\] {
-    background-color: var(--usa-bg-default) !important;
+/* Light mode background overrides */
+body.light-mode,
+.light-mode .min-h-screen {
+    background-color: #F8FAFC !important;
 }
 
-.light-mode .bg-\[\\#11161F\] {
-    background-color: var(--usa-bg-paper) !important;
+.light-mode nav {
+    background-color: rgba(255, 255, 255, 0.9) !important;
+    border-color: rgba(0, 0, 0, 0.08) !important;
 }
 
+/* Light mode text color overrides */
+.light-mode h1,
+.light-mode h2,
+.light-mode h3,
+.light-mode h4,
 .light-mode .text-white {
-    color: var(--usa-text-primary) !important;
+    color: #1E293B !important;
 }
 
+.light-mode p,
+.light-mode span,
 .light-mode .text-slate-400,
 .light-mode .text-slate-500 {
-    color: var(--usa-text-secondary) !important;
+    color: #64748B !important;
 }
 
 .light-mode .text-slate-600 {
-    color: var(--usa-text-muted) !important;
+    color: #94A3B8 !important;
 }
 
-.light-mode .border-white\/5,
-.light-mode .border-white\/10,
-.light-mode .border-white\/\[0\.05\],
-.light-mode .border-white\/\[0\.08\] {
-    border-color: var(--usa-border) !important;
+/* Keep colored text intact */
+.light-mode .text-\[\#00B4D8\],
+.light-mode .text-\[\#00F5FF\],
+.light-mode .text-\[\#7B68EE\],
+.light-mode .text-\[\#28A745\],
+.light-mode .text-\[\#FF9800\],
+.light-mode .text-\[\#EF4444\] {
+    color: inherit !important;
 }
 
-.light-mode .bg-white\/5,
-.light-mode .bg-white\/\[0\.02\] {
+/* Keep badge/pill text colors */
+.light-mode [class*="bg-\[\#"]:not(.light-mode [class*="bg-\[\#0A"]):not(.light-mode [class*="bg-\[\#11"]) span,
+.light-mode .rounded-full[class*="text-"] {
+    color: inherit !important;
+}
+
+/* Light mode border overrides */
+.light-mode [class*="border-white"] {
+    border-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Light mode background overrides for cards */
+.light-mode [class*="bg-white/5"],
+.light-mode [class*="bg-white/\[0"] {
     background-color: rgba(0, 0, 0, 0.03) !important;
 }
 
-.light-mode .bg-black\/30,
-.light-mode .bg-black\/60 {
+.light-mode [class*="bg-black/30"],
+.light-mode [class*="bg-black/60"] {
     background-color: rgba(241, 245, 249, 1) !important;
 }
 
+/* Light mode input styles */
 .light-mode input,
 .light-mode select,
 .light-mode textarea {
-    background-color: var(--usa-input-bg) !important;
-    color: var(--usa-text-primary) !important;
-    border-color: var(--usa-border) !important;
+    background-color: #F1F5F9 !important;
+    color: #1E293B !important;
+    border-color: rgba(0, 0, 0, 0.1) !important;
 }
 
 .light-mode input::placeholder,
 .light-mode textarea::placeholder {
-    color: var(--usa-text-muted) !important;
+    color: #94A3B8 !important;
 }
 
-.light-mode .gradient-hero {
-    background: linear-gradient(135deg, #F8FAFC 0%, #E0F2F7 50%, #F8FAFC 100%);
+.light-mode input:focus,
+.light-mode select:focus,
+.light-mode textarea:focus {
+    border-color: #00B4D8 !important;
 }
 
-.light-mode .gradient-radial {
-    background: radial-gradient(ellipse at center, #E0F2F7 0%, #F8FAFC 70%);
-}
-
+/* Light mode scrollbar */
 .light-mode ::-webkit-scrollbar-track {
-    background: var(--usa-bg-default);
+    background: #F8FAFC;
 }
 
 .light-mode ::-webkit-scrollbar-thumb {
@@ -133,7 +158,7 @@
 }
 
 .light-mode ::-webkit-scrollbar-thumb:hover {
-    background: var(--usa-primary);
+    background: #00B4D8;
 }
 
 body {
