@@ -175,45 +175,45 @@ const LandingPage = () => {
             </p>
           </div>
           
-          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {programs.map((program) => (
               <div
                 key={program.id}
                 onClick={() => setSelectedProgram(program.id)}
-                className={`glass-card rounded-3xl p-8 cursor-pointer card-lift ${
+                className={`glass-card rounded-3xl p-6 cursor-pointer card-lift ${
                   selectedProgram === program.id ? 'border-[#00F5FF] shadow-[0_0_30px_rgba(0,245,255,0.2)]' : ''
                 }`}
                 data-testid={`program-card-${program.id}`}
               >
                 <div 
-                  className="w-16 h-16 rounded-2xl flex items-center justify-center mb-6"
+                  className="w-14 h-14 rounded-2xl flex items-center justify-center mb-5"
                   style={{ background: `${program.color}20` }}
                 >
-                  <program.icon className="w-8 h-8" style={{ color: program.color }} />
+                  <program.icon className="w-7 h-7" style={{ color: program.color }} />
                 </div>
-                <h3 className="font-['Outfit'] text-2xl font-bold mb-2">{program.name}</h3>
-                <p className="text-slate-400 mb-6">{program.description}</p>
+                <h3 className="font-['Outfit'] text-xl font-bold mb-2">{program.name}</h3>
+                <p className="text-slate-400 text-sm mb-4">{program.description}</p>
                 <div className="flex flex-wrap gap-2">
                   {program.degrees.map((degree) => (
                     <span 
                       key={degree}
-                      className="px-3 py-1 rounded-full text-sm bg-white/5 border border-white/10"
+                      className="px-2 py-1 rounded-full text-xs bg-white/5 border border-white/10"
                     >
                       {degree}
                     </span>
                   ))}
                 </div>
                 {selectedProgram === program.id && (
-                  <div className="mt-6">
+                  <div className="mt-5">
                     <Button 
                       onClick={(e) => {
                         e.stopPropagation();
                         navigate("/register", { state: { program: program.id } });
                       }}
-                      className="w-full bg-[#00B4D8] hover:bg-[#0096B4] text-white rounded-full"
+                      className="w-full bg-[#00B4D8] hover:bg-[#0096B4] text-white rounded-full text-sm py-2"
                       data-testid={`apply-${program.id}-btn`}
                     >
-                      Apply for {program.name}
+                      Apply Now
                       <ArrowRight className="ml-2 w-4 h-4" />
                     </Button>
                   </div>
