@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { useAuth, API } from "@/App";
+import { useAuth, API, useTheme } from "@/App";
 import axios from "axios";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -10,7 +10,8 @@ import { toast } from "sonner";
 import {
   LayoutDashboard, User, GraduationCap, FileText, DollarSign, CheckCircle2,
   LogOut, Plus, Clock, AlertCircle, ChevronRight, Calendar, Upload,
-  MessageCircle, Sparkles, X, Phone, Mail, Video, CalendarDays, MapPin, BookOpen
+  MessageCircle, Sparkles, X, Phone, Mail, Video, CalendarDays, MapPin, BookOpen,
+  Sun, Moon
 } from "lucide-react";
 import AIChat from "@/components/AIChat";
 import { EmailModal, TextModal, CallModal, ScheduleModal } from "@/components/AdvisorContactModals";
