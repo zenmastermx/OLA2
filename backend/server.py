@@ -41,7 +41,7 @@ ENROLLMENT_ADVISORS = [
         "phone": "(904) 826-1234",
         "avatar_url": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=face",
         "specialization": "Occupational Therapy Programs",
-        "calendly_link": "https://calendly.com/usa-admissions/sarah-mitchell"
+        "acuity_link": "https://usa-admissions.acuityscheduling.com/schedule.php?appointmentType=sarah-mitchell"
     },
     {
         "id": "adv002",
@@ -51,7 +51,7 @@ ENROLLMENT_ADVISORS = [
         "phone": "(904) 826-1235",
         "avatar_url": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
         "specialization": "Nursing Programs",
-        "calendly_link": "https://calendly.com/usa-admissions/michael-chen"
+        "acuity_link": "https://usa-admissions.acuityscheduling.com/schedule.php?appointmentType=michael-chen"
     },
     {
         "id": "adv003",
@@ -61,7 +61,7 @@ ENROLLMENT_ADVISORS = [
         "phone": "(904) 826-1236",
         "avatar_url": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
         "specialization": "All Programs",
-        "calendly_link": "https://calendly.com/usa-admissions/jessica-rodriguez"
+        "acuity_link": "https://usa-admissions.acuityscheduling.com/schedule.php?appointmentType=jessica-rodriguez"
     },
     {
         "id": "adv004",
@@ -71,7 +71,7 @@ ENROLLMENT_ADVISORS = [
         "phone": "(904) 826-1237",
         "avatar_url": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
         "specialization": "Graduate Programs",
-        "calendly_link": "https://calendly.com/usa-admissions/david-thompson"
+        "acuity_link": "https://usa-admissions.acuityscheduling.com/schedule.php?appointmentType=david-thompson"
     }
 ]
 
