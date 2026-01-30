@@ -471,7 +471,7 @@ const ApplicationForm = () => {
                     <h4 className="text-white font-medium">Academic History</h4>
                   </div>
                   <button 
-                    onClick={() => { setCurrentStep(2); navigate(`/application/${appId}/2`); }}
+                    onClick={() => { setCurrentStep(2); navigate(`/application/${appId}/2`); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
                     className="px-3 py-1.5 rounded-full text-xs font-medium bg-white/5 text-[#7B68EE] hover:bg-[#7B68EE]/10 transition-colors opacity-0 group-hover:opacity-100"
                   >
                     Edit
