@@ -30,7 +30,7 @@ A cutting-edge, futuristic student online application portal for the University 
 
 ---
 
-## What's Been Implemented (Jan 29, 2026)
+## What's Been Implemented (Jan 30, 2026)
 
 ### Pages
 1. **Landing Page** (`/`)
@@ -50,6 +50,11 @@ A cutting-edge, futuristic student online application portal for the University 
    - Password strength indicators
    - Confirm password validation
    - **Auto-assigns enrollment advisor on registration**
+   - **Communication Consent Preferences** (NEW - Jan 30)
+     - Phone Calls consent toggle
+     - Text Messages (SMS) consent toggle
+     - Email Communications consent toggle
+     - Preferences saved to database and returned on login
 
 4. **Dashboard** (`/dashboard`)
    - Welcome greeting with user name
