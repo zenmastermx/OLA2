@@ -666,13 +666,19 @@ const AcademicHistorySections = ({ academicHistory, setAcademicHistory }) => {
                     ? "bg-[#28A745]/20"
                     : "bg-white/5"
               }`}>
-                {isSubSectionComplete(section.id) ? (
-                  <Check className="w-4 h-4 text-[#28A745]" />
-                ) : (
-                  <section.icon className={`w-4 h-4 ${activeSubSection === section.id ? "text-[#00F5FF]" : "text-slate-500"}`} />
-                )}
+                <section.icon className={`w-4 h-4 ${
+                  activeSubSection === section.id 
+                    ? "text-[#00F5FF]" 
+                    : isSubSectionComplete(section.id)
+                      ? "text-[#28A745]"
+                      : "text-slate-500"
+                }`} />
               </div>
-              <span className="text-sm font-medium flex-1">{section.label}</span>
+              <span className={`text-sm font-medium flex-1 ${
+                isSubSectionComplete(section.id) && activeSubSection !== section.id
+                  ? "text-[#28A745]" 
+                  : ""
+              }`}>{section.label}</span>
             </button>
           ))}
         </div>
