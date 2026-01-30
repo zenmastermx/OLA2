@@ -243,7 +243,7 @@ const EmploymentHistorySections = ({ employmentHistory, setEmploymentHistory, on
                 <Input
                   type="tel"
                   value={newVerification.verifier_phone}
-                  onChange={(e) => setNewVerification({ ...newVerification, verifier_phone: e.target.value })}
+                  onChange={(e) => setNewVerification({ ...newVerification, verifier_phone: formatPhoneNumber(e.target.value) })}
                   placeholder="(000) 000-0000"
                   className="h-12 bg-black/30 border-white/[0.08] focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20 text-white rounded-full px-5 transition-all duration-300 placeholder:text-slate-600"
                   data-testid="verifier-phone"
