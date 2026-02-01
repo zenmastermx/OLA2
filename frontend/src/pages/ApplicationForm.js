@@ -24,6 +24,7 @@ const ApplicationForm = () => {
   const navigate = useNavigate();
   const { appId, step: urlStep } = useParams();
   const { token } = useAuth();
+  const { theme, toggleTheme } = useTheme();
   const [application, setApplication] = useState(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -31,6 +32,8 @@ const ApplicationForm = () => {
   const [showChat, setShowChat] = useState(false);
   const [programs, setPrograms] = useState(null);
   const [expandedTranscript, setExpandedTranscript] = useState(false);
+  const [transcriptRequests, setTranscriptRequests] = useState({});
+  const [requestingTranscript, setRequestingTranscript] = useState({});
 
   // Form state
   const [personalInfo, setPersonalInfo] = useState({});
@@ -44,7 +47,8 @@ const ApplicationForm = () => {
     { step: 2, label: "Academic History", icon: GraduationCap },
     { step: 3, label: "Employment History", icon: LayoutDashboard },
     { step: 4, label: "Documents Required", icon: Upload },
-    { step: 5, label: "Review & Submit", icon: CheckCircle2 }
+    { step: 5, label: "Request Official Transcripts", icon: Send },
+    { step: 6, label: "Review & Submit", icon: CheckCircle2 }
   ];
 
   useEffect(() => {
