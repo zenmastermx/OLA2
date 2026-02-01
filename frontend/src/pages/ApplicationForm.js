@@ -73,6 +73,7 @@ const ApplicationForm = () => {
       setProgramSelection(response.data.program_selection || {});
       setFinancialAid(response.data.financial_aid || {});
       setEmploymentHistory(response.data.employment_history || {});
+      setTranscriptRequests(response.data.transcript_requests || {});
       if (!urlStep) {
         setCurrentStep(response.data.current_step || 1);
       }
