@@ -126,7 +126,7 @@ const ApplicationForm = () => {
 
   const handleNext = async () => {
     const saved = await saveProgress(currentStep + 1);
-    if (saved && currentStep < 6) {
+    if (saved && currentStep < steps.length) {
       setCurrentStep(currentStep + 1);
       navigate(`/application/${appId}/${currentStep + 1}`);
       window.scrollTo({ top: 0, behavior: 'smooth' });
