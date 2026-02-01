@@ -501,6 +501,271 @@ const ApplicationForm = () => {
         );
 
       case 5:
+        // Request Official Transcripts Step
+        const institutions = academicHistory.previous_institutions || [];
+        
+        // Transcript exchange services configuration
+        const transcriptServices = [
+          { id: "parchment", name: "Parchment" },
+          { id: "nsc", name: "National Student Clearinghouse" },
+          { id: "portage", name: "Portage" },
+          { id: "cas", name: "CAS" },
+          { id: "jst", name: "Joint Service Transcripts" },
+          { id: "certified_mail", name: "USA Certified Mail" }
+        ];
+        
+        // Mock mapping of institutions to supported services (in production, this would come from backend)
+        const getInstitutionServices = (institutionName) => {
+          // For demo purposes, randomly assign some services. In production, this comes from backend config
+          const name = institutionName?.toLowerCase() || "";
+          if (name.includes("california") || name.includes("ucla")) return ["parchment", "nsc"];
+          if (name.includes("stanford")) return ["nsc", "cas"];
+          if (name.includes("michigan")) return ["parchment", "portage"];
+          if (name.includes("harvard") || name.includes("mit")) return ["nsc", "cas"];
+          if (name.includes("military") || name.includes("army") || name.includes("navy")) return ["jst"];
+          // Default: most institutions support at least one service
+          return ["parchment", "nsc"];
+        };
+        
+        const handleTranscriptRequest = async (institutionId, service) => {
+          setRequestingTranscript(prev => ({ ...prev, [institutionId]: true }));
+          
+          try {
+            const response = await axios.post(
+              `${API}/applications/${appId}/transcript-request`,
+              {
+                institution_id: institutionId,
+                service: service,
+                timestamp: new Date().toISOString()
+              },
+              { headers: { Authorization: `Bearer ${token}` } }
+            );
+            
+            setTranscriptRequests(prev => ({
+              ...prev,
+              [institutionId]: {
+                service: service,
+                status: service === "certified_mail" ? "marked_sent" : "requested",
+                timestamp: new Date().toISOString()
+              }
+            }));
+            
+            toast.success(service === "certified_mail" 
+              ? "Marked as sent via certified mail" 
+              : `Transcript request sent via ${transcriptServices.find(s => s.id === service)?.name}`
+            );
+          } catch (error) {
+            console.error("Transcript request error:", error);
+            toast.error("Failed to submit transcript request. Please try again.");
+          } finally {
+            setRequestingTranscript(prev => ({ ...prev, [institutionId]: false }));
+          }
+        };
+        
+        return (
+          <div className="space-y-8" data-testid="step-5-transcripts">
+            {/* Section Header */}
+            <div className="relative">
+              <div className="absolute -left-4 top-0 w-1 h-full bg-gradient-to-b from-[#00B4D8] to-[#7B68EE] rounded-full" />
+              <h3 className={`text-2xl font-light tracking-tight ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>Request Official Transcripts</h3>
+              <p className={`text-sm mt-1 ${theme === 'dark' ? 'text-slate-500' : 'text-gray-600'}`}>Request official transcripts from each institution in your academic history</p>
+            </div>
+
+            {/* Info Notice */}
+            <div className={`backdrop-blur-xl border rounded-2xl p-6 transition-colors duration-500 ${theme === 'dark' ? 'bg-white/[0.02] border-white/[0.05] hover:border-[#00B4D8]/20' : 'bg-white border-gray-200 hover:border-[#00B4D8]/30'}`}>
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 rounded-full bg-[#00B4D8]/10 flex items-center justify-center flex-shrink-0">
+                  <Mail className="w-5 h-5 text-[#00B4D8]" />
+                </div>
+                <div className="space-y-2">
+                  <p className={`font-medium ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>How Transcript Requests Work</p>
+                  <p className={`text-sm ${theme === 'dark' ? 'text-slate-400' : 'text-gray-600'}`}>
+                    Select a transcript exchange service for each institution and click "Request" to initiate the official transcript request. 
+                    If your institution doesn't support electronic delivery, you can select "USA Certified Mail" to manually request and mail your transcript.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Institutions Table */}
+            {institutions.length === 0 ? (
+              <div className={`backdrop-blur-xl border rounded-2xl p-10 text-center ${theme === 'dark' ? 'bg-white/[0.02] border-white/[0.05]' : 'bg-white border-gray-200'}`}>
+                <div className="w-16 h-16 rounded-full bg-[#FF9800]/10 flex items-center justify-center mx-auto mb-4">
+                  <AlertCircle className="w-8 h-8 text-[#FF9800]" />
+                </div>
+                <h4 className={`font-medium mb-2 ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>No Institutions Found</h4>
+                <p className={`text-sm ${theme === 'dark' ? 'text-slate-400' : 'text-gray-600'}`}>
+                  Please go back to Step 2 (Academic History) and add your previous institutions before requesting transcripts.
+                </p>
+                <Button
+                  onClick={() => { setCurrentStep(2); navigate(`/application/${appId}/2`); }}
+                  className="mt-4 bg-[#00B4D8] hover:bg-[#0096B4] text-white rounded-full px-6"
+                >
+                  Go to Academic History
+                </Button>
+              </div>
+            ) : (
+              <div className="space-y-4">
+                {institutions.map((inst, index) => {
+                  const institutionId = inst.institution_name?.replace(/\s+/g, '_').toLowerCase() || `inst_${index}`;
+                  const supportedServices = getInstitutionServices(inst.institution_name);
+                  const requestData = transcriptRequests[institutionId];
+                  const isRequested = requestData?.status === "requested" || requestData?.status === "marked_sent";
+                  const selectedService = requestData?.service || "";
+                  const [localSelectedService, setLocalSelectedService] = useState(selectedService);
+                  
+                  return (
+                    <div
+                      key={institutionId}
+                      className={`backdrop-blur-xl border rounded-2xl p-5 transition-all duration-500 ${
+                        isRequested
+                          ? (theme === 'dark' ? 'border-[#28A745]/30 bg-[#28A745]/5' : 'border-[#28A745]/30 bg-[#28A745]/5')
+                          : (theme === 'dark' ? 'bg-white/[0.02] border-white/[0.05] hover:border-[#00B4D8]/30' : 'bg-white border-gray-200 hover:border-[#00B4D8]/30')
+                      }`}
+                      data-testid={`transcript-row-${index}`}
+                    >
+                      <div className="flex flex-col md:flex-row md:items-center gap-4">
+                        {/* Institution Name */}
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-3">
+                            <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${isRequested ? 'bg-[#28A745]/20' : 'bg-[#7B68EE]/10'}`}>
+                              {isRequested ? (
+                                <Check className="w-5 h-5 text-[#28A745]" />
+                              ) : (
+                                <GraduationCap className="w-5 h-5 text-[#7B68EE]" />
+                              )}
+                            </div>
+                            <div className="min-w-0">
+                              <p className={`font-medium truncate ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
+                                {inst.institution_name || "Unknown Institution"}
+                              </p>
+                              <p className={`text-xs ${theme === 'dark' ? 'text-slate-500' : 'text-gray-500'}`}>
+                                {inst.degree_type} {inst.major ? `in ${inst.major}` : ""}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        {/* Service Selector */}
+                        <div className="w-full md:w-56">
+                          {supportedServices.length > 0 || true ? (
+                            <Select
+                              value={localSelectedService}
+                              onValueChange={setLocalSelectedService}
+                              disabled={isRequested}
+                            >
+                              <SelectTrigger className={`h-11 rounded-xl ${
+                                theme === 'dark' 
+                                  ? 'bg-black/30 border-white/[0.08] text-white' 
+                                  : 'bg-gray-50 border-gray-200 text-gray-900'
+                              } ${isRequested ? 'opacity-60' : ''}`}>
+                                <SelectValue placeholder="Select service..." />
+                              </SelectTrigger>
+                              <SelectContent>
+                                {supportedServices.map(serviceId => {
+                                  const service = transcriptServices.find(s => s.id === serviceId);
+                                  return service ? (
+                                    <SelectItem key={service.id} value={service.id}>
+                                      {service.name}
+                                    </SelectItem>
+                                  ) : null;
+                                })}
+                                <SelectItem value="certified_mail">USA Certified Mail</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          ) : (
+                            <div className={`h-11 px-4 rounded-xl flex items-center text-sm ${
+                              theme === 'dark' ? 'bg-black/20 text-slate-500' : 'bg-gray-100 text-gray-500'
+                            }`}>
+                              No API Support
+                            </div>
+                          )}
+                        </div>
+                        
+                        {/* Action Button */}
+                        <div className="w-full md:w-36">
+                          {isRequested ? (
+                            <div className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-[#28A745]/20 text-[#28A745] text-sm font-medium justify-center">
+                              <Check className="w-4 h-4" />
+                              {requestData?.status === "marked_sent" ? "Marked Sent" : "Requested"}
+                            </div>
+                          ) : (
+                            <Button
+                              onClick={() => handleTranscriptRequest(institutionId, localSelectedService)}
+                              disabled={!localSelectedService || requestingTranscript[institutionId]}
+                              className={`w-full rounded-full ${
+                                localSelectedService === "certified_mail"
+                                  ? "bg-[#FF9800] hover:bg-[#F57C00]"
+                                  : "bg-[#00B4D8] hover:bg-[#0096B4]"
+                              } text-white`}
+                            >
+                              {requestingTranscript[institutionId] ? (
+                                <Loader2 className="w-4 h-4 animate-spin" />
+                              ) : localSelectedService === "certified_mail" ? (
+                                "Mark Sent"
+                              ) : (
+                                "Request"
+                              )}
+                            </Button>
+                          )}
+                        </div>
+                        
+                        {/* Status/Timestamp */}
+                        <div className="w-full md:w-40 text-right">
+                          {isRequested && requestData?.timestamp ? (
+                            <div className="flex items-center gap-2 justify-end">
+                              <Clock className="w-4 h-4 text-[#28A745]" />
+                              <span className={`text-sm ${theme === 'dark' ? 'text-slate-400' : 'text-gray-600'}`}>
+                                {new Date(requestData.timestamp).toLocaleDateString('en-US', {
+                                  month: '2-digit',
+                                  day: '2-digit',
+                                  year: 'numeric'
+                                })} {new Date(requestData.timestamp).toLocaleTimeString('en-US', {
+                                  hour: '2-digit',
+                                  minute: '2-digit'
+                                })}
+                              </span>
+                            </div>
+                          ) : (
+                            <span className={`text-sm ${theme === 'dark' ? 'text-slate-600' : 'text-gray-400'}`}>—</span>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+
+            {/* Progress Summary */}
+            {institutions.length > 0 && (
+              <div className={`backdrop-blur-xl border rounded-2xl p-6 ${theme === 'dark' ? 'bg-white/[0.02] border-white/[0.05]' : 'bg-white border-gray-200'}`}>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-[#00B4D8]/10 flex items-center justify-center">
+                      <Send className="w-5 h-5 text-[#00B4D8]" />
+                    </div>
+                    <div>
+                      <p className={`font-medium ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>Transcript Requests</p>
+                      <p className={`text-sm ${theme === 'dark' ? 'text-slate-500' : 'text-gray-600'}`}>
+                        {Object.keys(transcriptRequests).length} of {institutions.length} institutions requested
+                      </p>
+                    </div>
+                  </div>
+                  <div className={`px-4 py-2 rounded-full text-sm font-medium ${
+                    Object.keys(transcriptRequests).length === institutions.length
+                      ? "bg-[#28A745]/20 text-[#28A745]"
+                      : "bg-[#FF9800]/20 text-[#FF9800]"
+                  }`}>
+                    {Object.keys(transcriptRequests).length === institutions.length ? "All Requested" : "In Progress"}
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        );
+
+      case 6:
         return (
           <div className="space-y-8" data-testid="step-5-review">
             {/* Section Header */}
