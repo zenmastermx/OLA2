@@ -1183,7 +1183,7 @@ const ApplicationForm = () => {
             Previous
           </Button>
           
-          {currentStep < 5 ? (
+          {currentStep < steps.length ? (
             <Button
               onClick={handleNext}
               disabled={saving}
