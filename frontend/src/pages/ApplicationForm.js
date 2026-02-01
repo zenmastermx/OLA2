@@ -20,6 +20,135 @@ import PersonalInfoSections from "@/components/PersonalInfoSections";
 import AcademicHistorySections from "@/components/AcademicHistorySections";
 import EmploymentHistorySections from "@/components/EmploymentHistorySections";
 
+// Transcript Request Row Component (extracted for proper hook usage)
+const TranscriptRequestRow = ({ 
+  institution, 
+  index, 
+  theme, 
+  transcriptServices, 
+  getInstitutionServices, 
+  transcriptRequests, 
+  requestingTranscript, 
+  handleTranscriptRequest 
+}) => {
+  const institutionId = institution.institution_name?.replace(/\s+/g, '_').toLowerCase() || `inst_${index}`;
+  const supportedServices = getInstitutionServices(institution.institution_name);
+  const requestData = transcriptRequests[institutionId];
+  const isRequested = requestData?.status === "requested" || requestData?.status === "marked_sent";
+  const [localSelectedService, setLocalSelectedService] = useState(requestData?.service || "");
+  
+  return (
+    <div
+      className={`backdrop-blur-xl border rounded-2xl p-5 transition-all duration-500 ${
+        isRequested
+          ? 'border-[#28A745]/30 bg-[#28A745]/5'
+          : (theme === 'dark' ? 'bg-white/[0.02] border-white/[0.05] hover:border-[#00B4D8]/30' : 'bg-white border-gray-200 hover:border-[#00B4D8]/30')
+      }`}
+      data-testid={`transcript-row-${index}`}
+    >
+      <div className="flex flex-col md:flex-row md:items-center gap-4">
+        {/* Institution Name */}
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center gap-3">
+            <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${isRequested ? 'bg-[#28A745]/20' : 'bg-[#7B68EE]/10'}`}>
+              {isRequested ? (
+                <Check className="w-5 h-5 text-[#28A745]" />
+              ) : (
+                <GraduationCap className="w-5 h-5 text-[#7B68EE]" />
+              )}
+            </div>
+            <div className="min-w-0">
+              <p className={`font-medium truncate ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
+                {institution.institution_name || "Unknown Institution"}
+              </p>
+              <p className={`text-xs ${theme === 'dark' ? 'text-slate-500' : 'text-gray-500'}`}>
+                {institution.degree_type} {institution.major ? `in ${institution.major}` : ""}
+              </p>
+            </div>
+          </div>
+        </div>
+        
+        {/* Service Selector */}
+        <div className="w-full md:w-56">
+          <Select
+            value={localSelectedService}
+            onValueChange={setLocalSelectedService}
+            disabled={isRequested}
+          >
+            <SelectTrigger className={`h-11 rounded-xl ${
+              theme === 'dark' 
+                ? 'bg-black/30 border-white/[0.08] text-white' 
+                : 'bg-gray-50 border-gray-200 text-gray-900'
+            } ${isRequested ? 'opacity-60' : ''}`}>
+              <SelectValue placeholder="Select service..." />
+            </SelectTrigger>
+            <SelectContent>
+              {supportedServices.map(serviceId => {
+                const service = transcriptServices.find(s => s.id === serviceId);
+                return service ? (
+                  <SelectItem key={service.id} value={service.id}>
+                    {service.name}
+                  </SelectItem>
+                ) : null;
+              })}
+              <SelectItem value="certified_mail">USA Certified Mail</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+        
+        {/* Action Button */}
+        <div className="w-full md:w-36">
+          {isRequested ? (
+            <div className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-[#28A745]/20 text-[#28A745] text-sm font-medium justify-center">
+              <Check className="w-4 h-4" />
+              {requestData?.status === "marked_sent" ? "Marked Sent" : "Requested"}
+            </div>
+          ) : (
+            <Button
+              onClick={() => handleTranscriptRequest(institutionId, localSelectedService)}
+              disabled={!localSelectedService || requestingTranscript[institutionId]}
+              className={`w-full rounded-full ${
+                localSelectedService === "certified_mail"
+                  ? "bg-[#FF9800] hover:bg-[#F57C00]"
+                  : "bg-[#00B4D8] hover:bg-[#0096B4]"
+              } text-white`}
+            >
+              {requestingTranscript[institutionId] ? (
+                <Loader2 className="w-4 h-4 animate-spin" />
+              ) : localSelectedService === "certified_mail" ? (
+                "Mark Sent"
+              ) : (
+                "Request"
+              )}
+            </Button>
+          )}
+        </div>
+        
+        {/* Status/Timestamp */}
+        <div className="w-full md:w-40 text-right">
+          {isRequested && requestData?.timestamp ? (
+            <div className="flex items-center gap-2 justify-end">
+              <Clock className="w-4 h-4 text-[#28A745]" />
+              <span className={`text-sm ${theme === 'dark' ? 'text-slate-400' : 'text-gray-600'}`}>
+                {new Date(requestData.timestamp).toLocaleDateString('en-US', {
+                  month: '2-digit',
+                  day: '2-digit',
+                  year: 'numeric'
+                })} {new Date(requestData.timestamp).toLocaleTimeString('en-US', {
+                  hour: '2-digit',
+                  minute: '2-digit'
+                })}
+              </span>
+            </div>
+          ) : (
+            <span className={`text-sm ${theme === 'dark' ? 'text-slate-600' : 'text-gray-400'}`}>—</span>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const ApplicationForm = () => {
   const navigate = useNavigate();
   const { appId, step: urlStep } = useParams();
