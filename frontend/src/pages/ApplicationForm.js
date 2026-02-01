@@ -1068,13 +1068,13 @@ const ApplicationForm = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0A0E14]">
+    <div className={`min-h-screen ${theme === 'dark' ? 'bg-[#0A0E14]' : 'bg-gray-50'}`}>
       {/* Top Navigation */}
-      <nav className="sticky top-0 z-40 bg-[#0A0E14]/80 backdrop-blur-xl border-b border-white/5">
+      <nav className={`sticky top-0 z-40 backdrop-blur-xl border-b ${theme === 'dark' ? 'bg-[#0A0E14]/80 border-white/5' : 'bg-white/80 border-gray-200'}`}>
         <div className="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
           <button
             onClick={() => navigate("/dashboard")}
-            className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors"
+            className={`flex items-center gap-2 transition-colors ${theme === 'dark' ? 'text-slate-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'}`}
             data-testid="back-to-dashboard"
           >
             <ArrowLeft className="w-5 h-5" />
@@ -1082,15 +1082,24 @@ const ApplicationForm = () => {
           </button>
           
           <div className="text-center">
-            <p className="text-white font-['Outfit'] font-semibold">Application</p>
-            <p className="text-slate-500 text-sm">{application?.program_selection?.program_type || "Program"}</p>
+            <p className={`font-['Outfit'] font-semibold ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>Application</p>
+            <p className={`text-sm ${theme === 'dark' ? 'text-slate-500' : 'text-gray-500'}`}>{application?.program_selection?.program_type || "Program"}</p>
           </div>
           
           <div className="flex items-center gap-3">
+            {/* Theme Toggle */}
+            <button
+              onClick={toggleTheme}
+              className={`p-2 rounded-full transition-colors ${theme === 'dark' ? 'text-slate-400 hover:text-white hover:bg-white/5' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'}`}
+              data-testid="theme-toggle-btn"
+            >
+              {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+            </button>
+            
             {/* Ask Journey Button */}
             <Button
               onClick={() => setShowChat(true)}
-              className="bg-gradient-to-r from-[#00B4D8]/20 to-[#7B68EE]/20 border border-[#00B4D8]/30 text-white hover:border-[#00F5FF] hover:bg-[#00B4D8]/30 rounded-full px-4 py-2 flex items-center gap-2 transition-all"
+              className={`bg-gradient-to-r from-[#00B4D8]/20 to-[#7B68EE]/20 border border-[#00B4D8]/30 hover:border-[#00F5FF] hover:bg-[#00B4D8]/30 rounded-full px-4 py-2 flex items-center gap-2 transition-all ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}
               data-testid="ask-journey-btn"
             >
               <Sparkles className="w-4 h-4 text-[#00F5FF]" />
