@@ -1135,18 +1135,18 @@ const ApplicationForm = () => {
       </nav>
 
       {/* Progress Bar */}
-      <div className="bg-[#11161F] border-b border-white/5">
+      <div className={`border-b ${theme === 'dark' ? 'bg-[#11161F] border-white/5' : 'bg-white border-gray-200'}`}>
         <div className="max-w-5xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between mb-3">
-            <span className="text-slate-400 text-sm">Step {currentStep} of 5</span>
-            <span className="text-[#00F5FF] text-sm font-medium">{application?.progress || 0}% Complete</span>
+            <span className={`text-sm ${theme === 'dark' ? 'text-slate-400' : 'text-gray-600'}`}>Step {currentStep} of {steps.length}</span>
+            <span className="text-[#00B4D8] text-sm font-medium">{application?.progress || 0}% Complete</span>
           </div>
-          <Progress value={(currentStep / 5) * 100} className="h-2 bg-slate-800" />
+          <Progress value={(currentStep / steps.length) * 100} className={`h-2 ${theme === 'dark' ? 'bg-slate-800' : 'bg-gray-200'}`} />
         </div>
       </div>
 
       {/* Step Navigation */}
-      <div className="bg-[#0A0E14] border-b border-white/5 overflow-x-auto">
+      <div className={`border-b overflow-x-auto ${theme === 'dark' ? 'bg-[#0A0E14] border-white/5' : 'bg-gray-50 border-gray-200'}`}>
         <div className="max-w-5xl mx-auto px-6 py-4">
           <div className="flex gap-2 min-w-max">
             {steps.map(({ step, label, icon: Icon }) => (
