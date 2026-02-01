@@ -685,6 +685,53 @@ async def submit_application(app_id: str, current_user: dict = Depends(get_curre
     updated_app["progress"] = 100
     return ApplicationResponse(**updated_app)
 
+# ==================== TRANSCRIPT REQUEST ROUTES ====================
+
+class TranscriptRequestInput(BaseModel):
+    institution_id: str
+    service: str
+    timestamp: str
+
+@api_router.post("/applications/{app_id}/transcript-request")
+async def request_transcript(
+    app_id: str,
+    request_data: TranscriptRequestInput,
+    current_user: dict = Depends(get_current_user)
+):
+    app = await db.applications.find_one({"id": app_id, "user_id": current_user["id"]})
+    if not app:
+        raise HTTPException(status_code=404, detail="Application not found")
+    
+    # Get existing transcript requests or initialize empty dict
+    transcript_requests = app.get("transcript_requests", {})
+    
+    # Determine status based on service type
+    status = "marked_sent" if request_data.service == "certified_mail" else "requested"
+    
+    # Add or update the transcript request for this institution
+    transcript_requests[request_data.institution_id] = {
+        "service": request_data.service,
+        "status": status,
+        "timestamp": request_data.timestamp
+    }
+    
+    # Update the application
+    await db.applications.update_one(
+        {"id": app_id},
+        {"$set": {
+            "transcript_requests": transcript_requests,
+            "updated_at": datetime.now(timezone.utc).isoformat()
+        }}
+    )
+    
+    return {
+        "success": True, 
+        "institution_id": request_data.institution_id,
+        "service": request_data.service,
+        "status": status,
+        "timestamp": request_data.timestamp
+    }
+
 # ==================== DOCUMENT ROUTES ====================
 
 @api_router.post("/applications/{app_id}/documents/{doc_id}/upload")
