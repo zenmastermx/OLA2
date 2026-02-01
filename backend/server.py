@@ -286,6 +286,12 @@ class ApplicationUpdate(BaseModel):
     employment_history: Optional[EmploymentHistory] = None
     current_step: Optional[int] = None
 
+class TranscriptRequest(BaseModel):
+    institution_id: str
+    service: str
+    status: str  # requested, marked_sent
+    timestamp: str
+
 class ApplicationResponse(BaseModel):
     id: str
     user_id: str
@@ -299,6 +305,7 @@ class ApplicationResponse(BaseModel):
     employment_history: Optional[EmploymentHistory] = None
     documents: List[DocumentInfo] = []
     financial_aid: Optional[FinancialAid] = None
+    transcript_requests: Optional[dict] = None
     created_at: str
     updated_at: str
     submitted_at: Optional[str] = None
