@@ -631,7 +631,7 @@ const ApplicationForm = () => {
 
       case 5:
         // Request Official Transcripts Step
-        const institutions = academicHistory.previous_institutions || [];
+        const institutions = academicHistory.institutions || academicHistory.previous_institutions || [];
         
         // Transcript exchange services configuration
         const transcriptServices = [
