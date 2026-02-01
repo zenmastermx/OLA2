@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useAuth, API } from "@/App";
+import { useAuth, API, useTheme } from "@/App";
 import axios from "axios";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -13,7 +13,7 @@ import { toast } from "sonner";
 import {
   User, GraduationCap, LayoutDashboard, Upload, CheckCircle2,
   ArrowLeft, ArrowRight, Save, Loader2, FileText, X, Check, Sparkles,
-  AlertCircle, ChevronDown
+  AlertCircle, ChevronDown, Send, Clock, Mail, Sun, Moon
 } from "lucide-react";
 import AIChat from "@/components/AIChat";
 import PersonalInfoSections from "@/components/PersonalInfoSections";
