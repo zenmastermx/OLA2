@@ -1158,12 +1158,13 @@ const ApplicationForm = () => {
           <h1 className="font-['Outfit'] text-2xl lg:text-3xl font-bold text-white mb-2">
             {steps[currentStep - 1]?.label}
           </h1>
-          <p className="text-slate-400">
+          <p className={`${theme === 'dark' ? 'text-slate-400' : 'text-gray-600'}`}>
             {currentStep === 1 && "Tell us about yourself"}
             {currentStep === 2 && "Share your educational background"}
             {currentStep === 3 && "Tell us about your work experience"}
             {currentStep === 4 && "Upload required documents"}
-            {currentStep === 5 && "Review and submit your application"}
+            {currentStep === 5 && "Request official transcripts from your institutions"}
+            {currentStep === 6 && "Review and submit your application"}
           </p>
         </div>
 
