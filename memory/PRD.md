@@ -82,24 +82,17 @@ A cutting-edge, futuristic student online application portal for the University 
    - AI Chat "Ask Journey" button
 
 5. **Application Form** (`/application/:appId/:step`)
-   - Step 1: Personal Information (7 sub-sections)
-     - Contact Information
-     - Judicial Background
-     - Emergency Contact
-     - Citizenship & Identification
-     - US Military Background
-     - Work Experience
-     - Demographic Information
-   - Step 2: Academic History (5 sub-sections)
-     - Prerequisite Requirements
-     - Education
-     - Test Information (TOEFL)
-     - Prior Application
-     - Academic Background
-   - Step 3: Employment History
-     - Employment Verification form
-   - Step 4: Documents Required
-   - Step 5: Review & Submit
+   - 6-step application: Personal Info, Academic History, Employment History, Documents Required, **Request Official Transcripts (NEW)**, Review & Submit
+   - Theme toggle in navbar
+   - Step navigation with progress indicators
+   - **Request Official Transcripts Step (NEW)**:
+     - Pulls institutions from Academic History
+     - Service dropdown per institution (Parchment, National Student Clearinghouse, Portage, CAS, Joint Service Transcripts)
+     - "USA Certified Mail" option for manual requests
+     - "Request" button triggers API call with timestamp
+     - "Mark Sent" option for certified mail
+     - Status persists server-side (requested/marked_sent)
+     - Progress summary shows X of Y institutions requested
 
 ### Features
 - ✅ JWT Authentication (register/login/logout)
