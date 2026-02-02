@@ -614,12 +614,9 @@ const Dashboard = () => {
                             <span className="px-3 py-1 rounded-full text-xs font-medium bg-[#28A745]/20 text-[#28A745]">
                               Submitted
                             </span>
-                            <span className="px-3 py-1 rounded-full text-xs font-medium bg-[#7B68EE]/20 text-[#7B68EE]">
-                              {app.program_selection?.program_type || "Program"}
-                            </span>
                           </div>
                           <p className="text-white font-semibold text-lg">
-                            {app.program_selection?.program_pathway || app.program_selection?.program_type || "Healthcare"}
+                            {app.program_selection?.program_type || "Healthcare"}
                           </p>
                           <p className="text-slate-500 text-sm">
                             Submitted {new Date(app.submitted_at).toLocaleDateString()}
