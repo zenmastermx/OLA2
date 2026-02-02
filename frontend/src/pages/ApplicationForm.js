@@ -89,15 +89,11 @@ const TranscriptRequestRow = ({
               <SelectValue placeholder="Select service..." />
             </SelectTrigger>
             <SelectContent>
-              {supportedServices.map(serviceId => {
-                const service = transcriptServices.find(s => s.id === serviceId);
-                return service ? (
-                  <SelectItem key={service.id} value={service.id}>
-                    {service.name}
-                  </SelectItem>
-                ) : null;
-              })}
-              <SelectItem value="certified_mail">USA Certified Mail</SelectItem>
+              {transcriptServices.map(service => (
+                <SelectItem key={service.id} value={service.id}>
+                  {service.name}
+                </SelectItem>
+              ))}
             </SelectContent>
           </Select>
         </div>
