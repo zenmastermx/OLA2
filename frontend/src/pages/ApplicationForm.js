@@ -31,11 +31,17 @@ const TranscriptRequestRow = ({
   requestingTranscript, 
   handleTranscriptRequest 
 }) => {
-  const institutionId = institution.institution_name?.replace(/\s+/g, '_').toLowerCase() || `inst_${index}`;
-  const supportedServices = getInstitutionServices(institution.institution_name);
+  // Support both "name" and "institution_name" field names
+  const institutionName = institution.name || institution.institution_name || "";
+  const institutionId = institutionName.replace(/\s+/g, '_').toLowerCase() || `inst_${index}`;
+  const supportedServices = getInstitutionServices(institutionName);
   const requestData = transcriptRequests[institutionId];
   const isRequested = requestData?.status === "requested" || requestData?.status === "marked_sent";
   const [localSelectedService, setLocalSelectedService] = useState(requestData?.service || "");
+  
+  // Get degree info - support both old and new field names
+  const degreeType = institution.degree || institution.degree_type || "";
+  const major = institution.major || "";
   
   return (
     <div
@@ -59,10 +65,10 @@ const TranscriptRequestRow = ({
             </div>
             <div className="min-w-0">
               <p className={`font-medium truncate ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
-                {institution.institution_name || "Unknown Institution"}
+                {institutionName || "Unknown Institution"}
               </p>
               <p className={`text-xs ${theme === 'dark' ? 'text-slate-500' : 'text-gray-500'}`}>
-                {institution.degree_type} {institution.major ? `in ${institution.major}` : ""}
+                {degreeType} {major ? `in ${major}` : ""}
               </p>
             </div>
           </div>
