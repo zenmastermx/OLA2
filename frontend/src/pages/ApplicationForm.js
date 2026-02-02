@@ -650,9 +650,9 @@ const ApplicationForm = () => {
         ];
         
         // Mock mapping of institutions to supported services (in production, this would come from backend)
-        const getInstitutionServices = (institutionName) => {
+        const getInstitutionServices = (instName) => {
           // For demo purposes, randomly assign some services. In production, this comes from backend config
-          const name = institutionName?.toLowerCase() || "";
+          const name = (instName || "").toLowerCase();
           if (name.includes("california") || name.includes("ucla")) return ["parchment", "nsc"];
           if (name.includes("stanford")) return ["nsc", "cas"];
           if (name.includes("michigan")) return ["parchment", "portage"];
