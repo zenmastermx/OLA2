@@ -295,14 +295,14 @@ const Dashboard = () => {
               const statuses = [
                 { id: "application_received", label: "Application Received", color: "#00B4D8" },
                 { id: "under_review", label: "Under Review", color: "#FF9800" },
-                { id: "admitted", label: "Admitted", color: "#28A745" },
-                { id: "denied", label: "Denied", color: "#EF4444" }
+                { id: "decision", label: "Decision", color: "#7B68EE" },
+                { id: "admitted", label: "Admitted", color: "#28A745" }
               ];
               
               // Determine current step index
               let currentIndex = statuses.findIndex(s => s.id === reviewStatus);
               if (currentIndex === -1) currentIndex = 0;
-              const isDenied = reviewStatus === "denied";
+              const isDecision = reviewStatus === "decision";
               const isAdmitted = reviewStatus === "admitted";
               
               return (
@@ -317,7 +317,7 @@ const Dashboard = () => {
                     className="absolute top-5 left-0 h-1 rounded-full mx-8 transition-all duration-500"
                     style={{ 
                       width: `calc(${(currentIndex / (statuses.length - 1)) * 100}% - 64px)`,
-                      backgroundColor: isDenied ? "#EF4444" : isAdmitted ? "#28A745" : statuses[currentIndex]?.color || "#00B4D8"
+                      backgroundColor: isAdmitted ? "#28A745" : isDecision ? "#7B68EE" : statuses[currentIndex]?.color || "#00B4D8"
                     }}
                   />
                   
