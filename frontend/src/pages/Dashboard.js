@@ -587,10 +587,10 @@ const Dashboard = () => {
                       return { label: "Application Received", color: "#00B4D8", bgColor: "rgba(0,180,216,0.2)" };
                     case "under_review":
                       return { label: "Under Review", color: "#FF9800", bgColor: "rgba(255,152,0,0.2)" };
+                    case "decision":
+                      return { label: "Decision", color: "#7B68EE", bgColor: "rgba(123,104,238,0.2)" };
                     case "admitted":
                       return { label: "Admitted", color: "#28A745", bgColor: "rgba(40,167,69,0.2)" };
-                    case "denied":
-                      return { label: "Denied", color: "#EF4444", bgColor: "rgba(239,68,68,0.2)" };
                     default:
                       return { label: "Application Received", color: "#00B4D8", bgColor: "rgba(0,180,216,0.2)" };
                   }
