@@ -1022,15 +1022,15 @@ const ApplicationForm = () => {
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div className="p-4 rounded-xl bg-black/20 border border-white/[0.03]">
                   <p className="text-slate-600 text-xs uppercase tracking-wider mb-1">Program</p>
-                  <p className="text-white font-medium">{programSelection.program_type || "OT"}</p>
+                  <p className="text-white font-medium">{programSelection.program_type || "Not selected"}</p>
                 </div>
                 <div className="p-4 rounded-xl bg-black/20 border border-white/[0.03]">
-                  <p className="text-slate-600 text-xs uppercase tracking-wider mb-1">Degree</p>
-                  <p className="text-white font-medium">{programSelection.degree_type || "Not selected"}</p>
+                  <p className="text-slate-600 text-xs uppercase tracking-wider mb-1">Pathway</p>
+                  <p className="text-white font-medium">{programSelection.program_pathway || "Not selected"}</p>
                 </div>
                 <div className="p-4 rounded-xl bg-black/20 border border-white/[0.03]">
                   <p className="text-slate-600 text-xs uppercase tracking-wider mb-1">Campus</p>
-                  <p className="text-white font-medium capitalize">{programSelection.campus?.replace('_', ' ') || "Not selected"}</p>
+                  <p className="text-white font-medium capitalize">{programSelection.campus || programSelection.primary_campus || "Not selected"}</p>
                 </div>
                 <div className="p-4 rounded-xl bg-black/20 border border-white/[0.03]">
                   <p className="text-slate-600 text-xs uppercase tracking-wider mb-1">Start Term</p>
