@@ -778,6 +778,27 @@ const ApplicationForm = () => {
                 </div>
               </div>
             )}
+
+            {/* Mailing Address for Physical Transcripts */}
+            <div className={`backdrop-blur-xl border rounded-2xl p-6 transition-colors duration-500 ${theme === 'dark' ? 'bg-white/[0.02] border-white/[0.05] hover:border-[#FF9800]/20' : 'bg-white border-gray-200 hover:border-[#FF9800]/30'}`}>
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 rounded-full bg-[#FF9800]/10 flex items-center justify-center flex-shrink-0">
+                  <Mail className="w-5 h-5 text-[#FF9800]" />
+                </div>
+                <div className="space-y-3">
+                  <p className={`font-medium ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>Send Transcripts by Mail</p>
+                  <p className={`text-sm ${theme === 'dark' ? 'text-slate-400' : 'text-gray-600'}`}>
+                    If sending official transcripts by mail, please have them sent to:
+                  </p>
+                  <div className={`p-4 rounded-xl ${theme === 'dark' ? 'bg-black/20 border border-white/[0.05]' : 'bg-gray-50 border border-gray-200'}`}>
+                    <p className={`font-medium ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>Admissions Office</p>
+                    <p className={`text-sm ${theme === 'dark' ? 'text-slate-300' : 'text-gray-700'}`}>University of St. Augustine for Health Sciences</p>
+                    <p className={`text-sm ${theme === 'dark' ? 'text-slate-300' : 'text-gray-700'}`}>1 News Place</p>
+                    <p className={`text-sm ${theme === 'dark' ? 'text-slate-300' : 'text-gray-700'}`}>St. Augustine, FL 32086</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         );
 
