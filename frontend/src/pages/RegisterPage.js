@@ -6,11 +6,12 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { Eye, EyeOff, Mail, Lock, User, ArrowLeft, Loader2, Check, Phone, X } from "lucide-react";
+import VerificationModal from "@/components/VerificationModal";
 
 const RegisterPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { register } = useAuth();
+  const { register, updateUser } = useAuth();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -23,6 +24,11 @@ const RegisterPage = () => {
   // Consent agreement state
   const [consentAgreed, setConsentAgreed] = useState(null); // null = not selected, true = agree, false = disagree
   const [showDisagreeModal, setShowDisagreeModal] = useState(false);
+  
+  // Email verification state
+  const [showVerificationModal, setShowVerificationModal] = useState(false);
+  const [verificationToken, setVerificationToken] = useState(null);
+  const [registeredEmail, setRegisteredEmail] = useState("");
 
   // Phone number formatting
   const formatPhoneNumber = (value) => {
