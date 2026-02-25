@@ -384,10 +384,10 @@ const RegisterPage = () => {
                         </p>
                       </div>
                     </div>
-                    <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${
-                      consentAgreed === false ? "border-[#00B4D8] bg-[#00B4D8]" : "border-slate-500"
+                    <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all duration-500 ${
+                      consentAgreed === false ? "border-[#00B4D8] bg-[#00B4D8] scale-110" : "border-slate-500"
                     }`}>
-                      {consentAgreed === false && <Check className="w-4 h-4 text-white" />}
+                      {consentAgreed === false && <Check className="w-4 h-4 text-white animate-[scale-in_0.3s_ease-out]" />}
                     </div>
                   </div>
                 </button>
@@ -405,19 +405,20 @@ const RegisterPage = () => {
             </div>
 
             {consentAgreed === true && (
-              <Button
-                type="submit"
-                disabled={loading}
-                className="w-full h-14 bg-[#00B4D8] hover:bg-[#0096B4] text-white rounded-xl text-lg font-medium shadow-[0_0_20px_rgba(0,180,216,0.3)] hover:shadow-[0_0_30px_rgba(0,180,216,0.5)] transition-all mt-4"
-                data-testid="register-submit-btn"
-              >
-                {loading ? (
-                  <>
-                    <Loader2 className="w-5 h-5 mr-2 animate-spin" />
-                    Creating Account...
-                  </>
-                ) : (
-                  "Create Account"
+              <div className="animate-[fadeSlideUp_0.4s_ease-out]">
+                <Button
+                  type="submit"
+                  disabled={loading}
+                  className="w-full h-14 bg-[#00B4D8] hover:bg-[#0096B4] text-white rounded-xl text-lg font-medium shadow-[0_0_20px_rgba(0,180,216,0.3)] hover:shadow-[0_0_30px_rgba(0,180,216,0.5)] transition-all mt-4"
+                  data-testid="register-submit-btn"
+                >
+                  {loading ? (
+                    <>
+                      <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+                      Creating Account...
+                    </>
+                  ) : (
+                    "Create Account"
                 )}
               </Button>
             )}
