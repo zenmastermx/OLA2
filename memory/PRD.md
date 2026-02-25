@@ -141,6 +141,9 @@ A cutting-edge, futuristic student online application portal for the University 
 - `POST /api/applications/:id/documents/:docId/upload` - Upload document
 - `POST /api/chat` - AI Chat
 - `GET /api/programs` - List programs
+- `GET /api/auth/verify-email/:token` - Verify user email (NEW)
+- `GET /api/auth/check-verification` - Check if user is verified (NEW)
+- `POST /api/auth/resend-verification` - Regenerate verification token (NEW)
 
 ### Data Models
 - **PersonalInfo**: Contact info, judicial background, emergency contact, citizenship, military, work experience, demographics
