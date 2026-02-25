@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import AIChat from "@/components/AIChat";
 import { EmailModal, TextModal, CallModal, ScheduleModal } from "@/components/AdvisorContactModals";
+import VerificationModal from "@/components/VerificationModal";
 
 // Program pathways data
 const PROGRAM_PATHWAYS = {
