@@ -114,6 +114,7 @@ const AuthProvider = ({ children }) => {
       password,
       first_name: firstName,
       last_name: lastName,
+      phone: consentPreferences.phone,
       consent_call: consentPreferences.consent_call ?? true,
       consent_text: consentPreferences.consent_text ?? true,
       consent_email: consentPreferences.consent_email ?? true
@@ -123,6 +124,10 @@ const AuthProvider = ({ children }) => {
     setToken(access_token);
     setUser(userData);
     return userData;
+  };
+
+  const updateUser = (updates) => {
+    setUser(prev => ({ ...prev, ...updates }));
   };
 
   const logout = () => {
