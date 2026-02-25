@@ -309,34 +309,39 @@ const RegisterPage = () => {
             {/* Consent Agreement */}
             <div className="space-y-4 pt-2">
               <div className="flex items-center gap-3 pb-2 border-b border-white/[0.05]">
-                <span className="text-xs font-medium uppercase tracking-wider text-slate-400">Communication Preferences</span>
+                <span className="text-xs font-medium uppercase tracking-wider text-slate-400">Consent Agreement</span>
               </div>
-              
-              <p className="text-slate-400 text-sm">
-                Select how you'd like to receive updates about your application and program information.
-              </p>
               
               <div className="space-y-3">
                 {/* I Agree Card */}
                 <button
                   type="button"
-                  onClick={() => handleConsentChange(true)}
-                  className={`w-full p-4 rounded-xl border transition-all duration-300 ${
+                  onClick={() => {
+                    if (firstName && lastName && email && phone && password && confirmPassword && password === confirmPassword) {
+                      handleConsentChange(true);
+                    } else {
+                      toast.error("Please fill in all fields correctly before agreeing");
+                    }
+                  }}
+                  disabled={!firstName || !lastName || !email || !phone || !password || !confirmPassword || password !== confirmPassword}
+                  className={`w-full p-4 rounded-xl border transform transition-all duration-500 ease-out ${
                     consentAgreed === true
-                      ? "border-[#28A745]/50 bg-[#0d2818]"
-                      : "border-white/[0.08] bg-black/20 hover:border-white/20"
+                      ? "border-[#28A745]/50 bg-[#0d2818] scale-[1.02] shadow-[0_0_20px_rgba(40,167,69,0.2)]"
+                      : (!firstName || !lastName || !email || !phone || !password || !confirmPassword || password !== confirmPassword)
+                        ? "border-white/[0.05] bg-black/10 opacity-50 cursor-not-allowed"
+                        : "border-white/[0.08] bg-black/20 hover:border-white/20 hover:scale-[1.01]"
                   }`}
                   data-testid="consent-agree-btn"
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-4">
-                      <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
-                        consentAgreed === true ? "bg-[#28A745]/20" : "bg-slate-700/50"
+                      <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-500 ${
+                        consentAgreed === true ? "bg-[#28A745]/20 scale-110" : "bg-slate-700/50"
                       }`}>
-                        <Check className={`w-5 h-5 ${consentAgreed === true ? "text-[#28A745]" : "text-slate-400"}`} />
+                        <Check className={`w-5 h-5 transition-all duration-500 ${consentAgreed === true ? "text-[#28A745]" : "text-slate-400"}`} />
                       </div>
                       <div className="text-left">
-                        <h4 className={`font-medium ${consentAgreed === true ? "text-[#28A745]" : "text-white"}`}>
+                        <h4 className={`font-medium transition-colors duration-500 ${consentAgreed === true ? "text-[#28A745]" : "text-white"}`}>
                           I Agree
                         </h4>
                         <p className="text-slate-400 text-sm">
@@ -344,10 +349,10 @@ const RegisterPage = () => {
                         </p>
                       </div>
                     </div>
-                    <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${
-                      consentAgreed === true ? "border-[#28A745] bg-[#28A745]" : "border-slate-500"
+                    <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all duration-500 ${
+                      consentAgreed === true ? "border-[#28A745] bg-[#28A745] scale-110" : "border-slate-500"
                     }`}>
-                      {consentAgreed === true && <Check className="w-4 h-4 text-white" />}
+                      {consentAgreed === true && <Check className="w-4 h-4 text-white animate-[scale-in_0.3s_ease-out]" />}
                     </div>
                   </div>
                 </button>
@@ -356,22 +361,22 @@ const RegisterPage = () => {
                 <button
                   type="button"
                   onClick={() => handleConsentChange(false)}
-                  className={`w-full p-4 rounded-xl border transition-all duration-300 ${
+                  className={`w-full p-4 rounded-xl border transform transition-all duration-500 ease-out ${
                     consentAgreed === false
-                      ? "border-[#00B4D8]/50 bg-[#0a1a20]"
-                      : "border-white/[0.08] bg-black/20 hover:border-white/20"
+                      ? "border-[#00B4D8]/50 bg-[#0a1a20] scale-[1.02] shadow-[0_0_20px_rgba(0,180,216,0.2)]"
+                      : "border-white/[0.08] bg-black/20 hover:border-white/20 hover:scale-[1.01]"
                   }`}
                   data-testid="consent-disagree-btn"
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-4">
-                      <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
-                        consentAgreed === false ? "bg-[#00B4D8]/20" : "bg-slate-700/50"
+                      <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-500 ${
+                        consentAgreed === false ? "bg-[#00B4D8]/20 scale-110" : "bg-slate-700/50"
                       }`}>
-                        <Phone className={`w-5 h-5 ${consentAgreed === false ? "text-[#00B4D8]" : "text-slate-400"}`} />
+                        <Phone className={`w-5 h-5 transition-all duration-500 ${consentAgreed === false ? "text-[#00B4D8]" : "text-slate-400"}`} />
                       </div>
                       <div className="text-left">
-                        <h4 className={`font-medium ${consentAgreed === false ? "text-[#00B4D8]" : "text-white"}`}>
+                        <h4 className={`font-medium transition-colors duration-500 ${consentAgreed === false ? "text-[#00B4D8]" : "text-white"}`}>
                           I Do Not Agree
                         </h4>
                         <p className="text-slate-400 text-sm">
