@@ -413,6 +413,8 @@ async def login(credentials: UserLogin):
             first_name=user["first_name"],
             last_name=user["last_name"],
             created_at=user["created_at"],
+            email_verified=user.get("email_verified", False),
+            verification_token=user.get("verification_token"),
             consent_call=user.get("consent_call", True),
             consent_text=user.get("consent_text", True),
             consent_email=user.get("consent_email", True)
