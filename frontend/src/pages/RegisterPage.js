@@ -4,9 +4,8 @@ import { useAuth } from "@/App";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "sonner";
-import { Eye, EyeOff, Mail, Lock, User, ArrowLeft, Loader2, Check, Phone, MessageCircle } from "lucide-react";
+import { Eye, EyeOff, Mail, Lock, User, ArrowLeft, Loader2, Check, Phone, X } from "lucide-react";
 
 const RegisterPage = () => {
   const navigate = useNavigate();
@@ -15,21 +14,40 @@ const RegisterPage = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   
-  // Consent preferences
-  const [consentCall, setConsentCall] = useState(true);
-  const [consentText, setConsentText] = useState(true);
-  const [consentEmail, setConsentEmail] = useState(true);
+  // Consent agreement state
+  const [consentAgreed, setConsentAgreed] = useState(null); // null = not selected, true = agree, false = disagree
+  const [showDisagreeModal, setShowDisagreeModal] = useState(false);
+
+  // Phone number formatting
+  const formatPhoneNumber = (value) => {
+    if (!value) return value;
+    const phoneNumber = value.replace(/[^\d]/g, '');
+    const phoneNumberLength = phoneNumber.length;
+    if (phoneNumberLength < 4) return phoneNumber;
+    if (phoneNumberLength < 7) {
+      return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3)}`;
+    }
+    return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3, 6)}-${phoneNumber.slice(6, 10)}`;
+  };
 
   const passwordChecks = [
     { label: "At least 8 characters", valid: password.length >= 8 },
     { label: "Contains a number", valid: /\d/.test(password) },
     { label: "Contains uppercase", valid: /[A-Z]/.test(password) },
   ];
+
+  const handleConsentChange = (agreed) => {
+    setConsentAgreed(agreed);
+    if (!agreed) {
+      setShowDisagreeModal(true);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -49,12 +67,18 @@ const RegisterPage = () => {
       return;
     }
 
+    if (consentAgreed !== true) {
+      toast.error("Please agree to the consent terms to create an account");
+      return;
+    }
+
     setLoading(true);
     try {
       await register(email, password, firstName, lastName, {
-        consent_call: consentCall,
-        consent_text: consentText,
-        consent_email: consentEmail
+        consent_call: true,
+        consent_text: true,
+        consent_email: true,
+        phone: phone
       });
       toast.success("Account created successfully!");
       navigate("/dashboard", { state: { newUser: true, program: location.state?.program } });
@@ -68,6 +92,40 @@ const RegisterPage = () => {
 
   return (
     <div className="min-h-screen bg-[#0A0E14] flex">
+      {/* Disagree Modal */}
+      {showDisagreeModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+          <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={() => setShowDisagreeModal(false)} />
+          <div className="relative bg-[#11161F] border border-white/10 rounded-2xl p-8 max-w-md mx-4 animate-slide-up">
+            <button
+              onClick={() => setShowDisagreeModal(false)}
+              className="absolute top-4 right-4 text-slate-400 hover:text-white transition-colors"
+            >
+              <X className="w-5 h-5" />
+            </button>
+            
+            <div className="text-center">
+              <div className="w-16 h-16 rounded-full bg-[#FF9800]/10 flex items-center justify-center mx-auto mb-4">
+                <Phone className="w-8 h-8 text-[#FF9800]" />
+              </div>
+              <h3 className="text-white text-xl font-semibold mb-3">Complete Your Application by Phone</h3>
+              <p className="text-slate-400 mb-6">
+                Please call us to complete the application process:
+              </p>
+              <a 
+                href="tel:855-481-9203"
+                className="inline-block text-2xl font-bold text-[#00B4D8] hover:text-[#00F5FF] transition-colors mb-6"
+              >
+                855-481-9203
+              </a>
+              <p className="text-slate-500 text-sm">
+                Our enrollment advisors are available to assist you.
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Left side - Visual */}
       <div className="hidden lg:flex flex-1 items-center justify-center p-12 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-[#002855]/50 to-[#0A0E14]" />
@@ -177,6 +235,22 @@ const RegisterPage = () => {
             </div>
 
             <div className="space-y-2">
+              <Label htmlFor="phone" className="text-slate-300">Phone Number</Label>
+              <div className="relative">
+                <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
+                <Input
+                  id="phone"
+                  type="tel"
+                  placeholder="(000) 000-0000"
+                  value={phone}
+                  onChange={(e) => setPhone(formatPhoneNumber(e.target.value))}
+                  className="pl-12 h-12 bg-black/20 border-white/10 focus:border-[#00F5FF] focus:ring-1 focus:ring-[#00F5FF] text-white placeholder:text-slate-600 rounded-xl"
+                  data-testid="register-phone-input"
+                />
+              </div>
+            </div>
+
+            <div className="space-y-2">
               <Label htmlFor="password" className="text-slate-300">Password</Label>
               <div className="relative">
                 <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
@@ -232,93 +306,62 @@ const RegisterPage = () => {
               )}
             </div>
 
-            {/* Communication Consent */}
+            {/* Consent Agreement */}
             <div className="space-y-4 pt-2">
               <div className="flex items-center gap-3 pb-2 border-b border-white/[0.05]">
-                <span className="text-xs font-medium uppercase tracking-wider text-slate-400">Communication Preferences</span>
+                <span className="text-xs font-medium uppercase tracking-wider text-slate-400">Consent Agreement</span>
               </div>
-              <p className="text-slate-500 text-xs">
-                Select how you'd like to receive updates about your application and program information.
+              
+              <p className="text-slate-400 text-xs leading-relaxed">
+                By clicking the "I Agree" button below, I consent to the University of St. Augustine for Health Sciences using automated technology and/or pre-recorded means to email, text, and/or call me at the phone number above regarding educational services. I understand that my consent is not a required condition to purchase a good or service. I am providing an e-signature confirming my consent and my agreement to USAHS'{" "}
+                <a href="#" className="text-[#00B4D8] hover:underline">Privacy Policy</a> and{" "}
+                <a href="#" className="text-[#00B4D8] hover:underline">Terms of Use</a>. Msg and data rates may apply.
               </p>
               
-              <div className="space-y-3">
-                <label 
-                  htmlFor="consent-call"
-                  className={`flex items-center justify-between p-4 rounded-xl border transition-all duration-300 cursor-pointer ${
-                    consentCall 
-                      ? "border-[#28A745]/50 bg-[#28A745]/10" 
+              <div className="grid grid-cols-2 gap-3">
+                <button
+                  type="button"
+                  onClick={() => handleConsentChange(true)}
+                  className={`p-4 rounded-xl border transition-all duration-300 ${
+                    consentAgreed === true
+                      ? "border-[#28A745]/50 bg-[#28A745]/10"
                       : "border-white/[0.08] bg-black/20 hover:border-white/20"
                   }`}
+                  data-testid="consent-agree-btn"
                 >
-                  <div className="flex items-center gap-3">
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center ${consentCall ? "bg-[#28A745]/20" : "bg-white/5"}`}>
-                      <Phone className={`w-4 h-4 ${consentCall ? "text-[#28A745]" : "text-slate-500"}`} />
+                  <div className="flex items-center justify-center gap-2">
+                    <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
+                      consentAgreed === true ? "border-[#28A745] bg-[#28A745]" : "border-slate-500"
+                    }`}>
+                      {consentAgreed === true && <Check className="w-3 h-3 text-white" />}
                     </div>
-                    <div>
-                      <p className="text-white text-sm font-medium">Phone Calls</p>
-                      <p className="text-slate-500 text-xs">Receive calls from enrollment advisors</p>
-                    </div>
+                    <span className={`font-medium ${consentAgreed === true ? "text-[#28A745]" : "text-white"}`}>
+                      I Agree
+                    </span>
                   </div>
-                  <Checkbox
-                    id="consent-call"
-                    checked={consentCall}
-                    onCheckedChange={(checked) => setConsentCall(checked)}
-                    className="border-[#28A745] data-[state=checked]:bg-[#28A745]"
-                    data-testid="consent-call-checkbox"
-                  />
-                </label>
+                </button>
 
-                <label 
-                  htmlFor="consent-text"
-                  className={`flex items-center justify-between p-4 rounded-xl border transition-all duration-300 cursor-pointer ${
-                    consentText 
-                      ? "border-[#00B4D8]/50 bg-[#00B4D8]/10" 
+                <button
+                  type="button"
+                  onClick={() => handleConsentChange(false)}
+                  className={`p-4 rounded-xl border transition-all duration-300 ${
+                    consentAgreed === false
+                      ? "border-[#EF4444]/50 bg-[#EF4444]/10"
                       : "border-white/[0.08] bg-black/20 hover:border-white/20"
                   }`}
+                  data-testid="consent-disagree-btn"
                 >
-                  <div className="flex items-center gap-3">
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center ${consentText ? "bg-[#00B4D8]/20" : "bg-white/5"}`}>
-                      <MessageCircle className={`w-4 h-4 ${consentText ? "text-[#00B4D8]" : "text-slate-500"}`} />
+                  <div className="flex items-center justify-center gap-2">
+                    <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
+                      consentAgreed === false ? "border-[#EF4444] bg-[#EF4444]" : "border-slate-500"
+                    }`}>
+                      {consentAgreed === false && <X className="w-3 h-3 text-white" />}
                     </div>
-                    <div>
-                      <p className="text-white text-sm font-medium">Text Messages (SMS)</p>
-                      <p className="text-slate-500 text-xs">Receive text updates and reminders</p>
-                    </div>
+                    <span className={`font-medium ${consentAgreed === false ? "text-[#EF4444]" : "text-white"}`}>
+                      I Do Not Agree
+                    </span>
                   </div>
-                  <Checkbox
-                    id="consent-text"
-                    checked={consentText}
-                    onCheckedChange={(checked) => setConsentText(checked)}
-                    className="border-[#00B4D8] data-[state=checked]:bg-[#00B4D8]"
-                    data-testid="consent-text-checkbox"
-                  />
-                </label>
-
-                <label 
-                  htmlFor="consent-email"
-                  className={`flex items-center justify-between p-4 rounded-xl border transition-all duration-300 cursor-pointer ${
-                    consentEmail 
-                      ? "border-[#7B68EE]/50 bg-[#7B68EE]/10" 
-                      : "border-white/[0.08] bg-black/20 hover:border-white/20"
-                  }`}
-                >
-                  <div className="flex items-center gap-3">
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center ${consentEmail ? "bg-[#7B68EE]/20" : "bg-white/5"}`}>
-                      <Mail className={`w-4 h-4 ${consentEmail ? "text-[#7B68EE]" : "text-slate-500"}`} />
-                    </div>
-                    <div>
-                      <p className="text-white text-sm font-medium">Email Communications</p>
-                      <p className="text-slate-500 text-xs">Receive emails about your application</p>
-                    </div>
-                  </div>
-                  <Checkbox
-                    id="consent-email"
-                    checked={consentEmail}
-                    onCheckedChange={(checked) => setConsentEmail(checked)}
-                    className="border-[#7B68EE] data-[state=checked]:bg-[#7B68EE]"
-                    data-testid="consent-email-checkbox"
-                  />
-                </label>
+                </button>
               </div>
               
               <p className="text-slate-600 text-xs">
@@ -326,21 +369,23 @@ const RegisterPage = () => {
               </p>
             </div>
 
-            <Button
-              type="submit"
-              disabled={loading}
-              className="w-full h-14 bg-[#00B4D8] hover:bg-[#0096B4] text-white rounded-xl text-lg font-medium shadow-[0_0_20px_rgba(0,180,216,0.3)] hover:shadow-[0_0_30px_rgba(0,180,216,0.5)] transition-all mt-4"
-              data-testid="register-submit-btn"
-            >
-              {loading ? (
-                <>
-                  <Loader2 className="w-5 h-5 mr-2 animate-spin" />
-                  Creating Account...
-                </>
-              ) : (
-                "Create Account"
-              )}
-            </Button>
+            {consentAgreed === true && (
+              <Button
+                type="submit"
+                disabled={loading}
+                className="w-full h-14 bg-[#00B4D8] hover:bg-[#0096B4] text-white rounded-xl text-lg font-medium shadow-[0_0_20px_rgba(0,180,216,0.3)] hover:shadow-[0_0_30px_rgba(0,180,216,0.5)] transition-all mt-4"
+                data-testid="register-submit-btn"
+              >
+                {loading ? (
+                  <>
+                    <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+                    Creating Account...
+                  </>
+                ) : (
+                  "Create Account"
+                )}
+              </Button>
+            )}
           </form>
 
           {/* Login link */}
