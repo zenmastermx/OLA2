@@ -420,7 +420,8 @@ const RegisterPage = () => {
                   ) : (
                     "Create Account"
                 )}
-              </Button>
+                </Button>
+              </div>
             )}
           </form>
 
