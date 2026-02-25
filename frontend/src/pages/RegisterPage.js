@@ -124,6 +124,16 @@ const RegisterPage = () => {
 
   return (
     <div className="min-h-screen bg-[#0A0E14] flex">
+      {/* Email Verification Modal */}
+      <VerificationModal
+        isOpen={showVerificationModal}
+        email={registeredEmail}
+        firstName={firstName}
+        verificationToken={verificationToken}
+        onVerified={handleVerificationComplete}
+        canClose={false}
+      />
+
       {/* Disagree Modal */}
       {showDisagreeModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center">
