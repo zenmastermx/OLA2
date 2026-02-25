@@ -235,6 +235,16 @@ const Dashboard = () => {
 
   return (
     <div className={`min-h-screen ${theme === 'dark' ? 'bg-[#0A0E14]' : 'bg-gray-50'}`}>
+      {/* Email Verification Modal */}
+      <VerificationModal
+        isOpen={showVerificationModal}
+        email={user?.email}
+        firstName={user?.first_name}
+        verificationToken={user?.verification_token}
+        onVerified={handleVerificationComplete}
+        canClose={false}
+      />
+
       {/* Top Navigation */}
       <nav className={`sticky top-0 z-40 backdrop-blur-xl border-b ${theme === 'dark' ? 'bg-[#0A0E14]/80 border-white/5' : 'bg-white/80 border-gray-200'}`}>
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
