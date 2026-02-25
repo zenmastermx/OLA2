@@ -360,6 +360,7 @@ async def register(user_data: UserCreate):
         raise HTTPException(status_code=400, detail="Email already registered")
     
     user_id = str(uuid.uuid4())
+    verification_token = str(uuid.uuid4())
     assigned_advisor = assign_advisor()
     
     user_doc = {
@@ -368,10 +369,14 @@ async def register(user_data: UserCreate):
         "password_hash": hash_password(user_data.password),
         "first_name": user_data.first_name,
         "last_name": user_data.last_name,
+        "phone": user_data.phone,
         "enrollment_advisor": assigned_advisor,
         "consent_call": user_data.consent_call,
         "consent_text": user_data.consent_text,
         "consent_email": user_data.consent_email,
+        "email_verified": False,
+        "verification_token": verification_token,
+        "verification_sent_at": datetime.now(timezone.utc).isoformat(),
         "created_at": datetime.now(timezone.utc).isoformat()
     }
     await db.users.insert_one(user_doc)
@@ -385,6 +390,8 @@ async def register(user_data: UserCreate):
             first_name=user_data.first_name,
             last_name=user_data.last_name,
             created_at=user_doc["created_at"],
+            email_verified=False,
+            verification_token=verification_token,
             consent_call=user_data.consent_call,
             consent_text=user_data.consent_text,
             consent_email=user_data.consent_email
