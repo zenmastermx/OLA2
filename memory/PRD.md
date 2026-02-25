@@ -51,9 +51,12 @@ A cutting-edge, futuristic student online application portal for the University 
    - Confirm password validation
    - **Auto-assigns enrollment advisor on registration**
    - **Redesigned Consent Agreement Flow** (Updated Jan 30, 2026)
+     - Title: "CONSENT AGREEMENT" (more consent-aligned)
      - Two card options: "I Agree" and "I Do Not Agree"
      - Card design with icon, title, and description (matches communication preference card style)
-     - "I Agree" enables Create Account button, sets all consent flags to true
+     - **Smooth animations**: scale, glow effects, and transitions on selection
+     - **Field validation**: "I Agree" is grayed out until all fields are filled correctly. Shows error toast if clicked prematurely
+     - "I Agree" enables Create Account button with slide-up animation, sets all consent flags to true
      - "I Do Not Agree" hides Create Account button, shows modal with phone number 855-481-9203
      - Modal instructs user to complete application by phone
      - Preferences saved to database and returned on login
