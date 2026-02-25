@@ -46,14 +46,16 @@ A cutting-edge, futuristic student online application portal for the University 
    - Link to registration
 
 3. **Register Page** (`/register`)
-   - First/last name, email, password fields
+   - First/last name, email, phone, password fields
    - Password strength indicators
    - Confirm password validation
    - **Auto-assigns enrollment advisor on registration**
-   - **Communication Consent Preferences**
-     - Phone Calls consent toggle
-     - Text Messages (SMS) consent toggle
-     - Email Communications consent toggle
+   - **Redesigned Consent Agreement Flow** (Updated Jan 30, 2026)
+     - Two card options: "I Agree" and "I Do Not Agree"
+     - Card design with icon, title, and description (matches communication preference card style)
+     - "I Agree" enables Create Account button, sets all consent flags to true
+     - "I Do Not Agree" hides Create Account button, shows modal with phone number 855-481-9203
+     - Modal instructs user to complete application by phone
      - Preferences saved to database and returned on login
 
 4. **Dashboard** (`/dashboard`)
