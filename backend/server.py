@@ -429,10 +429,67 @@ async def get_me(current_user: dict = Depends(get_current_user)):
         first_name=current_user["first_name"],
         last_name=current_user["last_name"],
         created_at=current_user["created_at"],
+        email_verified=current_user.get("email_verified", False),
+        verification_token=current_user.get("verification_token"),
         consent_call=current_user.get("consent_call", True),
         consent_text=current_user.get("consent_text", True),
         consent_email=current_user.get("consent_email", True)
     )
+
+@api_router.get("/auth/verify-email/{token}")
+async def verify_email(token: str):
+    """Verify user's email using the verification token"""
+    user = await db.users.find_one({"verification_token": token}, {"_id": 0})
+    if not user:
+        raise HTTPException(status_code=400, detail="Invalid verification token")
+    
+    if user.get("email_verified"):
+        return {"message": "Email already verified", "success": True}
+    
+    # Update user as verified
+    await db.users.update_one(
+        {"verification_token": token},
+        {
+            "$set": {
+                "email_verified": True,
+                "verified_at": datetime.now(timezone.utc).isoformat()
+            }
+        }
+    )
+    
+    return {"message": "Email verified successfully", "success": True}
+
+@api_router.get("/auth/check-verification")
+async def check_verification(current_user: dict = Depends(get_current_user)):
+    """Check if current user's email is verified"""
+    user = await db.users.find_one({"id": current_user["id"]}, {"_id": 0})
+    return {
+        "email_verified": user.get("email_verified", False),
+        "email": user.get("email")
+    }
+
+@api_router.post("/auth/resend-verification")
+async def resend_verification(current_user: dict = Depends(get_current_user)):
+    """Generate a new verification token for the current user"""
+    if current_user.get("email_verified"):
+        return {"message": "Email already verified", "success": True}
+    
+    new_token = str(uuid.uuid4())
+    await db.users.update_one(
+        {"id": current_user["id"]},
+        {
+            "$set": {
+                "verification_token": new_token,
+                "verification_sent_at": datetime.now(timezone.utc).isoformat()
+            }
+        }
+    )
+    
+    return {
+        "message": "Verification token regenerated",
+        "success": True,
+        "verification_token": new_token
+    }
 
 @api_router.get("/auth/advisor")
 async def get_my_advisor(current_user: dict = Depends(get_current_user)):
