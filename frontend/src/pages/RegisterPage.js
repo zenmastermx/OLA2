@@ -309,60 +309,90 @@ const RegisterPage = () => {
             {/* Consent Agreement */}
             <div className="space-y-4 pt-2">
               <div className="flex items-center gap-3 pb-2 border-b border-white/[0.05]">
-                <span className="text-xs font-medium uppercase tracking-wider text-slate-400">Consent Agreement</span>
+                <span className="text-xs font-medium uppercase tracking-wider text-slate-400">Communication Preferences</span>
               </div>
               
-              <p className="text-slate-400 text-xs leading-relaxed">
-                By clicking the "I Agree" button below, I consent to the University of St. Augustine for Health Sciences using automated technology and/or pre-recorded means to email, text, and/or call me at the phone number above regarding educational services. I understand that my consent is not a required condition to purchase a good or service. I am providing an e-signature confirming my consent and my agreement to USAHS'{" "}
-                <a href="#" className="text-[#00B4D8] hover:underline">Privacy Policy</a> and{" "}
-                <a href="#" className="text-[#00B4D8] hover:underline">Terms of Use</a>. Msg and data rates may apply.
+              <p className="text-slate-400 text-sm">
+                Select how you'd like to receive updates about your application and program information.
               </p>
               
-              <div className="grid grid-cols-2 gap-3">
+              <div className="space-y-3">
+                {/* I Agree Card */}
                 <button
                   type="button"
                   onClick={() => handleConsentChange(true)}
-                  className={`p-4 rounded-xl border transition-all duration-300 ${
+                  className={`w-full p-4 rounded-xl border transition-all duration-300 ${
                     consentAgreed === true
-                      ? "border-[#28A745]/50 bg-[#28A745]/10"
+                      ? "border-[#28A745]/50 bg-[#0d2818]"
                       : "border-white/[0.08] bg-black/20 hover:border-white/20"
                   }`}
                   data-testid="consent-agree-btn"
                 >
-                  <div className="flex items-center justify-center gap-2">
-                    <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-4">
+                      <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
+                        consentAgreed === true ? "bg-[#28A745]/20" : "bg-slate-700/50"
+                      }`}>
+                        <Check className={`w-5 h-5 ${consentAgreed === true ? "text-[#28A745]" : "text-slate-400"}`} />
+                      </div>
+                      <div className="text-left">
+                        <h4 className={`font-medium ${consentAgreed === true ? "text-[#28A745]" : "text-white"}`}>
+                          I Agree
+                        </h4>
+                        <p className="text-slate-400 text-sm">
+                          Receive calls, texts, and emails from enrollment advisors
+                        </p>
+                      </div>
+                    </div>
+                    <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${
                       consentAgreed === true ? "border-[#28A745] bg-[#28A745]" : "border-slate-500"
                     }`}>
-                      {consentAgreed === true && <Check className="w-3 h-3 text-white" />}
+                      {consentAgreed === true && <Check className="w-4 h-4 text-white" />}
                     </div>
-                    <span className={`font-medium ${consentAgreed === true ? "text-[#28A745]" : "text-white"}`}>
-                      I Agree
-                    </span>
                   </div>
                 </button>
 
+                {/* I Do Not Agree Card */}
                 <button
                   type="button"
                   onClick={() => handleConsentChange(false)}
-                  className={`p-4 rounded-xl border transition-all duration-300 ${
+                  className={`w-full p-4 rounded-xl border transition-all duration-300 ${
                     consentAgreed === false
-                      ? "border-[#EF4444]/50 bg-[#EF4444]/10"
+                      ? "border-[#00B4D8]/50 bg-[#0a1a20]"
                       : "border-white/[0.08] bg-black/20 hover:border-white/20"
                   }`}
                   data-testid="consent-disagree-btn"
                 >
-                  <div className="flex items-center justify-center gap-2">
-                    <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
-                      consentAgreed === false ? "border-[#EF4444] bg-[#EF4444]" : "border-slate-500"
-                    }`}>
-                      {consentAgreed === false && <X className="w-3 h-3 text-white" />}
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-4">
+                      <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
+                        consentAgreed === false ? "bg-[#00B4D8]/20" : "bg-slate-700/50"
+                      }`}>
+                        <Phone className={`w-5 h-5 ${consentAgreed === false ? "text-[#00B4D8]" : "text-slate-400"}`} />
+                      </div>
+                      <div className="text-left">
+                        <h4 className={`font-medium ${consentAgreed === false ? "text-[#00B4D8]" : "text-white"}`}>
+                          I Do Not Agree
+                        </h4>
+                        <p className="text-slate-400 text-sm">
+                          Complete application by phone instead
+                        </p>
+                      </div>
                     </div>
-                    <span className={`font-medium ${consentAgreed === false ? "text-[#EF4444]" : "text-white"}`}>
-                      I Do Not Agree
-                    </span>
+                    <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${
+                      consentAgreed === false ? "border-[#00B4D8] bg-[#00B4D8]" : "border-slate-500"
+                    }`}>
+                      {consentAgreed === false && <Check className="w-4 h-4 text-white" />}
+                    </div>
                   </div>
                 </button>
               </div>
+              
+              <p className="text-slate-500 text-xs leading-relaxed">
+                By clicking "I Agree", I consent to the University of St. Augustine for Health Sciences using automated technology and/or pre-recorded means to email, text, and/or call me at the phone number above regarding educational services. I understand that my consent is not a required condition to purchase a good or service. I am providing an e-signature confirming my consent and my agreement to USAHS'{" "}
+                <a href="#" className="text-[#00B4D8] hover:underline">Privacy Policy</a> and{" "}
+                <a href="#" className="text-[#00B4D8] hover:underline">Terms of Use</a>. Msg and data rates may apply.
+              </p>
               
               <p className="text-slate-600 text-xs">
                 You can update these preferences at any time in your account settings.
