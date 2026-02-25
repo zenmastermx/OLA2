@@ -143,6 +143,7 @@ const AuthProvider = ({ children }) => {
     login,
     register,
     logout,
+    updateUser,
     isAuthenticated: !!user
   };
 
