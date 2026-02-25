@@ -91,7 +91,7 @@ const CAMPUSES = [
 const Dashboard = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { user, token, logout } = useAuth();
+  const { user, token, logout, updateUser } = useAuth();
   const { theme, toggleTheme } = useTheme();
   const [applications, setApplications] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -109,18 +109,36 @@ const Dashboard = () => {
   const [showTextModal, setShowTextModal] = useState(false);
   const [showCallModal, setShowCallModal] = useState(false);
   const [showScheduleModal, setShowScheduleModal] = useState(false);
+  const [showVerificationModal, setShowVerificationModal] = useState(false);
 
   useEffect(() => {
     fetchApplications();
     fetchAdvisor();
+    
+    // Check if user email is not verified
+    if (user && !user.email_verified) {
+      setShowVerificationModal(true);
+    }
+    
     if (location.state?.newUser) {
       toast.success(`Welcome, ${user?.first_name}! Let's start your application.`);
-      setShowNewAppModal(true);
+      if (!user?.email_verified) {
+        // Don't show new app modal until verified
+      } else {
+        setShowNewAppModal(true);
+      }
       if (location.state?.program) {
         setSelectedCategory(location.state.program);
       }
     }
   }, []);
+
+  const handleVerificationComplete = () => {
+    setShowVerificationModal(false);
+    updateUser({ email_verified: true });
+    toast.success("Email verified! You can now start your application.");
+    setShowNewAppModal(true);
+  };
 
   const fetchAdvisor = async () => {
     try {
