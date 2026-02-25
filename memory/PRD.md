@@ -162,12 +162,13 @@ A cutting-edge, futuristic student online application portal for the University 
 - Connect In-App Modals (Email, Text, Call, Schedule) to backend (currently UI-only/MOCKED)
 - Add pathways for "Education" and "Certificates" programs in selection modal
 - User Account Settings Page (update communication preferences post-registration)
-- Email verification on registration
+- ~~Email verification on registration~~ ✅ DONE (Mock implementation for development)
 - Password reset functionality
 - Real document preview (PDF viewer)
 - Application history/timeline
 - Email notifications on status changes
 - Admin dashboard for reviewing applications
+- **Integrate real email service** (SendGrid/Resend) for production email verification
 
 ### P2 (Medium Priority)
 - Refactor Dashboard.js - Extract modal logic into separate components
