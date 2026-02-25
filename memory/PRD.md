@@ -59,6 +59,21 @@ A cutting-edge, futuristic student online application portal for the University 
      - "I Agree" enables Create Account button with slide-up animation, sets all consent flags to true
      - "I Do Not Agree" hides Create Account button, shows modal with phone number 855-481-9203
      - Modal instructs user to complete application by phone
+   - **Email Verification Flow** (NEW - Feb 25, 2026)
+     - After registration, user receives verification modal
+     - Mock email window opens automatically (for development)
+     - User must click "Verify Email Address" button in mock email
+     - System polls for verification status every 3 seconds
+     - Upon verification, user is redirected to dashboard
+     - Unverified users cannot start applications
+
+4. **Mock Email Page** (`/mock-email`) (NEW - Development Only)
+   - Simulates email client for development/testing
+   - Shows branded verification email from USA.edu
+   - "Verify Email Address" button calls verification API
+   - Shows success screen after verification
+   - Window auto-closes after 3 seconds
+     - Modal instructs user to complete application by phone
      - Preferences saved to database and returned on login
 
 4. **Dashboard** (`/dashboard`)
