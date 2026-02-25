@@ -323,12 +323,11 @@ const RegisterPage = () => {
                       toast.error("Please fill in all fields correctly before agreeing");
                     }
                   }}
-                  disabled={!firstName || !lastName || !email || !phone || !password || !confirmPassword || password !== confirmPassword}
                   className={`w-full p-4 rounded-xl border transform transition-all duration-500 ease-out ${
                     consentAgreed === true
                       ? "border-[#28A745]/50 bg-[#0d2818] scale-[1.02] shadow-[0_0_20px_rgba(40,167,69,0.2)]"
                       : (!firstName || !lastName || !email || !phone || !password || !confirmPassword || password !== confirmPassword)
-                        ? "border-white/[0.05] bg-black/10 opacity-50 cursor-not-allowed"
+                        ? "border-white/[0.05] bg-black/10 opacity-50"
                         : "border-white/[0.08] bg-black/20 hover:border-white/20 hover:scale-[1.01]"
                   }`}
                   data-testid="consent-agree-btn"
