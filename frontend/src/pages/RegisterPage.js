@@ -80,20 +80,46 @@ const RegisterPage = () => {
 
     setLoading(true);
     try {
-      await register(email, password, firstName, lastName, {
+      const userData = await register(email, password, firstName, lastName, {
         consent_call: true,
         consent_text: true,
         consent_email: true,
         phone: phone
       });
-      toast.success("Account created successfully!");
-      navigate("/dashboard", { state: { newUser: true, program: location.state?.program } });
+      
+      // Store verification details
+      setRegisteredEmail(email);
+      setVerificationToken(userData.verification_token);
+      
+      toast.success("Account created! Please verify your email.");
+      
+      // Show verification modal
+      setShowVerificationModal(true);
+      
+      // Open mock email window after a short delay
+      setTimeout(() => {
+        const params = new URLSearchParams({
+          token: userData.verification_token,
+          email: email,
+          firstName: firstName
+        });
+        const mockEmailUrl = `${window.location.origin}/mock-email?${params.toString()}`;
+        window.open(mockEmailUrl, "_blank", "width=900,height=800");
+      }, 500);
+      
     } catch (error) {
       console.error("Register error:", error);
       toast.error(error.response?.data?.detail || "Registration failed. Please try again.");
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleVerificationComplete = () => {
+    setShowVerificationModal(false);
+    updateUser({ email_verified: true });
+    toast.success("Email verified! Welcome to USA.edu!");
+    navigate("/dashboard", { state: { newUser: true, program: location.state?.program } });
   };
 
   return (
