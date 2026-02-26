@@ -26,8 +26,6 @@ const TranscriptRequestRow = ({
   institution, 
   index, 
   theme, 
-  transcriptServices, 
-  getInstitutionServices, 
   transcriptRequests, 
   requestingTranscript, 
   handleTranscriptRequest 
@@ -35,14 +33,21 @@ const TranscriptRequestRow = ({
   // Support both "name" and "institution_name" field names
   const institutionName = institution.name || institution.institution_name || "";
   const institutionId = institutionName.replace(/\s+/g, '_').toLowerCase() || `inst_${index}`;
-  const supportedServices = getInstitutionServices(institutionName);
   const requestData = transcriptRequests[institutionId];
-  const isRequested = requestData?.status === "requested" || requestData?.status === "marked_sent";
-  const [localSelectedService, setLocalSelectedService] = useState(requestData?.service || "");
+  const isRequested = requestData?.status === "requested";
+  const [requestedDate, setRequestedDate] = useState(requestData?.requested_date || "");
+  const [showDateInput, setShowDateInput] = useState(false);
   
   // Get degree info - support both old and new field names
   const degreeType = institution.degree || institution.degree_type || "";
   const major = institution.major || "";
+
+  const handleMarkRequested = () => {
+    if (requestedDate) {
+      handleTranscriptRequest(institutionId, requestedDate);
+      setShowDateInput(false);
+    }
+  };
   
   return (
     <div
@@ -75,76 +80,71 @@ const TranscriptRequestRow = ({
           </div>
         </div>
         
-        {/* Service Selector */}
-        <div className="w-full md:w-56">
-          <Select
-            value={localSelectedService}
-            onValueChange={setLocalSelectedService}
-            disabled={isRequested}
-          >
-            <SelectTrigger className={`h-11 rounded-xl ${
-              theme === 'dark' 
-                ? 'bg-black/30 border-white/[0.08] text-white' 
-                : 'bg-gray-50 border-gray-200 text-gray-900'
-            } ${isRequested ? 'opacity-60' : ''}`}>
-              <SelectValue placeholder="Select service..." />
-            </SelectTrigger>
-            <SelectContent>
-              {transcriptServices.map(service => (
-                <SelectItem key={service.id} value={service.id}>
-                  {service.name}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
-        
-        {/* Action Button */}
-        <div className="w-full md:w-36">
+        {/* Date Input or Action Button */}
+        <div className="flex items-center gap-3">
           {isRequested ? (
-            <div className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-[#739600]/20 text-[#739600] text-sm font-medium justify-center">
-              <Check className="w-4 h-4" />
-              {requestData?.status === "marked_sent" ? "Marked Sent" : "Requested"}
+            <>
+              <div className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-[#739600]/20 text-[#739600] text-sm font-medium">
+                <Check className="w-4 h-4" />
+                Requested
+              </div>
+              <div className="flex items-center gap-2">
+                <Clock className="w-4 h-4 text-[#739600]" />
+                <span className={`text-sm ${theme === 'dark' ? 'text-slate-400' : 'text-gray-600'}`}>
+                  {requestData?.requested_date ? new Date(requestData.requested_date).toLocaleDateString('en-US', {
+                    month: '2-digit',
+                    day: '2-digit',
+                    year: 'numeric'
+                  }) : ""}
+                </span>
+              </div>
+            </>
+          ) : showDateInput ? (
+            <div className="flex items-center gap-3">
+              <div className="flex flex-col gap-1">
+                <label className={`text-xs ${theme === 'dark' ? 'text-slate-400' : 'text-gray-500'}`}>
+                  Date Requested
+                </label>
+                <input
+                  type="date"
+                  value={requestedDate}
+                  onChange={(e) => setRequestedDate(e.target.value)}
+                  max={new Date().toISOString().split('T')[0]}
+                  className={`h-10 px-3 rounded-lg border text-sm ${
+                    theme === 'dark' 
+                      ? 'bg-black/30 border-white/[0.08] text-white' 
+                      : 'bg-gray-50 border-gray-200 text-gray-900'
+                  }`}
+                  data-testid={`transcript-date-${index}`}
+                />
+              </div>
+              <Button
+                onClick={handleMarkRequested}
+                disabled={!requestedDate || requestingTranscript[institutionId]}
+                className="rounded-full bg-[#739600] hover:bg-[#5a7400] text-white px-6"
+                data-testid={`transcript-confirm-${index}`}
+              >
+                {requestingTranscript[institutionId] ? (
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                ) : (
+                  "Confirm"
+                )}
+              </Button>
+              <button
+                onClick={() => setShowDateInput(false)}
+                className={`text-sm ${theme === 'dark' ? 'text-slate-400 hover:text-white' : 'text-gray-500 hover:text-gray-700'}`}
+              >
+                Cancel
+              </button>
             </div>
           ) : (
             <Button
-              onClick={() => handleTranscriptRequest(institutionId, localSelectedService)}
-              disabled={!localSelectedService || requestingTranscript[institutionId]}
-              className={`w-full rounded-full ${
-                localSelectedService === "certified_mail"
-                  ? "bg-[#FF9800] hover:bg-[#F57C00]"
-                  : "bg-[#00677F] hover:bg-[#135163]"
-              } text-white`}
+              onClick={() => setShowDateInput(true)}
+              className="rounded-full bg-[#00677F] hover:bg-[#135163] text-white px-6"
+              data-testid={`transcript-request-${index}`}
             >
-              {requestingTranscript[institutionId] ? (
-                <Loader2 className="w-4 h-4 animate-spin" />
-              ) : localSelectedService === "certified_mail" ? (
-                "Mark Sent"
-              ) : (
-                "Request"
-              )}
+              I've Requested This
             </Button>
-          )}
-        </div>
-        
-        {/* Status/Timestamp */}
-        <div className="w-full md:w-40 text-right">
-          {isRequested && requestData?.timestamp ? (
-            <div className="flex items-center gap-2 justify-end">
-              <Clock className="w-4 h-4 text-[#739600]" />
-              <span className={`text-sm ${theme === 'dark' ? 'text-slate-400' : 'text-gray-600'}`}>
-                {new Date(requestData.timestamp).toLocaleDateString('en-US', {
-                  month: '2-digit',
-                  day: '2-digit',
-                  year: 'numeric'
-                })} {new Date(requestData.timestamp).toLocaleTimeString('en-US', {
-                  hour: '2-digit',
-                  minute: '2-digit'
-                })}
-              </span>
-            </div>
-          ) : (
-            <span className={`text-sm ${theme === 'dark' ? 'text-slate-600' : 'text-gray-400'}`}>—</span>
           )}
         </div>
       </div>
