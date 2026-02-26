@@ -550,13 +550,12 @@ const AcademicHistorySections = ({ academicHistory, setAcademicHistory, onSectio
               </div>
 
               <div className="space-y-2 max-w-xs">
-                <Label className="text-xs font-medium uppercase tracking-wider text-slate-400">Test Date</Label>
-                <Input
-                  type="date"
+                <MonthYearPicker
+                  label="Test Date"
                   value={academicHistory.toefl_date || ""}
-                  onChange={(e) => setAcademicHistory({ ...academicHistory, toefl_date: e.target.value })}
-                  className="h-12 bg-black/30 border-white/[0.08] focus:border-[#A1D8E0] focus:ring-2 focus:ring-[#A1D8E0]/20 text-white rounded-full px-5 transition-all duration-300"
-                  data-testid="toefl-date"
+                  onChange={(date) => setAcademicHistory({ ...academicHistory, toefl_date: date })}
+                  testId="toefl-date"
+                  theme="dark"
                 />
               </div>
             </div>
