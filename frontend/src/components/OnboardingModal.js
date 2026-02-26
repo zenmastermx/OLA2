@@ -78,7 +78,7 @@ const OnboardingModal = ({ isOpen, onComplete }) => {
             </ul>
           </div>
           <p className="text-slate-400 text-sm">
-            Click the <span className="text-white font-medium">USA.edu logo</span> in the top left to return to your Dashboard at any time.
+            Click <span className="text-white font-medium">"Dashboard"</span> in the top left to return to your Dashboard at any time.
           </p>
         </>
       )
