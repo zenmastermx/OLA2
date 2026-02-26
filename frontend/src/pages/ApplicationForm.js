@@ -1139,6 +1139,71 @@ const ApplicationForm = () => {
               </div>
             </div>
 
+            {/* Transcript Requests Summary */}
+            <div className="backdrop-blur-xl bg-white/[0.02] border border-white/[0.05] rounded-2xl p-6 hover:border-[#9C27B0]/20 transition-colors duration-500">
+              <div className="flex items-center justify-between mb-5">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-[#9C27B0]/10 flex items-center justify-center">
+                    <Send className="w-5 h-5 text-[#9C27B0]" />
+                  </div>
+                  <div>
+                    <h4 className="text-white font-medium">Transcript Requests</h4>
+                    <p className="text-slate-500 text-xs">Official transcripts from your institutions</p>
+                  </div>
+                </div>
+                <button 
+                  onClick={() => { setCurrentStep(5); navigate(`/application/${appId}/5`); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                  className="px-3 py-1.5 rounded-full text-xs font-medium bg-white/5 text-[#9C27B0] hover:bg-[#9C27B0]/10 transition-colors"
+                >
+                  Edit
+                </button>
+              </div>
+              <div className="space-y-3">
+                <div className="flex items-center justify-between py-2 border-b border-white/[0.03]">
+                  <span className="text-slate-500 text-sm">Requested</span>
+                  <span className="text-white text-sm">
+                    {Object.keys(transcriptRequests).length} of {(academicHistory.institutions || []).length} institutions
+                  </span>
+                </div>
+                {/* Transcript Request Details */}
+                <div className="pt-2 space-y-2">
+                  {(academicHistory.institutions || []).length > 0 ? (
+                    (academicHistory.institutions || []).map((inst, idx) => {
+                      const instId = (inst.name || '').replace(/\s+/g, '_').toLowerCase() || `inst_${idx}`;
+                      const request = transcriptRequests[instId];
+                      const isRequested = request?.status === "requested";
+                      // Format date from YYYY-MM-DD to Month Day, Year
+                      const formatRequestDate = (dateStr) => {
+                        if (!dateStr) return "";
+                        const [year, month, day] = dateStr.split('-');
+                        const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+                        return `${monthNames[parseInt(month) - 1]} ${parseInt(day)}, ${year}`;
+                      };
+                      return (
+                        <div key={idx} className="flex items-center justify-between py-2 px-3 rounded-lg bg-black/20 border border-white/[0.03]">
+                          <div className="flex items-center gap-2">
+                            <div className={`w-5 h-5 rounded-full flex items-center justify-center ${isRequested ? 'bg-[#739600]/20' : 'bg-white/5'}`}>
+                              {isRequested ? (
+                                <Check className="w-3 h-3 text-[#739600]" />
+                              ) : (
+                                <Clock className="w-3 h-3 text-slate-500" />
+                              )}
+                            </div>
+                            <span className="text-slate-300 text-sm">{inst.name || "Unknown"}</span>
+                          </div>
+                          <span className={`text-xs ${isRequested ? 'text-[#739600]' : 'text-slate-500'}`}>
+                            {isRequested ? `Requested ${formatRequestDate(request.requested_date)}` : "Not requested"}
+                          </span>
+                        </div>
+                      );
+                    })
+                  ) : (
+                    <p className="text-slate-600 text-xs italic">No institutions added in Academic History</p>
+                  )}
+                </div>
+              </div>
+            </div>
+
             {/* Program Selection Summary */}
             <div className="backdrop-blur-xl bg-white/[0.02] border border-white/[0.05] rounded-2xl p-6 hover:border-[#00677F]/20 transition-colors duration-500">
               <div className="flex items-center gap-3 mb-5">
