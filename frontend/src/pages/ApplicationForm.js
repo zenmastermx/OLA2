@@ -1048,7 +1048,7 @@ const ApplicationForm = () => {
                       {(employmentHistory.verifications || []).filter(v => v.date_confirmed).length} of {(employmentHistory.verifications || []).length}
                     </span>
                   </div>
-                  <div className="flex items-center justify-between py-2">
+                  <div className="flex items-center justify-between py-2 border-b border-white/[0.03]">
                     <span className="text-slate-500 text-sm">Total Hours</span>
                     <span className={`text-sm font-medium ${
                       (employmentHistory.verifications || []).reduce((sum, v) => sum + (parseInt(v.hours_worked) || 0), 0) >= 2080
@@ -1057,6 +1057,39 @@ const ApplicationForm = () => {
                     }`}>
                       {(employmentHistory.verifications || []).reduce((sum, v) => sum + (parseInt(v.hours_worked) || 0), 0).toLocaleString()} / 2,080
                     </span>
+                  </div>
+                  {/* Employment Verifications List */}
+                  <div className="pt-2">
+                    <span className="text-slate-500 text-xs uppercase tracking-wider">Employment Records</span>
+                    <div className="mt-2 space-y-2">
+                      {(employmentHistory.verifications || []).length > 0 ? (
+                        (employmentHistory.verifications || []).map((v, idx) => {
+                          // Format date from YYYY-MM-DD to Month Year
+                          const formatDate = (dateStr) => {
+                            if (!dateStr) return "Present";
+                            const [year, month] = dateStr.split('-');
+                            const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+                            return `${monthNames[parseInt(month) - 1] || ''} ${year}`;
+                          };
+                          return (
+                            <div key={idx} className="py-2 px-3 rounded-lg bg-black/20 border border-white/[0.03]">
+                              <div className="flex items-center justify-between mb-1">
+                                <span className="text-slate-300 text-sm font-medium">{v.employer_name || "Unknown Employer"}</span>
+                                <span className={`text-xs px-2 py-0.5 rounded-full ${v.date_confirmed ? 'bg-[#739600]/20 text-[#739600]' : 'bg-[#FF9800]/20 text-[#FF9800]'}`}>
+                                  {v.date_confirmed ? "Verified" : "Pending"}
+                                </span>
+                              </div>
+                              <div className="flex items-center justify-between text-xs">
+                                <span className="text-slate-500">{v.job_title || "No title"}</span>
+                                <span className="text-slate-500">{formatDate(v.start_date)} - {formatDate(v.end_date)} • {v.hours_worked || 0} hrs</span>
+                              </div>
+                            </div>
+                          );
+                        })
+                      ) : (
+                        <p className="text-slate-600 text-xs italic">No employment records added</p>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
