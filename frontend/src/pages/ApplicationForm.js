@@ -153,7 +153,6 @@ const TranscriptRequestRow = ({
                   ))}
                 </select>
               </div>
-              </div>
               <Button
                 onClick={handleMarkRequested}
                 disabled={!requestedDate || requestingTranscript[institutionId]}
