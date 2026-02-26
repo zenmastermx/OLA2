@@ -325,6 +325,9 @@ const LandingPage = () => {
           </div>
         </div>
       </footer>
+
+      {/* Cookie Consent Popup */}
+      <CookieConsent />
     </div>
   );
 };
