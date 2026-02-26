@@ -134,7 +134,7 @@ const OnboardingModal = ({ isOpen, onComplete, appId }) => {
           </div>
           <p className="text-slate-400 text-sm">
             Look for the <span className="text-[#7B68EE] font-medium">"Ask Journey"</span> button 
-            in the bottom right corner of your screen.
+            in the top right corner of your screen.
           </p>
         </>
       )
