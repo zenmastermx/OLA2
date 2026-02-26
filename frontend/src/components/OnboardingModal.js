@@ -163,16 +163,6 @@ const OnboardingModal = ({ isOpen, onComplete, appId }) => {
     }
   };
 
-  const handleComplete = () => {
-    localStorage.setItem("onboarding_completed", "true");
-    onComplete?.();
-  };
-
-  const handleSkip = () => {
-    localStorage.setItem("onboarding_completed", "true");
-    onComplete?.();
-  };
-
   if (!isOpen) return null;
 
   const step = steps[currentStep];
