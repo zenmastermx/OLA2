@@ -306,28 +306,21 @@ const EmploymentHistorySections = ({ employmentHistory, setEmploymentHistory, on
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="space-y-2">
-                <Label className="text-xs font-medium uppercase tracking-wider text-slate-400">
-                  Start Date <span className="text-[#A1D8E0]">*</span>
-                </Label>
-                <Input
-                  type="date"
-                  value={newVerification.start_date}
-                  onChange={(e) => setNewVerification({ ...newVerification, start_date: e.target.value })}
-                  className="h-12 bg-black/30 border-white/[0.08] focus:border-[#A1D8E0] focus:ring-2 focus:ring-[#A1D8E0]/20 text-white rounded-full px-5 transition-all duration-300"
-                  data-testid="employment-start"
-                />
-              </div>
-              <div className="space-y-2">
-                <Label className="text-xs font-medium uppercase tracking-wider text-slate-400">End Date</Label>
-                <Input
-                  type="date"
-                  value={newVerification.end_date}
-                  onChange={(e) => setNewVerification({ ...newVerification, end_date: e.target.value })}
-                  className="h-12 bg-black/30 border-white/[0.08] focus:border-[#A1D8E0] focus:ring-2 focus:ring-[#A1D8E0]/20 text-white rounded-full px-5 transition-all duration-300"
-                  data-testid="employment-end"
-                />
-              </div>
+              <MonthYearPicker
+                label="Start Date"
+                required={true}
+                value={newVerification.start_date}
+                onChange={(date) => setNewVerification({ ...newVerification, start_date: date })}
+                testId="employment-start"
+                theme="dark"
+              />
+              <MonthYearPicker
+                label="End Date"
+                value={newVerification.end_date}
+                onChange={(date) => setNewVerification({ ...newVerification, end_date: date })}
+                testId="employment-end"
+                theme="dark"
+              />
               <div className="space-y-2">
                 <Label className="text-xs font-medium uppercase tracking-wider text-slate-400">
                   Total Hours <span className="text-[#A1D8E0]">*</span>
@@ -337,7 +330,7 @@ const EmploymentHistorySections = ({ employmentHistory, setEmploymentHistory, on
                   value={newVerification.hours_worked}
                   onChange={(e) => setNewVerification({ ...newVerification, hours_worked: e.target.value })}
                   placeholder="e.g., 2080"
-                  className="h-12 bg-black/30 border-white/[0.08] focus:border-[#A1D8E0] focus:ring-2 focus:ring-[#A1D8E0]/20 text-white rounded-full px-5 transition-all duration-300 placeholder:text-slate-600"
+                  className="h-12 bg-black/30 border-white/[0.08] focus:border-[#A1D8E0] focus:ring-2 focus:ring-[#A1D8E0]/20 text-white rounded-xl px-5 transition-all duration-300 placeholder:text-slate-600"
                   data-testid="hours-worked"
                 />
               </div>
