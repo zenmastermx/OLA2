@@ -180,7 +180,8 @@ A cutting-edge, futuristic student online application portal for the University 
 ## Backlog / Future Enhancements
 
 ### P0 (Critical)
-- End-to-End Data Persistence Verification - Audit all form fields including prerequisites
+- ~~UX-Friendly Date Pickers~~ ✅ DONE - MonthYearPicker component integrated in Academic History, Employment History, and Transcript Requests
+- End-to-End Data Persistence Verification - Audit all form fields including prerequisites (verify new month/year format saves correctly)
 - Wire up "Review & Submit" page to display complete application summary
 
 ### P1 (High Priority)
