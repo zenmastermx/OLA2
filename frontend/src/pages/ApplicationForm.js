@@ -101,23 +101,58 @@ const TranscriptRequestRow = ({
               </div>
             </>
           ) : showDateInput ? (
-            <div className="flex items-center gap-3">
-              <div className="flex flex-col gap-1">
-                <label className={`text-xs ${theme === 'dark' ? 'text-slate-400' : 'text-gray-500'}`}>
-                  Date Requested
-                </label>
-                <input
-                  type="date"
-                  value={requestedDate}
-                  onChange={(e) => setRequestedDate(e.target.value)}
-                  max={new Date().toISOString().split('T')[0]}
-                  className={`h-10 px-3 rounded-lg border text-sm ${
+            <div className="flex items-center gap-3 flex-wrap">
+              <div className="flex items-center gap-2">
+                <select
+                  value={requestedDate ? requestedDate.split('-')[1] : ''}
+                  onChange={(e) => {
+                    const year = requestedDate ? requestedDate.split('-')[0] : new Date().getFullYear().toString();
+                    if (e.target.value) {
+                      setRequestedDate(`${year}-${e.target.value}-01`);
+                    }
+                  }}
+                  className={`h-10 px-3 rounded-lg border text-sm appearance-none cursor-pointer ${
                     theme === 'dark' 
                       ? 'bg-black/30 border-white/[0.08] text-white' 
                       : 'bg-gray-50 border-gray-200 text-gray-900'
                   }`}
-                  data-testid={`transcript-date-${index}`}
-                />
+                  data-testid={`transcript-month-${index}`}
+                >
+                  <option value="">Month</option>
+                  <option value="01">January</option>
+                  <option value="02">February</option>
+                  <option value="03">March</option>
+                  <option value="04">April</option>
+                  <option value="05">May</option>
+                  <option value="06">June</option>
+                  <option value="07">July</option>
+                  <option value="08">August</option>
+                  <option value="09">September</option>
+                  <option value="10">October</option>
+                  <option value="11">November</option>
+                  <option value="12">December</option>
+                </select>
+                <select
+                  value={requestedDate ? requestedDate.split('-')[0] : ''}
+                  onChange={(e) => {
+                    const month = requestedDate ? requestedDate.split('-')[1] : '01';
+                    if (e.target.value) {
+                      setRequestedDate(`${e.target.value}-${month || '01'}-01`);
+                    }
+                  }}
+                  className={`h-10 px-3 rounded-lg border text-sm appearance-none cursor-pointer ${
+                    theme === 'dark' 
+                      ? 'bg-black/30 border-white/[0.08] text-white' 
+                      : 'bg-gray-50 border-gray-200 text-gray-900'
+                  }`}
+                  data-testid={`transcript-year-${index}`}
+                >
+                  <option value="">Year</option>
+                  {[2026, 2025, 2024, 2023, 2022, 2021, 2020].map(year => (
+                    <option key={year} value={year}>{year}</option>
+                  ))}
+                </select>
+              </div>
               </div>
               <Button
                 onClick={handleMarkRequested}
