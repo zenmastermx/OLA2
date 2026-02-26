@@ -758,7 +758,7 @@ async def submit_application(app_id: str, current_user: dict = Depends(get_curre
 
 class TranscriptRequestInput(BaseModel):
     institution_id: str
-    service: str
+    requested_date: str
     timestamp: str
 
 @api_router.post("/applications/{app_id}/transcript-request")
@@ -774,13 +774,10 @@ async def request_transcript(
     # Get existing transcript requests or initialize empty dict
     transcript_requests = app.get("transcript_requests", {})
     
-    # Determine status based on service type
-    status = "marked_sent" if request_data.service == "certified_mail" else "requested"
-    
     # Add or update the transcript request for this institution
     transcript_requests[request_data.institution_id] = {
-        "service": request_data.service,
-        "status": status,
+        "requested_date": request_data.requested_date,
+        "status": "requested",
         "timestamp": request_data.timestamp
     }
     
@@ -796,8 +793,8 @@ async def request_transcript(
     return {
         "success": True, 
         "institution_id": request_data.institution_id,
-        "service": request_data.service,
-        "status": status,
+        "requested_date": request_data.requested_date,
+        "status": "requested",
         "timestamp": request_data.timestamp
     }
 
