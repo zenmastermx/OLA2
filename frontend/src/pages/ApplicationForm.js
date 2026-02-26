@@ -1121,6 +1121,12 @@ const ApplicationForm = () => {
 
   return (
     <div className={`min-h-screen ${theme === 'dark' ? 'bg-[#0A0E14]' : 'bg-gray-50'}`}>
+      {/* Onboarding Modal for first-time users */}
+      <OnboardingModal 
+        isOpen={showOnboarding} 
+        onComplete={() => setShowOnboarding(false)} 
+      />
+
       {/* Top Navigation */}
       <nav className={`sticky top-0 z-40 backdrop-blur-xl border-b ${theme === 'dark' ? 'bg-[#0A0E14]/80 border-white/5' : 'bg-white/80 border-gray-200'}`}>
         <div className="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
