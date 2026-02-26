@@ -19,6 +19,7 @@ import AIChat from "@/components/AIChat";
 import PersonalInfoSections from "@/components/PersonalInfoSections";
 import AcademicHistorySections from "@/components/AcademicHistorySections";
 import EmploymentHistorySections from "@/components/EmploymentHistorySections";
+import OnboardingModal from "@/components/OnboardingModal";
 
 // Transcript Request Row Component (extracted for proper hook usage)
 const TranscriptRequestRow = ({ 
