@@ -3,6 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { useTheme } from "@/App";
 import { Button } from "@/components/ui/button";
 import { ChevronRight, Sparkles, FileCheck, Headphones, GraduationCap, Stethoscope, MapPin, ArrowRight, BookOpen, Award, Sun, Moon } from "lucide-react";
+import CookieConsent from "@/components/CookieConsent";
 
 const LandingPage = () => {
   const navigate = useNavigate();
