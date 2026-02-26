@@ -442,7 +442,15 @@ const Dashboard = () => {
                       : "No Application"}
                 </p>
                 <p className="text-slate-500 text-sm">
-                  {displayApp?.status === "submitted" ? "Submitted" : displayApp ? "In Progress" : "Start one above"}
+                  {displayApp?.status === "submitted" ? "Submitted" : displayApp ? "In Progress" : (
+                    <button 
+                      onClick={() => setShowNewAppModal(true)}
+                      className="text-[#00B4D8] hover:text-[#00F5FF] underline transition-colors"
+                      data-testid="start-application-btn"
+                    >
+                      Start one now
+                    </button>
+                  )}
                 </p>
               </div>
             </div>
