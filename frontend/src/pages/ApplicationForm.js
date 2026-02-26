@@ -675,7 +675,7 @@ const ApplicationForm = () => {
           return ["parchment", "nsc"];
         };
         
-        const handleTranscriptRequest = async (institutionId, service) => {
+        const handleTranscriptRequest = async (institutionId, requestedDate) => {
           setRequestingTranscript(prev => ({ ...prev, [institutionId]: true }));
           
           try {
@@ -683,7 +683,7 @@ const ApplicationForm = () => {
               `${API}/applications/${appId}/transcript-request`,
               {
                 institution_id: institutionId,
-                service: service,
+                requested_date: requestedDate,
                 timestamp: new Date().toISOString()
               },
               { headers: { Authorization: `Bearer ${token}` } }
@@ -692,19 +692,16 @@ const ApplicationForm = () => {
             setTranscriptRequests(prev => ({
               ...prev,
               [institutionId]: {
-                service: service,
-                status: service === "certified_mail" ? "marked_sent" : "requested",
+                requested_date: requestedDate,
+                status: "requested",
                 timestamp: new Date().toISOString()
               }
             }));
             
-            toast.success(service === "certified_mail" 
-              ? "Marked as sent via certified mail" 
-              : `Transcript request sent via ${transcriptServices.find(s => s.id === service)?.name}`
-            );
+            toast.success("Transcript request confirmed!");
           } catch (error) {
             console.error("Transcript request error:", error);
-            toast.error("Failed to submit transcript request. Please try again.");
+            toast.error("Failed to save transcript request. Please try again.");
           } finally {
             setRequestingTranscript(prev => ({ ...prev, [institutionId]: false }));
           }
