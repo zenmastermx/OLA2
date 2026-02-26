@@ -487,19 +487,18 @@ const AcademicHistorySections = ({ academicHistory, setAcademicHistory, onSectio
                             );
                             setAcademicHistory({ ...academicHistory, institutions });
                           }}
-                          className="h-11 bg-black/30 border-white/[0.08] text-white rounded-full px-5 focus:border-[#A1D8E0] focus:ring-2 focus:ring-[#A1D8E0]/20 placeholder:text-slate-600"
+                          className="h-11 bg-black/30 border-white/[0.08] text-white rounded-xl px-5 focus:border-[#A1D8E0] focus:ring-2 focus:ring-[#A1D8E0]/20 placeholder:text-slate-600"
                         />
-                        <Input
-                          type="month"
-                          placeholder="Graduation Date"
+                        <MonthYearPicker
                           value={inst.date}
-                          onChange={(e) => {
+                          onChange={(date) => {
                             const institutions = academicHistory.institutions.map((item, i) =>
-                              i === index ? { ...item, date: e.target.value } : item
+                              i === index ? { ...item, date: date } : item
                             );
                             setAcademicHistory({ ...academicHistory, institutions });
                           }}
-                          className="h-11 bg-black/30 border-white/[0.08] text-white rounded-full px-5 focus:border-[#A1D8E0] focus:ring-2 focus:ring-[#A1D8E0]/20"
+                          testId={`institution-date-${index}`}
+                          theme="dark"
                         />
                         <Input
                           placeholder="Degree Earned"
@@ -510,7 +509,7 @@ const AcademicHistorySections = ({ academicHistory, setAcademicHistory, onSectio
                             );
                             setAcademicHistory({ ...academicHistory, institutions });
                           }}
-                          className="h-11 bg-black/30 border-white/[0.08] text-white rounded-full px-5 focus:border-[#A1D8E0] focus:ring-2 focus:ring-[#A1D8E0]/20 placeholder:text-slate-600"
+                          className="h-11 bg-black/30 border-white/[0.08] text-white rounded-xl px-5 focus:border-[#A1D8E0] focus:ring-2 focus:ring-[#A1D8E0]/20 placeholder:text-slate-600"
                         />
                       </div>
                     </div>
