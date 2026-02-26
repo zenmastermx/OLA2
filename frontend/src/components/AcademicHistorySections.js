@@ -9,6 +9,7 @@ import { Textarea } from "@/components/ui/textarea";
 import {
   BookOpen, GraduationCap, FileText, Clock, AlertCircle, Check, ChevronRight, Plus, Trash2, Info, Building, Calendar
 } from "lucide-react";
+import MonthYearPicker from "@/components/MonthYearPicker";
 
 const AcademicHistorySections = ({ academicHistory, setAcademicHistory, onSectionComplete }) => {
   const [activeSubSection, setActiveSubSection] = useState(0);
