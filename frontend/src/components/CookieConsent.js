@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Cookie, X, Shield, Settings } from "lucide-react";
+import { Cookie, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const CookieConsent = () => {
