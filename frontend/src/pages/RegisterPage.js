@@ -156,7 +156,7 @@ const RegisterPage = () => {
               </p>
               <a 
                 href="tel:855-481-9203"
-                className="inline-block text-2xl font-bold text-[#00B4D8] hover:text-[#00F5FF] transition-colors mb-6"
+                className="inline-block text-2xl font-bold text-[#00677F] hover:text-[#A1D8E0] transition-colors mb-6"
               >
                 855-481-9203
               </a>
@@ -171,7 +171,7 @@ const RegisterPage = () => {
       {/* Left side - Visual */}
       <div className="hidden lg:flex flex-1 items-center justify-center p-12 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-[#002855]/50 to-[#0A0E14]" />
-        <div className="absolute top-1/3 left-1/4 w-96 h-96 bg-[#00B4D8]/10 rounded-full blur-[100px]" />
+        <div className="absolute top-1/3 left-1/4 w-96 h-96 bg-[#00677F]/10 rounded-full blur-[100px]" />
         <div className="absolute bottom-1/3 right-1/4 w-96 h-96 bg-[#7B68EE]/10 rounded-full blur-[100px]" />
         
         <div className="relative z-10 max-w-lg">
@@ -190,8 +190,8 @@ const RegisterPage = () => {
               "24/7 support access"
             ].map((feature, i) => (
               <div key={i} className="flex items-center gap-3">
-                <div className="w-6 h-6 rounded-full bg-[#00B4D8]/20 flex items-center justify-center">
-                  <Check className="w-4 h-4 text-[#00B4D8]" />
+                <div className="w-6 h-6 rounded-full bg-[#00677F]/20 flex items-center justify-center">
+                  <Check className="w-4 h-4 text-[#00677F]" />
                 </div>
                 <span className="text-slate-300">{feature}</span>
               </div>
@@ -241,7 +241,7 @@ const RegisterPage = () => {
                     placeholder="John"
                     value={firstName}
                     onChange={(e) => setFirstName(e.target.value)}
-                    className="pl-12 h-12 bg-black/20 border-white/10 focus:border-[#00F5FF] focus:ring-1 focus:ring-[#00F5FF] text-white placeholder:text-slate-600 rounded-xl"
+                    className="pl-12 h-12 bg-black/20 border-white/10 focus:border-[#A1D8E0] focus:ring-1 focus:ring-[#A1D8E0] text-white placeholder:text-slate-600 rounded-xl"
                     data-testid="register-firstname-input"
                   />
                 </div>
@@ -254,7 +254,7 @@ const RegisterPage = () => {
                   placeholder="Doe"
                   value={lastName}
                   onChange={(e) => setLastName(e.target.value)}
-                  className="h-12 bg-black/20 border-white/10 focus:border-[#00F5FF] focus:ring-1 focus:ring-[#00F5FF] text-white placeholder:text-slate-600 rounded-xl"
+                  className="h-12 bg-black/20 border-white/10 focus:border-[#A1D8E0] focus:ring-1 focus:ring-[#A1D8E0] text-white placeholder:text-slate-600 rounded-xl"
                   data-testid="register-lastname-input"
                 />
               </div>
@@ -270,7 +270,7 @@ const RegisterPage = () => {
                   placeholder="you@example.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="pl-12 h-12 bg-black/20 border-white/10 focus:border-[#00F5FF] focus:ring-1 focus:ring-[#00F5FF] text-white placeholder:text-slate-600 rounded-xl"
+                  className="pl-12 h-12 bg-black/20 border-white/10 focus:border-[#A1D8E0] focus:ring-1 focus:ring-[#A1D8E0] text-white placeholder:text-slate-600 rounded-xl"
                   data-testid="register-email-input"
                 />
               </div>
@@ -286,7 +286,7 @@ const RegisterPage = () => {
                   placeholder="(000) 000-0000"
                   value={phone}
                   onChange={(e) => setPhone(formatPhoneNumber(e.target.value))}
-                  className="pl-12 h-12 bg-black/20 border-white/10 focus:border-[#00F5FF] focus:ring-1 focus:ring-[#00F5FF] text-white placeholder:text-slate-600 rounded-xl"
+                  className="pl-12 h-12 bg-black/20 border-white/10 focus:border-[#A1D8E0] focus:ring-1 focus:ring-[#A1D8E0] text-white placeholder:text-slate-600 rounded-xl"
                   data-testid="register-phone-input"
                 />
               </div>
@@ -302,7 +302,7 @@ const RegisterPage = () => {
                   placeholder="••••••••"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="pl-12 pr-12 h-12 bg-black/20 border-white/10 focus:border-[#00F5FF] focus:ring-1 focus:ring-[#00F5FF] text-white placeholder:text-slate-600 rounded-xl"
+                  className="pl-12 pr-12 h-12 bg-black/20 border-white/10 focus:border-[#A1D8E0] focus:ring-1 focus:ring-[#A1D8E0] text-white placeholder:text-slate-600 rounded-xl"
                   data-testid="register-password-input"
                 />
                 <button
@@ -319,10 +319,10 @@ const RegisterPage = () => {
                 <div className="space-y-2 mt-3">
                   {passwordChecks.map((check, i) => (
                     <div key={i} className="flex items-center gap-2 text-sm">
-                      <div className={`w-4 h-4 rounded-full flex items-center justify-center ${check.valid ? 'bg-[#28A745]' : 'bg-slate-700'}`}>
+                      <div className={`w-4 h-4 rounded-full flex items-center justify-center ${check.valid ? 'bg-[#739600]' : 'bg-slate-700'}`}>
                         {check.valid && <Check className="w-3 h-3 text-white" />}
                       </div>
-                      <span className={check.valid ? 'text-[#28A745]' : 'text-slate-500'}>{check.label}</span>
+                      <span className={check.valid ? 'text-[#739600]' : 'text-slate-500'}>{check.label}</span>
                     </div>
                   ))}
                 </div>
@@ -339,7 +339,7 @@ const RegisterPage = () => {
                   placeholder="••••••••"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
-                  className="pl-12 h-12 bg-black/20 border-white/10 focus:border-[#00F5FF] focus:ring-1 focus:ring-[#00F5FF] text-white placeholder:text-slate-600 rounded-xl"
+                  className="pl-12 h-12 bg-black/20 border-white/10 focus:border-[#A1D8E0] focus:ring-1 focus:ring-[#A1D8E0] text-white placeholder:text-slate-600 rounded-xl"
                   data-testid="register-confirm-password-input"
                 />
               </div>
@@ -367,7 +367,7 @@ const RegisterPage = () => {
                   }}
                   className={`w-full p-4 rounded-xl border transform transition-all duration-500 ease-out ${
                     consentAgreed === true
-                      ? "border-[#28A745]/50 bg-[#0d2818] scale-[1.02] shadow-[0_0_20px_rgba(40,167,69,0.2)]"
+                      ? "border-[#739600]/50 bg-[#0d2818] scale-[1.02] shadow-[0_0_20px_rgba(40,167,69,0.2)]"
                       : (!firstName || !lastName || !email || !phone || !password || !confirmPassword || password !== confirmPassword)
                         ? "border-white/[0.05] bg-black/10 opacity-50"
                         : "border-white/[0.08] bg-black/20 hover:border-white/20 hover:scale-[1.01]"
@@ -377,12 +377,12 @@ const RegisterPage = () => {
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-4">
                       <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-500 ${
-                        consentAgreed === true ? "bg-[#28A745]/20 scale-110" : "bg-slate-700/50"
+                        consentAgreed === true ? "bg-[#739600]/20 scale-110" : "bg-slate-700/50"
                       }`}>
-                        <Check className={`w-5 h-5 transition-all duration-500 ${consentAgreed === true ? "text-[#28A745]" : "text-slate-400"}`} />
+                        <Check className={`w-5 h-5 transition-all duration-500 ${consentAgreed === true ? "text-[#739600]" : "text-slate-400"}`} />
                       </div>
                       <div className="text-left">
-                        <h4 className={`font-medium transition-colors duration-500 ${consentAgreed === true ? "text-[#28A745]" : "text-white"}`}>
+                        <h4 className={`font-medium transition-colors duration-500 ${consentAgreed === true ? "text-[#739600]" : "text-white"}`}>
                           I Agree
                         </h4>
                         <p className="text-slate-400 text-sm">
@@ -391,7 +391,7 @@ const RegisterPage = () => {
                       </div>
                     </div>
                     <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all duration-500 ${
-                      consentAgreed === true ? "border-[#28A745] bg-[#28A745] scale-110" : "border-slate-500"
+                      consentAgreed === true ? "border-[#739600] bg-[#739600] scale-110" : "border-slate-500"
                     }`}>
                       {consentAgreed === true && <Check className="w-4 h-4 text-white animate-[scale-in_0.3s_ease-out]" />}
                     </div>
@@ -404,7 +404,7 @@ const RegisterPage = () => {
                   onClick={() => handleConsentChange(false)}
                   className={`w-full p-4 rounded-xl border transform transition-all duration-500 ease-out ${
                     consentAgreed === false
-                      ? "border-[#00B4D8]/50 bg-[#0a1a20] scale-[1.02] shadow-[0_0_20px_rgba(0,180,216,0.2)]"
+                      ? "border-[#00677F]/50 bg-[#0a1a20] scale-[1.02] shadow-[0_0_20px_rgba(0,180,216,0.2)]"
                       : "border-white/[0.08] bg-black/20 hover:border-white/20 hover:scale-[1.01]"
                   }`}
                   data-testid="consent-disagree-btn"
@@ -412,12 +412,12 @@ const RegisterPage = () => {
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-4">
                       <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-500 ${
-                        consentAgreed === false ? "bg-[#00B4D8]/20 scale-110" : "bg-slate-700/50"
+                        consentAgreed === false ? "bg-[#00677F]/20 scale-110" : "bg-slate-700/50"
                       }`}>
-                        <Phone className={`w-5 h-5 transition-all duration-500 ${consentAgreed === false ? "text-[#00B4D8]" : "text-slate-400"}`} />
+                        <Phone className={`w-5 h-5 transition-all duration-500 ${consentAgreed === false ? "text-[#00677F]" : "text-slate-400"}`} />
                       </div>
                       <div className="text-left">
-                        <h4 className={`font-medium transition-colors duration-500 ${consentAgreed === false ? "text-[#00B4D8]" : "text-white"}`}>
+                        <h4 className={`font-medium transition-colors duration-500 ${consentAgreed === false ? "text-[#00677F]" : "text-white"}`}>
                           I Do Not Agree
                         </h4>
                         <p className="text-slate-400 text-sm">
@@ -426,7 +426,7 @@ const RegisterPage = () => {
                       </div>
                     </div>
                     <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all duration-500 ${
-                      consentAgreed === false ? "border-[#00B4D8] bg-[#00B4D8] scale-110" : "border-slate-500"
+                      consentAgreed === false ? "border-[#00677F] bg-[#00677F] scale-110" : "border-slate-500"
                     }`}>
                       {consentAgreed === false && <Check className="w-4 h-4 text-white animate-[scale-in_0.3s_ease-out]" />}
                     </div>
@@ -436,8 +436,8 @@ const RegisterPage = () => {
               
               <p className="text-slate-500 text-xs leading-relaxed">
                 By clicking "I Agree", I consent to the University of St. Augustine for Health Sciences using automated technology and/or pre-recorded means to email, text, and/or call me at the phone number above regarding educational services. I understand that my consent is not a required condition to purchase a good or service. I am providing an e-signature confirming my consent and my agreement to USAHS'{" "}
-                <a href="#" className="text-[#00B4D8] hover:underline">Privacy Policy</a> and{" "}
-                <a href="#" className="text-[#00B4D8] hover:underline">Terms of Use</a>. Msg and data rates may apply.
+                <a href="#" className="text-[#00677F] hover:underline">Privacy Policy</a> and{" "}
+                <a href="#" className="text-[#00677F] hover:underline">Terms of Use</a>. Msg and data rates may apply.
               </p>
               
               <p className="text-slate-600 text-xs">
@@ -450,7 +450,7 @@ const RegisterPage = () => {
                 <Button
                   type="submit"
                   disabled={loading}
-                  className="w-full h-14 bg-[#00B4D8] hover:bg-[#0096B4] text-white rounded-xl text-lg font-medium shadow-[0_0_20px_rgba(0,180,216,0.3)] hover:shadow-[0_0_30px_rgba(0,180,216,0.5)] transition-all mt-4"
+                  className="w-full h-14 bg-[#00677F] hover:bg-[#135163] text-white rounded-xl text-lg font-medium shadow-[0_0_20px_rgba(0,180,216,0.3)] hover:shadow-[0_0_30px_rgba(0,180,216,0.5)] transition-all mt-4"
                   data-testid="register-submit-btn"
                 >
                   {loading ? (
@@ -471,7 +471,7 @@ const RegisterPage = () => {
             Already have an account?{" "}
             <Link 
               to="/login" 
-              className="text-[#00B4D8] hover:text-[#00F5FF] font-medium transition-colors"
+              className="text-[#00677F] hover:text-[#A1D8E0] font-medium transition-colors"
               data-testid="login-link"
             >
               Sign In

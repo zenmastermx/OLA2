@@ -21,7 +21,7 @@ import VerificationModal from "@/components/VerificationModal";
 const PROGRAM_PATHWAYS = {
   ot: {
     name: "Occupational Therapy",
-    color: "#00B4D8",
+    color: "#00677F",
     programs: [
       { id: "mot", name: "Master of Occupational Therapy" },
       { id: "mot_ota", name: "Master of Occupational Therapy (OTA Entry)" },
@@ -63,7 +63,7 @@ const PROGRAM_PATHWAYS = {
   },
   certificates: {
     name: "Certificates",
-    color: "#28A745",
+    color: "#739600",
     programs: [
       { id: "cert_fnp", name: "Certificate - Family Nurse Practitioner" },
       { id: "cert_ne", name: "Certificate - Nursing Executive" },
@@ -274,10 +274,10 @@ const Dashboard = () => {
             {/* Ask Journey Button */}
             <Button
               onClick={() => setShowChat(true)}
-              className={`bg-gradient-to-r from-[#00B4D8]/20 to-[#7B68EE]/20 border border-[#00B4D8]/30 hover:border-[#00F5FF] hover:bg-[#00B4D8]/30 rounded-full px-4 py-2 flex items-center gap-2 transition-all ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}
+              className={`bg-gradient-to-r from-[#00677F]/20 to-[#7B68EE]/20 border border-[#00677F]/30 hover:border-[#A1D8E0] hover:bg-[#00677F]/30 rounded-full px-4 py-2 flex items-center gap-2 transition-all ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}
               data-testid="ask-journey-btn"
             >
-              <Sparkles className="w-4 h-4 text-[#00F5FF]" />
+              <Sparkles className="w-4 h-4 text-[#A1D8E0]" />
               <span className="hidden sm:inline">Ask Journey</span>
             </Button>
             
@@ -285,7 +285,7 @@ const Dashboard = () => {
               <p className={`font-medium ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>{user?.first_name} {user?.last_name}</p>
               <p className={`text-sm ${theme === 'dark' ? 'text-slate-500' : 'text-gray-500'}`}>{user?.email}</p>
             </div>
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#00B4D8] to-[#7B68EE] flex items-center justify-center">
+            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#00677F] to-[#7B68EE] flex items-center justify-center">
               <span className="text-white font-bold">{user?.first_name?.[0]}</span>
             </div>
             <Button
@@ -322,10 +322,10 @@ const Dashboard = () => {
               const latestSubmitted = submittedApps[0];
               const reviewStatus = latestSubmitted?.review_status || "application_received";
               const statuses = [
-                { id: "application_received", label: "Application Received", color: "#00B4D8" },
+                { id: "application_received", label: "Application Received", color: "#00677F" },
                 { id: "under_review", label: "Under Review", color: "#FF9800" },
                 { id: "decision", label: "Decision", color: "#7B68EE" },
-                { id: "admitted", label: "Admitted", color: "#28A745" }
+                { id: "admitted", label: "Admitted", color: "#739600" }
               ];
               
               // Determine current step index
@@ -346,7 +346,7 @@ const Dashboard = () => {
                     className="absolute top-5 left-0 h-1 rounded-full mx-8 transition-all duration-500"
                     style={{ 
                       width: `calc(${(currentIndex / (statuses.length - 1)) * 100}% - 64px)`,
-                      backgroundColor: isAdmitted ? "#28A745" : isDecision ? "#7B68EE" : statuses[currentIndex]?.color || "#00B4D8"
+                      backgroundColor: isAdmitted ? "#739600" : isDecision ? "#7B68EE" : statuses[currentIndex]?.color || "#00677F"
                     }}
                   />
                   
@@ -361,12 +361,12 @@ const Dashboard = () => {
                           <div 
                             className="w-10 h-10 rounded-full flex items-center justify-center border-2 transition-all"
                             style={{
-                              borderColor: isActive ? status.color : isPast ? "#28A745" : (theme === 'dark' ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.15)"),
+                              borderColor: isActive ? status.color : isPast ? "#739600" : (theme === 'dark' ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.15)"),
                               backgroundColor: isActive ? `${status.color}20` : isPast ? "rgba(40,167,69,0.2)" : (theme === 'dark' ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.05)")
                             }}
                           >
                             {isPast ? (
-                              <CheckCircle2 className="w-5 h-5 text-[#28A745]" />
+                              <CheckCircle2 className="w-5 h-5 text-[#739600]" />
                             ) : isActive ? (
                               <div 
                                 className="w-3 h-3 rounded-full animate-pulse"
@@ -383,7 +383,7 @@ const Dashboard = () => {
                             isActive 
                               ? (theme === 'dark' ? "text-white" : "text-gray-900")
                               : isPast 
-                                ? "text-[#28A745]" 
+                                ? "text-[#739600]" 
                                 : (theme === 'dark' ? "text-slate-500" : "text-gray-500")
                           }`}>
                             {status.label}
@@ -404,7 +404,7 @@ const Dashboard = () => {
           <div className="glass-card rounded-2xl p-6" data-testid="progress-card">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-slate-400 text-sm font-medium">Application Progress</h3>
-              <Clock className="w-5 h-5 text-[#00F5FF]" />
+              <Clock className="w-5 h-5 text-[#A1D8E0]" />
             </div>
             <div className="flex items-center gap-4">
               <div className="relative w-20 h-20">
@@ -422,7 +422,7 @@ const Dashboard = () => {
                     cy="40"
                     r="36"
                     fill="none"
-                    stroke={displayApp?.status === "submitted" ? "#28A745" : "#00F5FF"}
+                    stroke={displayApp?.status === "submitted" ? "#739600" : "#A1D8E0"}
                     strokeWidth="6"
                     strokeDasharray={`${(displayApp?.progress || 0) * 2.26} 226`}
                     strokeLinecap="round"
@@ -445,7 +445,7 @@ const Dashboard = () => {
                   {displayApp?.status === "submitted" ? "Submitted" : displayApp ? "In Progress" : (
                     <button 
                       onClick={() => setShowNewAppModal(true)}
-                      className="text-[#00B4D8] hover:text-[#00F5FF] underline transition-colors"
+                      className="text-[#00677F] hover:text-[#A1D8E0] underline transition-colors"
                       data-testid="start-application-btn"
                     >
                       Start one now
@@ -475,7 +475,7 @@ const Dashboard = () => {
           <div className="glass-card rounded-2xl p-6" data-testid="documents-card">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-slate-400 text-sm font-medium">Documents</h3>
-              <FileText className="w-5 h-5 text-[#28A745]" />
+              <FileText className="w-5 h-5 text-[#739600]" />
             </div>
             {displayApp ? (
               <>
@@ -505,7 +505,7 @@ const Dashboard = () => {
             <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6">
               <div className="flex-1">
                 <div className="flex items-center gap-2 mb-3 flex-wrap">
-                  <span className="px-3 py-1 rounded-full text-xs font-medium bg-[#00B4D8]/20 text-[#00B4D8]">
+                  <span className="px-3 py-1 rounded-full text-xs font-medium bg-[#00677F]/20 text-[#00677F]">
                     Active Application
                   </span>
                   <span className="px-3 py-1 rounded-full text-xs font-medium bg-[#7B68EE]/20 text-[#7B68EE]">
@@ -530,7 +530,7 @@ const Dashboard = () => {
                   {(activeApp.program_selection?.campus || activeApp.program_selection?.primary_campus) && (
                     <div className="p-3 rounded-xl bg-white/5 border border-white/[0.05]">
                       <div className="flex items-center gap-2 mb-1">
-                        <MapPin className="w-3.5 h-3.5 text-[#00B4D8]" />
+                        <MapPin className="w-3.5 h-3.5 text-[#00677F]" />
                         <span className="text-slate-500 text-xs uppercase tracking-wider">Primary Campus</span>
                       </div>
                       <p className="text-white text-sm font-medium">{activeApp.program_selection.campus || activeApp.program_selection.primary_campus}</p>
@@ -548,7 +548,7 @@ const Dashboard = () => {
                   {activeApp.program_selection?.secondary_campus && (
                     <div className="p-3 rounded-xl bg-white/5 border border-white/[0.05]">
                       <div className="flex items-center gap-2 mb-1">
-                        <MapPin className="w-3.5 h-3.5 text-[#28A745]" />
+                        <MapPin className="w-3.5 h-3.5 text-[#739600]" />
                         <span className="text-slate-500 text-xs uppercase tracking-wider">Backup Campus</span>
                       </div>
                       <p className="text-white text-sm font-medium">{activeApp.program_selection.secondary_campus}</p>
@@ -559,7 +559,7 @@ const Dashboard = () => {
               
               <Button
                 onClick={() => navigate(`/application/${activeApp.id}`)}
-                className="bg-[#00B4D8] hover:bg-[#0096B4] text-white rounded-full px-8 py-6 shadow-[0_0_20px_rgba(0,180,216,0.3)] hover:shadow-[0_0_30px_rgba(0,180,216,0.5)] transition-all"
+                className="bg-[#00677F] hover:bg-[#135163] text-white rounded-full px-8 py-6 shadow-[0_0_20px_rgba(0,180,216,0.3)] hover:shadow-[0_0_30px_rgba(0,180,216,0.5)] transition-all"
                 data-testid="continue-application-btn"
               >
                 Continue Application
@@ -580,9 +580,9 @@ const Dashboard = () => {
                   key={step}
                   className={`p-4 rounded-xl border transition-colors cursor-pointer ${
                     step < activeApp.current_step
-                      ? "bg-[#28A745]/10 border-[#28A745]/30"
+                      ? "bg-[#739600]/10 border-[#739600]/30"
                       : step === activeApp.current_step
-                      ? "bg-[#00B4D8]/10 border-[#00B4D8]/50"
+                      ? "bg-[#00677F]/10 border-[#00677F]/50"
                       : "bg-white/5 border-white/10"
                   }`}
                   onClick={() => navigate(`/application/${activeApp.id}/${step}`)}
@@ -590,9 +590,9 @@ const Dashboard = () => {
                 >
                   <Icon className={`w-5 h-5 mb-2 ${
                     step < activeApp.current_step
-                      ? "text-[#28A745]"
+                      ? "text-[#739600]"
                       : step === activeApp.current_step
-                      ? "text-[#00B4D8]"
+                      ? "text-[#00677F]"
                       : "text-slate-500"
                   }`} />
                   <p className={`text-sm font-medium ${
@@ -601,7 +601,7 @@ const Dashboard = () => {
                     {label}
                   </p>
                   {step < activeApp.current_step && (
-                    <CheckCircle2 className="w-4 h-4 text-[#28A745] mt-1" />
+                    <CheckCircle2 className="w-4 h-4 text-[#739600] mt-1" />
                   )}
                 </div>
               ))}
@@ -621,15 +621,15 @@ const Dashboard = () => {
                 const getStatusDisplay = (reviewStatus) => {
                   switch (reviewStatus) {
                     case "application_received":
-                      return { label: "Application Received", color: "#00B4D8", bgColor: "rgba(0,180,216,0.2)" };
+                      return { label: "Application Received", color: "#00677F", bgColor: "rgba(0,180,216,0.2)" };
                     case "under_review":
                       return { label: "Under Review", color: "#FF9800", bgColor: "rgba(255,152,0,0.2)" };
                     case "decision":
                       return { label: "Decision", color: "#7B68EE", bgColor: "rgba(123,104,238,0.2)" };
                     case "admitted":
-                      return { label: "Admitted", color: "#28A745", bgColor: "rgba(40,167,69,0.2)" };
+                      return { label: "Admitted", color: "#739600", bgColor: "rgba(40,167,69,0.2)" };
                     default:
-                      return { label: "Application Received", color: "#00B4D8", bgColor: "rgba(0,180,216,0.2)" };
+                      return { label: "Application Received", color: "#00677F", bgColor: "rgba(0,180,216,0.2)" };
                   }
                 };
                 
@@ -643,12 +643,12 @@ const Dashboard = () => {
                   >
                     <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 mb-4">
                       <div className="flex items-center gap-4">
-                        <div className="w-12 h-12 rounded-xl bg-[#28A745]/20 flex items-center justify-center">
-                          <CheckCircle2 className="w-6 h-6 text-[#28A745]" />
+                        <div className="w-12 h-12 rounded-xl bg-[#739600]/20 flex items-center justify-center">
+                          <CheckCircle2 className="w-6 h-6 text-[#739600]" />
                         </div>
                         <div>
                           <div className="flex items-center gap-2 mb-1 flex-wrap">
-                            <span className="px-3 py-1 rounded-full text-xs font-medium bg-[#28A745]/20 text-[#28A745]">
+                            <span className="px-3 py-1 rounded-full text-xs font-medium bg-[#739600]/20 text-[#739600]">
                               Submitted
                             </span>
                           </div>
@@ -683,7 +683,7 @@ const Dashboard = () => {
                       {(app.program_selection?.campus || app.program_selection?.primary_campus) && (
                         <div className="p-3 rounded-xl bg-white/5 border border-white/[0.05]">
                           <div className="flex items-center gap-2 mb-1">
-                            <MapPin className="w-3.5 h-3.5 text-[#00B4D8]" />
+                            <MapPin className="w-3.5 h-3.5 text-[#00677F]" />
                             <span className="text-slate-500 text-xs uppercase tracking-wider">Primary Campus</span>
                           </div>
                           <p className="text-white text-sm font-medium">{app.program_selection.campus || app.program_selection.primary_campus}</p>
@@ -701,7 +701,7 @@ const Dashboard = () => {
                       {app.program_selection?.secondary_campus && (
                         <div className="p-3 rounded-xl bg-white/5 border border-white/[0.05]">
                           <div className="flex items-center gap-2 mb-1">
-                            <MapPin className="w-3.5 h-3.5 text-[#28A745]" />
+                            <MapPin className="w-3.5 h-3.5 text-[#739600]" />
                             <span className="text-slate-500 text-xs uppercase tracking-wider">Backup Campus</span>
                           </div>
                           <p className="text-white text-sm font-medium">{app.program_selection.secondary_campus}</p>
@@ -720,7 +720,7 @@ const Dashboard = () => {
           <div className="glass-card rounded-2xl p-6 mt-8" data-testid="enrollment-advisor-card">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-slate-400 text-sm font-medium">Your Enrollment Advisor</h3>
-              <span className="px-2 py-1 rounded-full text-xs font-medium bg-[#28A745]/20 text-[#28A745]">
+              <span className="px-2 py-1 rounded-full text-xs font-medium bg-[#739600]/20 text-[#739600]">
                 Assigned
               </span>
             </div>
@@ -731,14 +731,14 @@ const Dashboard = () => {
                 <img 
                   src={advisor.avatar_url} 
                   alt={advisor.name}
-                  className="w-16 h-16 rounded-full object-cover border-2 border-[#00B4D8]/30"
+                  className="w-16 h-16 rounded-full object-cover border-2 border-[#00677F]/30"
                   data-testid="advisor-avatar"
                 />
                 <div>
                   <h4 className="text-white font-semibold text-lg" data-testid="advisor-name">
                     {advisor.name}
                   </h4>
-                  <p className="text-[#00B4D8] text-sm">{advisor.title}</p>
+                  <p className="text-[#00677F] text-sm">{advisor.title}</p>
                   <p className="text-slate-500 text-sm">
                     {displayApp?.program_selection?.program_type 
                       ? `${displayApp.program_selection.program_type} Programs` 
@@ -751,10 +751,10 @@ const Dashboard = () => {
               <div className="flex flex-wrap gap-3">
                 <button
                   onClick={() => setShowScheduleModal(true)}
-                  className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-[#00B4D8]/50 text-white text-sm font-medium transition-all"
+                  className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-[#00677F]/50 text-white text-sm font-medium transition-all"
                   data-testid="schedule-appointment-btn"
                 >
-                  <CalendarDays className="w-4 h-4 text-[#00B4D8]" />
+                  <CalendarDays className="w-4 h-4 text-[#00677F]" />
                   Schedule Appointment
                 </button>
                 
@@ -769,10 +769,10 @@ const Dashboard = () => {
                 
                 <button
                   onClick={() => setShowTextModal(true)}
-                  className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-[#28A745]/50 text-white text-sm font-medium transition-all"
+                  className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-[#739600]/50 text-white text-sm font-medium transition-all"
                   data-testid="text-advisor-btn"
                 >
-                  <MessageCircle className="w-4 h-4 text-[#28A745]" />
+                  <MessageCircle className="w-4 h-4 text-[#739600]" />
                   Send Text
                 </button>
                 
@@ -854,7 +854,7 @@ const Dashboard = () => {
                 <div 
                   key={step}
                   className={`h-1 flex-1 rounded-full transition-all ${
-                    step <= modalStep ? "bg-[#00B4D8]" : "bg-white/10"
+                    step <= modalStep ? "bg-[#00677F]" : "bg-white/10"
                   }`}
                 />
               ))}
@@ -872,7 +872,7 @@ const Dashboard = () => {
                     }}
                     className={`w-full p-4 rounded-xl border text-left transition-all ${
                       selectedCategory === key
-                        ? "border-[#00F5FF] bg-[#00F5FF]/10"
+                        ? "border-[#A1D8E0] bg-[#A1D8E0]/10"
                         : "border-white/10 bg-white/5 hover:border-white/30"
                     }`}
                     data-testid={`select-category-${key}`}
@@ -892,7 +892,7 @@ const Dashboard = () => {
                         <p className="text-slate-500 text-sm">{category.programs.length} programs available</p>
                       </div>
                       {selectedCategory === key && (
-                        <CheckCircle2 className="w-5 h-5 text-[#00F5FF] ml-auto" />
+                        <CheckCircle2 className="w-5 h-5 text-[#A1D8E0] ml-auto" />
                       )}
                     </div>
                   </button>
@@ -912,7 +912,7 @@ const Dashboard = () => {
                     onClick={() => setSelectedProgram(program.id)}
                     className={`w-full p-4 rounded-xl border text-left transition-all ${
                       selectedProgram === program.id
-                        ? "border-[#00F5FF] bg-[#00F5FF]/10"
+                        ? "border-[#A1D8E0] bg-[#A1D8E0]/10"
                         : "border-white/10 bg-white/5 hover:border-white/30"
                     }`}
                     data-testid={`select-program-${program.id}`}
@@ -920,7 +920,7 @@ const Dashboard = () => {
                     <div className="flex items-center justify-between">
                       <p className="text-white text-sm font-medium">{program.name}</p>
                       {selectedProgram === program.id && (
-                        <CheckCircle2 className="w-5 h-5 text-[#00F5FF]" />
+                        <CheckCircle2 className="w-5 h-5 text-[#A1D8E0]" />
                       )}
                     </div>
                   </button>
@@ -932,7 +932,7 @@ const Dashboard = () => {
             {modalStep === 3 && (
               <div className="space-y-6 mb-6">
                 {/* Selected Program Summary */}
-                <div className="p-4 rounded-xl bg-[#00B4D8]/10 border border-[#00B4D8]/20">
+                <div className="p-4 rounded-xl bg-[#00677F]/10 border border-[#00677F]/20">
                   <p className="text-slate-400 text-xs uppercase tracking-wider mb-1">Selected Program</p>
                   <p className="text-white font-medium">
                     {PROGRAM_PATHWAYS[selectedCategory]?.programs.find(p => p.id === selectedProgram)?.name}
@@ -943,10 +943,10 @@ const Dashboard = () => {
                 <div className="space-y-3">
                   <Label className="text-xs font-medium uppercase tracking-wider text-slate-400 flex items-center gap-2">
                     <Calendar className="w-4 h-4 text-[#FF9800]" />
-                    Intended Start Term <span className="text-[#00F5FF]">*</span>
+                    Intended Start Term <span className="text-[#A1D8E0]">*</span>
                   </Label>
                   <Select value={selectedStartTerm || ""} onValueChange={setSelectedStartTerm}>
-                    <SelectTrigger className="h-12 bg-black/30 border-white/[0.08] text-white rounded-xl px-4 focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20" data-testid="select-start-term">
+                    <SelectTrigger className="h-12 bg-black/30 border-white/[0.08] text-white rounded-xl px-4 focus:border-[#A1D8E0] focus:ring-2 focus:ring-[#A1D8E0]/20" data-testid="select-start-term">
                       <SelectValue placeholder="Select your start term" />
                     </SelectTrigger>
                     <SelectContent className="bg-[#11161F] border-white/10 rounded-xl">
@@ -960,11 +960,11 @@ const Dashboard = () => {
                 {/* Primary Campus Selection */}
                 <div className="space-y-3">
                   <Label className="text-xs font-medium uppercase tracking-wider text-slate-400 flex items-center gap-2">
-                    <MapPin className="w-4 h-4 text-[#00B4D8]" />
-                    Primary Campus <span className="text-[#00F5FF]">*</span>
+                    <MapPin className="w-4 h-4 text-[#00677F]" />
+                    Primary Campus <span className="text-[#A1D8E0]">*</span>
                   </Label>
                   <Select value={selectedCampus || ""} onValueChange={setSelectedCampus}>
-                    <SelectTrigger className="h-12 bg-black/30 border-white/[0.08] text-white rounded-xl px-4 focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20" data-testid="select-campus">
+                    <SelectTrigger className="h-12 bg-black/30 border-white/[0.08] text-white rounded-xl px-4 focus:border-[#A1D8E0] focus:ring-2 focus:ring-[#A1D8E0]/20" data-testid="select-campus">
                       <SelectValue placeholder="Select your preferred campus" />
                     </SelectTrigger>
                     <SelectContent className="bg-[#11161F] border-white/10 rounded-xl">
@@ -983,7 +983,7 @@ const Dashboard = () => {
                   </Label>
                   <p className="text-slate-600 text-xs -mt-1">In case your first choice reaches capacity</p>
                   <Select value={selectedCampus2 || ""} onValueChange={setSelectedCampus2}>
-                    <SelectTrigger className="h-12 bg-black/30 border-white/[0.08] text-white rounded-xl px-4 focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20" data-testid="select-campus-2">
+                    <SelectTrigger className="h-12 bg-black/30 border-white/[0.08] text-white rounded-xl px-4 focus:border-[#A1D8E0] focus:ring-2 focus:ring-[#A1D8E0]/20" data-testid="select-campus-2">
                       <SelectValue placeholder="Select a backup campus (optional)" />
                     </SelectTrigger>
                     <SelectContent className="bg-[#11161F] border-white/10 rounded-xl">
@@ -1015,7 +1015,7 @@ const Dashboard = () => {
                     (modalStep === 1 && !selectedCategory) ||
                     (modalStep === 2 && !selectedProgram)
                   }
-                  className="flex-1 bg-[#00B4D8] hover:bg-[#0096B4] text-white rounded-xl h-12 shadow-[0_0_20px_rgba(0,180,216,0.3)] disabled:opacity-50"
+                  className="flex-1 bg-[#00677F] hover:bg-[#135163] text-white rounded-xl h-12 shadow-[0_0_20px_rgba(0,180,216,0.3)] disabled:opacity-50"
                 >
                   Continue
                   <ChevronRight className="w-4 h-4 ml-2" />
@@ -1024,7 +1024,7 @@ const Dashboard = () => {
                 <Button
                   onClick={createApplication}
                   disabled={!selectedStartTerm || !selectedCampus || creatingApp}
-                  className="flex-1 bg-[#28A745] hover:bg-[#218838] text-white rounded-xl h-12 shadow-[0_0_20px_rgba(40,167,69,0.3)] disabled:opacity-50"
+                  className="flex-1 bg-[#739600] hover:bg-[#218838] text-white rounded-xl h-12 shadow-[0_0_20px_rgba(40,167,69,0.3)] disabled:opacity-50"
                   data-testid="create-application-btn"
                 >
                   {creatingApp ? "Creating..." : "Create Application"}

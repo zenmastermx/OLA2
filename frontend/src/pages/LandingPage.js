@@ -16,7 +16,7 @@ const LandingPage = () => {
       icon: GraduationCap,
       description: "Transform lives through therapeutic interventions",
       degrees: ["MOT - Master's", "OTD - Doctorate"],
-      color: "#00B4D8"
+      color: "#00677F"
     },
     {
       id: "nursing",
@@ -94,7 +94,7 @@ const LandingPage = () => {
               </Button>
             </Link>
             <Link to="/register">
-              <Button className="bg-[#00B4D8] hover:bg-[#0096B4] text-white rounded-full px-6 shadow-[0_0_20px_rgba(0,180,216,0.3)] hover:shadow-[0_0_30px_rgba(0,180,216,0.5)] transition-all" data-testid="nav-apply-btn">
+              <Button className="bg-[#00677F] hover:bg-[#135163] text-white rounded-full px-6 shadow-[0_0_20px_rgba(0,180,216,0.3)] hover:shadow-[0_0_30px_rgba(0,180,216,0.5)] transition-all" data-testid="nav-apply-btn">
                 Apply Now
               </Button>
             </Link>
@@ -106,19 +106,19 @@ const LandingPage = () => {
       <section className="relative min-h-screen flex items-center pt-20">
         {/* Background effects */}
         <div className={`absolute inset-0 ${theme === 'dark' ? 'gradient-radial opacity-50' : 'bg-gradient-to-br from-[#E0F7FA]/30 to-transparent'}`} />
-        <div className={`absolute top-1/4 left-1/4 w-96 h-96 rounded-full blur-[100px] ${theme === 'dark' ? 'bg-[#00B4D8]/10' : 'bg-[#00B4D8]/15'}`} />
+        <div className={`absolute top-1/4 left-1/4 w-96 h-96 rounded-full blur-[100px] ${theme === 'dark' ? 'bg-[#00677F]/10' : 'bg-[#00677F]/15'}`} />
         <div className={`absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full blur-[100px] ${theme === 'dark' ? 'bg-[#7B68EE]/10' : 'bg-[#7B68EE]/10'}`} />
         
         <div className="relative z-10 max-w-7xl mx-auto px-6 py-20 grid lg:grid-cols-2 gap-16 items-center">
           <div className="space-y-8 animate-slide-up">
-            <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm ${theme === 'dark' ? 'bg-[#00B4D8]/10 border border-[#00B4D8]/30 text-[#00B4D8]' : 'bg-[#00B4D8]/10 border border-[#00B4D8]/30 text-[#0096B4]'}`}>
+            <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm ${theme === 'dark' ? 'bg-[#00677F]/10 border border-[#00677F]/30 text-[#00677F]' : 'bg-[#00677F]/10 border border-[#00677F]/30 text-[#135163]'}`}>
               <Sparkles className="w-4 h-4" />
               <span>Applications Open for 2026</span>
             </div>
             
             <h1 className={`font-['Outfit'] text-5xl lg:text-7xl font-bold leading-tight ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
               Your Journey to{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00B4D8] to-[#0096B4]">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00677F] to-[#135163]">
                 Healthcare Excellence
               </span>
             </h1>
@@ -130,7 +130,7 @@ const LandingPage = () => {
             <div className="flex flex-wrap gap-4">
               <Button 
                 onClick={() => navigate("/register")}
-                className="bg-[#00B4D8] hover:bg-[#0096B4] text-white rounded-full px-8 py-6 text-lg shadow-[0_0_30px_rgba(0,180,216,0.4)] hover:shadow-[0_0_40px_rgba(0,180,216,0.6)] transition-all hover:scale-105"
+                className="bg-[#00677F] hover:bg-[#135163] text-white rounded-full px-8 py-6 text-lg shadow-[0_0_30px_rgba(0,180,216,0.4)] hover:shadow-[0_0_40px_rgba(0,180,216,0.6)] transition-all hover:scale-105"
                 data-testid="hero-start-application-btn"
               >
                 Start Your Application
@@ -141,15 +141,15 @@ const LandingPage = () => {
             {/* Stats */}
             <div className="flex gap-12 pt-8">
               <div>
-                <p className="text-3xl font-['Outfit'] font-bold text-[#00B4D8]">15K+</p>
+                <p className="text-3xl font-['Outfit'] font-bold text-[#00677F]">15K+</p>
                 <p className={`text-sm ${theme === 'dark' ? 'text-slate-500' : 'text-gray-500'}`}>Alumni Worldwide</p>
               </div>
               <div>
-                <p className="text-3xl font-['Outfit'] font-bold text-[#00B4D8]">95%</p>
+                <p className="text-3xl font-['Outfit'] font-bold text-[#00677F]">95%</p>
                 <p className={`text-sm ${theme === 'dark' ? 'text-slate-500' : 'text-gray-500'}`}>Employment Rate</p>
               </div>
               <div>
-                <p className="text-3xl font-['Outfit'] font-bold text-[#00B4D8]">5</p>
+                <p className="text-3xl font-['Outfit'] font-bold text-[#00677F]">5</p>
                 <p className={`text-sm ${theme === 'dark' ? 'text-slate-500' : 'text-gray-500'}`}>Campus Locations</p>
               </div>
             </div>
@@ -187,7 +187,7 @@ const LandingPage = () => {
                 key={program.id}
                 onClick={() => setSelectedProgram(program.id)}
                 className={`glass-card rounded-3xl p-6 cursor-pointer card-lift ${
-                  selectedProgram === program.id ? 'border-[#00B4D8] shadow-[0_0_30px_rgba(0,180,216,0.2)]' : ''
+                  selectedProgram === program.id ? 'border-[#00677F] shadow-[0_0_30px_rgba(0,180,216,0.2)]' : ''
                 }`}
                 data-testid={`program-card-${program.id}`}
               >
@@ -216,7 +216,7 @@ const LandingPage = () => {
                         e.stopPropagation();
                         navigate("/register", { state: { program: program.id } });
                       }}
-                      className="w-full bg-[#00B4D8] hover:bg-[#0096B4] text-white rounded-full text-sm py-2"
+                      className="w-full bg-[#00677F] hover:bg-[#135163] text-white rounded-full text-sm py-2"
                       data-testid={`apply-${program.id}-btn`}
                     >
                       Apply Now
@@ -251,8 +251,8 @@ const LandingPage = () => {
                 style={{ animationDelay: `${index * 0.1}s` }}
                 data-testid={`feature-card-${index}`}
               >
-                <div className="w-14 h-14 rounded-2xl bg-[#00B4D8]/10 flex items-center justify-center mb-6">
-                  <feature.icon className="w-7 h-7 text-[#00B4D8]" />
+                <div className="w-14 h-14 rounded-2xl bg-[#00677F]/10 flex items-center justify-center mb-6">
+                  <feature.icon className="w-7 h-7 text-[#00677F]" />
                 </div>
                 <h3 className={`font-['Outfit'] text-xl font-bold mb-3 ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>{feature.title}</h3>
                 <p className={theme === 'dark' ? 'text-slate-400' : 'text-gray-600'}>{feature.description}</p>
@@ -274,10 +274,10 @@ const LandingPage = () => {
             {campuses.map((campus) => (
               <div 
                 key={campus}
-                className={`glass-card rounded-full px-6 py-3 flex items-center gap-2 hover:border-[#00B4D8]/50 transition-colors cursor-pointer ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}
+                className={`glass-card rounded-full px-6 py-3 flex items-center gap-2 hover:border-[#00677F]/50 transition-colors cursor-pointer ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}
                 data-testid={`campus-${campus.toLowerCase().replace(' ', '-')}`}
               >
-                <MapPin className="w-4 h-4 text-[#00B4D8]" />
+                <MapPin className="w-4 h-4 text-[#00677F]" />
                 <span>{campus}</span>
               </div>
             ))}
@@ -297,7 +297,7 @@ const LandingPage = () => {
           </p>
           <Button 
             onClick={() => navigate("/register")}
-            className="bg-[#00B4D8] hover:bg-[#0096B4] text-white rounded-full px-10 py-6 text-lg shadow-[0_0_30px_rgba(0,180,216,0.4)] hover:shadow-[0_0_40px_rgba(0,180,216,0.6)] transition-all hover:scale-105"
+            className="bg-[#00677F] hover:bg-[#135163] text-white rounded-full px-10 py-6 text-lg shadow-[0_0_30px_rgba(0,180,216,0.4)] hover:shadow-[0_0_40px_rgba(0,180,216,0.6)] transition-all hover:scale-105"
             data-testid="cta-apply-btn"
           >
             Start Your Application

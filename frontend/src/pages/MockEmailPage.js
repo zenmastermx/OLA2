@@ -47,8 +47,8 @@ const MockEmailPage = () => {
     return (
       <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-950 flex items-center justify-center p-4">
         <div className="max-w-md w-full text-center animate-[fadeSlideUp_0.5s_ease-out]">
-          <div className="w-20 h-20 rounded-full bg-[#28A745]/20 flex items-center justify-center mx-auto mb-6">
-            <CheckCircle className="w-10 h-10 text-[#28A745]" />
+          <div className="w-20 h-20 rounded-full bg-[#739600]/20 flex items-center justify-center mx-auto mb-6">
+            <CheckCircle className="w-10 h-10 text-[#739600]" />
           </div>
           <h1 className="text-2xl font-bold text-white mb-3">Email Verified!</h1>
           <p className="text-slate-400 mb-6">
@@ -147,7 +147,7 @@ const MockEmailPage = () => {
               <Button
                 onClick={handleVerify}
                 disabled={loading}
-                className="px-8 py-6 bg-[#00B4D8] hover:bg-[#0096B4] text-white text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+                className="px-8 py-6 bg-[#00677F] hover:bg-[#135163] text-white text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
                 data-testid="verify-email-btn"
               >
                 {loading ? (
@@ -172,7 +172,7 @@ const MockEmailPage = () => {
                   If the button above doesn't work, copy and paste this link into your browser:
                 </p>
                 <div className="bg-slate-100 dark:bg-slate-900 rounded-lg p-3 break-all">
-                  <code className="text-xs text-[#00B4D8]">
+                  <code className="text-xs text-[#00677F]">
                     {window.location.origin}/verify-email?token={token}
                   </code>
                 </div>

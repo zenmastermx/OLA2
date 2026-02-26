@@ -33,31 +33,31 @@ const OnboardingModal = ({ isOpen, onComplete, appId }) => {
   const steps = [
     {
       icon: LayoutDashboard,
-      iconColor: "#00B4D8",
-      iconBg: "bg-[#00B4D8]/10",
+      iconColor: "#00677F",
+      iconBg: "bg-[#00677F]/10",
       title: "Welcome to Your Application!",
       subtitle: "Let's show you around",
       content: (
         <>
           <p className="text-slate-300 mb-4">
-            Your <span className="text-[#00B4D8] font-semibold">Dashboard</span> is your home base. 
+            Your <span className="text-[#00677F] font-semibold">Dashboard</span> is your home base. 
             From there you can:
           </p>
           <ul className="space-y-3 text-slate-400">
             <li className="flex items-start gap-3">
-              <CheckCircle className="w-5 h-5 text-[#28A745] mt-0.5 flex-shrink-0" />
+              <CheckCircle className="w-5 h-5 text-[#739600] mt-0.5 flex-shrink-0" />
               <span>Track your application progress</span>
             </li>
             <li className="flex items-start gap-3">
-              <CheckCircle className="w-5 h-5 text-[#28A745] mt-0.5 flex-shrink-0" />
+              <CheckCircle className="w-5 h-5 text-[#739600] mt-0.5 flex-shrink-0" />
               <span>View upcoming deadlines</span>
             </li>
             <li className="flex items-start gap-3">
-              <CheckCircle className="w-5 h-5 text-[#28A745] mt-0.5 flex-shrink-0" />
+              <CheckCircle className="w-5 h-5 text-[#739600] mt-0.5 flex-shrink-0" />
               <span>Contact your enrollment advisor</span>
             </li>
             <li className="flex items-start gap-3">
-              <CheckCircle className="w-5 h-5 text-[#28A745] mt-0.5 flex-shrink-0" />
+              <CheckCircle className="w-5 h-5 text-[#739600] mt-0.5 flex-shrink-0" />
               <span>Manage your documents</span>
             </li>
           </ul>
@@ -66,29 +66,29 @@ const OnboardingModal = ({ isOpen, onComplete, appId }) => {
     },
     {
       icon: Save,
-      iconColor: "#28A745",
-      iconBg: "bg-[#28A745]/10",
+      iconColor: "#739600",
+      iconBg: "bg-[#739600]/10",
       title: "Your Progress is Auto-Saved",
       subtitle: "Pick up where you left off",
       content: (
         <>
           <p className="text-slate-300 mb-4">
             Don't worry about losing your work! Your application 
-            <span className="text-[#28A745] font-semibold"> saves automatically</span> as you fill out each section.
+            <span className="text-[#739600] font-semibold"> saves automatically</span> as you fill out each section.
           </p>
-          <div className="bg-[#28A745]/10 border border-[#28A745]/20 rounded-xl p-4 mb-4">
-            <p className="text-[#28A745] text-sm font-medium mb-2">Pro Tips:</p>
+          <div className="bg-[#739600]/10 border border-[#739600]/20 rounded-xl p-4 mb-4">
+            <p className="text-[#739600] text-sm font-medium mb-2">Pro Tips:</p>
             <ul className="space-y-2 text-slate-400 text-sm">
               <li className="flex items-start gap-2">
-                <span className="text-[#28A745]">•</span>
+                <span className="text-[#739600]">•</span>
                 <span>Use the navigation on the left to jump between sections</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-[#28A745]">•</span>
+                <span className="text-[#739600]">•</span>
                 <span>Green checkmarks indicate completed sections</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-[#28A745]">•</span>
+                <span className="text-[#739600]">•</span>
                 <span>You can return anytime from your Dashboard</span>
               </li>
             </ul>
@@ -111,7 +111,7 @@ const OnboardingModal = ({ isOpen, onComplete, appId }) => {
             <span className="text-[#7B68EE] font-semibold">Journey</span> is your personal AI assistant, 
             ready to help you throughout your application process.
           </p>
-          <div className="bg-gradient-to-r from-[#7B68EE]/10 to-[#00B4D8]/10 border border-[#7B68EE]/20 rounded-xl p-4 mb-4">
+          <div className="bg-gradient-to-r from-[#7B68EE]/10 to-[#00677F]/10 border border-[#7B68EE]/20 rounded-xl p-4 mb-4">
             <p className="text-white text-sm font-medium mb-3">Ask Journey about:</p>
             <div className="grid grid-cols-2 gap-2 text-sm">
               <div className="flex items-center gap-2 text-slate-300">
@@ -178,7 +178,7 @@ const OnboardingModal = ({ isOpen, onComplete, appId }) => {
         {/* Progress bar */}
         <div className="absolute top-0 left-0 right-0 h-1 bg-white/5">
           <div 
-            className="h-full bg-gradient-to-r from-[#00B4D8] to-[#7B68EE] transition-all duration-500"
+            className="h-full bg-gradient-to-r from-[#00677F] to-[#7B68EE] transition-all duration-500"
             style={{ width: `${((currentStep + 1) / steps.length) * 100}%` }}
           />
         </div>
@@ -217,9 +217,9 @@ const OnboardingModal = ({ isOpen, onComplete, appId }) => {
                 key={index}
                 className={`h-2 rounded-full transition-all duration-300 ${
                   index === currentStep 
-                    ? 'w-8 bg-[#00B4D8]' 
+                    ? 'w-8 bg-[#00677F]' 
                     : index < currentStep 
-                      ? 'w-2 bg-[#28A745]' 
+                      ? 'w-2 bg-[#739600]' 
                       : 'w-2 bg-white/20'
                 }`}
               />
@@ -242,8 +242,8 @@ const OnboardingModal = ({ isOpen, onComplete, appId }) => {
               onClick={handleNext}
               className={`flex-1 h-12 rounded-xl font-medium transition-all ${
                 currentStep === steps.length - 1
-                  ? 'bg-gradient-to-r from-[#00B4D8] to-[#7B68EE] hover:opacity-90 text-white shadow-[0_0_20px_rgba(0,180,216,0.3)]'
-                  : 'bg-[#00B4D8] hover:bg-[#0096B4] text-white'
+                  ? 'bg-gradient-to-r from-[#00677F] to-[#7B68EE] hover:opacity-90 text-white shadow-[0_0_20px_rgba(0,180,216,0.3)]'
+                  : 'bg-[#00677F] hover:bg-[#135163] text-white'
               }`}
             >
               {currentStep === steps.length - 1 ? (

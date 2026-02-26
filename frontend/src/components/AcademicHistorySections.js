@@ -110,16 +110,16 @@ const AcademicHistorySections = ({ academicHistory, setAcademicHistory, onSectio
           <div className="space-y-8" data-testid="subsection-prerequisites">
             {/* Section Header */}
             <div className="relative">
-              <div className="absolute -left-4 top-0 w-1 h-full bg-gradient-to-b from-[#00B4D8] to-[#7B68EE] rounded-full" />
+              <div className="absolute -left-4 top-0 w-1 h-full bg-gradient-to-b from-[#00677F] to-[#7B68EE] rounded-full" />
               <h3 className="text-2xl font-light text-white tracking-tight">My Prerequisites</h3>
               <p className="text-slate-500 text-sm mt-1">Track your prerequisite course requirements</p>
             </div>
 
             {/* Instructions - Glass Card */}
-            <div className="backdrop-blur-xl bg-white/[0.02] border border-white/[0.05] rounded-2xl p-6 space-y-4 hover:border-[#00B4D8]/20 transition-colors duration-500">
+            <div className="backdrop-blur-xl bg-white/[0.02] border border-white/[0.05] rounded-2xl p-6 space-y-4 hover:border-[#00677F]/20 transition-colors duration-500">
               <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-[#00B4D8]/10 flex items-center justify-center">
-                  <Info className="w-4 h-4 text-[#00B4D8]" />
+                <div className="w-8 h-8 rounded-full bg-[#00677F]/10 flex items-center justify-center">
+                  <Info className="w-4 h-4 text-[#00677F]" />
                 </div>
                 <h4 className="text-xs font-medium uppercase tracking-wider text-slate-500">Instructions</h4>
               </div>
@@ -128,7 +128,7 @@ const AcademicHistorySections = ({ academicHistory, setAcademicHistory, onSectio
                 Click "Add Prerequisite." Total number of credits will auto-calculate in semester hours.
               </p>
               <p className="text-sm text-slate-400">
-                Not sure if your course meets the requirement? <span className="text-[#00B4D8] cursor-pointer hover:underline">Check Course Equivalency →</span>
+                Not sure if your course meets the requirement? <span className="text-[#00677F] cursor-pointer hover:underline">Check Course Equivalency →</span>
               </p>
               <div className="text-xs text-slate-500 space-y-1 pt-2 border-t border-white/5">
                 <p>• All calculations are in Semester hours.</p>
@@ -158,15 +158,15 @@ const AcademicHistorySections = ({ academicHistory, setAcademicHistory, onSectio
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="p-4 rounded-xl bg-black/20 border border-white/[0.05]">
                   <p className="text-slate-500 text-xs uppercase tracking-wider mb-1">Total Credits Added</p>
-                  <p className="text-2xl font-light text-white">{calculateTotalCredits()} <span className="text-sm text-[#00B4D8]">/ 21.0</span></p>
+                  <p className="text-2xl font-light text-white">{calculateTotalCredits()} <span className="text-sm text-[#00677F]">/ 21.0</span></p>
                 </div>
                 <div className="p-4 rounded-xl bg-black/20 border border-white/[0.05]">
                   <p className="text-slate-500 text-xs uppercase tracking-wider mb-1">Min to Apply</p>
-                  <p className="text-2xl font-light text-white">{Math.min(parseFloat(calculateTotalCredits()), 10).toFixed(1)} <span className="text-sm text-[#00B4D8]">/ 10.0</span></p>
+                  <p className="text-2xl font-light text-white">{Math.min(parseFloat(calculateTotalCredits()), 10).toFixed(1)} <span className="text-sm text-[#00677F]">/ 10.0</span></p>
                 </div>
                 <div className="p-4 rounded-xl bg-black/20 border border-white/[0.05]">
                   <p className="text-slate-500 text-xs uppercase tracking-wider mb-1">Status</p>
-                  <p className={`text-lg font-light ${parseFloat(calculateTotalCredits()) >= 10 ? 'text-[#28A745]' : parseFloat(calculateTotalCredits()) > 0 ? 'text-[#FF9800]' : 'text-slate-400'}`}>
+                  <p className={`text-lg font-light ${parseFloat(calculateTotalCredits()) >= 10 ? 'text-[#739600]' : parseFloat(calculateTotalCredits()) > 0 ? 'text-[#FF9800]' : 'text-slate-400'}`}>
                     {parseFloat(calculateTotalCredits()) >= 21 ? 'Complete' : parseFloat(calculateTotalCredits()) >= 10 ? 'Ready to Apply' : parseFloat(calculateTotalCredits()) > 0 ? 'In Progress' : 'Not Started'}
                   </p>
                 </div>
@@ -178,10 +178,10 @@ const AcademicHistorySections = ({ academicHistory, setAcademicHistory, onSectio
               {prerequisiteCourses.map((course) => {
                 const courseCreds = (academicHistory.prerequisites?.[course.id]?.courses || []).reduce((sum, c) => sum + (parseFloat(c.credits) || 0), 0);
                 return (
-                <div key={course.id} className="backdrop-blur-xl bg-white/[0.02] border border-white/[0.05] rounded-2xl p-6 hover:border-[#00B4D8]/20 transition-colors duration-500">
+                <div key={course.id} className="backdrop-blur-xl bg-white/[0.02] border border-white/[0.05] rounded-2xl p-6 hover:border-[#00677F]/20 transition-colors duration-500">
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-3">
-                      <div className={`w-2 h-2 rounded-full ${courseCreds >= course.maxCredits ? 'bg-[#28A745]' : 'bg-[#00F5FF]'}`} />
+                      <div className={`w-2 h-2 rounded-full ${courseCreds >= course.maxCredits ? 'bg-[#739600]' : 'bg-[#A1D8E0]'}`} />
                       <h4 className="text-white font-medium">{course.name}</h4>
                       <Info className="w-4 h-4 text-slate-500 cursor-help" />
                     </div>
@@ -190,7 +190,7 @@ const AcademicHistorySections = ({ academicHistory, setAcademicHistory, onSectio
                       variant="outline"
                       size="sm"
                       onClick={() => setAddingPrereqFor(course.id)}
-                      className="border-[#00B4D8]/50 text-[#00B4D8] hover:bg-[#00B4D8]/10 rounded-full px-4"
+                      className="border-[#00677F]/50 text-[#00677F] hover:bg-[#00677F]/10 rounded-full px-4"
                       data-testid={`add-prereq-${course.id}`}
                     >
                       <Plus className="w-4 h-4 mr-1" />
@@ -199,12 +199,12 @@ const AcademicHistorySections = ({ academicHistory, setAcademicHistory, onSectio
                   </div>
                   
                   <p className="text-slate-500 text-sm mb-4">
-                    Max Credits Applied to Total: <span className={courseCreds >= course.maxCredits ? 'text-[#28A745]' : 'text-[#00B4D8]'}>{courseCreds.toFixed(1)} / {course.maxCredits}</span>
+                    Max Credits Applied to Total: <span className={courseCreds >= course.maxCredits ? 'text-[#739600]' : 'text-[#00677F]'}>{courseCreds.toFixed(1)} / {course.maxCredits}</span>
                   </p>
 
                   {/* Add Prerequisite Form */}
                   {addingPrereqFor === course.id && (
-                    <div className="mb-4 p-4 rounded-xl bg-[#00B4D8]/5 border border-[#00B4D8]/20 space-y-4 animate-in slide-in-from-top-2 duration-300">
+                    <div className="mb-4 p-4 rounded-xl bg-[#00677F]/5 border border-[#00677F]/20 space-y-4 animate-in slide-in-from-top-2 duration-300">
                       <h5 className="text-white font-medium text-sm">Add New Course</h5>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                         <div className="space-y-1">
@@ -267,7 +267,7 @@ const AcademicHistorySections = ({ academicHistory, setAcademicHistory, onSectio
                           id="course-completed"
                           checked={newCourse.completed}
                           onCheckedChange={(checked) => setNewCourse({ ...newCourse, completed: checked })}
-                          className="border-[#00B4D8]"
+                          className="border-[#00677F]"
                         />
                         <Label htmlFor="course-completed" className="text-sm text-slate-300 cursor-pointer">Course completed</Label>
                       </div>
@@ -276,7 +276,7 @@ const AcademicHistorySections = ({ academicHistory, setAcademicHistory, onSectio
                           type="button"
                           onClick={() => handleAddPrerequisite(course.id)}
                           disabled={!newCourse.name || !newCourse.credits}
-                          className="bg-[#00B4D8] hover:bg-[#0096B4] text-white rounded-full px-4 text-sm"
+                          className="bg-[#00677F] hover:bg-[#135163] text-white rounded-full px-4 text-sm"
                           data-testid="save-prereq-btn"
                         >
                           Save Course
@@ -364,14 +364,14 @@ const AcademicHistorySections = ({ academicHistory, setAcademicHistory, onSectio
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <Label className="text-xs font-medium uppercase tracking-wider text-slate-400 flex items-center gap-2">
-                    Advanced Degree Earned? <span className="text-[#00F5FF]">*</span>
+                    Advanced Degree Earned? <span className="text-[#A1D8E0]">*</span>
                     <Info className="w-3.5 h-3.5 text-slate-600" />
                   </Label>
                   <Select
                     value={academicHistory.advanced_degree || ""}
                     onValueChange={(value) => setAcademicHistory({ ...academicHistory, advanced_degree: value })}
                   >
-                    <SelectTrigger className="h-12 bg-black/30 border-white/[0.08] text-white rounded-full px-5 focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20" data-testid="education-advanced-degree">
+                    <SelectTrigger className="h-12 bg-black/30 border-white/[0.08] text-white rounded-full px-5 focus:border-[#A1D8E0] focus:ring-2 focus:ring-[#A1D8E0]/20" data-testid="education-advanced-degree">
                       <SelectValue placeholder="- Select -" />
                     </SelectTrigger>
                     <SelectContent className="bg-[#11161F] border-white/10 rounded-xl">
@@ -384,14 +384,14 @@ const AcademicHistorySections = ({ academicHistory, setAcademicHistory, onSectio
 
                 <div className="space-y-2">
                   <Label className="text-xs font-medium uppercase tracking-wider text-slate-400 flex items-center gap-2">
-                    Highest Degree <span className="text-[#00F5FF]">*</span>
+                    Highest Degree <span className="text-[#A1D8E0]">*</span>
                     <Info className="w-3.5 h-3.5 text-slate-600" />
                   </Label>
                   <Select
                     value={academicHistory.highest_degree || ""}
                     onValueChange={(value) => setAcademicHistory({ ...academicHistory, highest_degree: value })}
                   >
-                    <SelectTrigger className="h-12 bg-black/30 border-white/[0.08] text-white rounded-full px-5 focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20" data-testid="education-highest-degree">
+                    <SelectTrigger className="h-12 bg-black/30 border-white/[0.08] text-white rounded-full px-5 focus:border-[#A1D8E0] focus:ring-2 focus:ring-[#A1D8E0]/20" data-testid="education-highest-degree">
                       <SelectValue placeholder="- Select -" />
                     </SelectTrigger>
                     <SelectContent className="bg-[#11161F] border-white/10 rounded-xl">
@@ -407,11 +407,11 @@ const AcademicHistorySections = ({ academicHistory, setAcademicHistory, onSectio
             </div>
 
             {/* Institutions - Glass Card */}
-            <div className="backdrop-blur-xl bg-white/[0.02] border border-white/[0.05] rounded-2xl p-6 space-y-5 hover:border-[#00B4D8]/20 transition-colors duration-500">
+            <div className="backdrop-blur-xl bg-white/[0.02] border border-white/[0.05] rounded-2xl p-6 space-y-5 hover:border-[#00677F]/20 transition-colors duration-500">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-full bg-[#00B4D8]/10 flex items-center justify-center">
-                    <Building className="w-4 h-4 text-[#00B4D8]" />
+                  <div className="w-8 h-8 rounded-full bg-[#00677F]/10 flex items-center justify-center">
+                    <Building className="w-4 h-4 text-[#00677F]" />
                   </div>
                   <div>
                     <h4 className="text-xs font-medium uppercase tracking-wider text-slate-500">Institutions</h4>
@@ -427,7 +427,7 @@ const AcademicHistorySections = ({ academicHistory, setAcademicHistory, onSectio
                       institutions: [...institutions, { id: Date.now(), name: "", date: "", degree: "" }]
                     });
                   }}
-                  className="bg-[#00B4D8] hover:bg-[#0096B4] text-white rounded-full px-4"
+                  className="bg-[#00677F] hover:bg-[#135163] text-white rounded-full px-4"
                   data-testid="add-institution-btn"
                 >
                   <Plus className="w-4 h-4 mr-1" />
@@ -435,7 +435,7 @@ const AcademicHistorySections = ({ academicHistory, setAcademicHistory, onSectio
                 </Button>
               </div>
 
-              <div className="p-4 rounded-xl bg-[#00B4D8]/5 border border-[#00B4D8]/10">
+              <div className="p-4 rounded-xl bg-[#00677F]/5 border border-[#00677F]/10">
                 <p className="text-slate-400 text-sm">
                   Please list <strong className="text-white">all</strong> post-secondary institutions you have attended. 
                   Official transcripts are required from each institution.
@@ -460,7 +460,7 @@ const AcademicHistorySections = ({ academicHistory, setAcademicHistory, onSectio
                     <div key={inst.id || index} className="p-4 rounded-xl bg-black/20 border border-white/[0.05] space-y-4">
                       <div className="flex items-center justify-between">
                         <span className="text-white font-medium flex items-center gap-2">
-                          <span className="w-6 h-6 rounded-full bg-[#00B4D8]/20 flex items-center justify-center text-xs text-[#00B4D8]">{index + 1}</span>
+                          <span className="w-6 h-6 rounded-full bg-[#00677F]/20 flex items-center justify-center text-xs text-[#00677F]">{index + 1}</span>
                           Institution {index + 1}
                         </span>
                         <Button
@@ -486,7 +486,7 @@ const AcademicHistorySections = ({ academicHistory, setAcademicHistory, onSectio
                             );
                             setAcademicHistory({ ...academicHistory, institutions });
                           }}
-                          className="h-11 bg-black/30 border-white/[0.08] text-white rounded-full px-5 focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20 placeholder:text-slate-600"
+                          className="h-11 bg-black/30 border-white/[0.08] text-white rounded-full px-5 focus:border-[#A1D8E0] focus:ring-2 focus:ring-[#A1D8E0]/20 placeholder:text-slate-600"
                         />
                         <Input
                           type="month"
@@ -498,7 +498,7 @@ const AcademicHistorySections = ({ academicHistory, setAcademicHistory, onSectio
                             );
                             setAcademicHistory({ ...academicHistory, institutions });
                           }}
-                          className="h-11 bg-black/30 border-white/[0.08] text-white rounded-full px-5 focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20"
+                          className="h-11 bg-black/30 border-white/[0.08] text-white rounded-full px-5 focus:border-[#A1D8E0] focus:ring-2 focus:ring-[#A1D8E0]/20"
                         />
                         <Input
                           placeholder="Degree Earned"
@@ -509,7 +509,7 @@ const AcademicHistorySections = ({ academicHistory, setAcademicHistory, onSectio
                             );
                             setAcademicHistory({ ...academicHistory, institutions });
                           }}
-                          className="h-11 bg-black/30 border-white/[0.08] text-white rounded-full px-5 focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20 placeholder:text-slate-600"
+                          className="h-11 bg-black/30 border-white/[0.08] text-white rounded-full px-5 focus:border-[#A1D8E0] focus:ring-2 focus:ring-[#A1D8E0]/20 placeholder:text-slate-600"
                         />
                       </div>
                     </div>
@@ -545,7 +545,7 @@ const AcademicHistorySections = ({ academicHistory, setAcademicHistory, onSectio
                   Contact your enrollment advisor to confirm if you need to submit TOEFL scores.
                 </p>
                 <p className="text-slate-500 text-xs mt-2">
-                  Official TOEFL scores must be sent directly from <a href="https://www.ets.org" target="_blank" rel="noopener noreferrer" className="text-[#00B4D8] hover:underline">www.ets.org</a>
+                  Official TOEFL scores must be sent directly from <a href="https://www.ets.org" target="_blank" rel="noopener noreferrer" className="text-[#00677F] hover:underline">www.ets.org</a>
                 </p>
               </div>
 
@@ -555,17 +555,17 @@ const AcademicHistorySections = ({ academicHistory, setAcademicHistory, onSectio
                   type="date"
                   value={academicHistory.toefl_date || ""}
                   onChange={(e) => setAcademicHistory({ ...academicHistory, toefl_date: e.target.value })}
-                  className="h-12 bg-black/30 border-white/[0.08] focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20 text-white rounded-full px-5 transition-all duration-300"
+                  className="h-12 bg-black/30 border-white/[0.08] focus:border-[#A1D8E0] focus:ring-2 focus:ring-[#A1D8E0]/20 text-white rounded-full px-5 transition-all duration-300"
                   data-testid="toefl-date"
                 />
               </div>
             </div>
 
             {/* TOEFL Scores - Glass Card */}
-            <div className="backdrop-blur-xl bg-white/[0.02] border border-white/[0.05] rounded-2xl p-6 space-y-5 hover:border-[#00B4D8]/20 transition-colors duration-500">
+            <div className="backdrop-blur-xl bg-white/[0.02] border border-white/[0.05] rounded-2xl p-6 space-y-5 hover:border-[#00677F]/20 transition-colors duration-500">
               <div className="flex items-center gap-3 mb-2">
-                <div className="w-8 h-8 rounded-full bg-[#00B4D8]/10 flex items-center justify-center">
-                  <svg className="w-4 h-4 text-[#00B4D8]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-8 h-8 rounded-full bg-[#00677F]/10 flex items-center justify-center">
+                  <svg className="w-4 h-4 text-[#00677F]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                   </svg>
                 </div>
@@ -582,7 +582,7 @@ const AcademicHistorySections = ({ academicHistory, setAcademicHistory, onSectio
                     value={academicHistory.toefl_total || ""}
                     onChange={(e) => setAcademicHistory({ ...academicHistory, toefl_total: e.target.value })}
                     placeholder="0"
-                    className="h-12 bg-black/30 border-white/[0.08] focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20 text-white rounded-full px-5 text-center transition-all duration-300"
+                    className="h-12 bg-black/30 border-white/[0.08] focus:border-[#A1D8E0] focus:ring-2 focus:ring-[#A1D8E0]/20 text-white rounded-full px-5 text-center transition-all duration-300"
                     data-testid="toefl-total"
                   />
                 </div>
@@ -593,7 +593,7 @@ const AcademicHistorySections = ({ academicHistory, setAcademicHistory, onSectio
                     value={academicHistory.toefl_reading || ""}
                     onChange={(e) => setAcademicHistory({ ...academicHistory, toefl_reading: e.target.value })}
                     placeholder="0"
-                    className="h-12 bg-black/30 border-white/[0.08] focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20 text-white rounded-full px-5 text-center transition-all duration-300"
+                    className="h-12 bg-black/30 border-white/[0.08] focus:border-[#A1D8E0] focus:ring-2 focus:ring-[#A1D8E0]/20 text-white rounded-full px-5 text-center transition-all duration-300"
                     data-testid="toefl-reading"
                   />
                 </div>
@@ -604,7 +604,7 @@ const AcademicHistorySections = ({ academicHistory, setAcademicHistory, onSectio
                     value={academicHistory.toefl_writing || ""}
                     onChange={(e) => setAcademicHistory({ ...academicHistory, toefl_writing: e.target.value })}
                     placeholder="0"
-                    className="h-12 bg-black/30 border-white/[0.08] focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20 text-white rounded-full px-5 text-center transition-all duration-300"
+                    className="h-12 bg-black/30 border-white/[0.08] focus:border-[#A1D8E0] focus:ring-2 focus:ring-[#A1D8E0]/20 text-white rounded-full px-5 text-center transition-all duration-300"
                     data-testid="toefl-writing"
                   />
                 </div>
@@ -615,7 +615,7 @@ const AcademicHistorySections = ({ academicHistory, setAcademicHistory, onSectio
                     value={academicHistory.toefl_speaking || ""}
                     onChange={(e) => setAcademicHistory({ ...academicHistory, toefl_speaking: e.target.value })}
                     placeholder="0"
-                    className="h-12 bg-black/30 border-white/[0.08] focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20 text-white rounded-full px-5 text-center transition-all duration-300"
+                    className="h-12 bg-black/30 border-white/[0.08] focus:border-[#A1D8E0] focus:ring-2 focus:ring-[#A1D8E0]/20 text-white rounded-full px-5 text-center transition-all duration-300"
                     data-testid="toefl-speaking"
                   />
                 </div>
@@ -626,7 +626,7 @@ const AcademicHistorySections = ({ academicHistory, setAcademicHistory, onSectio
                     value={academicHistory.toefl_listening || ""}
                     onChange={(e) => setAcademicHistory({ ...academicHistory, toefl_listening: e.target.value })}
                     placeholder="0"
-                    className="h-12 bg-black/30 border-white/[0.08] focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20 text-white rounded-full px-5 text-center transition-all duration-300"
+                    className="h-12 bg-black/30 border-white/[0.08] focus:border-[#A1D8E0] focus:ring-2 focus:ring-[#A1D8E0]/20 text-white rounded-full px-5 text-center transition-all duration-300"
                     data-testid="toefl-listening"
                   />
                 </div>
@@ -656,7 +656,7 @@ const AcademicHistorySections = ({ academicHistory, setAcademicHistory, onSectio
               
               <div className="space-y-3">
                 <Label className="text-xs font-medium uppercase tracking-wider text-slate-400">
-                  Have you ever applied to the University of St. Augustine? <span className="text-[#00F5FF]">*</span>
+                  Have you ever applied to the University of St. Augustine? <span className="text-[#A1D8E0]">*</span>
                 </Label>
                 <RadioGroup
                   value={academicHistory.prior_application || ""}
@@ -685,7 +685,7 @@ const AcademicHistorySections = ({ academicHistory, setAcademicHistory, onSectio
                     type="date"
                     value={academicHistory.prior_application_date || ""}
                     onChange={(e) => setAcademicHistory({ ...academicHistory, prior_application_date: e.target.value })}
-                    className="h-12 bg-black/30 border-white/[0.08] focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20 text-white rounded-full px-5 transition-all duration-300"
+                    className="h-12 bg-black/30 border-white/[0.08] focus:border-[#A1D8E0] focus:ring-2 focus:ring-[#A1D8E0]/20 text-white rounded-full px-5 transition-all duration-300"
                     data-testid="prior-app-date"
                   />
                 </div>
@@ -693,17 +693,17 @@ const AcademicHistorySections = ({ academicHistory, setAcademicHistory, onSectio
             </div>
 
             {/* Prior OT Enrollment - Glass Card */}
-            <div className="backdrop-blur-xl bg-white/[0.02] border border-white/[0.05] rounded-2xl p-6 space-y-5 hover:border-[#00B4D8]/20 transition-colors duration-500">
+            <div className="backdrop-blur-xl bg-white/[0.02] border border-white/[0.05] rounded-2xl p-6 space-y-5 hover:border-[#00677F]/20 transition-colors duration-500">
               <div className="flex items-center gap-3 mb-2">
-                <div className="w-8 h-8 rounded-full bg-[#00B4D8]/10 flex items-center justify-center">
-                  <GraduationCap className="w-4 h-4 text-[#00B4D8]" />
+                <div className="w-8 h-8 rounded-full bg-[#00677F]/10 flex items-center justify-center">
+                  <GraduationCap className="w-4 h-4 text-[#00677F]" />
                 </div>
                 <h4 className="text-xs font-medium uppercase tracking-wider text-slate-500">Prior OT Enrollment</h4>
               </div>
               
               <div className="space-y-3">
                 <Label className="text-xs font-medium uppercase tracking-wider text-slate-400">
-                  Have you previously enrolled in an Occupational Therapy program? <span className="text-[#00F5FF]">*</span>
+                  Have you previously enrolled in an Occupational Therapy program? <span className="text-[#A1D8E0]">*</span>
                 </Label>
                 <RadioGroup
                   value={academicHistory.prior_ot_enrollment || ""}
@@ -713,7 +713,7 @@ const AcademicHistorySections = ({ academicHistory, setAcademicHistory, onSectio
                   {[{ value: "yes", label: "Yes" }, { value: "no", label: "No" }].map((option) => (
                     <div key={option.value} className={`flex items-center space-x-2 px-6 py-3 rounded-full border transition-all duration-300 cursor-pointer ${
                       academicHistory.prior_ot_enrollment === option.value 
-                        ? "border-[#00B4D8]/50 bg-[#00B4D8]/10" 
+                        ? "border-[#00677F]/50 bg-[#00677F]/10" 
                         : "border-white/[0.08] bg-black/30 hover:border-white/20"
                     }`}>
                       <RadioGroupItem value={option.value} id={`ot-enroll-${option.value}`} />
@@ -747,7 +747,7 @@ const AcademicHistorySections = ({ academicHistory, setAcademicHistory, onSectio
               
               <div className="space-y-3">
                 <Label className="text-xs font-medium uppercase tracking-wider text-slate-400">
-                  Have you ever been placed on academic probation, suspended, or dismissed? <span className="text-[#00F5FF]">*</span>
+                  Have you ever been placed on academic probation, suspended, or dismissed? <span className="text-[#A1D8E0]">*</span>
                 </Label>
                 <RadioGroup
                   value={academicHistory.academic_probation || ""}
@@ -775,7 +775,7 @@ const AcademicHistorySections = ({ academicHistory, setAcademicHistory, onSectio
                     value={academicHistory.probation_explanation || ""}
                     onChange={(e) => setAcademicHistory({ ...academicHistory, probation_explanation: e.target.value })}
                     placeholder="Provide details about the academic probation, suspension, or dismissal..."
-                    className="min-h-[120px] bg-black/30 border-white/[0.08] focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20 text-white rounded-2xl resize-none transition-all duration-300 placeholder:text-slate-600"
+                    className="min-h-[120px] bg-black/30 border-white/[0.08] focus:border-[#A1D8E0] focus:ring-2 focus:ring-[#A1D8E0]/20 text-white rounded-2xl resize-none transition-all duration-300 placeholder:text-slate-600"
                     data-testid="probation-explanation"
                   />
                 </div>
@@ -783,10 +783,10 @@ const AcademicHistorySections = ({ academicHistory, setAcademicHistory, onSectio
             </div>
 
             {/* Section Complete Indicator */}
-            <div className="flex items-center justify-center p-6 rounded-xl bg-gradient-to-r from-[#E91E63]/10 to-[#00B4D8]/10 border border-white/[0.05]">
+            <div className="flex items-center justify-center p-6 rounded-xl bg-gradient-to-r from-[#E91E63]/10 to-[#00677F]/10 border border-white/[0.05]">
               <div className="text-center">
-                <div className="w-12 h-12 rounded-full bg-[#28A745]/20 flex items-center justify-center mx-auto mb-3">
-                  <Check className="w-6 h-6 text-[#28A745]" />
+                <div className="w-12 h-12 rounded-full bg-[#739600]/20 flex items-center justify-center mx-auto mb-3">
+                  <Check className="w-6 h-6 text-[#739600]" />
                 </div>
                 <p className="text-white font-medium">You're almost done with Academic History!</p>
                 <p className="text-slate-500 text-sm mt-1">Click "Section Complete" to proceed to the next step</p>
@@ -811,29 +811,29 @@ const AcademicHistorySections = ({ academicHistory, setAcademicHistory, onSectio
               onClick={() => setActiveSubSection(section.id)}
               className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left transition-all duration-300 ${
                 activeSubSection === section.id
-                  ? "bg-[#00B4D8]/10 text-white border-l-2 border-[#00F5FF]"
+                  ? "bg-[#00677F]/10 text-white border-l-2 border-[#A1D8E0]"
                   : "text-slate-400 hover:text-white hover:bg-white/5"
               }`}
               data-testid={`academic-subsection-nav-${section.id}`}
             >
               <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-all ${
                 activeSubSection === section.id 
-                  ? "bg-[#00F5FF]/20" 
+                  ? "bg-[#A1D8E0]/20" 
                   : isSubSectionComplete(section.id)
-                    ? "bg-[#28A745]/20"
+                    ? "bg-[#739600]/20"
                     : "bg-white/5"
               }`}>
                 <section.icon className={`w-4 h-4 ${
                   activeSubSection === section.id 
-                    ? "text-[#00F5FF]" 
+                    ? "text-[#A1D8E0]" 
                     : isSubSectionComplete(section.id)
-                      ? "text-[#28A745]"
+                      ? "text-[#739600]"
                       : "text-slate-500"
                 }`} />
               </div>
               <span className={`text-sm font-medium flex-1 ${
                 isSubSectionComplete(section.id) && activeSubSection !== section.id
-                  ? "text-[#28A745]" 
+                  ? "text-[#739600]" 
                   : ""
               }`}>{section.label}</span>
             </button>
@@ -860,7 +860,7 @@ const AcademicHistorySections = ({ academicHistory, setAcademicHistory, onSectio
           {activeSubSection < 4 ? (
             <Button
               onClick={() => { setActiveSubSection(activeSubSection + 1); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-              className="bg-[#00B4D8] hover:bg-[#0096B4] text-white rounded-full px-6 shadow-[0_0_20px_rgba(0,180,216,0.3)]"
+              className="bg-[#00677F] hover:bg-[#135163] text-white rounded-full px-6 shadow-[0_0_20px_rgba(0,180,216,0.3)]"
               data-testid="academic-next-subsection-btn"
             >
               Next Section
@@ -869,7 +869,7 @@ const AcademicHistorySections = ({ academicHistory, setAcademicHistory, onSectio
           ) : (
             <Button
               onClick={() => onSectionComplete && onSectionComplete()}
-              className="bg-[#28A745] hover:bg-[#218838] text-white rounded-full px-6 shadow-[0_0_20px_rgba(40,167,69,0.3)]"
+              className="bg-[#739600] hover:bg-[#218838] text-white rounded-full px-6 shadow-[0_0_20px_rgba(40,167,69,0.3)]"
               data-testid="academic-complete-btn"
             >
               <Check className="w-4 h-4 mr-2" />

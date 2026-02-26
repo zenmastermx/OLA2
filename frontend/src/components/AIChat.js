@@ -89,7 +89,7 @@ const AIChat = ({ onClose }) => {
         {/* Header */}
         <div className="flex items-center justify-between p-4 border-b border-white/10">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#00B4D8] to-[#7B68EE] flex items-center justify-center animate-pulse-glow">
+            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#00677F] to-[#7B68EE] flex items-center justify-center animate-pulse-glow">
               <Sparkles className="w-5 h-5 text-white" />
             </div>
             <div>
@@ -116,8 +116,8 @@ const AIChat = ({ onClose }) => {
               >
                 <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
                   message.role === "user" 
-                    ? "bg-[#00B4D8]" 
-                    : "bg-gradient-to-br from-[#00B4D8] to-[#7B68EE]"
+                    ? "bg-[#00677F]" 
+                    : "bg-gradient-to-br from-[#00677F] to-[#7B68EE]"
                 }`}>
                   {message.role === "user" ? (
                     <User className="w-4 h-4 text-white" />
@@ -141,7 +141,7 @@ const AIChat = ({ onClose }) => {
             {/* Typing indicator */}
             {loading && (
               <div className="flex gap-3">
-                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#00B4D8] to-[#7B68EE] flex items-center justify-center">
+                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#00677F] to-[#7B68EE] flex items-center justify-center">
                   <Bot className="w-4 h-4 text-white" />
                 </div>
                 <div className="chat-bubble-ai p-4">
@@ -164,7 +164,7 @@ const AIChat = ({ onClose }) => {
                 <button
                   key={index}
                   onClick={() => sendMessage(question)}
-                  className="px-3 py-1.5 text-xs rounded-full bg-white/5 border border-white/10 text-slate-300 hover:border-[#00B4D8]/50 hover:text-white transition-all"
+                  className="px-3 py-1.5 text-xs rounded-full bg-white/5 border border-white/10 text-slate-300 hover:border-[#00677F]/50 hover:text-white transition-all"
                   data-testid={`quick-question-${index}`}
                 >
                   {question}
@@ -183,14 +183,14 @@ const AIChat = ({ onClose }) => {
               onChange={(e) => setInput(e.target.value)}
               onKeyPress={handleKeyPress}
               placeholder="Type your question..."
-              className="flex-1 h-12 bg-black/20 border-white/10 focus:border-[#00F5FF] text-white placeholder:text-slate-600 rounded-xl"
+              className="flex-1 h-12 bg-black/20 border-white/10 focus:border-[#A1D8E0] text-white placeholder:text-slate-600 rounded-xl"
               disabled={loading}
               data-testid="chat-input"
             />
             <Button
               onClick={() => sendMessage()}
               disabled={!input.trim() || loading}
-              className="h-12 w-12 bg-[#00B4D8] hover:bg-[#0096B4] rounded-xl p-0"
+              className="h-12 w-12 bg-[#00677F] hover:bg-[#135163] rounded-xl p-0"
               data-testid="send-message-btn"
             >
               {loading ? (

@@ -90,7 +90,7 @@ const LoginPage = () => {
                   placeholder="you@example.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className={`pl-12 h-14 rounded-xl focus:border-[#00B4D8] focus:ring-1 focus:ring-[#00B4D8] ${
+                  className={`pl-12 h-14 rounded-xl focus:border-[#00677F] focus:ring-1 focus:ring-[#00677F] ${
                     theme === 'dark' 
                       ? 'bg-black/20 border-white/10 text-white placeholder:text-slate-600' 
                       : 'bg-white border-gray-200 text-gray-900 placeholder:text-gray-400'
@@ -110,7 +110,7 @@ const LoginPage = () => {
                   placeholder="••••••••"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className={`pl-12 pr-12 h-14 rounded-xl focus:border-[#00B4D8] focus:ring-1 focus:ring-[#00B4D8] ${
+                  className={`pl-12 pr-12 h-14 rounded-xl focus:border-[#00677F] focus:ring-1 focus:ring-[#00677F] ${
                     theme === 'dark' 
                       ? 'bg-black/20 border-white/10 text-white placeholder:text-slate-600' 
                       : 'bg-white border-gray-200 text-gray-900 placeholder:text-gray-400'
@@ -131,7 +131,7 @@ const LoginPage = () => {
             <Button
               type="submit"
               disabled={loading}
-              className="w-full h-14 bg-[#00B4D8] hover:bg-[#0096B4] text-white rounded-xl text-lg font-medium shadow-[0_0_20px_rgba(0,180,216,0.3)] hover:shadow-[0_0_30px_rgba(0,180,216,0.5)] transition-all"
+              className="w-full h-14 bg-[#00677F] hover:bg-[#135163] text-white rounded-xl text-lg font-medium shadow-[0_0_20px_rgba(0,180,216,0.3)] hover:shadow-[0_0_30px_rgba(0,180,216,0.5)] transition-all"
               data-testid="login-submit-btn"
             >
               {loading ? (
@@ -150,7 +150,7 @@ const LoginPage = () => {
             Don't have an account?{" "}
             <Link 
               to="/register" 
-              className="text-[#00B4D8] hover:text-[#0096B4] font-medium transition-colors"
+              className="text-[#00677F] hover:text-[#135163] font-medium transition-colors"
               data-testid="register-link"
             >
               Create Account
@@ -162,7 +162,7 @@ const LoginPage = () => {
       {/* Right side - Visual */}
       <div className={`hidden lg:flex flex-1 items-center justify-center p-12 relative overflow-hidden ${theme === 'dark' ? '' : 'bg-gradient-to-br from-[#E0F7FA] to-[#B2EBF2]'}`}>
         <div className={`absolute inset-0 ${theme === 'dark' ? 'bg-gradient-to-br from-[#002855]/50 to-[#0A0E14]' : ''}`} />
-        <div className={`absolute top-1/4 right-1/4 w-96 h-96 rounded-full blur-[100px] ${theme === 'dark' ? 'bg-[#00B4D8]/10' : 'bg-[#00B4D8]/20'}`} />
+        <div className={`absolute top-1/4 right-1/4 w-96 h-96 rounded-full blur-[100px] ${theme === 'dark' ? 'bg-[#00677F]/10' : 'bg-[#00677F]/20'}`} />
         <div className={`absolute bottom-1/4 left-1/4 w-96 h-96 rounded-full blur-[100px] ${theme === 'dark' ? 'bg-[#7B68EE]/10' : 'bg-[#7B68EE]/15'}`} />
         
         <div className="relative z-10 text-center max-w-lg">
@@ -179,15 +179,15 @@ const LoginPage = () => {
           </p>
           <div className="mt-12 flex justify-center gap-8">
             <div className="text-center">
-              <p className="text-3xl font-['Outfit'] font-bold text-[#00B4D8]">15K+</p>
+              <p className="text-3xl font-['Outfit'] font-bold text-[#00677F]">15K+</p>
               <p className={`text-sm ${theme === 'dark' ? 'text-slate-500' : 'text-[#004D6E]'}`}>Students</p>
             </div>
             <div className="text-center">
-              <p className="text-3xl font-['Outfit'] font-bold text-[#00B4D8]">5</p>
+              <p className="text-3xl font-['Outfit'] font-bold text-[#00677F]">5</p>
               <p className={`text-sm ${theme === 'dark' ? 'text-slate-500' : 'text-[#004D6E]'}`}>Campuses</p>
             </div>
             <div className="text-center">
-              <p className="text-3xl font-['Outfit'] font-bold text-[#00B4D8]">95%</p>
+              <p className="text-3xl font-['Outfit'] font-bold text-[#00677F]">95%</p>
               <p className={`text-sm ${theme === 'dark' ? 'text-slate-500' : 'text-[#004D6E]'}`}>Employment</p>
             </div>
           </div>

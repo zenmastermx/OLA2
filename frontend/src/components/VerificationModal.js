@@ -132,8 +132,8 @@ const VerificationModal = ({
 
         <div className="text-center">
           {/* Icon */}
-          <div className="w-20 h-20 rounded-full bg-[#00B4D8]/10 flex items-center justify-center mx-auto mb-6 relative">
-            <Mail className="w-10 h-10 text-[#00B4D8]" />
+          <div className="w-20 h-20 rounded-full bg-[#00677F]/10 flex items-center justify-center mx-auto mb-6 relative">
+            <Mail className="w-10 h-10 text-[#00677F]" />
             <div className="absolute -top-1 -right-1 w-6 h-6 rounded-full bg-amber-500 flex items-center justify-center animate-bounce">
               <span className="text-white text-xs font-bold">1</span>
             </div>
@@ -146,7 +146,7 @@ const VerificationModal = ({
 
           {/* Email display */}
           <div className="bg-black/20 rounded-lg px-4 py-2 mb-4 inline-block">
-            <span className="text-[#00B4D8] font-medium">{email}</span>
+            <span className="text-[#00677F] font-medium">{email}</span>
           </div>
 
           {/* Description */}
@@ -165,7 +165,7 @@ const VerificationModal = ({
           <div className="space-y-3">
             <Button
               onClick={openMockEmail}
-              className="w-full h-12 bg-[#00B4D8] hover:bg-[#0096B4] text-white rounded-xl font-medium shadow-[0_0_20px_rgba(0,180,216,0.3)] hover:shadow-[0_0_30px_rgba(0,180,216,0.5)] transition-all"
+              className="w-full h-12 bg-[#00677F] hover:bg-[#135163] text-white rounded-xl font-medium shadow-[0_0_20px_rgba(0,180,216,0.3)] hover:shadow-[0_0_30px_rgba(0,180,216,0.5)] transition-all"
               data-testid="open-mock-email-btn"
             >
               <Mail className="w-5 h-5 mr-2" />
@@ -205,7 +205,7 @@ const VerificationModal = ({
 
           {/* Checking indicator */}
           <div className="flex items-center justify-center gap-2 mt-4 text-slate-500 text-sm">
-            <div className="w-2 h-2 rounded-full bg-[#00B4D8] animate-pulse" />
+            <div className="w-2 h-2 rounded-full bg-[#00677F] animate-pulse" />
             Waiting for verification...
           </div>
         </div>

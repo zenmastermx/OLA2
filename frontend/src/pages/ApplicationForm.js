@@ -48,8 +48,8 @@ const TranscriptRequestRow = ({
     <div
       className={`backdrop-blur-xl border rounded-2xl p-5 transition-all duration-500 ${
         isRequested
-          ? 'border-[#28A745]/30 bg-[#28A745]/5'
-          : (theme === 'dark' ? 'bg-white/[0.02] border-white/[0.05] hover:border-[#00B4D8]/30' : 'bg-white border-gray-200 hover:border-[#00B4D8]/30')
+          ? 'border-[#739600]/30 bg-[#739600]/5'
+          : (theme === 'dark' ? 'bg-white/[0.02] border-white/[0.05] hover:border-[#00677F]/30' : 'bg-white border-gray-200 hover:border-[#00677F]/30')
       }`}
       data-testid={`transcript-row-${index}`}
     >
@@ -57,9 +57,9 @@ const TranscriptRequestRow = ({
         {/* Institution Name */}
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-3">
-            <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${isRequested ? 'bg-[#28A745]/20' : 'bg-[#7B68EE]/10'}`}>
+            <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${isRequested ? 'bg-[#739600]/20' : 'bg-[#7B68EE]/10'}`}>
               {isRequested ? (
-                <Check className="w-5 h-5 text-[#28A745]" />
+                <Check className="w-5 h-5 text-[#739600]" />
               ) : (
                 <GraduationCap className="w-5 h-5 text-[#7B68EE]" />
               )}
@@ -102,7 +102,7 @@ const TranscriptRequestRow = ({
         {/* Action Button */}
         <div className="w-full md:w-36">
           {isRequested ? (
-            <div className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-[#28A745]/20 text-[#28A745] text-sm font-medium justify-center">
+            <div className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-[#739600]/20 text-[#739600] text-sm font-medium justify-center">
               <Check className="w-4 h-4" />
               {requestData?.status === "marked_sent" ? "Marked Sent" : "Requested"}
             </div>
@@ -113,7 +113,7 @@ const TranscriptRequestRow = ({
               className={`w-full rounded-full ${
                 localSelectedService === "certified_mail"
                   ? "bg-[#FF9800] hover:bg-[#F57C00]"
-                  : "bg-[#00B4D8] hover:bg-[#0096B4]"
+                  : "bg-[#00677F] hover:bg-[#135163]"
               } text-white`}
             >
               {requestingTranscript[institutionId] ? (
@@ -131,7 +131,7 @@ const TranscriptRequestRow = ({
         <div className="w-full md:w-40 text-right">
           {isRequested && requestData?.timestamp ? (
             <div className="flex items-center gap-2 justify-end">
-              <Clock className="w-4 h-4 text-[#28A745]" />
+              <Clock className="w-4 h-4 text-[#739600]" />
               <span className={`text-sm ${theme === 'dark' ? 'text-slate-400' : 'text-gray-600'}`}>
                 {new Date(requestData.timestamp).toLocaleDateString('en-US', {
                   month: '2-digit',
@@ -383,7 +383,7 @@ const ApplicationForm = () => {
   if (loading) {
     return (
       <div className="min-h-screen bg-[#0A0E14] flex items-center justify-center">
-        <Loader2 className="w-10 h-10 text-[#00B4D8] animate-spin" />
+        <Loader2 className="w-10 h-10 text-[#00677F] animate-spin" />
       </div>
     );
   }
@@ -450,11 +450,11 @@ const ApplicationForm = () => {
             </div>
 
             {/* Upload Progress Summary */}
-            <div className="backdrop-blur-xl bg-white/[0.02] border border-white/[0.05] rounded-2xl p-6 hover:border-[#00B4D8]/20 transition-colors duration-500">
+            <div className="backdrop-blur-xl bg-white/[0.02] border border-white/[0.05] rounded-2xl p-6 hover:border-[#00677F]/20 transition-colors duration-500">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-full bg-[#00B4D8]/10 flex items-center justify-center">
-                    <Upload className="w-4 h-4 text-[#00B4D8]" />
+                  <div className="w-8 h-8 rounded-full bg-[#00677F]/10 flex items-center justify-center">
+                    <Upload className="w-4 h-4 text-[#00677F]" />
                   </div>
                   <span className="text-xs font-medium uppercase tracking-wider text-slate-500">Upload Progress</span>
                 </div>
@@ -464,7 +464,7 @@ const ApplicationForm = () => {
               </div>
               <div className="h-2 bg-black/30 rounded-full overflow-hidden">
                 <div 
-                  className="h-full bg-gradient-to-r from-[#00B4D8] to-[#00F5FF] rounded-full transition-all duration-500"
+                  className="h-full bg-gradient-to-r from-[#00677F] to-[#A1D8E0] rounded-full transition-all duration-500"
                   style={{ width: `${((application?.documents?.filter(d => d.status === "uploaded").length || 0) / (application?.documents?.length || 5)) * 100}%` }}
                 />
               </div>
@@ -477,8 +477,8 @@ const ApplicationForm = () => {
                   key={doc.id}
                   className={`backdrop-blur-xl bg-white/[0.02] border rounded-2xl p-5 transition-all duration-500 ${
                     doc.status === "uploaded"
-                      ? "border-[#28A745]/30 hover:border-[#28A745]/50"
-                      : "border-white/[0.05] hover:border-[#00B4D8]/30"
+                      ? "border-[#739600]/30 hover:border-[#739600]/50"
+                      : "border-white/[0.05] hover:border-[#00677F]/30"
                   }`}
                   data-testid={`document-${doc.type}`}
                 >
@@ -486,11 +486,11 @@ const ApplicationForm = () => {
                     <div className="flex items-center gap-4">
                       <div className={`w-14 h-14 rounded-xl flex items-center justify-center transition-all ${
                         doc.status === "uploaded" 
-                          ? "bg-[#28A745]/20" 
+                          ? "bg-[#739600]/20" 
                           : "bg-white/5"
                       }`}>
                         {doc.status === "uploaded" ? (
-                          <Check className="w-7 h-7 text-[#28A745]" />
+                          <Check className="w-7 h-7 text-[#739600]" />
                         ) : (
                           <FileText className="w-7 h-7 text-slate-500" />
                         )}
@@ -504,10 +504,10 @@ const ApplicationForm = () => {
                             >
                               <p className="text-white font-medium">{doc.name}</p>
                               <span className="text-slate-400">•</span>
-                              <span className="text-[#00B4D8] font-medium">
+                              <span className="text-[#00677F] font-medium">
                                 Total: {doc.files.length}
                               </span>
-                              <ChevronDown className={`w-4 h-4 text-[#00B4D8] transition-transform duration-300 ${expandedTranscript ? 'rotate-180' : ''}`} />
+                              <ChevronDown className={`w-4 h-4 text-[#00677F] transition-transform duration-300 ${expandedTranscript ? 'rotate-180' : ''}`} />
                             </button>
                           ) : (
                             <p className="text-white font-medium">{doc.name}</p>
@@ -548,7 +548,7 @@ const ApplicationForm = () => {
                           <span className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium transition-all ${
                             doc.status === "uploaded"
                               ? "bg-white/5 hover:bg-white/10 text-slate-300 border border-white/10"
-                              : "bg-[#00B4D8] hover:bg-[#0096B4] text-white shadow-[0_0_15px_rgba(0,180,216,0.3)]"
+                              : "bg-[#00677F] hover:bg-[#135163] text-white shadow-[0_0_15px_rgba(0,180,216,0.3)]"
                           }`}>
                             <Upload className="w-4 h-4" />
                             {doc.status === "uploaded" ? "Add More" : "Upload"}
@@ -571,7 +571,7 @@ const ApplicationForm = () => {
                           <span className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium transition-all ${
                             doc.status === "uploaded"
                               ? "bg-white/5 hover:bg-white/10 text-slate-300 border border-white/10"
-                              : "bg-[#00B4D8] hover:bg-[#0096B4] text-white shadow-[0_0_15px_rgba(0,180,216,0.3)]"
+                              : "bg-[#00677F] hover:bg-[#135163] text-white shadow-[0_0_15px_rgba(0,180,216,0.3)]"
                           }`}>
                             <Upload className="w-4 h-4" />
                             {doc.status === "uploaded" ? "Replace" : "Upload"}
@@ -588,8 +588,8 @@ const ApplicationForm = () => {
                       {doc.files.map((file, fileIndex) => (
                         <div key={fileIndex} className="flex items-center justify-between py-3 px-4 rounded-xl bg-white/[0.02] border border-white/[0.03] hover:border-white/[0.08] transition-colors">
                           <div className="flex items-center gap-3">
-                            <div className="w-8 h-8 rounded-lg bg-[#28A745]/10 flex items-center justify-center">
-                              <FileText className="w-4 h-4 text-[#28A745]" />
+                            <div className="w-8 h-8 rounded-lg bg-[#739600]/10 flex items-center justify-center">
+                              <FileText className="w-4 h-4 text-[#739600]" />
                             </div>
                             <div>
                               <span className="text-white text-sm font-medium">{file.name}</span>
@@ -635,10 +635,10 @@ const ApplicationForm = () => {
 
             {/* Completion Status */}
             {application?.documents?.every(d => d.status === "uploaded") && (
-              <div className="flex items-center justify-center p-6 rounded-xl bg-gradient-to-r from-[#28A745]/10 to-[#00B4D8]/10 border border-[#28A745]/20 animate-in fade-in duration-500">
+              <div className="flex items-center justify-center p-6 rounded-xl bg-gradient-to-r from-[#739600]/10 to-[#00677F]/10 border border-[#739600]/20 animate-in fade-in duration-500">
                 <div className="text-center">
-                  <div className="w-12 h-12 rounded-full bg-[#28A745]/20 flex items-center justify-center mx-auto mb-3">
-                    <Check className="w-6 h-6 text-[#28A745]" />
+                  <div className="w-12 h-12 rounded-full bg-[#739600]/20 flex items-center justify-center mx-auto mb-3">
+                    <Check className="w-6 h-6 text-[#739600]" />
                   </div>
                   <p className="text-white font-medium">All Documents Uploaded!</p>
                   <p className="text-slate-500 text-sm mt-1">You're ready to proceed to the final review step</p>
@@ -714,16 +714,16 @@ const ApplicationForm = () => {
           <div className="space-y-8" data-testid="step-5-transcripts">
             {/* Section Header */}
             <div className="relative">
-              <div className="absolute -left-4 top-0 w-1 h-full bg-gradient-to-b from-[#00B4D8] to-[#7B68EE] rounded-full" />
+              <div className="absolute -left-4 top-0 w-1 h-full bg-gradient-to-b from-[#00677F] to-[#7B68EE] rounded-full" />
               <h3 className={`text-2xl font-light tracking-tight ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>Request Official Transcripts</h3>
               <p className={`text-sm mt-1 ${theme === 'dark' ? 'text-slate-500' : 'text-gray-600'}`}>Request official transcripts from each institution in your academic history</p>
             </div>
 
             {/* Info Notice */}
-            <div className={`backdrop-blur-xl border rounded-2xl p-6 transition-colors duration-500 ${theme === 'dark' ? 'bg-white/[0.02] border-white/[0.05] hover:border-[#00B4D8]/20' : 'bg-white border-gray-200 hover:border-[#00B4D8]/30'}`}>
+            <div className={`backdrop-blur-xl border rounded-2xl p-6 transition-colors duration-500 ${theme === 'dark' ? 'bg-white/[0.02] border-white/[0.05] hover:border-[#00677F]/20' : 'bg-white border-gray-200 hover:border-[#00677F]/30'}`}>
               <div className="flex items-start gap-4">
-                <div className="w-10 h-10 rounded-full bg-[#00B4D8]/10 flex items-center justify-center flex-shrink-0">
-                  <Mail className="w-5 h-5 text-[#00B4D8]" />
+                <div className="w-10 h-10 rounded-full bg-[#00677F]/10 flex items-center justify-center flex-shrink-0">
+                  <Mail className="w-5 h-5 text-[#00677F]" />
                 </div>
                 <div className="space-y-2">
                   <p className={`font-medium ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>How Transcript Requests Work</p>
@@ -747,7 +747,7 @@ const ApplicationForm = () => {
                 </p>
                 <Button
                   onClick={() => { setCurrentStep(2); navigate(`/application/${appId}/2`); }}
-                  className="mt-4 bg-[#00B4D8] hover:bg-[#0096B4] text-white rounded-full px-6"
+                  className="mt-4 bg-[#00677F] hover:bg-[#135163] text-white rounded-full px-6"
                 >
                   Go to Academic History
                 </Button>
@@ -775,8 +775,8 @@ const ApplicationForm = () => {
               <div className={`backdrop-blur-xl border rounded-2xl p-6 ${theme === 'dark' ? 'bg-white/[0.02] border-white/[0.05]' : 'bg-white border-gray-200'}`}>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-[#00B4D8]/10 flex items-center justify-center">
-                      <Send className="w-5 h-5 text-[#00B4D8]" />
+                    <div className="w-10 h-10 rounded-full bg-[#00677F]/10 flex items-center justify-center">
+                      <Send className="w-5 h-5 text-[#00677F]" />
                     </div>
                     <div>
                       <p className={`font-medium ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>Transcript Requests</p>
@@ -787,7 +787,7 @@ const ApplicationForm = () => {
                   </div>
                   <div className={`px-4 py-2 rounded-full text-sm font-medium ${
                     Object.keys(transcriptRequests).length === institutions.length
-                      ? "bg-[#28A745]/20 text-[#28A745]"
+                      ? "bg-[#739600]/20 text-[#739600]"
                       : "bg-[#FF9800]/20 text-[#FF9800]"
                   }`}>
                     {Object.keys(transcriptRequests).length === institutions.length ? "All Requested" : "In Progress"}
@@ -824,17 +824,17 @@ const ApplicationForm = () => {
           <div className="space-y-8" data-testid="step-5-review">
             {/* Section Header */}
             <div className="relative">
-              <div className="absolute -left-4 top-0 w-1 h-full bg-gradient-to-b from-[#28A745] to-[#00B4D8] rounded-full" />
+              <div className="absolute -left-4 top-0 w-1 h-full bg-gradient-to-b from-[#739600] to-[#00677F] rounded-full" />
               <h3 className="text-2xl font-light text-white tracking-tight">Review & Submit</h3>
               <p className="text-slate-500 text-sm mt-1">Review your application before final submission</p>
             </div>
 
             {/* Completion Status - Glass Card */}
-            <div className="backdrop-blur-xl bg-white/[0.02] border border-white/[0.05] rounded-2xl p-6 hover:border-[#00B4D8]/20 transition-colors duration-500">
+            <div className="backdrop-blur-xl bg-white/[0.02] border border-white/[0.05] rounded-2xl p-6 hover:border-[#00677F]/20 transition-colors duration-500">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-[#00B4D8]/10 flex items-center justify-center">
-                    <CheckCircle2 className="w-6 h-6 text-[#00B4D8]" />
+                  <div className="w-12 h-12 rounded-full bg-[#00677F]/10 flex items-center justify-center">
+                    <CheckCircle2 className="w-6 h-6 text-[#00677F]" />
                   </div>
                   <div>
                     <p className="text-slate-500 text-xs uppercase tracking-wider">Application Progress</p>
@@ -845,7 +845,7 @@ const ApplicationForm = () => {
                   <p className="text-slate-500 text-xs uppercase tracking-wider">Status</p>
                   <span className={`inline-block mt-1 px-3 py-1 rounded-full text-sm font-medium ${
                     application?.status === "submitted" 
-                      ? "bg-[#28A745]/20 text-[#28A745]" 
+                      ? "bg-[#739600]/20 text-[#739600]" 
                       : "bg-[#FF9800]/20 text-[#FF9800]"
                   }`}>
                     {application?.status === "submitted" ? "Submitted" : "In Progress"}
@@ -857,7 +857,7 @@ const ApplicationForm = () => {
               <div className="mt-4 pt-4 border-t border-white/[0.05]">
                 <div className="h-2 bg-black/30 rounded-full overflow-hidden">
                   <div 
-                    className="h-full bg-gradient-to-r from-[#00B4D8] to-[#28A745] rounded-full transition-all duration-500"
+                    className="h-full bg-gradient-to-r from-[#00677F] to-[#739600] rounded-full transition-all duration-500"
                     style={{ width: `${application?.progress || 0}%` }}
                   />
                 </div>
@@ -867,17 +867,17 @@ const ApplicationForm = () => {
             {/* Summary Cards Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Personal Info Card */}
-              <div className="backdrop-blur-xl bg-white/[0.02] border border-white/[0.05] rounded-2xl p-6 hover:border-[#00B4D8]/20 transition-colors duration-500 group">
+              <div className="backdrop-blur-xl bg-white/[0.02] border border-white/[0.05] rounded-2xl p-6 hover:border-[#00677F]/20 transition-colors duration-500 group">
                 <div className="flex items-center justify-between mb-5">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-[#00B4D8]/10 flex items-center justify-center">
-                      <User className="w-5 h-5 text-[#00B4D8]" />
+                    <div className="w-10 h-10 rounded-xl bg-[#00677F]/10 flex items-center justify-center">
+                      <User className="w-5 h-5 text-[#00677F]" />
                     </div>
                     <h4 className="text-white font-medium">Personal Information</h4>
                   </div>
                   <button 
                     onClick={() => { setCurrentStep(1); navigate(`/application/${appId}/1`); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-                    className="px-3 py-1.5 rounded-full text-xs font-medium bg-white/5 text-[#00B4D8] hover:bg-[#00B4D8]/10 transition-colors opacity-0 group-hover:opacity-100"
+                    className="px-3 py-1.5 rounded-full text-xs font-medium bg-white/5 text-[#00677F] hover:bg-[#00677F]/10 transition-colors opacity-0 group-hover:opacity-100"
                   >
                     Edit
                   </button>
@@ -971,7 +971,7 @@ const ApplicationForm = () => {
                     <span className="text-slate-500 text-sm">Total Hours</span>
                     <span className={`text-sm font-medium ${
                       (employmentHistory.verifications || []).reduce((sum, v) => sum + (parseInt(v.hours_worked) || 0), 0) >= 2080
-                        ? "text-[#28A745]"
+                        ? "text-[#739600]"
                         : "text-[#FF6B35]"
                     }`}>
                       {(employmentHistory.verifications || []).reduce((sum, v) => sum + (parseInt(v.hours_worked) || 0), 0).toLocaleString()} / 2,080
@@ -1007,10 +1007,10 @@ const ApplicationForm = () => {
                     {application?.documents?.map((doc) => (
                       <div key={doc.id} className="flex items-center gap-3">
                         <div className={`w-5 h-5 rounded-full flex items-center justify-center ${
-                          doc.status === "uploaded" ? "bg-[#28A745]/20" : "bg-white/5"
+                          doc.status === "uploaded" ? "bg-[#739600]/20" : "bg-white/5"
                         }`}>
                           {doc.status === "uploaded" ? (
-                            <Check className="w-3 h-3 text-[#28A745]" />
+                            <Check className="w-3 h-3 text-[#739600]" />
                           ) : (
                             <X className="w-3 h-3 text-slate-500" />
                           )}
@@ -1026,10 +1026,10 @@ const ApplicationForm = () => {
             </div>
 
             {/* Program Selection Summary */}
-            <div className="backdrop-blur-xl bg-white/[0.02] border border-white/[0.05] rounded-2xl p-6 hover:border-[#00B4D8]/20 transition-colors duration-500">
+            <div className="backdrop-blur-xl bg-white/[0.02] border border-white/[0.05] rounded-2xl p-6 hover:border-[#00677F]/20 transition-colors duration-500">
               <div className="flex items-center gap-3 mb-5">
-                <div className="w-10 h-10 rounded-xl bg-[#00B4D8]/10 flex items-center justify-center">
-                  <GraduationCap className="w-5 h-5 text-[#00B4D8]" />
+                <div className="w-10 h-10 rounded-xl bg-[#00677F]/10 flex items-center justify-center">
+                  <GraduationCap className="w-5 h-5 text-[#00677F]" />
                 </div>
                 <div>
                   <h4 className="text-white font-medium">Selected Program</h4>
@@ -1078,9 +1078,9 @@ const ApplicationForm = () => {
             </div>
 
             {/* Submit Section */}
-            <div className="backdrop-blur-xl bg-gradient-to-br from-[#00B4D8]/10 to-[#7B68EE]/10 border border-[#00B4D8]/20 rounded-2xl p-10 text-center">
-              <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[#00B4D8]/20 to-[#7B68EE]/20 flex items-center justify-center mx-auto mb-6">
-                <CheckCircle2 className="w-10 h-10 text-[#00B4D8]" />
+            <div className="backdrop-blur-xl bg-gradient-to-br from-[#00677F]/10 to-[#7B68EE]/10 border border-[#00677F]/20 rounded-2xl p-10 text-center">
+              <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[#00677F]/20 to-[#7B68EE]/20 flex items-center justify-center mx-auto mb-6">
+                <CheckCircle2 className="w-10 h-10 text-[#00677F]" />
               </div>
               <h3 className="font-['Outfit'] text-3xl font-light text-white mb-3">
                 Ready to Submit?
@@ -1093,7 +1093,7 @@ const ApplicationForm = () => {
               <Button
                 onClick={handleSubmit}
                 disabled={saving}
-                className="bg-gradient-to-r from-[#00B4D8] to-[#7B68EE] hover:opacity-90 text-white rounded-full px-14 py-7 text-lg shadow-[0_0_40px_rgba(0,180,216,0.4)] hover:shadow-[0_0_60px_rgba(0,180,216,0.5)] transition-all duration-300"
+                className="bg-gradient-to-r from-[#00677F] to-[#7B68EE] hover:opacity-90 text-white rounded-full px-14 py-7 text-lg shadow-[0_0_40px_rgba(0,180,216,0.4)] hover:shadow-[0_0_60px_rgba(0,180,216,0.5)] transition-all duration-300"
                 data-testid="submit-application-btn"
               >
                 {saving ? (
@@ -1160,10 +1160,10 @@ const ApplicationForm = () => {
             {/* Ask Journey Button */}
             <Button
               onClick={() => setShowChat(true)}
-              className={`bg-gradient-to-r from-[#00B4D8]/20 to-[#7B68EE]/20 border border-[#00B4D8]/30 hover:border-[#00F5FF] hover:bg-[#00B4D8]/30 rounded-full px-4 py-2 flex items-center gap-2 transition-all ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}
+              className={`bg-gradient-to-r from-[#00677F]/20 to-[#7B68EE]/20 border border-[#00677F]/30 hover:border-[#A1D8E0] hover:bg-[#00677F]/30 rounded-full px-4 py-2 flex items-center gap-2 transition-all ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}
               data-testid="ask-journey-btn"
             >
-              <Sparkles className="w-4 h-4 text-[#00F5FF]" />
+              <Sparkles className="w-4 h-4 text-[#A1D8E0]" />
               <span className="hidden sm:inline">Ask Journey</span>
             </Button>
             
@@ -1171,7 +1171,7 @@ const ApplicationForm = () => {
               onClick={() => saveProgress()}
               disabled={saving}
               variant="ghost"
-              className="text-[#00B4D8] hover:text-[#00F5FF] hover:bg-[#00B4D8]/10"
+              className="text-[#00677F] hover:text-[#A1D8E0] hover:bg-[#00677F]/10"
               data-testid="save-progress-btn"
             >
               {saving ? <Loader2 className="w-5 h-5 animate-spin" /> : <Save className="w-5 h-5" />}
@@ -1186,7 +1186,7 @@ const ApplicationForm = () => {
         <div className="max-w-5xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between mb-3">
             <span className={`text-sm ${theme === 'dark' ? 'text-slate-400' : 'text-gray-600'}`}>Step {currentStep} of {steps.length}</span>
-            <span className="text-[#00B4D8] text-sm font-medium">{application?.progress || 0}% Complete</span>
+            <span className="text-[#00677F] text-sm font-medium">{application?.progress || 0}% Complete</span>
           </div>
           <Progress value={(currentStep / steps.length) * 100} className={`h-2 ${theme === 'dark' ? 'bg-slate-800' : 'bg-gray-200'}`} />
         </div>
@@ -1206,9 +1206,9 @@ const ApplicationForm = () => {
                 }}
                 className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all ${
                   step === currentStep
-                    ? "bg-[#00B4D8] text-white"
+                    ? "bg-[#00677F] text-white"
                     : step < currentStep
-                    ? "bg-[#28A745]/20 text-[#28A745]"
+                    ? "bg-[#739600]/20 text-[#739600]"
                     : "bg-white/5 text-slate-500"
                 }`}
                 data-testid={`step-nav-${step}`}
@@ -1257,7 +1257,7 @@ const ApplicationForm = () => {
             <Button
               onClick={handleNext}
               disabled={saving}
-              className="bg-[#00B4D8] hover:bg-[#0096B4] text-white rounded-full px-6"
+              className="bg-[#00677F] hover:bg-[#135163] text-white rounded-full px-6"
               data-testid="next-step-btn"
             >
               {saving ? (

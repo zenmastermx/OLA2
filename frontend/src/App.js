@@ -158,7 +158,7 @@ const ProtectedRoute = ({ children }) => {
   if (loading) {
     return (
       <div className={`min-h-screen flex items-center justify-center ${theme === 'dark' ? 'bg-[#0A0E14]' : 'bg-gray-50'}`}>
-        <div className="w-12 h-12 border-4 border-[#00B4D8] border-t-transparent rounded-full animate-spin" />
+        <div className="w-12 h-12 border-4 border-[#00677F] border-t-transparent rounded-full animate-spin" />
       </div>
     );
   }

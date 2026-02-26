@@ -72,16 +72,16 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo, onSectionComplete
           <div className="space-y-8" data-testid="subsection-contact">
             {/* Section Header */}
             <div className="relative">
-              <div className="absolute -left-4 top-0 w-1 h-full bg-gradient-to-b from-[#00B4D8] to-[#7B68EE] rounded-full" />
+              <div className="absolute -left-4 top-0 w-1 h-full bg-gradient-to-b from-[#00677F] to-[#7B68EE] rounded-full" />
               <h3 className="text-2xl font-light text-white tracking-tight">Contact Information</h3>
               <p className="text-slate-500 text-sm mt-1">Let us know how to reach you</p>
             </div>
 
             {/* WHO YOU ARE - Glass Card */}
-            <div className="backdrop-blur-xl bg-white/[0.02] border border-white/[0.05] rounded-2xl p-6 space-y-5 hover:border-[#00B4D8]/20 transition-colors duration-500">
+            <div className="backdrop-blur-xl bg-white/[0.02] border border-white/[0.05] rounded-2xl p-6 space-y-5 hover:border-[#00677F]/20 transition-colors duration-500">
               <div className="flex items-center gap-3 mb-2">
-                <div className="w-8 h-8 rounded-full bg-[#00B4D8]/10 flex items-center justify-center">
-                  <User className="w-4 h-4 text-[#00B4D8]" />
+                <div className="w-8 h-8 rounded-full bg-[#00677F]/10 flex items-center justify-center">
+                  <User className="w-4 h-4 text-[#00677F]" />
                 </div>
                 <h4 className="text-xs font-medium uppercase tracking-wider text-slate-500">Who You Are</h4>
               </div>
@@ -89,12 +89,12 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo, onSectionComplete
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="space-y-2">
                   <Label className="text-xs font-medium uppercase tracking-wider text-slate-400">
-                    First Name <span className="text-[#00F5FF]">*</span>
+                    First Name <span className="text-[#A1D8E0]">*</span>
                   </Label>
                   <Input
                     value={personalInfo.first_name || ""}
                     onChange={(e) => setPersonalInfo({ ...personalInfo, first_name: e.target.value })}
-                    className="h-12 bg-black/30 border-white/[0.08] focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20 text-white rounded-full px-5 transition-all duration-300 placeholder:text-slate-600"
+                    className="h-12 bg-black/30 border-white/[0.08] focus:border-[#A1D8E0] focus:ring-2 focus:ring-[#A1D8E0]/20 text-white rounded-full px-5 transition-all duration-300 placeholder:text-slate-600"
                     placeholder="Enter first name"
                     data-testid="contact-firstname"
                   />
@@ -104,19 +104,19 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo, onSectionComplete
                   <Input
                     value={personalInfo.middle_name || ""}
                     onChange={(e) => setPersonalInfo({ ...personalInfo, middle_name: e.target.value })}
-                    className="h-12 bg-black/30 border-white/[0.08] focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20 text-white rounded-full px-5 transition-all duration-300 placeholder:text-slate-600"
+                    className="h-12 bg-black/30 border-white/[0.08] focus:border-[#A1D8E0] focus:ring-2 focus:ring-[#A1D8E0]/20 text-white rounded-full px-5 transition-all duration-300 placeholder:text-slate-600"
                     placeholder="Optional"
                     data-testid="contact-middlename"
                   />
                 </div>
                 <div className="space-y-2">
                   <Label className="text-xs font-medium uppercase tracking-wider text-slate-400">
-                    Last Name <span className="text-[#00F5FF]">*</span>
+                    Last Name <span className="text-[#A1D8E0]">*</span>
                   </Label>
                   <Input
                     value={personalInfo.last_name || ""}
                     onChange={(e) => setPersonalInfo({ ...personalInfo, last_name: e.target.value })}
-                    className="h-12 bg-black/30 border-white/[0.08] focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20 text-white rounded-full px-5 transition-all duration-300 placeholder:text-slate-600"
+                    className="h-12 bg-black/30 border-white/[0.08] focus:border-[#A1D8E0] focus:ring-2 focus:ring-[#A1D8E0]/20 text-white rounded-full px-5 transition-all duration-300 placeholder:text-slate-600"
                     placeholder="Enter last name"
                     data-testid="contact-lastname"
                   />
@@ -129,7 +129,7 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo, onSectionComplete
                 <Input
                   value={personalInfo.preferred_name || ""}
                   onChange={(e) => setPersonalInfo({ ...personalInfo, preferred_name: e.target.value })}
-                  className="h-12 bg-black/30 border-white/[0.08] focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20 text-white rounded-full px-5 transition-all duration-300 placeholder:text-slate-600"
+                  className="h-12 bg-black/30 border-white/[0.08] focus:border-[#A1D8E0] focus:ring-2 focus:ring-[#A1D8E0]/20 text-white rounded-full px-5 transition-all duration-300 placeholder:text-slate-600"
                   placeholder="Nickname or preferred name"
                   data-testid="contact-preferredname"
                 />
@@ -147,14 +147,14 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo, onSectionComplete
               
               <div className="space-y-2">
                 <Label className="text-xs font-medium uppercase tracking-wider text-slate-400">
-                  Email Address <span className="text-[#00F5FF]">*</span>
+                  Email Address <span className="text-[#A1D8E0]">*</span>
                 </Label>
                 <p className="text-slate-600 text-xs">We'll send application updates here</p>
                 <Input
                   type="email"
                   value={personalInfo.email || ""}
                   onChange={(e) => setPersonalInfo({ ...personalInfo, email: e.target.value })}
-                  className="h-12 bg-black/30 border-white/[0.08] focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20 text-white rounded-full px-5 transition-all duration-300 placeholder:text-slate-600 max-w-md"
+                  className="h-12 bg-black/30 border-white/[0.08] focus:border-[#A1D8E0] focus:ring-2 focus:ring-[#A1D8E0]/20 text-white rounded-full px-5 transition-all duration-300 placeholder:text-slate-600 max-w-md"
                   placeholder="you@example.com"
                   data-testid="contact-email"
                 />
@@ -163,7 +163,7 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo, onSectionComplete
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl">
                 <div className="space-y-2">
                   <Label className="text-xs font-medium uppercase tracking-wider text-slate-400">
-                    Phone Number <span className="text-[#00F5FF]">*</span>
+                    Phone Number <span className="text-[#A1D8E0]">*</span>
                   </Label>
                   <Input
                     type="tel"
@@ -171,7 +171,7 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo, onSectionComplete
                     value={formatPhoneNumber(personalInfo.phone) || ""}
                     onChange={(e) => setPersonalInfo({ ...personalInfo, phone: formatPhoneNumber(e.target.value) })}
                     placeholder="(000) 000-0000"
-                    className="h-12 bg-black/30 border-white/[0.08] focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20 text-white rounded-full px-5 transition-all duration-300 placeholder:text-slate-600"
+                    className="h-12 bg-black/30 border-white/[0.08] focus:border-[#A1D8E0] focus:ring-2 focus:ring-[#A1D8E0]/20 text-white rounded-full px-5 transition-all duration-300 placeholder:text-slate-600"
                     data-testid="contact-phone"
                   />
                 </div>
@@ -183,7 +183,7 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo, onSectionComplete
                     value={formatPhoneNumber(personalInfo.alternate_phone) || ""}
                     onChange={(e) => setPersonalInfo({ ...personalInfo, alternate_phone: formatPhoneNumber(e.target.value) })}
                     placeholder="(000) 000-0000"
-                    className="h-12 bg-black/30 border-white/[0.08] focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20 text-white rounded-full px-5 transition-all duration-300 placeholder:text-slate-600"
+                    className="h-12 bg-black/30 border-white/[0.08] focus:border-[#A1D8E0] focus:ring-2 focus:ring-[#A1D8E0]/20 text-white rounded-full px-5 transition-all duration-300 placeholder:text-slate-600"
                     data-testid="contact-altphone"
                   />
                 </div>
@@ -191,10 +191,10 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo, onSectionComplete
             </div>
 
             {/* WHERE YOU LIVE - Glass Card */}
-            <div className="backdrop-blur-xl bg-white/[0.02] border border-white/[0.05] rounded-2xl p-6 space-y-5 hover:border-[#28A745]/20 transition-colors duration-500">
+            <div className="backdrop-blur-xl bg-white/[0.02] border border-white/[0.05] rounded-2xl p-6 space-y-5 hover:border-[#739600]/20 transition-colors duration-500">
               <div className="flex items-center gap-3 mb-2">
-                <div className="w-8 h-8 rounded-full bg-[#28A745]/10 flex items-center justify-center">
-                  <svg className="w-4 h-4 text-[#28A745]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-8 h-8 rounded-full bg-[#739600]/10 flex items-center justify-center">
+                  <svg className="w-4 h-4 text-[#739600]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
@@ -207,7 +207,7 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo, onSectionComplete
                 <Input
                   value={personalInfo.address || ""}
                   onChange={(e) => setPersonalInfo({ ...personalInfo, address: e.target.value })}
-                  className="h-12 bg-black/30 border-white/[0.08] focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20 text-white rounded-full px-5 transition-all duration-300 placeholder:text-slate-600"
+                  className="h-12 bg-black/30 border-white/[0.08] focus:border-[#A1D8E0] focus:ring-2 focus:ring-[#A1D8E0]/20 text-white rounded-full px-5 transition-all duration-300 placeholder:text-slate-600"
                   placeholder="123 Main Street, Apt 4B"
                   data-testid="contact-address"
                 />
@@ -219,7 +219,7 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo, onSectionComplete
                   <Input
                     value={personalInfo.city || ""}
                     onChange={(e) => setPersonalInfo({ ...personalInfo, city: e.target.value })}
-                    className="h-12 bg-black/30 border-white/[0.08] focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20 text-white rounded-full px-5 transition-all duration-300 placeholder:text-slate-600"
+                    className="h-12 bg-black/30 border-white/[0.08] focus:border-[#A1D8E0] focus:ring-2 focus:ring-[#A1D8E0]/20 text-white rounded-full px-5 transition-all duration-300 placeholder:text-slate-600"
                     placeholder="City"
                     data-testid="contact-city"
                   />
@@ -229,7 +229,7 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo, onSectionComplete
                   <Input
                     value={personalInfo.state || ""}
                     onChange={(e) => setPersonalInfo({ ...personalInfo, state: e.target.value })}
-                    className="h-12 bg-black/30 border-white/[0.08] focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20 text-white rounded-full px-5 transition-all duration-300 placeholder:text-slate-600"
+                    className="h-12 bg-black/30 border-white/[0.08] focus:border-[#A1D8E0] focus:ring-2 focus:ring-[#A1D8E0]/20 text-white rounded-full px-5 transition-all duration-300 placeholder:text-slate-600"
                     placeholder="FL"
                     data-testid="contact-state"
                   />
@@ -240,7 +240,7 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo, onSectionComplete
                     inputMode="numeric"
                     value={personalInfo.zip_code || ""}
                     onChange={(e) => setPersonalInfo({ ...personalInfo, zip_code: e.target.value })}
-                    className="h-12 bg-black/30 border-white/[0.08] focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20 text-white rounded-full px-5 transition-all duration-300 placeholder:text-slate-600"
+                    className="h-12 bg-black/30 border-white/[0.08] focus:border-[#A1D8E0] focus:ring-2 focus:ring-[#A1D8E0]/20 text-white rounded-full px-5 transition-all duration-300 placeholder:text-slate-600"
                     placeholder="32084"
                     data-testid="contact-zip"
                   />
@@ -250,7 +250,7 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo, onSectionComplete
                   <Input
                     value={personalInfo.country || "United States"}
                     onChange={(e) => setPersonalInfo({ ...personalInfo, country: e.target.value })}
-                    className="h-12 bg-black/30 border-white/[0.08] focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20 text-white rounded-full px-5 transition-all duration-300 placeholder:text-slate-600"
+                    className="h-12 bg-black/30 border-white/[0.08] focus:border-[#A1D8E0] focus:ring-2 focus:ring-[#A1D8E0]/20 text-white rounded-full px-5 transition-all duration-300 placeholder:text-slate-600"
                     data-testid="contact-country"
                   />
                 </div>
@@ -258,16 +258,16 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo, onSectionComplete
             </div>
 
             {/* Completion Indicator */}
-            <div className="flex items-center justify-between p-4 rounded-xl bg-[#00B4D8]/5 border border-[#00B4D8]/10">
+            <div className="flex items-center justify-between p-4 rounded-xl bg-[#00677F]/5 border border-[#00677F]/10">
               <div className="flex items-center gap-3">
-                <div className="w-2 h-2 rounded-full bg-[#00F5FF] animate-pulse" />
+                <div className="w-2 h-2 rounded-full bg-[#A1D8E0] animate-pulse" />
                 <span className="text-sm text-slate-400">
                   {personalInfo.first_name && personalInfo.last_name && personalInfo.email && personalInfo.phone
                     ? "All required fields completed"
                     : "Complete required fields to continue"}
                 </span>
               </div>
-              <span className="text-xs font-medium text-[#00F5FF]">
+              <span className="text-xs font-medium text-[#A1D8E0]">
                 {[personalInfo.first_name, personalInfo.last_name, personalInfo.email, personalInfo.phone].filter(Boolean).length}/4 required
               </span>
             </div>
@@ -308,21 +308,21 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo, onSectionComplete
               >
                 <div className={`flex items-center space-x-3 p-4 rounded-full border transition-all duration-300 cursor-pointer ${
                   personalInfo.judicial_agreement === "agree" 
-                    ? "border-[#28A745]/50 bg-[#28A745]/10" 
-                    : "border-white/[0.08] bg-black/30 hover:border-[#00B4D8]/30"
+                    ? "border-[#739600]/50 bg-[#739600]/10" 
+                    : "border-white/[0.08] bg-black/30 hover:border-[#00677F]/30"
                 }`}>
-                  <RadioGroupItem value="agree" id="agree" className="border-[#00B4D8]" />
+                  <RadioGroupItem value="agree" id="agree" className="border-[#00677F]" />
                   <Label htmlFor="agree" className="text-white cursor-pointer flex-1 text-sm">
                     I Agree - I understand and consent to the background check requirements
                   </Label>
-                  {personalInfo.judicial_agreement === "agree" && <Check className="w-4 h-4 text-[#28A745]" />}
+                  {personalInfo.judicial_agreement === "agree" && <Check className="w-4 h-4 text-[#739600]" />}
                 </div>
                 <div className={`flex items-center space-x-3 p-4 rounded-full border transition-all duration-300 cursor-pointer ${
                   personalInfo.judicial_agreement === "disagree" 
                     ? "border-[#FF6B35]/50 bg-[#FF6B35]/10" 
-                    : "border-white/[0.08] bg-black/30 hover:border-[#00B4D8]/30"
+                    : "border-white/[0.08] bg-black/30 hover:border-[#00677F]/30"
                 }`}>
-                  <RadioGroupItem value="disagree" id="disagree" className="border-[#00B4D8]" />
+                  <RadioGroupItem value="disagree" id="disagree" className="border-[#00677F]" />
                   <Label htmlFor="disagree" className="text-white cursor-pointer flex-1 text-sm">
                     I Do Not Agree
                   </Label>
@@ -343,7 +343,7 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo, onSectionComplete
 
               <div className="space-y-3">
                 <Label className="text-xs font-medium uppercase tracking-wider text-slate-400">
-                  Have you ever been convicted of a felony? <span className="text-[#00F5FF]">*</span>
+                  Have you ever been convicted of a felony? <span className="text-[#A1D8E0]">*</span>
                 </Label>
                 <RadioGroup
                   value={personalInfo.felony_conviction}
@@ -352,7 +352,7 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo, onSectionComplete
                 >
                   <div className={`flex items-center space-x-2 px-6 py-3 rounded-full border transition-all duration-300 cursor-pointer ${
                     personalInfo.felony_conviction === "yes" 
-                      ? "border-[#00F5FF]/50 bg-[#00F5FF]/10" 
+                      ? "border-[#A1D8E0]/50 bg-[#A1D8E0]/10" 
                       : "border-white/[0.08] bg-black/30 hover:border-white/20"
                   }`}>
                     <RadioGroupItem value="yes" id="felony-yes" />
@@ -360,7 +360,7 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo, onSectionComplete
                   </div>
                   <div className={`flex items-center space-x-2 px-6 py-3 rounded-full border transition-all duration-300 cursor-pointer ${
                     personalInfo.felony_conviction === "no" 
-                      ? "border-[#00F5FF]/50 bg-[#00F5FF]/10" 
+                      ? "border-[#A1D8E0]/50 bg-[#A1D8E0]/10" 
                       : "border-white/[0.08] bg-black/30 hover:border-white/20"
                   }`}>
                     <RadioGroupItem value="no" id="felony-no" />
@@ -379,7 +379,7 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo, onSectionComplete
                     value={personalInfo.felony_explanation || ""}
                     onChange={(e) => setPersonalInfo({ ...personalInfo, felony_explanation: e.target.value })}
                     placeholder="Provide details about the conviction..."
-                    className="min-h-[120px] bg-black/30 border-white/[0.08] focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20 text-white rounded-2xl resize-none transition-all duration-300 placeholder:text-slate-600"
+                    className="min-h-[120px] bg-black/30 border-white/[0.08] focus:border-[#A1D8E0] focus:ring-2 focus:ring-[#A1D8E0]/20 text-white rounded-2xl resize-none transition-all duration-300 placeholder:text-slate-600"
                     data-testid="felony-explanation"
                   />
                 </div>
@@ -410,24 +410,24 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo, onSectionComplete
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label className="text-xs font-medium uppercase tracking-wider text-slate-400">
-                    First Name <span className="text-[#00F5FF]">*</span>
+                    First Name <span className="text-[#A1D8E0]">*</span>
                   </Label>
                   <Input
                     value={personalInfo.emergency_first_name || ""}
                     onChange={(e) => setPersonalInfo({ ...personalInfo, emergency_first_name: e.target.value })}
-                    className="h-12 bg-black/30 border-white/[0.08] focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20 text-white rounded-full px-5 transition-all duration-300 placeholder:text-slate-600"
+                    className="h-12 bg-black/30 border-white/[0.08] focus:border-[#A1D8E0] focus:ring-2 focus:ring-[#A1D8E0]/20 text-white rounded-full px-5 transition-all duration-300 placeholder:text-slate-600"
                     placeholder="Contact's first name"
                     data-testid="emergency-firstname"
                   />
                 </div>
                 <div className="space-y-2">
                   <Label className="text-xs font-medium uppercase tracking-wider text-slate-400">
-                    Last Name <span className="text-[#00F5FF]">*</span>
+                    Last Name <span className="text-[#A1D8E0]">*</span>
                   </Label>
                   <Input
                     value={personalInfo.emergency_last_name || ""}
                     onChange={(e) => setPersonalInfo({ ...personalInfo, emergency_last_name: e.target.value })}
-                    className="h-12 bg-black/30 border-white/[0.08] focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20 text-white rounded-full px-5 transition-all duration-300 placeholder:text-slate-600"
+                    className="h-12 bg-black/30 border-white/[0.08] focus:border-[#A1D8E0] focus:ring-2 focus:ring-[#A1D8E0]/20 text-white rounded-full px-5 transition-all duration-300 placeholder:text-slate-600"
                     placeholder="Contact's last name"
                     data-testid="emergency-lastname"
                   />
@@ -436,13 +436,13 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo, onSectionComplete
 
               <div className="space-y-2 max-w-xs">
                 <Label className="text-xs font-medium uppercase tracking-wider text-slate-400">
-                  Relationship <span className="text-[#00F5FF]">*</span>
+                  Relationship <span className="text-[#A1D8E0]">*</span>
                 </Label>
                 <Select
                   value={personalInfo.emergency_relationship || ""}
                   onValueChange={(value) => setPersonalInfo({ ...personalInfo, emergency_relationship: value })}
                 >
-                  <SelectTrigger className="h-12 bg-black/30 border-white/[0.08] text-white rounded-full px-5 focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20" data-testid="emergency-relationship">
+                  <SelectTrigger className="h-12 bg-black/30 border-white/[0.08] text-white rounded-full px-5 focus:border-[#A1D8E0] focus:ring-2 focus:ring-[#A1D8E0]/20" data-testid="emergency-relationship">
                     <SelectValue placeholder="Select relationship" />
                   </SelectTrigger>
                   <SelectContent className="bg-[#11161F] border-white/10 rounded-xl">
@@ -458,10 +458,10 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo, onSectionComplete
             </div>
 
             {/* Contact Details - Glass Card */}
-            <div className="backdrop-blur-xl bg-white/[0.02] border border-white/[0.05] rounded-2xl p-6 space-y-5 hover:border-[#00B4D8]/20 transition-colors duration-500">
+            <div className="backdrop-blur-xl bg-white/[0.02] border border-white/[0.05] rounded-2xl p-6 space-y-5 hover:border-[#00677F]/20 transition-colors duration-500">
               <div className="flex items-center gap-3 mb-2">
-                <div className="w-8 h-8 rounded-full bg-[#00B4D8]/10 flex items-center justify-center">
-                  <Phone className="w-4 h-4 text-[#00B4D8]" />
+                <div className="w-8 h-8 rounded-full bg-[#00677F]/10 flex items-center justify-center">
+                  <Phone className="w-4 h-4 text-[#00677F]" />
                 </div>
                 <h4 className="text-xs font-medium uppercase tracking-wider text-slate-500">Contact Details</h4>
               </div>
@@ -469,7 +469,7 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo, onSectionComplete
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label className="text-xs font-medium uppercase tracking-wider text-slate-400">
-                    Phone Number <span className="text-[#00F5FF]">*</span>
+                    Phone Number <span className="text-[#A1D8E0]">*</span>
                   </Label>
                   <Input
                     type="tel"
@@ -477,7 +477,7 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo, onSectionComplete
                     value={formatPhoneNumber(personalInfo.emergency_phone) || ""}
                     onChange={(e) => setPersonalInfo({ ...personalInfo, emergency_phone: formatPhoneNumber(e.target.value) })}
                     placeholder="(000) 000-0000"
-                    className="h-12 bg-black/30 border-white/[0.08] focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20 text-white rounded-full px-5 transition-all duration-300 placeholder:text-slate-600"
+                    className="h-12 bg-black/30 border-white/[0.08] focus:border-[#A1D8E0] focus:ring-2 focus:ring-[#A1D8E0]/20 text-white rounded-full px-5 transition-all duration-300 placeholder:text-slate-600"
                     data-testid="emergency-phone"
                   />
                 </div>
@@ -488,7 +488,7 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo, onSectionComplete
                     value={personalInfo.emergency_email || ""}
                     onChange={(e) => setPersonalInfo({ ...personalInfo, emergency_email: e.target.value })}
                     placeholder="contact@email.com"
-                    className="h-12 bg-black/30 border-white/[0.08] focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20 text-white rounded-full px-5 transition-all duration-300 placeholder:text-slate-600"
+                    className="h-12 bg-black/30 border-white/[0.08] focus:border-[#A1D8E0] focus:ring-2 focus:ring-[#A1D8E0]/20 text-white rounded-full px-5 transition-all duration-300 placeholder:text-slate-600"
                     data-testid="emergency-email"
                   />
                 </div>
@@ -501,7 +501,7 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo, onSectionComplete
                   value={personalInfo.emergency_address || ""}
                   onChange={(e) => setPersonalInfo({ ...personalInfo, emergency_address: e.target.value })}
                   placeholder="Street Address, City, State ZIP"
-                  className="h-12 bg-black/30 border-white/[0.08] focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20 text-white rounded-full px-5 transition-all duration-300 placeholder:text-slate-600"
+                  className="h-12 bg-black/30 border-white/[0.08] focus:border-[#A1D8E0] focus:ring-2 focus:ring-[#A1D8E0]/20 text-white rounded-full px-5 transition-all duration-300 placeholder:text-slate-600"
                   data-testid="emergency-address"
                 />
               </div>
@@ -546,19 +546,19 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo, onSectionComplete
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <Label className="text-xs font-medium uppercase tracking-wider text-slate-400">
-                    Date of Birth <span className="text-[#00F5FF]">*</span>
+                    Date of Birth <span className="text-[#A1D8E0]">*</span>
                   </Label>
                   <Input
                     type="date"
                     value={personalInfo.date_of_birth || ""}
                     onChange={(e) => setPersonalInfo({ ...personalInfo, date_of_birth: e.target.value })}
-                    className="h-12 bg-black/30 border-white/[0.08] focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20 text-white rounded-full px-5 transition-all duration-300"
+                    className="h-12 bg-black/30 border-white/[0.08] focus:border-[#A1D8E0] focus:ring-2 focus:ring-[#A1D8E0]/20 text-white rounded-full px-5 transition-all duration-300"
                     data-testid="citizenship-dob"
                   />
                 </div>
                 <div className="space-y-2">
                   <Label className="text-xs font-medium uppercase tracking-wider text-slate-400">
-                    What pronouns do you use? <span className="text-[#00F5FF]">*</span>
+                    What pronouns do you use? <span className="text-[#A1D8E0]">*</span>
                   </Label>
                   <RadioGroup
                     value={personalInfo.gender || ""}
@@ -573,7 +573,7 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo, onSectionComplete
                     ].map((option) => (
                       <div key={option.value} className={`flex items-center space-x-2 px-4 py-2 rounded-full border transition-all duration-300 cursor-pointer ${
                         personalInfo.gender === option.value 
-                          ? "border-[#00F5FF]/50 bg-[#00F5FF]/10" 
+                          ? "border-[#A1D8E0]/50 bg-[#A1D8E0]/10" 
                           : "border-white/[0.08] bg-black/30 hover:border-white/20"
                       }`}>
                         <RadioGroupItem value={option.value} id={`pronoun-${option.value}`} />
@@ -599,7 +599,7 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo, onSectionComplete
                   ].map((option) => (
                     <div key={option.value} className={`flex items-center space-x-2 px-4 py-2 rounded-full border transition-all duration-300 cursor-pointer ${
                       personalInfo.marital_status === option.value 
-                        ? "border-[#00F5FF]/50 bg-[#00F5FF]/10" 
+                        ? "border-[#A1D8E0]/50 bg-[#A1D8E0]/10" 
                         : "border-white/[0.08] bg-black/30 hover:border-white/20"
                     }`}>
                       <RadioGroupItem value={option.value} id={option.value} />
@@ -611,17 +611,17 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo, onSectionComplete
             </div>
 
             {/* Citizenship Status - Glass Card */}
-            <div className="backdrop-blur-xl bg-white/[0.02] border border-white/[0.05] rounded-2xl p-6 space-y-5 hover:border-[#00B4D8]/20 transition-colors duration-500">
+            <div className="backdrop-blur-xl bg-white/[0.02] border border-white/[0.05] rounded-2xl p-6 space-y-5 hover:border-[#00677F]/20 transition-colors duration-500">
               <div className="flex items-center gap-3 mb-2">
-                <div className="w-8 h-8 rounded-full bg-[#00B4D8]/10 flex items-center justify-center">
-                  <Flag className="w-4 h-4 text-[#00B4D8]" />
+                <div className="w-8 h-8 rounded-full bg-[#00677F]/10 flex items-center justify-center">
+                  <Flag className="w-4 h-4 text-[#00677F]" />
                 </div>
                 <h4 className="text-xs font-medium uppercase tracking-wider text-slate-500">Citizenship Status</h4>
               </div>
               
               <div className="space-y-3">
                 <Label className="text-xs font-medium uppercase tracking-wider text-slate-400">
-                  Are you a U.S. Citizen? <span className="text-[#00F5FF]">*</span>
+                  Are you a U.S. Citizen? <span className="text-[#A1D8E0]">*</span>
                 </Label>
                 <RadioGroup
                   value={personalInfo.us_citizen || ""}
@@ -631,7 +631,7 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo, onSectionComplete
                   {[{ value: "yes", label: "Yes" }, { value: "no", label: "No" }].map((option) => (
                     <div key={option.value} className={`flex items-center space-x-2 px-6 py-3 rounded-full border transition-all duration-300 cursor-pointer ${
                       personalInfo.us_citizen === option.value 
-                        ? "border-[#00F5FF]/50 bg-[#00F5FF]/10" 
+                        ? "border-[#A1D8E0]/50 bg-[#A1D8E0]/10" 
                         : "border-white/[0.08] bg-black/30 hover:border-white/20"
                     }`}>
                       <RadioGroupItem value={option.value} id={`citizen-${option.value}`} />
@@ -648,7 +648,7 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo, onSectionComplete
                     value={personalInfo.residency_status || ""}
                     onValueChange={(value) => setPersonalInfo({ ...personalInfo, residency_status: value })}
                   >
-                    <SelectTrigger className="h-12 bg-black/30 border-white/[0.08] text-white rounded-full px-5 focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20" data-testid="residency-status">
+                    <SelectTrigger className="h-12 bg-black/30 border-white/[0.08] text-white rounded-full px-5 focus:border-[#A1D8E0] focus:ring-2 focus:ring-[#A1D8E0]/20" data-testid="residency-status">
                       <SelectValue placeholder="Select status" />
                     </SelectTrigger>
                     <SelectContent className="bg-[#11161F] border-white/10 rounded-xl">
@@ -665,7 +665,7 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo, onSectionComplete
                     value={personalInfo.country_of_citizenship || ""}
                     onValueChange={(value) => setPersonalInfo({ ...personalInfo, country_of_citizenship: value })}
                   >
-                    <SelectTrigger className="h-12 bg-black/30 border-white/[0.08] text-white rounded-full px-5 focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20" data-testid="country-citizenship">
+                    <SelectTrigger className="h-12 bg-black/30 border-white/[0.08] text-white rounded-full px-5 focus:border-[#A1D8E0] focus:ring-2 focus:ring-[#A1D8E0]/20" data-testid="country-citizenship">
                       <SelectValue placeholder="Select country" />
                     </SelectTrigger>
                     <SelectContent className="bg-[#11161F] border-white/10 rounded-xl">
@@ -690,7 +690,7 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo, onSectionComplete
                     {[{ value: "yes", label: "Yes" }, { value: "no", label: "No" }].map((option) => (
                       <div key={option.value} className={`flex items-center space-x-2 px-6 py-3 rounded-full border transition-all duration-300 cursor-pointer ${
                         personalInfo.us_visa === option.value 
-                          ? "border-[#00F5FF]/50 bg-[#00F5FF]/10" 
+                          ? "border-[#A1D8E0]/50 bg-[#A1D8E0]/10" 
                           : "border-white/[0.08] bg-black/30 hover:border-white/20"
                       }`}>
                         <RadioGroupItem value={option.value} id={`visa-${option.value}`} />
@@ -727,7 +727,7 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo, onSectionComplete
                     value={personalInfo.ssn || ""}
                     onChange={(e) => setPersonalInfo({ ...personalInfo, ssn: e.target.value })}
                     placeholder="•••-••-••••"
-                    className="h-12 bg-black/30 border-white/[0.08] focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20 text-white rounded-full px-5 transition-all duration-300 placeholder:text-slate-600"
+                    className="h-12 bg-black/30 border-white/[0.08] focus:border-[#A1D8E0] focus:ring-2 focus:ring-[#A1D8E0]/20 text-white rounded-full px-5 transition-all duration-300 placeholder:text-slate-600"
                     data-testid="citizenship-ssn"
                   />
                 </div>
@@ -737,7 +737,7 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo, onSectionComplete
                     value={personalInfo.itin || ""}
                     onChange={(e) => setPersonalInfo({ ...personalInfo, itin: e.target.value })}
                     placeholder="000-00-0000"
-                    className="h-12 bg-black/30 border-white/[0.08] focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20 text-white rounded-full px-5 transition-all duration-300 placeholder:text-slate-600"
+                    className="h-12 bg-black/30 border-white/[0.08] focus:border-[#A1D8E0] focus:ring-2 focus:ring-[#A1D8E0]/20 text-white rounded-full px-5 transition-all duration-300 placeholder:text-slate-600"
                     data-testid="citizenship-itin"
                   />
                 </div>
@@ -745,10 +745,10 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo, onSectionComplete
             </div>
 
             {/* Funding Options - Glass Card */}
-            <div className="backdrop-blur-xl bg-white/[0.02] border border-white/[0.05] rounded-2xl p-6 space-y-5 hover:border-[#28A745]/20 transition-colors duration-500">
+            <div className="backdrop-blur-xl bg-white/[0.02] border border-white/[0.05] rounded-2xl p-6 space-y-5 hover:border-[#739600]/20 transition-colors duration-500">
               <div className="flex items-center gap-3 mb-2">
-                <div className="w-8 h-8 rounded-full bg-[#28A745]/10 flex items-center justify-center">
-                  <svg className="w-4 h-4 text-[#28A745]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-8 h-8 rounded-full bg-[#739600]/10 flex items-center justify-center">
+                  <svg className="w-4 h-4 text-[#739600]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
@@ -769,7 +769,7 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo, onSectionComplete
                     key={option.id} 
                     className={`flex items-start space-x-3 p-4 rounded-xl border transition-all duration-300 cursor-pointer ${
                       (personalInfo.funding_options || []).includes(option.id)
-                        ? "border-[#28A745]/50 bg-[#28A745]/10"
+                        ? "border-[#739600]/50 bg-[#739600]/10"
                         : "border-white/[0.08] bg-black/30 hover:border-white/20"
                     }`}
                     onClick={() => {
@@ -792,7 +792,7 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo, onSectionComplete
                           setPersonalInfo({ ...personalInfo, funding_options: current.filter(f => f !== option.id) });
                         }
                       }}
-                      className="border-[#28A745] mt-0.5"
+                      className="border-[#739600] mt-0.5"
                     />
                     <div>
                       <Label htmlFor={option.id} className="text-white text-sm cursor-pointer font-medium">{option.label}</Label>
@@ -826,7 +826,7 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo, onSectionComplete
               
               <div className="space-y-3">
                 <Label className="text-xs font-medium uppercase tracking-wider text-slate-400">
-                  Will you be using veteran benefits to fund your education? <span className="text-[#00F5FF]">*</span>
+                  Will you be using veteran benefits to fund your education? <span className="text-[#A1D8E0]">*</span>
                 </Label>
                 <RadioGroup
                   value={personalInfo.veteran_benefits || ""}
@@ -848,7 +848,7 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo, onSectionComplete
 
               <div className="space-y-3">
                 <Label className="text-xs font-medium uppercase tracking-wider text-slate-400">
-                  Are you actively serving in the U.S. military? <span className="text-[#00F5FF]">*</span>
+                  Are you actively serving in the U.S. military? <span className="text-[#A1D8E0]">*</span>
                 </Label>
                 <RadioGroup
                   value={personalInfo.active_military || ""}
@@ -875,7 +875,7 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo, onSectionComplete
                     value={personalInfo.military_branch || ""}
                     onValueChange={(value) => setPersonalInfo({ ...personalInfo, military_branch: value })}
                   >
-                    <SelectTrigger className="h-12 bg-black/30 border-white/[0.08] text-white rounded-full px-5 focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20 max-w-xs" data-testid="military-branch">
+                    <SelectTrigger className="h-12 bg-black/30 border-white/[0.08] text-white rounded-full px-5 focus:border-[#A1D8E0] focus:ring-2 focus:ring-[#A1D8E0]/20 max-w-xs" data-testid="military-branch">
                       <SelectValue placeholder="Select branch" />
                     </SelectTrigger>
                     <SelectContent className="bg-[#11161F] border-white/10 rounded-xl">
@@ -932,13 +932,13 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo, onSectionComplete
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label className="text-xs font-medium uppercase tracking-wider text-slate-400">
-                    Years of Work Experience <span className="text-[#00F5FF]">*</span>
+                    Years of Work Experience <span className="text-[#A1D8E0]">*</span>
                   </Label>
                   <Select
                     value={personalInfo.years_work_experience || ""}
                     onValueChange={(value) => setPersonalInfo({ ...personalInfo, years_work_experience: value })}
                   >
-                    <SelectTrigger className="h-12 bg-black/30 border-white/[0.08] text-white rounded-full px-5 focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20" data-testid="work-years">
+                    <SelectTrigger className="h-12 bg-black/30 border-white/[0.08] text-white rounded-full px-5 focus:border-[#A1D8E0] focus:ring-2 focus:ring-[#A1D8E0]/20" data-testid="work-years">
                       <SelectValue placeholder="Select experience level" />
                     </SelectTrigger>
                     <SelectContent className="bg-[#11161F] border-white/10 rounded-xl">
@@ -956,7 +956,7 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo, onSectionComplete
                     value={personalInfo.current_job_title || ""}
                     onChange={(e) => setPersonalInfo({ ...personalInfo, current_job_title: e.target.value })}
                     placeholder="e.g., Registered Nurse, Physical Therapist"
-                    className="h-12 bg-black/30 border-white/[0.08] focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20 text-white rounded-full px-5 transition-all duration-300 placeholder:text-slate-600"
+                    className="h-12 bg-black/30 border-white/[0.08] focus:border-[#A1D8E0] focus:ring-2 focus:ring-[#A1D8E0]/20 text-white rounded-full px-5 transition-all duration-300 placeholder:text-slate-600"
                     data-testid="work-title"
                   />
                 </div>
@@ -986,11 +986,11 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo, onSectionComplete
             </div>
 
             {/* Employment History - Glass Card */}
-            <div className="backdrop-blur-xl bg-white/[0.02] border border-white/[0.05] rounded-2xl p-6 space-y-5 hover:border-[#00B4D8]/20 transition-colors duration-500">
+            <div className="backdrop-blur-xl bg-white/[0.02] border border-white/[0.05] rounded-2xl p-6 space-y-5 hover:border-[#00677F]/20 transition-colors duration-500">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-full bg-[#00B4D8]/10 flex items-center justify-center">
-                    <Users className="w-4 h-4 text-[#00B4D8]" />
+                  <div className="w-8 h-8 rounded-full bg-[#00677F]/10 flex items-center justify-center">
+                    <Users className="w-4 h-4 text-[#00677F]" />
                   </div>
                   <div>
                     <h4 className="text-xs font-medium uppercase tracking-wider text-slate-500">Employment History</h4>
@@ -1008,7 +1008,7 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo, onSectionComplete
                       employers: [...employers, { id: Date.now(), name: "", title: "", start: "", end: "", current: false }]
                     });
                   }}
-                  className="border-[#00B4D8]/50 text-[#00B4D8] hover:bg-[#00B4D8]/10 rounded-full px-4"
+                  className="border-[#00677F]/50 text-[#00677F] hover:bg-[#00677F]/10 rounded-full px-4"
                   data-testid="add-employer-btn"
                 >
                   <Plus className="w-4 h-4 mr-1" />
@@ -1028,7 +1028,7 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo, onSectionComplete
                     <div key={employer.id} className="p-5 rounded-xl bg-black/20 border border-white/[0.05] space-y-4">
                       <div className="flex items-center justify-between">
                         <span className="text-white font-medium flex items-center gap-2">
-                          <span className="w-6 h-6 rounded-full bg-[#00B4D8]/20 flex items-center justify-center text-xs text-[#00B4D8]">{index + 1}</span>
+                          <span className="w-6 h-6 rounded-full bg-[#00677F]/20 flex items-center justify-center text-xs text-[#00677F]">{index + 1}</span>
                           Employer {index + 1}
                         </span>
                         <Button
@@ -1054,7 +1054,7 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo, onSectionComplete
                             );
                             setPersonalInfo({ ...personalInfo, employers });
                           }}
-                          className="h-11 bg-black/30 border-white/[0.08] text-white rounded-full px-5 focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20 placeholder:text-slate-600"
+                          className="h-11 bg-black/30 border-white/[0.08] text-white rounded-full px-5 focus:border-[#A1D8E0] focus:ring-2 focus:ring-[#A1D8E0]/20 placeholder:text-slate-600"
                         />
                         <Input
                           placeholder="Your Job Title"
@@ -1065,7 +1065,7 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo, onSectionComplete
                             );
                             setPersonalInfo({ ...personalInfo, employers });
                           }}
-                          className="h-11 bg-black/30 border-white/[0.08] text-white rounded-full px-5 focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20 placeholder:text-slate-600"
+                          className="h-11 bg-black/30 border-white/[0.08] text-white rounded-full px-5 focus:border-[#A1D8E0] focus:ring-2 focus:ring-[#A1D8E0]/20 placeholder:text-slate-600"
                         />
                       </div>
                       <div className="grid grid-cols-2 gap-4">
@@ -1080,7 +1080,7 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo, onSectionComplete
                               );
                               setPersonalInfo({ ...personalInfo, employers });
                             }}
-                            className="h-11 bg-black/30 border-white/[0.08] text-white rounded-full px-5 focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20"
+                            className="h-11 bg-black/30 border-white/[0.08] text-white rounded-full px-5 focus:border-[#A1D8E0] focus:ring-2 focus:ring-[#A1D8E0]/20"
                           />
                         </div>
                         <div className="space-y-1">
@@ -1095,7 +1095,7 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo, onSectionComplete
                               );
                               setPersonalInfo({ ...personalInfo, employers });
                             }}
-                            className="h-11 bg-black/30 border-white/[0.08] text-white rounded-full px-5 focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20 disabled:opacity-50"
+                            className="h-11 bg-black/30 border-white/[0.08] text-white rounded-full px-5 focus:border-[#A1D8E0] focus:ring-2 focus:ring-[#A1D8E0]/20 disabled:opacity-50"
                           />
                         </div>
                       </div>
@@ -1109,7 +1109,7 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo, onSectionComplete
                             );
                             setPersonalInfo({ ...personalInfo, employers });
                           }}
-                          className="border-[#00B4D8]"
+                          className="border-[#00677F]"
                         />
                         <Label htmlFor={`current-${employer.id}`} className="text-slate-400 text-sm cursor-pointer">I currently work here</Label>
                       </div>
@@ -1153,7 +1153,7 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo, onSectionComplete
                   value={personalInfo.ethnicity || ""}
                   onValueChange={(value) => setPersonalInfo({ ...personalInfo, ethnicity: value })}
                 >
-                  <SelectTrigger className="h-12 bg-black/30 border-white/[0.08] text-white rounded-full px-5 focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20 max-w-md" data-testid="demographic-ethnicity">
+                  <SelectTrigger className="h-12 bg-black/30 border-white/[0.08] text-white rounded-full px-5 focus:border-[#A1D8E0] focus:ring-2 focus:ring-[#A1D8E0]/20 max-w-md" data-testid="demographic-ethnicity">
                     <SelectValue placeholder="Select ethnicity" />
                   </SelectTrigger>
                   <SelectContent className="bg-[#11161F] border-white/10 rounded-xl">
@@ -1213,10 +1213,10 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo, onSectionComplete
             </div>
 
             {/* How did you hear about us - Glass Card */}
-            <div className="backdrop-blur-xl bg-white/[0.02] border border-white/[0.05] rounded-2xl p-6 space-y-5 hover:border-[#00B4D8]/20 transition-colors duration-500">
+            <div className="backdrop-blur-xl bg-white/[0.02] border border-white/[0.05] rounded-2xl p-6 space-y-5 hover:border-[#00677F]/20 transition-colors duration-500">
               <div className="flex items-center gap-3 mb-2">
-                <div className="w-8 h-8 rounded-full bg-[#00B4D8]/10 flex items-center justify-center">
-                  <svg className="w-4 h-4 text-[#00B4D8]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-8 h-8 rounded-full bg-[#00677F]/10 flex items-center justify-center">
+                  <svg className="w-4 h-4 text-[#00677F]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
@@ -1230,7 +1230,7 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo, onSectionComplete
                   value={personalInfo.referral_source || ""}
                   onValueChange={(value) => setPersonalInfo({ ...personalInfo, referral_source: value })}
                 >
-                  <SelectTrigger className="h-12 bg-black/30 border-white/[0.08] text-white rounded-full px-5 focus:border-[#00F5FF] focus:ring-2 focus:ring-[#00F5FF]/20 max-w-md" data-testid="demographic-referral">
+                  <SelectTrigger className="h-12 bg-black/30 border-white/[0.08] text-white rounded-full px-5 focus:border-[#A1D8E0] focus:ring-2 focus:ring-[#A1D8E0]/20 max-w-md" data-testid="demographic-referral">
                     <SelectValue placeholder="Select source" />
                   </SelectTrigger>
                   <SelectContent className="bg-[#11161F] border-white/10 rounded-xl">
@@ -1247,10 +1247,10 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo, onSectionComplete
             </div>
 
             {/* Section Complete Indicator */}
-            <div className="flex items-center justify-center p-6 rounded-xl bg-gradient-to-r from-[#9C27B0]/10 to-[#00B4D8]/10 border border-white/[0.05]">
+            <div className="flex items-center justify-center p-6 rounded-xl bg-gradient-to-r from-[#9C27B0]/10 to-[#00677F]/10 border border-white/[0.05]">
               <div className="text-center">
-                <div className="w-12 h-12 rounded-full bg-[#28A745]/20 flex items-center justify-center mx-auto mb-3">
-                  <Check className="w-6 h-6 text-[#28A745]" />
+                <div className="w-12 h-12 rounded-full bg-[#739600]/20 flex items-center justify-center mx-auto mb-3">
+                  <Check className="w-6 h-6 text-[#739600]" />
                 </div>
                 <p className="text-white font-medium">You're almost done!</p>
                 <p className="text-slate-500 text-sm mt-1">Click "Section Complete" to finish Personal Information</p>
@@ -1275,21 +1275,21 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo, onSectionComplete
               onClick={() => setActiveSubSection(section.id)}
               className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-all ${
                 activeSubSection === section.id
-                  ? "bg-[#00B4D8]/20 text-white border-l-2 border-[#00F5FF]"
+                  ? "bg-[#00677F]/20 text-white border-l-2 border-[#A1D8E0]"
                   : "text-slate-400 hover:text-white hover:bg-white/5"
               }`}
               data-testid={`subsection-nav-${section.id}`}
             >
               <section.icon className={`w-4 h-4 ${
                 activeSubSection === section.id 
-                  ? "text-[#00F5FF]" 
+                  ? "text-[#A1D8E0]" 
                   : isSubSectionComplete(section.id) 
-                    ? "text-[#28A745]" 
+                    ? "text-[#739600]" 
                     : ""
               }`} />
               <span className={`text-sm font-medium flex-1 ${
                 isSubSectionComplete(section.id) && activeSubSection !== section.id
-                  ? "text-[#28A745]" 
+                  ? "text-[#739600]" 
                   : ""
               }`}>{section.label}</span>
             </button>
@@ -1316,7 +1316,7 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo, onSectionComplete
           {activeSubSection < 6 ? (
             <Button
               onClick={() => { setActiveSubSection(activeSubSection + 1); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-              className="bg-[#00B4D8] hover:bg-[#0096B4] text-white rounded-full px-6"
+              className="bg-[#00677F] hover:bg-[#135163] text-white rounded-full px-6"
               data-testid="next-subsection-btn"
             >
               Next Section
@@ -1325,7 +1325,7 @@ const PersonalInfoSections = ({ personalInfo, setPersonalInfo, onSectionComplete
           ) : (
             <Button
               onClick={() => onSectionComplete && onSectionComplete()}
-              className="bg-[#28A745] hover:bg-[#218838] text-white rounded-full px-6"
+              className="bg-[#739600] hover:bg-[#218838] text-white rounded-full px-6"
               data-testid="complete-personal-btn"
             >
               <Check className="w-4 h-4 mr-2" />

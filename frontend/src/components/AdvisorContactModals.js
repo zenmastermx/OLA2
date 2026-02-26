@@ -19,7 +19,7 @@ export const ScheduleModal = ({ onClose, advisor, user }) => {
 
   const meetingTypes = [
     { id: "phone", name: "Phone Call", icon: Phone, duration: "30 min", color: "#FF6B35" },
-    { id: "video", name: "Video Call", icon: Video, duration: "30 min", color: "#00B4D8" },
+    { id: "video", name: "Video Call", icon: Video, duration: "30 min", color: "#00677F" },
     { id: "inperson", name: "In-Person", icon: User, duration: "45 min", color: "#7B68EE" }
   ];
 
@@ -86,7 +86,7 @@ export const ScheduleModal = ({ onClose, advisor, user }) => {
         {/* Header */}
         <div className="flex items-center justify-between p-4 border-b border-white/10">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#00B4D8] to-[#0096B4] flex items-center justify-center">
+            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#00677F] to-[#135163] flex items-center justify-center">
               <CalendarDays className="w-5 h-5 text-white" />
             </div>
             <div>
@@ -109,16 +109,16 @@ export const ScheduleModal = ({ onClose, advisor, user }) => {
               <div key={label} className="flex items-center">
                 <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium transition-all ${
                   step > index + 1 
-                    ? "bg-[#28A745] text-white" 
+                    ? "bg-[#739600] text-white" 
                     : step === index + 1 
-                      ? "bg-[#00B4D8] text-white" 
+                      ? "bg-[#00677F] text-white" 
                       : "bg-white/10 text-slate-500"
                 }`}>
                   {step > index + 1 ? <Check className="w-4 h-4" /> : index + 1}
                 </div>
                 {index < 3 && (
                   <div className={`w-12 sm:w-16 h-0.5 mx-1 transition-colors ${
-                    step > index + 1 ? "bg-[#28A745]" : "bg-white/10"
+                    step > index + 1 ? "bg-[#739600]" : "bg-white/10"
                   }`} />
                 )}
               </div>
@@ -145,7 +145,7 @@ export const ScheduleModal = ({ onClose, advisor, user }) => {
                   onClick={() => { setMeetingType(type); setStep(2); }}
                   className={`w-full flex items-center gap-4 p-4 rounded-xl border transition-all ${
                     meetingType?.id === type.id
-                      ? "border-[#00B4D8] bg-[#00B4D8]/10"
+                      ? "border-[#00677F] bg-[#00677F]/10"
                       : "border-white/10 bg-white/5 hover:border-white/20 hover:bg-white/10"
                   }`}
                 >
@@ -196,7 +196,7 @@ export const ScheduleModal = ({ onClose, advisor, user }) => {
                       !date 
                         ? "invisible" 
                         : selectedDate?.toDateString() === date.toDateString()
-                          ? "bg-[#00B4D8] text-white"
+                          ? "bg-[#00677F] text-white"
                           : isDateAvailable(date)
                             ? "text-white hover:bg-white/10"
                             : "text-slate-600 cursor-not-allowed"
@@ -222,7 +222,7 @@ export const ScheduleModal = ({ onClose, advisor, user }) => {
                     onClick={() => setSelectedTime(time)}
                     className={`p-3 rounded-xl text-sm font-medium transition-all ${
                       selectedTime === time
-                        ? "bg-[#00B4D8] text-white"
+                        ? "bg-[#00677F] text-white"
                         : "bg-white/5 border border-white/10 text-white hover:bg-white/10"
                     }`}
                   >
@@ -255,7 +255,7 @@ export const ScheduleModal = ({ onClose, advisor, user }) => {
                     <span className="text-white text-sm">{meetingType?.name} ({meetingType?.duration})</span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <CalendarDays className="w-4 h-4 text-[#00B4D8]" />
+                    <CalendarDays className="w-4 h-4 text-[#00677F]" />
                     <span className="text-white text-sm">{formatDate(selectedDate)}</span>
                   </div>
                   <div className="flex items-center gap-3">
@@ -294,7 +294,7 @@ export const ScheduleModal = ({ onClose, advisor, user }) => {
             <Button
               onClick={() => setStep(3)}
               disabled={!selectedDate}
-              className="flex-1 bg-[#00B4D8] hover:bg-[#0096B4] text-white rounded-full py-6"
+              className="flex-1 bg-[#00677F] hover:bg-[#135163] text-white rounded-full py-6"
             >
               Continue
             </Button>
@@ -304,7 +304,7 @@ export const ScheduleModal = ({ onClose, advisor, user }) => {
             <Button
               onClick={() => setStep(4)}
               disabled={!selectedTime}
-              className="flex-1 bg-[#00B4D8] hover:bg-[#0096B4] text-white rounded-full py-6"
+              className="flex-1 bg-[#00677F] hover:bg-[#135163] text-white rounded-full py-6"
             >
               Continue
             </Button>
@@ -314,7 +314,7 @@ export const ScheduleModal = ({ onClose, advisor, user }) => {
             <Button
               onClick={handleSchedule}
               disabled={scheduling}
-              className="flex-1 bg-[#28A745] hover:bg-[#218838] text-white rounded-full py-6"
+              className="flex-1 bg-[#739600] hover:bg-[#218838] text-white rounded-full py-6"
             >
               {scheduling ? (
                 <>
@@ -496,7 +496,7 @@ export const TextModal = ({ onClose, advisor, user }) => {
         {/* Header */}
         <div className="flex items-center justify-between p-4 border-b border-white/10">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#28A745] to-[#20C997] flex items-center justify-center">
+            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#739600] to-[#20C997] flex items-center justify-center">
               <MessageSquare className="w-5 h-5 text-white" />
             </div>
             <div>
@@ -522,8 +522,8 @@ export const TextModal = ({ onClose, advisor, user }) => {
               >
                 <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
                   message.role === "user" 
-                    ? "bg-[#00B4D8]" 
-                    : "bg-gradient-to-br from-[#28A745] to-[#20C997]"
+                    ? "bg-[#00677F]" 
+                    : "bg-gradient-to-br from-[#739600] to-[#20C997]"
                 }`}>
                   {message.role === "user" ? (
                     <User className="w-4 h-4 text-white" />
@@ -538,7 +538,7 @@ export const TextModal = ({ onClose, advisor, user }) => {
                 <div
                   className={`max-w-[80%] p-3 rounded-2xl ${
                     message.role === "user"
-                      ? "bg-[#00B4D8] text-white rounded-tr-sm"
+                      ? "bg-[#00677F] text-white rounded-tr-sm"
                       : "bg-white/10 text-white rounded-tl-sm"
                   }`}
                 >
@@ -548,7 +548,7 @@ export const TextModal = ({ onClose, advisor, user }) => {
             ))}
             {sending && (
               <div className="flex gap-3">
-                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#28A745] to-[#20C997] flex items-center justify-center">
+                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#739600] to-[#20C997] flex items-center justify-center">
                   <img 
                     src={advisor?.avatar_url} 
                     alt={advisor?.name}
@@ -580,7 +580,7 @@ export const TextModal = ({ onClose, advisor, user }) => {
             <Button
               onClick={handleSend}
               disabled={!input.trim() || sending}
-              className="w-12 h-12 bg-[#28A745] hover:bg-[#218838] text-white rounded-full p-0"
+              className="w-12 h-12 bg-[#739600] hover:bg-[#218838] text-white rounded-full p-0"
             >
               <Send className="w-5 h-5" />
             </Button>
@@ -636,8 +636,8 @@ export const CallModal = ({ onClose, advisor, user }) => {
           <div className="flex items-center gap-3">
             <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
               callState === "connected" 
-                ? "bg-gradient-to-br from-[#28A745] to-[#20C997] animate-pulse" 
-                : "bg-gradient-to-br from-[#00B4D8] to-[#0096B4]"
+                ? "bg-gradient-to-br from-[#739600] to-[#20C997] animate-pulse" 
+                : "bg-gradient-to-br from-[#00677F] to-[#135163]"
             }`}>
               <Phone className="w-5 h-5 text-white" />
             </div>
@@ -672,18 +672,18 @@ export const CallModal = ({ onClose, advisor, user }) => {
               className="w-32 h-32 rounded-full object-cover border-4 border-white/10"
             />
             {callState === "connected" && (
-              <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 px-3 py-1 rounded-full bg-[#28A745] text-white text-xs font-medium">
+              <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 px-3 py-1 rounded-full bg-[#739600] text-white text-xs font-medium">
                 Connected
               </div>
             )}
             {callState === "connecting" && (
-              <div className="absolute inset-0 rounded-full border-4 border-[#00B4D8] border-t-transparent animate-spin" />
+              <div className="absolute inset-0 rounded-full border-4 border-[#00677F] border-t-transparent animate-spin" />
             )}
           </div>
           
           <h4 className="text-white text-xl font-semibold mb-1">{advisor?.name}</h4>
           <p className="text-slate-400 text-sm mb-2">{advisor?.title}</p>
-          <p className="text-[#00B4D8] text-sm">{advisor?.phone}</p>
+          <p className="text-[#00677F] text-sm">{advisor?.phone}</p>
         </div>
 
         {/* Actions */}
@@ -699,7 +699,7 @@ export const CallModal = ({ onClose, advisor, user }) => {
               </Button>
               <Button
                 onClick={handleCall}
-                className="w-14 h-14 rounded-full bg-[#28A745] hover:bg-[#218838] text-white p-0"
+                className="w-14 h-14 rounded-full bg-[#739600] hover:bg-[#218838] text-white p-0"
               >
                 <Phone className="w-6 h-6" />
               </Button>
