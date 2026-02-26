@@ -1134,11 +1134,19 @@ const ApplicationForm = () => {
 
   return (
     <div className={`min-h-screen ${theme === 'dark' ? 'bg-[#0A0E14]' : 'bg-gray-50'}`}>
-      {/* Onboarding Modal for first-time users */}
+      {/* Onboarding Modal for first-time users (Step 1 only) */}
       <OnboardingModal 
         isOpen={showOnboarding} 
         onComplete={() => setShowOnboarding(false)}
         appId={appId}
+      />
+
+      {/* Step-specific onboarding modal (Steps 2-6) */}
+      <StepOnboardingModal
+        isOpen={showStepOnboarding}
+        step={currentStep}
+        appId={appId}
+        onComplete={() => setShowStepOnboarding(false)}
       />
 
       {/* Top Navigation */}
