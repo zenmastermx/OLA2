@@ -3,6 +3,286 @@
 
 ---
 
+# COOKIE CONSENT
+
+---
+
+## COOKIE-001: Cookie Consent Popup Display
+**Title:** Cookie Consent - Initial Display
+
+**User Story:**
+As a first-time visitor to the website, I want to see a cookie consent popup, so that I can make an informed decision about whether to accept cookies.
+
+**Acceptance Criteria:**
+- [ ] Popup appears automatically on first visit to the landing page
+- [ ] Popup appears after a 1-second delay (allows page to load first)
+- [ ] Popup does NOT appear if user has previously made a choice
+- [ ] Popup is displayed at the bottom of the screen
+- [ ] Popup has a dark backdrop with blur effect (`bg-black/40 backdrop-blur-sm`)
+- [ ] Popup uses glassmorphism card design matching site theme
+- [ ] Popup has `data-testid="cookie-consent-banner"` for testing
+
+**Logic:**
+```javascript
+const [isVisible, setIsVisible] = useState(false);
+
+useEffect(() => {
+  // Check if user has already made a choice
+  const consent = localStorage.getItem("cookie_consent");
+  if (!consent) {
+    // Small delay for better UX - let page load first
+    const timer = setTimeout(() => setIsVisible(true), 1000);
+    return () => clearTimeout(timer);
+  }
+}, []);
+```
+
+---
+
+## COOKIE-002: Cookie Icon and Header
+**Title:** Cookie Consent - Visual Header
+
+**User Story:**
+As a visitor, I want to see a clear visual indicator that this is a cookie notice, so that I immediately understand the purpose of the popup.
+
+**Acceptance Criteria:**
+- [ ] Cookie icon (🍪) displayed in teal-colored container
+- [ ] Icon container: `w-12 h-12 rounded-xl bg-[#00677F]/10`
+- [ ] Icon hidden on mobile, shown on desktop (`hidden sm:flex`)
+- [ ] Mobile shows inline cookie icon next to heading
+- [ ] Heading text: "We Use Cookies"
+- [ ] Heading styled: `text-white text-lg font-semibold`
+
+---
+
+## COOKIE-003: Cookie Description Text
+**Title:** Cookie Consent - Information Text
+
+**User Story:**
+As a visitor, I want to understand why cookies are being used, so that I can make an informed decision.
+
+**Acceptance Criteria:**
+- [ ] Description text explains cookie usage clearly
+- [ ] Text content: "We use cookies to enhance your browsing experience and analyze our traffic. By clicking 'Accept All', you consent to our use of cookies."
+- [ ] Text styled: `text-slate-400 text-sm leading-relaxed`
+- [ ] Text is concise and easy to read
+
+---
+
+## COOKIE-004: Accept All Button
+**Title:** Cookie Consent - Accept All Action
+
+**User Story:**
+As a visitor who wants to proceed quickly, I want to accept all cookies with one click, so that I can continue browsing without interruption.
+
+**Acceptance Criteria:**
+- [ ] Button text: "Accept All"
+- [ ] Button uses primary teal styling: `bg-[#00677F] hover:bg-[#135163]`
+- [ ] Button has shadow effect: `shadow-lg shadow-[#00677F]/20`
+- [ ] Button is rounded: `rounded-xl`
+- [ ] Button height: `h-11`
+- [ ] Clicking saves consent to localStorage with `accepted: true`
+- [ ] Clicking closes the popup immediately
+- [ ] Button has `data-testid="cookie-accept-all-btn"`
+
+**Logic:**
+```javascript
+const handleAcceptAll = () => {
+  localStorage.setItem("cookie_consent", JSON.stringify({
+    accepted: true,
+    timestamp: new Date().toISOString()
+  }));
+  setIsVisible(false);
+};
+```
+
+**localStorage Data Structure (Accept):**
+```json
+{
+  "accepted": true,
+  "timestamp": "2026-02-26T15:43:02.273Z"
+}
+```
+
+---
+
+## COOKIE-005: Deny Button
+**Title:** Cookie Consent - Deny Action
+
+**User Story:**
+As a privacy-conscious visitor, I want to decline cookies, so that my browsing data is not tracked.
+
+**Acceptance Criteria:**
+- [ ] Button text: "Deny"
+- [ ] Button uses outline variant: `variant="outline"`
+- [ ] Button styled: `border-white/10 text-slate-300 hover:bg-white/5 hover:text-white`
+- [ ] Button is rounded: `rounded-xl`
+- [ ] Button height: `h-11`
+- [ ] Clicking saves consent to localStorage with `accepted: false`
+- [ ] Clicking closes the popup immediately
+- [ ] Button has `data-testid="cookie-deny-btn"`
+
+**Logic:**
+```javascript
+const handleDeny = () => {
+  localStorage.setItem("cookie_consent", JSON.stringify({
+    accepted: false,
+    timestamp: new Date().toISOString()
+  }));
+  setIsVisible(false);
+};
+```
+
+**localStorage Data Structure (Deny):**
+```json
+{
+  "accepted": false,
+  "timestamp": "2026-02-26T15:43:02.273Z"
+}
+```
+
+---
+
+## COOKIE-006: Privacy Policy Link
+**Title:** Cookie Consent - Privacy Policy Reference
+
+**User Story:**
+As a visitor who wants more information, I want a link to the privacy policy, so that I can learn more about data handling practices.
+
+**Acceptance Criteria:**
+- [ ] Text: "Learn more in our Privacy Policy"
+- [ ] "Privacy Policy" is a clickable link
+- [ ] Link styled in teal: `text-[#00677F] hover:underline`
+- [ ] Link centered below buttons
+- [ ] Text styled: `text-slate-500 text-xs`
+
+---
+
+## COOKIE-007: Popup Persistence
+**Title:** Cookie Consent - Remember User Choice
+
+**User Story:**
+As a returning visitor, I don't want to see the cookie popup again, so that my browsing experience is not interrupted repeatedly.
+
+**Acceptance Criteria:**
+- [ ] User's choice is saved to localStorage under key `cookie_consent`
+- [ ] Popup checks localStorage on page load
+- [ ] If consent exists, popup does NOT display
+- [ ] Choice persists across browser sessions
+- [ ] Choice persists across page refreshes
+- [ ] Choice persists across different pages of the site
+
+**Logic:**
+```javascript
+useEffect(() => {
+  const consent = localStorage.getItem("cookie_consent");
+  if (!consent) {
+    // Show popup only if no previous choice
+    const timer = setTimeout(() => setIsVisible(true), 1000);
+    return () => clearTimeout(timer);
+  }
+  // If consent exists, isVisible remains false (popup hidden)
+}, []);
+```
+
+---
+
+## COOKIE-008: Responsive Design
+**Title:** Cookie Consent - Mobile Responsiveness
+
+**User Story:**
+As a mobile user, I want the cookie popup to display correctly on my device, so that I can easily make my choice.
+
+**Acceptance Criteria:**
+- [ ] Popup is full-width on mobile with padding: `p-4 md:p-6`
+- [ ] Buttons stack vertically on mobile: `flex-col sm:flex-row`
+- [ ] Cookie icon hidden on mobile (text icon shown instead)
+- [ ] Max width constrained on desktop: `max-w-2xl mx-auto`
+- [ ] Touch targets are adequate size (44px minimum via `h-11`)
+
+---
+
+## COOKIE-009: Backdrop Behavior
+**Title:** Cookie Consent - Background Overlay
+
+**User Story:**
+As a visitor, I want the background to be dimmed when the popup appears, so that my attention is focused on making a cookie choice.
+
+**Acceptance Criteria:**
+- [ ] Dark overlay covers entire screen: `fixed inset-0`
+- [ ] Overlay has blur effect: `backdrop-blur-sm`
+- [ ] Overlay opacity: `bg-black/40`
+- [ ] Overlay has high z-index: `z-[100]`
+- [ ] Clicking overlay does NOT close popup (forces user to make choice)
+- [ ] Popup has higher z-index than overlay: `z-[101]`
+
+---
+
+## COOKIE-010: Animation
+**Title:** Cookie Consent - Entry Animation
+
+**User Story:**
+As a visitor, I want the popup to appear smoothly, so that it doesn't feel jarring or disruptive.
+
+**Acceptance Criteria:**
+- [ ] Popup uses slide-up animation: `animate-slide-up`
+- [ ] Animation is smooth and professional
+- [ ] 1-second delay before appearing allows page content to load first
+
+---
+
+# COOKIE CONSENT - TEST SCENARIOS
+
+## Happy Path - Accept
+1. Visit landing page for first time
+2. Wait 1 second for popup to appear
+3. Click "Accept All"
+4. Popup disappears
+5. Refresh page - popup does NOT appear
+6. Check localStorage: `{ accepted: true, timestamp: "..." }`
+
+## Happy Path - Deny
+1. Clear localStorage
+2. Visit landing page
+3. Wait 1 second for popup to appear
+4. Click "Deny"
+5. Popup disappears
+6. Refresh page - popup does NOT appear
+7. Check localStorage: `{ accepted: false, timestamp: "..." }`
+
+## Returning User
+1. User has previously accepted/denied cookies
+2. Visit landing page
+3. Popup does NOT appear (choice remembered)
+
+## Mobile View
+1. View landing page on mobile device (< 640px width)
+2. Popup displays full-width
+3. Buttons stack vertically
+4. Both buttons are easily tappable
+
+---
+
+# COOKIE CONSENT - VALIDATION TABLE
+
+| Scenario | Action | localStorage Result | Popup Visible |
+|----------|--------|---------------------|---------------|
+| First visit | None | Empty | Yes (after 1s) |
+| Click Accept All | Save | `{ accepted: true, ... }` | No |
+| Click Deny | Save | `{ accepted: false, ... }` | No |
+| Return visit (accepted) | Check | Exists | No |
+| Return visit (denied) | Check | Exists | No |
+| Clear storage + refresh | Check | Empty | Yes (after 1s) |
+
+---
+
+# RELATED FILES
+
+- `/app/frontend/src/components/CookieConsent.js` - Main component
+- `/app/frontend/src/pages/LandingPage.js` - Parent page (imports CookieConsent)
+
+---
+
 # LANDING PAGE (`/`)
 
 ---
