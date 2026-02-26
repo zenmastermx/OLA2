@@ -1126,7 +1126,8 @@ const ApplicationForm = () => {
       {/* Onboarding Modal for first-time users */}
       <OnboardingModal 
         isOpen={showOnboarding} 
-        onComplete={() => setShowOnboarding(false)} 
+        onComplete={() => setShowOnboarding(false)}
+        appId={appId}
       />
 
       {/* Top Navigation */}
