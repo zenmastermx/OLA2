@@ -1,29 +1,40 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&family=Figtree:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=League+Gothic&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* USA Brand Colors */
+/* Primary (80% usage): PMS 315C #00677F, PMS 7477C #135163 */
+/* Secondary (20% usage): #A1D8E0, #83AFB4, #C9DD03, #739600, #DC5034, #A4493D */
+/* Neutrals: #E4E6E3, #000000, #FFFFFF */
 
 /* Dark Mode (Default) */
 :root, .dark-mode {
     --usa-bg-default: #0A0E14;
     --usa-bg-paper: #11161F;
     --usa-bg-glass: rgba(10, 14, 20, 0.7);
-    --usa-primary: #00B4D8;
-    --usa-primary-hover: #0096B4;
-    --usa-primary-glow: 0 0 20px rgba(0, 180, 216, 0.5);
-    --usa-secondary: #002855;
+    --usa-primary: #00677F;
+    --usa-primary-light: #00879F;
+    --usa-primary-hover: #135163;
+    --usa-primary-glow: 0 0 20px rgba(0, 103, 127, 0.5);
+    --usa-secondary: #135163;
     --usa-secondary-surface: #1A2E45;
-    --usa-accent-neon: #00F5FF;
-    --usa-accent-purple: #7B68EE;
-    --usa-accent-success: #28A745;
-    --usa-accent-warning: #FF6B35;
+    --usa-accent-teal: #A1D8E0;
+    --usa-accent-teal-muted: #83AFB4;
+    --usa-accent-lime: #C9DD03;
+    --usa-accent-green: #739600;
+    --usa-accent-orange: #DC5034;
+    --usa-accent-red: #A4493D;
+    --usa-accent-success: #739600;
+    --usa-accent-warning: #DC5034;
     --usa-text-primary: #F5F7F9;
     --usa-text-secondary: #94A3B8;
     --usa-text-muted: #475569;
     --usa-border: rgba(255, 255, 255, 0.1);
     --usa-card-bg: rgba(10, 14, 20, 0.6);
     --usa-input-bg: rgba(0, 0, 0, 0.3);
+    --usa-neutral-gray: #E4E6E3;
 }
 
 /* Light Mode */
@@ -31,21 +42,27 @@
     --usa-bg-default: #F8FAFC;
     --usa-bg-paper: #FFFFFF;
     --usa-bg-glass: rgba(255, 255, 255, 0.8);
-    --usa-primary: #0096B4;
-    --usa-primary-hover: #007A94;
-    --usa-primary-glow: 0 0 20px rgba(0, 150, 180, 0.3);
+    --usa-primary: #00677F;
+    --usa-primary-light: #00879F;
+    --usa-primary-hover: #135163;
+    --usa-primary-glow: 0 0 20px rgba(0, 103, 127, 0.3);
     --usa-secondary: #E0F2F7;
     --usa-secondary-surface: #D0E8F0;
-    --usa-accent-neon: #00B4D8;
-    --usa-accent-purple: #6B5DD3;
-    --usa-accent-success: #22C55E;
-    --usa-accent-warning: #F97316;
+    --usa-accent-teal: #A1D8E0;
+    --usa-accent-teal-muted: #83AFB4;
+    --usa-accent-lime: #C9DD03;
+    --usa-accent-green: #739600;
+    --usa-accent-orange: #DC5034;
+    --usa-accent-red: #A4493D;
+    --usa-accent-success: #739600;
+    --usa-accent-warning: #DC5034;
     --usa-text-primary: #1E293B;
     --usa-text-secondary: #64748B;
     --usa-text-muted: #94A3B8;
     --usa-border: rgba(0, 0, 0, 0.1);
     --usa-card-bg: rgba(255, 255, 255, 0.9);
     --usa-input-bg: rgba(241, 245, 249, 1);
+    --usa-neutral-gray: #E4E6E3;
 }
 
 /* Light mode global overrides */
