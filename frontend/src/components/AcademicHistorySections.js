@@ -677,15 +677,12 @@ const AcademicHistorySections = ({ academicHistory, setAcademicHistory, onSectio
 
               {academicHistory.prior_application === "yes" && (
                 <div className="space-y-2 pt-2 animate-in slide-in-from-top-2 duration-300 max-w-xs">
-                  <Label className="text-xs font-medium uppercase tracking-wider text-slate-400 flex items-center gap-1">
-                    Prior Application Date <Info className="w-3 h-3 text-slate-600" />
-                  </Label>
-                  <Input
-                    type="date"
+                  <MonthYearPicker
+                    label="Prior Application Date"
                     value={academicHistory.prior_application_date || ""}
-                    onChange={(e) => setAcademicHistory({ ...academicHistory, prior_application_date: e.target.value })}
-                    className="h-12 bg-black/30 border-white/[0.08] focus:border-[#A1D8E0] focus:ring-2 focus:ring-[#A1D8E0]/20 text-white rounded-full px-5 transition-all duration-300"
-                    data-testid="prior-app-date"
+                    onChange={(date) => setAcademicHistory({ ...academicHistory, prior_application_date: date })}
+                    testId="prior-app-date"
+                    theme="dark"
                   />
                 </div>
               )}
