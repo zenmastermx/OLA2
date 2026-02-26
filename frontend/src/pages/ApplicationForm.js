@@ -197,8 +197,10 @@ const ApplicationForm = () => {
 
   // Show onboarding for first-time users on step 1
   useEffect(() => {
-    if (!loading && currentStep === 1) {
-      const hasSeenOnboarding = localStorage.getItem("onboarding_completed");
+    if (!loading && currentStep === 1 && appId) {
+      // Store onboarding completion per application, not globally
+      const onboardingKey = `onboarding_completed_${appId}`;
+      const hasSeenOnboarding = localStorage.getItem(onboardingKey);
       if (!hasSeenOnboarding) {
         // Small delay to let the page render first
         setTimeout(() => {
@@ -206,7 +208,7 @@ const ApplicationForm = () => {
         }, 500);
       }
     }
-  }, [loading, currentStep]);
+  }, [loading, currentStep, appId]);
 
   const fetchApplication = async () => {
     try {
