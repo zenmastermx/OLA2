@@ -10,9 +10,25 @@ import {
   CheckCircle
 } from "lucide-react";
 
-const OnboardingModal = ({ isOpen, onComplete }) => {
+const OnboardingModal = ({ isOpen, onComplete, appId }) => {
   const [currentStep, setCurrentStep] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
+
+  const handleComplete = () => {
+    // Store completion per application ID
+    if (appId) {
+      localStorage.setItem(`onboarding_completed_${appId}`, "true");
+    }
+    onComplete?.();
+  };
+
+  const handleSkip = () => {
+    // Store completion per application ID
+    if (appId) {
+      localStorage.setItem(`onboarding_completed_${appId}`, "true");
+    }
+    onComplete?.();
+  };
 
   const steps = [
     {
