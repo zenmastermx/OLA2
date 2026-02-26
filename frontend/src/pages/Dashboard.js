@@ -137,7 +137,7 @@ const Dashboard = () => {
     setShowVerificationModal(false);
     updateUser({ email_verified: true });
     toast.success("Email verified! You can now start your application.");
-    // Don't auto-open application modal, let user explore dashboard first
+    setShowNewAppModal(true);
   };
 
   const fetchAdvisor = async () => {
