@@ -30,6 +30,23 @@ A cutting-edge, futuristic student online application portal for the University 
 
 ---
 
+## What's Been Implemented (Dec 2025)
+
+### Recent Updates (Dec 2025)
+- **UX-Friendly Date Pickers** (VERIFIED)
+  - Created reusable `MonthYearPicker.js` component
+  - Replaced difficult native date inputs with Month/Year dropdown pickers
+  - Integrated in: Academic History (Education section), Employment History, Request Official Transcripts
+  - Supports dark/light theme
+- **Brand Guideline Compliance**
+  - Updated colors to official university brand (#00677F teal, #FF6B35 orange)
+  - Integrated official fonts (League Gothic, Montserrat)
+- **Step-Specific Onboarding Modals**
+  - Each application step shows contextual help modal on first visit
+  - Tied to application ID in database (resets for new applications)
+
+---
+
 ## What's Been Implemented (Jan 30, 2026)
 
 ### Pages
