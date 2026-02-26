@@ -119,7 +119,7 @@ const RegisterPage = () => {
     setShowVerificationModal(false);
     updateUser({ email_verified: true });
     toast.success("Email verified! Welcome to USA.edu!");
-    navigate("/dashboard", { state: { newUser: true, program: location.state?.program } });
+    navigate("/dashboard");
   };
 
   return (
