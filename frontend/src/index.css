@@ -136,10 +136,10 @@ body.light-mode,
 }
 
 /* Keep colored text intact */
-.light-mode .text-\[\#00B4D8\],
-.light-mode .text-\[\#00F5FF\],
+.light-mode .text-\[\#00677F\],
+.light-mode .text-\[\#A1D8E0\],
 .light-mode .text-\[\#7B68EE\],
-.light-mode .text-\[\#28A745\],
+.light-mode .text-\[\#739600\],
 .light-mode .text-\[\#FF9800\],
 .light-mode .text-\[\#EF4444\] {
     color: inherit !important;
@@ -184,7 +184,7 @@ body.light-mode,
 .light-mode input:focus,
 .light-mode select:focus,
 .light-mode textarea:focus {
-    border-color: #00B4D8 !important;
+    border-color: #00677F !important;
 }
 
 /* Light mode scrollbar */
@@ -197,7 +197,7 @@ body.light-mode,
 }
 
 .light-mode ::-webkit-scrollbar-thumb:hover {
-    background: #00B4D8;
+    background: #00677F;
 }
 
 body {
@@ -248,16 +248,16 @@ code {
 
 .glass-card:hover {
     border-color: rgba(0, 245, 255, 0.3);
-    box-shadow: 0 0 30px rgba(0, 180, 216, 0.1);
+    box-shadow: 0 0 30px rgba(0, 103, 127, 0.1);
 }
 
 /* Neon glow effects */
 .neon-glow {
-    box-shadow: 0 0 20px rgba(0, 180, 216, 0.3);
+    box-shadow: 0 0 20px rgba(0, 103, 127, 0.3);
 }
 
 .neon-glow:hover {
-    box-shadow: 0 0 30px rgba(0, 180, 216, 0.5);
+    box-shadow: 0 0 30px rgba(0, 103, 127, 0.5);
 }
 
 /* Gradient backgrounds */
@@ -386,18 +386,18 @@ code {
     border-radius: 9999px;
     font-weight: 500;
     transition: all 0.3s ease;
-    box-shadow: 0 0 20px rgba(0, 180, 216, 0.3);
+    box-shadow: 0 0 20px rgba(0, 103, 127, 0.3);
 }
 
 .btn-primary:hover {
     background: var(--usa-primary-hover);
     transform: scale(1.05);
-    box-shadow: 0 0 30px rgba(0, 180, 216, 0.5);
+    box-shadow: 0 0 30px rgba(0, 103, 127, 0.5);
 }
 
 .btn-secondary {
     background: transparent;
-    border: 1px solid rgba(0, 180, 216, 0.3);
+    border: 1px solid rgba(0, 103, 127, 0.3);
     color: var(--usa-primary);
     padding: 0.75rem 2rem;
     border-radius: 9999px;
@@ -406,7 +406,7 @@ code {
 }
 
 .btn-secondary:hover {
-    background: rgba(0, 180, 216, 0.1);
+    background: rgba(0, 103, 127, 0.1);
     border-color: var(--usa-primary);
 }
 
@@ -557,7 +557,7 @@ code {
 
 /* Document upload area */
 .upload-zone {
-    border: 2px dashed rgba(0, 180, 216, 0.3);
+    border: 2px dashed rgba(0, 103, 127, 0.3);
     transition: all 0.3s ease;
 }
 
@@ -569,6 +569,6 @@ code {
 
 /* Selection highlight */
 ::selection {
-    background: rgba(0, 180, 216, 0.3);
+    background: rgba(0, 103, 127, 0.3);
     color: white;
 }
