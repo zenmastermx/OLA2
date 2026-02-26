@@ -757,8 +757,6 @@ const ApplicationForm = () => {
                     institution={inst}
                     index={index}
                     theme={theme}
-                    transcriptServices={transcriptServices}
-                    getInstitutionServices={getInstitutionServices}
                     transcriptRequests={transcriptRequests}
                     requestingTranscript={requestingTranscript}
                     handleTranscriptRequest={handleTranscriptRequest}
