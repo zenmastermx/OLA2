@@ -105,6 +105,14 @@ A cutting-edge, futuristic student online application portal for the University 
    - 6-step application: Personal Info, Academic History, Employment History, Documents Required, **Request Official Transcripts (NEW)**, Review & Submit
    - Theme toggle in navbar
    - Step navigation with progress indicators
+   - **Onboarding Modal Tour** (NEW - Feb 25, 2026)
+     - 3-step guided tour for first-time users
+     - Step 1: Dashboard overview - what you can do from home base
+     - Step 2: Auto-save explanation - how to navigate and save progress
+     - Step 3: Journey AI introduction - how to get help
+     - Progress indicator with animated transitions
+     - Skip tour option available
+     - Stored in localStorage so only shows once per user
    - **Request Official Transcripts Step (NEW)**:
      - Pulls institutions from Academic History
      - Service dropdown per institution (Parchment, National Student Clearinghouse, Portage, CAS, Joint Service Transcripts)
