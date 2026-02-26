@@ -723,10 +723,10 @@ const ApplicationForm = () => {
                   <Mail className="w-5 h-5 text-[#00677F]" />
                 </div>
                 <div className="space-y-2">
-                  <p className={`font-medium ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>How Transcript Requests Work</p>
+                  <p className={`font-medium ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>Verify Your Transcript Requests</p>
                   <p className={`text-sm ${theme === 'dark' ? 'text-slate-400' : 'text-gray-600'}`}>
-                    Select a transcript exchange service for each institution and click "Request" to initiate the official transcript request. 
-                    If your institution doesn't support electronic delivery, you can select "USA Certified Mail" to manually request and mail your transcript.
+                    Please confirm that you have requested official transcripts from each institution listed below. 
+                    Click "I've Requested This" and enter the date you submitted your request.
                   </p>
                 </div>
               </div>
