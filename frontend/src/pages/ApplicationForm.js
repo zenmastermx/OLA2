@@ -197,7 +197,7 @@ const ApplicationForm = () => {
     }
   }, [urlStep]);
 
-  // Show onboarding for first-time users on step 1
+  // Show onboarding for first-time users on step 1 (general intro)
   useEffect(() => {
     if (!loading && currentStep === 1 && appId) {
       // Store onboarding completion per application, not globally
@@ -208,11 +208,20 @@ const ApplicationForm = () => {
         setTimeout(() => {
           setShowOnboarding(true);
         }, 500);
+      } else {
+        // If they've seen the general onboarding, check for step-specific
+        const stepOnboardingKey = `step_onboarding_${appId}_1`;
+        const hasSeenStepOnboarding = localStorage.getItem(stepOnboardingKey);
+        if (!hasSeenStepOnboarding) {
+          setTimeout(() => {
+            setShowStepOnboarding(true);
+          }, 300);
+        }
       }
     }
   }, [loading, currentStep, appId]);
 
-  // Show step-specific onboarding when entering a new step
+  // Show step-specific onboarding when entering a new step (steps 2-6)
   useEffect(() => {
     if (!loading && appId && currentStep > 1) {
       const stepOnboardingKey = `step_onboarding_${appId}_${currentStep}`;
