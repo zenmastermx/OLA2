@@ -212,6 +212,20 @@ const ApplicationForm = () => {
     }
   }, [loading, currentStep, appId]);
 
+  // Show step-specific onboarding when entering a new step
+  useEffect(() => {
+    if (!loading && appId && currentStep > 1) {
+      const stepOnboardingKey = `step_onboarding_${appId}_${currentStep}`;
+      const hasSeenStepOnboarding = localStorage.getItem(stepOnboardingKey);
+      if (!hasSeenStepOnboarding) {
+        // Small delay to let the page render first
+        setTimeout(() => {
+          setShowStepOnboarding(true);
+        }, 300);
+      }
+    }
+  }, [loading, currentStep, appId]);
+
   const fetchApplication = async () => {
     try {
       const response = await axios.get(`${API}/applications/${appId}`, {
