@@ -102,24 +102,24 @@ A cutting-edge, futuristic student online application portal for the University 
    - AI Chat "Ask Journey" button
 
 5. **Application Form** (`/application/:appId/:step`)
-   - 6-step application: Personal Info, Academic History, Employment History, Documents Required, **Request Official Transcripts (NEW)**, Review & Submit
+   - 6-step application: Personal Info, Academic History, Employment History, Documents Required, **Request Official Transcripts**, Review & Submit
    - Theme toggle in navbar
    - Step navigation with progress indicators
-   - **Onboarding Modal Tour** (NEW - Feb 25, 2026)
+   - **General Onboarding Tour** (Step 1 only)
      - 3-step guided tour for first-time users
-     - Step 1: Dashboard overview - what you can do from home base
-     - Step 2: Auto-save explanation - how to navigate and save progress
-     - Step 3: Journey AI introduction - how to get help
+     - Dashboard overview, auto-save explanation, Journey AI introduction
      - Progress indicator with animated transitions
-     - Skip tour option available
-     - Stored in localStorage so only shows once per user
-   - **Request Official Transcripts Step (NEW)**:
+   - **Step-Specific Onboarding Modals** (NEW - Feb 26, 2026)
+     - Each application step has its own onboarding modal
+     - Shows only on first visit to each step (per application)
+     - Includes Quick Tips and important reminders
+     - Color-coded to match step theme
+     - Stored in localStorage per app ID and step
+   - **Request Official Transcripts Step**:
      - Pulls institutions from Academic History
-     - Service dropdown per institution (Parchment, National Student Clearinghouse, Portage, CAS, Joint Service Transcripts)
-     - "USA Certified Mail" option for manual requests
-     - "Request" button triggers API call with timestamp
-     - "Mark Sent" option for certified mail
-     - Status persists server-side (requested/marked_sent)
+     - "I've Requested This" button for each institution
+     - Date picker to record when transcript was requested
+     - Status shows "Requested" with date after confirmation
      - Progress summary shows X of Y institutions requested
 
 ### Features
