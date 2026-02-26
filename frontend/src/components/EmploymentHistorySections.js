@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import {
   Briefcase, Check, Plus, Trash2, Info, Mail, Phone, Building, Calendar, Clock, User, X, Send
 } from "lucide-react";
+import MonthYearPicker from "@/components/MonthYearPicker";
 
 // Phone number formatting function
 const formatPhoneNumber = (value) => {
