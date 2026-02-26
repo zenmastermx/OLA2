@@ -71,6 +71,28 @@
     --tw-text-opacity: 1;
 }
 
+/* Brand Typography */
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
+h1, h2, h3, .heading, .font-heading {
+    font-family: 'League Gothic', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+}
+
+/* Use Montserrat for body text and UI elements */
+p, span, label, input, textarea, select, button, a, li {
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Accent text class for special highlights */
+.font-accent {
+    font-family: 'League Gothic', sans-serif;
+    text-transform: uppercase;
+}
+
 .light-mode .glass-card {
     background: rgba(255, 255, 255, 0.9) !important;
     border: 1px solid rgba(0, 0, 0, 0.08) !important;
