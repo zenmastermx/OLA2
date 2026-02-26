@@ -1082,7 +1082,7 @@ const ApplicationForm = () => {
               <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[#00677F]/20 to-[#7B68EE]/20 flex items-center justify-center mx-auto mb-6">
                 <CheckCircle2 className="w-10 h-10 text-[#00677F]" />
               </div>
-              <h3 className="font-['Outfit'] text-3xl font-light text-white mb-3">
+              <h3 className="font-['Montserrat'] text-3xl font-light text-white mb-3">
                 Ready to Submit?
               </h3>
               <p className="text-slate-400 mb-8 max-w-lg mx-auto">
@@ -1143,7 +1143,7 @@ const ApplicationForm = () => {
           </button>
           
           <div className="text-center">
-            <p className={`font-['Outfit'] font-semibold ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>Application</p>
+            <p className={`font-['Montserrat'] font-semibold ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>Application</p>
             <p className={`text-sm ${theme === 'dark' ? 'text-slate-500' : 'text-gray-500'}`}>{application?.program_selection?.program_type || "Program"}</p>
           </div>
           
@@ -1225,7 +1225,7 @@ const ApplicationForm = () => {
       {/* Main Content */}
       <div className="max-w-5xl mx-auto px-6 py-8">
         <div className="mb-8">
-          <h1 className="font-['Outfit'] text-2xl lg:text-3xl font-bold text-white mb-2">
+          <h1 className="font-['Montserrat'] text-2xl lg:text-3xl font-bold text-white mb-2">
             {steps[currentStep - 1]?.label}
           </h1>
           <p className={`${theme === 'dark' ? 'text-slate-400' : 'text-gray-600'}`}>

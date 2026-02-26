@@ -175,7 +175,7 @@ const RegisterPage = () => {
         <div className="absolute bottom-1/3 right-1/4 w-96 h-96 bg-[#7B68EE]/10 rounded-full blur-[100px]" />
         
         <div className="relative z-10 max-w-lg">
-          <h2 className="font-['Outfit'] text-5xl font-bold mb-6 leading-tight">
+          <h2 className="font-['Montserrat'] text-5xl font-bold mb-6 leading-tight">
             Begin Your Healthcare Career Journey
           </h2>
           <p className="text-slate-400 text-lg mb-8">
@@ -224,7 +224,7 @@ const RegisterPage = () => {
 
           {/* Header */}
           <div>
-            <h2 className="font-['Outfit'] text-3xl font-bold">Create Account</h2>
+            <h2 className="font-['Montserrat'] text-3xl font-bold">Create Account</h2>
             <p className="text-slate-400 mt-2">Start your application journey today</p>
           </div>
 

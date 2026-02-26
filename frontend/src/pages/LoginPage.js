@@ -74,7 +74,7 @@ const LoginPage = () => {
 
           {/* Header */}
           <div>
-            <h2 className={`font-['Outfit'] text-3xl font-bold ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>Welcome Back</h2>
+            <h2 className={`font-['Montserrat'] text-3xl font-bold ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>Welcome Back</h2>
             <p className={`mt-2 ${theme === 'dark' ? 'text-slate-400' : 'text-gray-600'}`}>Sign in to continue your application</p>
           </div>
 
@@ -171,7 +171,7 @@ const LoginPage = () => {
             alt="USA.edu Logo" 
             className="h-24 w-auto mx-auto mb-8"
           />
-          <h2 className={`font-['Outfit'] text-4xl font-bold mb-4 ${theme === 'dark' ? 'text-white' : 'text-[#002855]'}`}>
+          <h2 className={`font-['Montserrat'] text-4xl font-bold mb-4 ${theme === 'dark' ? 'text-white' : 'text-[#002855]'}`}>
             University of St. Augustine
           </h2>
           <p className={`text-lg ${theme === 'dark' ? 'text-slate-400' : 'text-[#004D6E]'}`}>
@@ -179,15 +179,15 @@ const LoginPage = () => {
           </p>
           <div className="mt-12 flex justify-center gap-8">
             <div className="text-center">
-              <p className="text-3xl font-['Outfit'] font-bold text-[#00677F]">15K+</p>
+              <p className="text-3xl font-['Montserrat'] font-bold text-[#00677F]">15K+</p>
               <p className={`text-sm ${theme === 'dark' ? 'text-slate-500' : 'text-[#004D6E]'}`}>Students</p>
             </div>
             <div className="text-center">
-              <p className="text-3xl font-['Outfit'] font-bold text-[#00677F]">5</p>
+              <p className="text-3xl font-['Montserrat'] font-bold text-[#00677F]">5</p>
               <p className={`text-sm ${theme === 'dark' ? 'text-slate-500' : 'text-[#004D6E]'}`}>Campuses</p>
             </div>
             <div className="text-center">
-              <p className="text-3xl font-['Outfit'] font-bold text-[#00677F]">95%</p>
+              <p className="text-3xl font-['Montserrat'] font-bold text-[#00677F]">95%</p>
               <p className={`text-sm ${theme === 'dark' ? 'text-slate-500' : 'text-[#004D6E]'}`}>Employment</p>
             </div>
           </div>

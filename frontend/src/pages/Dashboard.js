@@ -304,7 +304,7 @@ const Dashboard = () => {
       <div className="max-w-7xl mx-auto px-6 py-8">
         {/* Welcome Section */}
         <div className="mb-8">
-          <h1 className="font-['Outfit'] text-3xl lg:text-4xl font-bold text-white mb-2">
+          <h1 className="font-['Montserrat'] text-3xl lg:text-4xl font-bold text-white mb-2">
             Welcome back, {user?.first_name}!
           </h1>
           <p className="text-slate-400">
@@ -315,7 +315,7 @@ const Dashboard = () => {
         {/* Application Review Status Progress Bar - Shows for submitted applications */}
         {submittedApps.length > 0 && (
           <div className="glass-card rounded-2xl p-6 mb-8" data-testid="review-status-progress">
-            <h3 className={`font-['Outfit'] text-lg font-semibold mb-4 ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
+            <h3 className={`font-['Montserrat'] text-lg font-semibold mb-4 ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
               Admission Status
             </h3>
             {(() => {
@@ -429,7 +429,7 @@ const Dashboard = () => {
                     className="progress-ring__circle"
                   />
                 </svg>
-                <span className="absolute inset-0 flex items-center justify-center text-2xl font-['Outfit'] font-bold text-white">
+                <span className="absolute inset-0 flex items-center justify-center text-2xl font-['Montserrat'] font-bold text-white">
                   {displayApp?.progress || 0}%
                 </span>
               </div>
@@ -462,7 +462,7 @@ const Dashboard = () => {
               <h3 className="text-slate-400 text-sm font-medium">Next Deadline</h3>
               <Calendar className="w-5 h-5 text-[#FF6B35]" />
             </div>
-            <p className="text-3xl font-['Outfit'] font-bold text-white mb-1">
+            <p className="text-3xl font-['Montserrat'] font-bold text-white mb-1">
               {daysUntilDeadline} Days
             </p>
             <p className="text-slate-400">{deadline.term} Application</p>
@@ -479,7 +479,7 @@ const Dashboard = () => {
             </div>
             {displayApp ? (
               <>
-                <p className="text-3xl font-['Outfit'] font-bold text-white mb-1">
+                <p className="text-3xl font-['Montserrat'] font-bold text-white mb-1">
                   {displayApp.documents?.filter(d => d.status === "uploaded").length || 0}/5
                 </p>
                 <p className="text-slate-400">Documents Uploaded</p>
@@ -492,7 +492,7 @@ const Dashboard = () => {
               </>
             ) : (
               <>
-                <p className="text-3xl font-['Outfit'] font-bold text-white mb-1">0/5</p>
+                <p className="text-3xl font-['Montserrat'] font-bold text-white mb-1">0/5</p>
                 <p className="text-slate-400">Documents Uploaded</p>
               </>
             )}
@@ -512,7 +512,7 @@ const Dashboard = () => {
                     {activeApp.program_selection?.program_type || "Program"}
                   </span>
                 </div>
-                <h2 className="font-['Outfit'] text-2xl font-bold text-white mb-2">
+                <h2 className="font-['Montserrat'] text-2xl font-bold text-white mb-2">
                   {activeApp.program_selection?.program_pathway || activeApp.program_selection?.program_type || "Healthcare"} 
                 </h2>
                 
@@ -612,7 +612,7 @@ const Dashboard = () => {
         {/* Submitted Applications */}
         {submittedApps.length > 0 && (
           <div className="mt-8">
-            <h3 className="font-['Outfit'] text-xl font-bold text-white mb-4">
+            <h3 className="font-['Montserrat'] text-xl font-bold text-white mb-4">
               Submitted Applications
             </h3>
             <div className="space-y-4">
@@ -832,7 +832,7 @@ const Dashboard = () => {
           <div className="glass-card rounded-3xl p-8 max-w-2xl w-full animate-slide-up my-8" data-testid="new-app-modal">
             <div className="flex items-center justify-between mb-6">
               <div>
-                <h2 className="font-['Outfit'] text-2xl font-bold text-white">
+                <h2 className="font-['Montserrat'] text-2xl font-bold text-white">
                   {modalStep === 1 && "Select Your Program"}
                   {modalStep === 2 && "Select Your Pathway"}
                   {modalStep === 3 && "Select Term & Campus"}

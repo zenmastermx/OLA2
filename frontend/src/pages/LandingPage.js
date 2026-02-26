@@ -116,7 +116,7 @@ const LandingPage = () => {
               <span>Applications Open for 2026</span>
             </div>
             
-            <h1 className={`font-['Outfit'] text-5xl lg:text-7xl font-bold leading-tight ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
+            <h1 className={`font-['Montserrat'] text-5xl lg:text-7xl font-bold leading-tight ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
               Your Journey to{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00677F] to-[#135163]">
                 Healthcare Excellence
@@ -141,15 +141,15 @@ const LandingPage = () => {
             {/* Stats */}
             <div className="flex gap-12 pt-8">
               <div>
-                <p className="text-3xl font-['Outfit'] font-bold text-[#00677F]">15K+</p>
+                <p className="text-3xl font-['Montserrat'] font-bold text-[#00677F]">15K+</p>
                 <p className={`text-sm ${theme === 'dark' ? 'text-slate-500' : 'text-gray-500'}`}>Alumni Worldwide</p>
               </div>
               <div>
-                <p className="text-3xl font-['Outfit'] font-bold text-[#00677F]">95%</p>
+                <p className="text-3xl font-['Montserrat'] font-bold text-[#00677F]">95%</p>
                 <p className={`text-sm ${theme === 'dark' ? 'text-slate-500' : 'text-gray-500'}`}>Employment Rate</p>
               </div>
               <div>
-                <p className="text-3xl font-['Outfit'] font-bold text-[#00677F]">5</p>
+                <p className="text-3xl font-['Montserrat'] font-bold text-[#00677F]">5</p>
                 <p className={`text-sm ${theme === 'dark' ? 'text-slate-500' : 'text-gray-500'}`}>Campus Locations</p>
               </div>
             </div>
@@ -173,7 +173,7 @@ const LandingPage = () => {
       <section className="py-24 relative">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className={`font-['Outfit'] text-4xl lg:text-5xl font-bold mb-4 ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
+            <h2 className={`font-['Montserrat'] text-4xl lg:text-5xl font-bold mb-4 ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
               Choose Your Path
             </h2>
             <p className={`text-lg max-w-2xl mx-auto ${theme === 'dark' ? 'text-slate-400' : 'text-gray-600'}`}>
@@ -197,7 +197,7 @@ const LandingPage = () => {
                 >
                   <program.icon className="w-7 h-7" style={{ color: program.color }} />
                 </div>
-                <h3 className={`font-['Outfit'] text-xl font-bold mb-2 ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>{program.name}</h3>
+                <h3 className={`font-['Montserrat'] text-xl font-bold mb-2 ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>{program.name}</h3>
                 <p className={`text-sm mb-4 ${theme === 'dark' ? 'text-slate-400' : 'text-gray-600'}`}>{program.description}</p>
                 <div className="flex flex-wrap gap-2">
                   {program.degrees.map((degree) => (
@@ -235,7 +235,7 @@ const LandingPage = () => {
         <div className={`absolute inset-0 ${theme === 'dark' ? 'bg-gradient-to-b from-transparent via-[#002855]/20 to-transparent' : 'bg-gradient-to-b from-transparent via-[#E0F7FA]/30 to-transparent'}`} />
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="text-center mb-16">
-            <h2 className={`font-['Outfit'] text-4xl lg:text-5xl font-bold mb-4 ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
+            <h2 className={`font-['Montserrat'] text-4xl lg:text-5xl font-bold mb-4 ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
               A Smarter Application Experience
             </h2>
             <p className={`text-lg max-w-2xl mx-auto ${theme === 'dark' ? 'text-slate-400' : 'text-gray-600'}`}>
@@ -254,7 +254,7 @@ const LandingPage = () => {
                 <div className="w-14 h-14 rounded-2xl bg-[#00677F]/10 flex items-center justify-center mb-6">
                   <feature.icon className="w-7 h-7 text-[#00677F]" />
                 </div>
-                <h3 className={`font-['Outfit'] text-xl font-bold mb-3 ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>{feature.title}</h3>
+                <h3 className={`font-['Montserrat'] text-xl font-bold mb-3 ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>{feature.title}</h3>
                 <p className={theme === 'dark' ? 'text-slate-400' : 'text-gray-600'}>{feature.description}</p>
               </div>
             ))}
@@ -266,7 +266,7 @@ const LandingPage = () => {
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-12">
-            <h2 className={`font-['Outfit'] text-4xl font-bold mb-4 ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>Our Campuses</h2>
+            <h2 className={`font-['Montserrat'] text-4xl font-bold mb-4 ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>Our Campuses</h2>
             <p className={theme === 'dark' ? 'text-slate-400' : 'text-gray-600'}>World-class facilities across the United States</p>
           </div>
           
@@ -289,7 +289,7 @@ const LandingPage = () => {
       <section className="py-24 relative">
         <div className={`absolute inset-0 ${theme === 'dark' ? 'bg-gradient-to-r from-[#002855]/50 via-[#0A0E14] to-[#002855]/50' : 'bg-gradient-to-r from-[#E0F7FA]/50 via-white to-[#E0F7FA]/50'}`} />
         <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
-          <h2 className={`font-['Outfit'] text-4xl lg:text-5xl font-bold mb-6 ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
+          <h2 className={`font-['Montserrat'] text-4xl lg:text-5xl font-bold mb-6 ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
             Ready to Begin Your Journey?
           </h2>
           <p className={`text-lg mb-8 max-w-2xl mx-auto ${theme === 'dark' ? 'text-slate-400' : 'text-gray-600'}`}>
@@ -316,7 +316,7 @@ const LandingPage = () => {
                 alt="USA.edu Logo" 
                 className="h-8 w-auto"
               />
-              <span className={`font-['Outfit'] font-semibold ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>University of St. Augustine</span>
+              <span className={`font-['Montserrat'] font-semibold ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>University of St. Augustine</span>
             </div>
             <p className={`text-sm ${theme === 'dark' ? 'text-slate-500' : 'text-gray-500'}`}>
               © 2026 University of St. Augustine for Health Sciences. All rights reserved.
