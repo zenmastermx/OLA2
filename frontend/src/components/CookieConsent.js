@@ -18,9 +18,7 @@ const CookieConsent = () => {
 
   const handleAcceptAll = () => {
     localStorage.setItem("cookie_consent", JSON.stringify({
-      essential: true,
-      analytics: true,
-      marketing: true,
+      accepted: true,
       timestamp: new Date().toISOString()
     }));
     setIsVisible(false);
@@ -28,19 +26,7 @@ const CookieConsent = () => {
 
   const handleDeny = () => {
     localStorage.setItem("cookie_consent", JSON.stringify({
-      essential: true, // Essential cookies are always needed
-      analytics: false,
-      marketing: false,
-      timestamp: new Date().toISOString()
-    }));
-    setIsVisible(false);
-  };
-
-  const handleAcceptEssential = () => {
-    localStorage.setItem("cookie_consent", JSON.stringify({
-      essential: true,
-      analytics: false,
-      marketing: false,
+      accepted: false,
       timestamp: new Date().toISOString()
     }));
     setIsVisible(false);
