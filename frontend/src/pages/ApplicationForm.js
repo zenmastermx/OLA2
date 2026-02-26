@@ -195,6 +195,19 @@ const ApplicationForm = () => {
     }
   }, [urlStep]);
 
+  // Show onboarding for first-time users on step 1
+  useEffect(() => {
+    if (!loading && currentStep === 1) {
+      const hasSeenOnboarding = localStorage.getItem("onboarding_completed");
+      if (!hasSeenOnboarding) {
+        // Small delay to let the page render first
+        setTimeout(() => {
+          setShowOnboarding(true);
+        }, 500);
+      }
+    }
+  }, [loading, currentStep]);
+
   const fetchApplication = async () => {
     try {
       const response = await axios.get(`${API}/applications/${appId}`, {
