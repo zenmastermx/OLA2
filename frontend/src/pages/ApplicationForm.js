@@ -168,6 +168,7 @@ const ApplicationForm = () => {
   const [transcriptRequests, setTranscriptRequests] = useState({});
   const [requestingTranscript, setRequestingTranscript] = useState({});
   const [showOnboarding, setShowOnboarding] = useState(false);
+  const [showStepOnboarding, setShowStepOnboarding] = useState(false);
 
   // Form state
   const [personalInfo, setPersonalInfo] = useState({});
