@@ -120,9 +120,16 @@ const Dashboard = () => {
       setShowVerificationModal(true);
     }
     
-    // Welcome message for new users, but don't auto-open application modal
     if (location.state?.newUser) {
-      toast.success(`Welcome, ${user?.first_name}! Your dashboard is ready.`);
+      toast.success(`Welcome, ${user?.first_name}! Let's start your application.`);
+      if (!user?.email_verified) {
+        // Don't show new app modal until verified
+      } else {
+        setShowNewAppModal(true);
+      }
+      if (location.state?.program) {
+        setSelectedCategory(location.state.program);
+      }
     }
   }, []);
 
