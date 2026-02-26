@@ -980,16 +980,43 @@ const ApplicationForm = () => {
                     <span className="text-white text-sm capitalize">{academicHistory.highest_degree?.replace('_', ' ') || "Not provided"}</span>
                   </div>
                   <div className="flex items-center justify-between py-2 border-b border-white/[0.03]">
-                    <span className="text-slate-500 text-sm">Institutions</span>
-                    <span className="text-slate-300 text-sm">{(academicHistory.institutions || []).length} listed</span>
-                  </div>
-                  <div className="flex items-center justify-between py-2 border-b border-white/[0.03]">
                     <span className="text-slate-500 text-sm">Prior Application</span>
                     <span className="text-slate-300 text-sm capitalize">{academicHistory.prior_application || "Not specified"}</span>
                   </div>
-                  <div className="flex items-center justify-between py-2">
+                  <div className="flex items-center justify-between py-2 border-b border-white/[0.03]">
                     <span className="text-slate-500 text-sm">TOEFL</span>
                     <span className="text-slate-300 text-sm">{academicHistory.toefl_total ? `Score: ${academicHistory.toefl_total}` : "Not required"}</span>
+                  </div>
+                  {/* Institutions List */}
+                  <div className="pt-2">
+                    <span className="text-slate-500 text-xs uppercase tracking-wider">Institutions ({(academicHistory.institutions || []).length})</span>
+                    <div className="mt-2 space-y-2">
+                      {(academicHistory.institutions || []).length > 0 ? (
+                        (academicHistory.institutions || []).map((inst, idx) => {
+                          // Format date from YYYY-MM-DD to Month Year
+                          const formatDate = (dateStr) => {
+                            if (!dateStr) return "Date not set";
+                            const [year, month] = dateStr.split('-');
+                            const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+                            return `${monthNames[parseInt(month) - 1] || ''} ${year}`;
+                          };
+                          return (
+                            <div key={idx} className="flex items-center justify-between py-2 px-3 rounded-lg bg-black/20 border border-white/[0.03]">
+                              <div className="flex items-center gap-2">
+                                <div className="w-6 h-6 rounded-full bg-[#7B68EE]/10 flex items-center justify-center text-xs text-[#7B68EE]">{idx + 1}</div>
+                                <span className="text-slate-300 text-sm">{inst.name || "Unknown"}</span>
+                              </div>
+                              <div className="text-right">
+                                <span className="text-slate-400 text-xs">{inst.degree || "Degree not set"}</span>
+                                <span className="text-slate-500 text-xs ml-2">• {formatDate(inst.date)}</span>
+                              </div>
+                            </div>
+                          );
+                        })
+                      ) : (
+                        <p className="text-slate-600 text-xs italic">No institutions added</p>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
