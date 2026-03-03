@@ -4,6 +4,11 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Hide Emergent Badge */
+#emergent-badge {
+    display: none !important;
+}
+
 /* USA Brand Colors */
 /* Primary (80% usage): PMS 315C #00677F, PMS 7477C #135163 */
 /* Secondary (20% usage): #A1D8E0, #83AFB4, #C9DD03, #739600, #DC5034, #A4493D */
