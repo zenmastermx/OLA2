@@ -9,6 +9,7 @@ import Dashboard from "./pages/Dashboard";
 import ApplicationForm from "./pages/ApplicationForm";
 import MockEmailPage from "./pages/MockEmailPage";
 import { Toaster } from "@/components/ui/sonner";
+import SitePasswordGate from "./components/SitePasswordGate";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 export const API = `${BACKEND_URL}/api`;
@@ -184,6 +185,7 @@ function AppContent() {
   const { theme } = useTheme();
   
   return (
+    <SitePasswordGate>
     <div className={`App min-h-screen ${theme === 'dark' ? 'bg-[#0A0E14]' : 'bg-gray-50'}`}>
       <BrowserRouter>
         <Routes>
@@ -219,6 +221,7 @@ function AppContent() {
       </BrowserRouter>
       <Toaster position="top-right" richColors />
     </div>
+    </SitePasswordGate>
   );
 }
 
