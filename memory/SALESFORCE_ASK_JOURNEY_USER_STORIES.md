@@ -18,15 +18,15 @@
 
 | Phase | Stories | Points | Focus |
 |-------|---------|--------|-------|
-| **MVP (Sprints 1-2)** | US-01 to US-10 | 37 | Widget, greeting, program Q&A, in-form help |
-| **Phase 2 (Sprints 3-4)** | US-11 to US-20 | 40 | Status, documents, deadlines, escalation |
-| **Phase 3 (Sprint 5)** | US-21 to US-28 | 27 | Analytics, accessibility, admin tools |
+| **MVP (Sprints 1-2)** | Journey LLM-01 to LLM-10 | 37 | Widget, greeting, program Q&A, in-form help |
+| **Phase 2 (Sprints 3-4)** | Journey LLM-11 to LLM-20 | 40 | Status, documents, deadlines, escalation |
+| **Phase 3 (Sprint 5)** | Journey LLM-21 to LLM-28 | 27 | Analytics, accessibility, admin tools |
 
 ---
 
 # DOMAIN 1 — Widget Presence & Launch
 
-## US-01: Floating Chat Widget
+## Journey LLM-01: Floating Chat Widget
 
 **As an** applicant, **I want** a persistent "Ask Journey" button in the nav bar that opens a slide-in chat panel, **so that** I can access AI help on any step.
 
@@ -44,7 +44,7 @@
 
 # DOMAIN 2 — Greeting & Orientation
 
-## US-02: Welcome Message & Quick Actions
+## Journey LLM-02: Welcome Message & Quick Actions
 
 **As an** applicant, **I want** Journey to greet me by name, show what it can help with, and offer clickable prompt chips, **so that** I can get started quickly.
 
@@ -61,7 +61,7 @@
 
 ---
 
-## US-03: Returning User Recognition
+## Journey LLM-03: Returning User Recognition
 
 **As a** returning applicant, **I want** Journey to recognize my in-progress application and offer to help me continue, **so that** I can resume quickly.
 
@@ -78,7 +78,7 @@
 
 # DOMAIN 3 — Program Information
 
-## US-04: Program Q&A
+## Journey LLM-04: Program Q&A
 
 **As a** prospective applicant, **I want** to ask Journey about OTD, Nursing, Education, and Certificate programs, **so that** I can choose the right fit.
 
@@ -96,7 +96,7 @@
 
 # DOMAIN 4 — Application Status & Requirements
 
-## US-05: Application Status Check
+## Journey LLM-05: Application Status Check
 
 **As an** authenticated applicant, **I want** to ask Journey my application status and what's left to complete, **so that** I know where I stand.
 
@@ -114,7 +114,7 @@
 
 # DOMAIN 5 — Document Guidance
 
-## US-06: Document Requirements & Status
+## Journey LLM-06: Document Requirements & Status
 
 **As an** applicant, **I want** Journey to tell me what documents I need, how to upload them, and confirm receipt, **so that** my application materials are complete.
 
@@ -133,7 +133,7 @@
 
 # DOMAIN 6 — Contextual In-Form Help
 
-## US-07: Step-Aware Contextual Help
+## Journey LLM-07: Step-Aware Contextual Help
 
 **As an** applicant, **I want** Journey to know which step I'm on and answer field-specific questions, **so that** I get relevant help without explaining my context.
 
@@ -155,7 +155,7 @@
 
 # DOMAIN 7 — Deadline & Timeline Information
 
-## US-08: Deadlines & Start Dates
+## Journey LLM-08: Deadlines & Start Dates
 
 **As a** prospective applicant, **I want** Journey to tell me application deadlines, financial aid dates, and program start dates, **so that** I can plan accordingly.
 
@@ -174,7 +174,7 @@
 
 # DOMAIN 8 — Financial Aid Questions
 
-## US-09: Financial Aid Guidance
+## Journey LLM-09: Financial Aid Guidance
 
 **As an** applicant, **I want** Journey to answer questions about FAFSA, scholarships, tuition, loans, and payment plans, **so that** I can plan financially.
 
@@ -194,7 +194,7 @@
 
 # DOMAIN 9 — Campus & Location Information
 
-## US-10: Campus & Location Info
+## Journey LLM-10: Campus & Location Info
 
 **As a** prospective applicant, **I want** Journey to answer questions about campus locations, program availability by campus, and online/hybrid options, **so that** I can choose the right setting.
 
@@ -213,7 +213,7 @@
 
 # DOMAIN 10 — Escalation & Handoff
 
-## US-11: Human Escalation & Case Creation
+## Journey LLM-11: Human Escalation & Case Creation
 
 **As an** applicant, **I want** Journey to recognize when it can't help and connect me to a human advisor, **so that** I always get an accurate answer.
 
@@ -231,7 +231,7 @@
 
 ---
 
-## US-12: Callback & Appointment Scheduling
+## Journey LLM-12: Callback & Appointment Scheduling
 
 **As an** applicant, **I want** to request a callback or schedule an advisor appointment through Journey, **so that** I can get help at a convenient time.
 
@@ -248,7 +248,7 @@
 
 ---
 
-## US-13: Sensitive Situation Handling
+## Journey LLM-13: Sensitive Situation Handling
 
 **As** the Journey system, **I need** to handle emergency disclosures or distress appropriately, **so that** users are directed to proper resources.
 
@@ -264,7 +264,7 @@
 
 ---
 
-## US-14: Escalation Context Handoff
+## Journey LLM-14: Escalation Context Handoff
 
 **As an** admissions advisor, **I want** to see a summary of the applicant's Journey conversation when receiving an escalation, **so that** they don't have to repeat themselves.
 
@@ -281,7 +281,7 @@
 
 # DOMAIN 11 — Conversation History & Session Management
 
-## US-15: Session Context & Persistence
+## Journey LLM-15: Session Context & Persistence
 
 **As an** applicant, **I want** Journey to remember our conversation within the session and let me clear/restart if needed, **so that** I don't repeat myself.
 
@@ -297,7 +297,7 @@
 
 ---
 
-## US-16: Cross-Session History & Export (Optional)
+## Journey LLM-16: Cross-Session History & Export (Optional)
 
 **As a** returning applicant, **I want** to optionally view past conversations and export transcripts, **so that** I can reference previous answers.
 
@@ -316,7 +316,7 @@
 
 # DOMAIN 12 — Accessibility & Compliance
 
-## US-17: WCAG 2.1 AA Compliance
+## Journey LLM-17: WCAG 2.1 AA Compliance
 
 **As an** applicant using assistive technology, **I want** the chat widget to be fully accessible, **so that** I can use it regardless of ability.
 
@@ -333,7 +333,7 @@
 
 ---
 
-## US-18: FERPA Compliance & Privacy
+## Journey LLM-18: FERPA Compliance & Privacy
 
 **As** the compliance team, **I need** Journey to handle student data per FERPA, **so that** the university avoids regulatory violations.
 
@@ -350,7 +350,7 @@
 
 ---
 
-## US-19: Multi-Language Support
+## Journey LLM-19: Multi-Language Support
 
 **As an** international applicant, **I want** Journey to detect and respond in my language, **so that** I can get help even with limited English.
 
@@ -368,7 +368,7 @@
 
 # DOMAIN 13 — Analytics & Feedback
 
-## US-20: Response Rating
+## Journey LLM-20: Response Rating
 
 **As an** applicant, **I want** to rate Journey's responses (thumbs up/down), **so that** the team can improve answer quality.
 
@@ -384,7 +384,7 @@
 
 ---
 
-## US-21: Unanswered Question Log
+## Journey LLM-21: Unanswered Question Log
 
 **As an** admissions team member, **I want** to review questions Journey couldn't answer, **so that** I can update the Knowledge base.
 
@@ -394,13 +394,13 @@
 - List View for unaddressed questions; markable as "Addressed"
 - Weekly summary report emailed to KB admin
 
-**Technical Notes:** `Unanswered_Question__c` from US-11. List View filtered on `Addressed__c = FALSE`. Scheduled report via Salesforce Reporting.
+**Technical Notes:** `Unanswered_Question__c` from Journey LLM-11. List View filtered on `Addressed__c = FALSE`. Scheduled report via Salesforce Reporting.
 
 **Priority:** High | **Points:** 3
 
 ---
 
-## US-22: Usage & Engagement Dashboard
+## Journey LLM-22: Usage & Engagement Dashboard
 
 **As a** product owner, **I want** analytics on Journey usage (sessions, duration, top questions, satisfaction, escalation rates), **so that** I can measure ROI.
 
@@ -418,7 +418,7 @@
 
 ---
 
-## US-23: Post-Chat Satisfaction Survey
+## Journey LLM-23: Post-Chat Satisfaction Survey
 
 **As an** applicant finishing a chat, **I want** to optionally rate my overall experience, **so that** USAHS can measure assistant quality.
 
@@ -436,7 +436,7 @@
 
 # DOMAIN 14 — Admin & Configuration
 
-## US-24: Knowledge Base Management
+## Journey LLM-24: Knowledge Base Management
 
 **As an** admissions admin, **I want** to update Journey's answers by editing Salesforce Knowledge articles, **so that** info stays current without developers.
 
@@ -453,7 +453,7 @@
 
 ---
 
-## US-25: Quick-Action Chip Configuration
+## Journey LLM-25: Quick-Action Chip Configuration
 
 **As an** admissions admin, **I want** to add, edit, and reorder the suggested question chips, **so that** I can promote timely topics.
 
@@ -470,7 +470,7 @@
 
 ---
 
-## US-26: Deadline & Date Management
+## Journey LLM-26: Deadline & Date Management
 
 **As an** admissions admin, **I want** to update deadlines and dates that Journey references, **so that** applicants get accurate timing.
 
@@ -487,7 +487,7 @@
 
 ---
 
-## US-27: Escalation Review & Management
+## Journey LLM-27: Escalation Review & Management
 
 **As an** admissions team lead, **I want** to review escalated conversations and track resolution, **so that** I can improve quality and identify training gaps.
 
@@ -503,7 +503,7 @@
 
 ---
 
-## US-28: System Health Monitoring
+## Journey LLM-28: System Health Monitoring
 
 **As an** IT admin, **I want** to monitor Journey's uptime and LLM API performance, **so that** I can resolve issues quickly.
 
