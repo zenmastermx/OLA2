@@ -177,6 +177,20 @@ A cutting-edge, futuristic student online application portal for the University 
 
 ---
 
+## What's Been Implemented (Feb 2026 - Latest)
+
+### Documentation (Feb 2026)
+- **Salesforce Ask Journey User Stories v2.0** (COMPLETE)
+  - 78 user stories across 14 functional domains
+  - 326 total story points, estimated 9-11 sprints
+  - Complete Executive Summary with sprint groupings (MVP, Phase 2, Phase 3)
+  - Dependencies & Risks section covering licensing, LLM, FERPA, and technical risks
+  - Full glossary and cross-reference index
+  - Available as markdown and downloadable PDF
+  - Download endpoint: `/api/download/SALESFORCE_ASK_JOURNEY_USER_STORIES.pdf`
+
+---
+
 ## Backlog / Future Enhancements
 
 ### P0 (Critical)

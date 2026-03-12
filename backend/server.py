@@ -1,4 +1,5 @@
 from fastapi import FastAPI, APIRouter, HTTPException, Depends, UploadFile, File
+from fastapi.responses import FileResponse
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
@@ -1078,6 +1079,16 @@ logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 )
 logger = logging.getLogger(__name__)
+
+@app.get("/api/download/{filename}")
+async def download_file(filename: str):
+    """Download generated documents (PDF/MD) from memory directory."""
+    safe_name = os.path.basename(filename)
+    file_path = Path(__file__).parent.parent / "memory" / safe_name
+    if not file_path.exists():
+        raise HTTPException(status_code=404, detail="File not found")
+    media_type = "application/pdf" if safe_name.endswith(".pdf") else "text/markdown"
+    return FileResponse(path=str(file_path), filename=safe_name, media_type=media_type)
 
 @app.on_event("shutdown")
 async def shutdown_db_client():
